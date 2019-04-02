@@ -42,3 +42,41 @@ int F1_GetCharAddress(int characterID) // clunckiest thing ever
             return -1;
     }
 }
+
+const int F1_Pointer = 0x20386B94;//enemy HP
+const int F1_EHPOffset = 0x544;
+
+const int F1_EMaxHPOffset = 0x546;
+
+const int F1_E1Start = 0x20425160;
+const int F1_E2Start = 0x20425EF0;
+const int F1_E3Start = 0x20426C80;
+const int F1_E4Start = 0x20427A10;
+const int F1_E5Start = 0x204287A0;
+const int F1_E6Start = 0x20429530;
+const int F1_EnemyEnabled = 0;
+const int F1_EnemyInGame = 1;
+const int F1_EnemyNameIDOffset = 3;
+const int F1_EnemyTypeOffset = 4;
+const int F1_EnemyStatusOffset = 0x32;
+
+int F1_GetEnemyAddress(int enemyID)
+{
+    switch (enemyID)
+    {
+        case 0:
+            return F1_E1Start;
+        case 1:
+            return F1_E2Start;
+        case 2:
+            return F1_E3Start;
+        case 3:
+            return F1_E4Start;
+        case 4:
+            return F1_E5Start;
+        case 5:
+            return F1_E6Start;
+        default:
+            return -1;
+    }
+}
