@@ -42,3 +42,45 @@ int F2_GetCharAddress(int characterID)
             return -1;
     }
 }
+
+
+const int F2_Pointer = 0x20388314;//enemy HP
+const int F2_EHPOffset = 0x540;
+const int F2_EMaxHPOffset = 0x542;
+const int F2_E1Start = 0x204297F0;
+const int F2_E2Start = 0x2042A5A0;
+const int F2_E3Start = 0x2042B350;
+const int F2_E4Start = 0x2042C100;
+const int F2_E5Start = 0x2042CEB0;
+const int F2_E6Start = 0x2042DC60;
+const int F2_EnemyEnabled = 0;
+const int F2_EnemyInGame = 1;
+const int F2_EnemyNameIDOffset = 3;
+const int F2_EnemyTypeOffset = 4;
+const int F2_EnemyStatusOffset = 0x32;//8,32,cb0,1F3
+
+int F2_GetEnemyAddress(int enemyID)
+{
+    switch (enemyID)
+    {
+        case 0:
+            return F2_E1Start;
+        case 1:
+            return F2_E2Start;
+        case 2:
+            return F2_E3Start;
+        case 3:
+            return F2_E4Start;
+        case 4:
+            return F2_E5Start;
+        case 5:
+            return F2_E6Start;
+        default:
+            return -1;
+    }
+}
+
+const int F2_Coin = 0x20491188;//wild things
+const int F2_KilledZombie = 0x20491268;//47ca64,49010c,491268,desperate times
+const int F2_MaxZombie = 0x2179464a;
+const int F2_DTStart= 0x20490f6c;
