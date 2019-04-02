@@ -33,6 +33,15 @@ typedef struct
 	unsigned char CurrentFile;
 	unsigned short ScenarioID;
 	unsigned int FrameCounter;
+	unsigned char P1Coin;
+	unsigned char P2Coin;
+	unsigned char P3Coin;
+	unsigned char P4Coin;
+	unsigned char KilledZombie;
+	unsigned int E1Start;
+	unsigned int E2Start;
+	unsigned int E3Start;
+	unsigned int E4Start;
 } GameInfo;
 
 typedef struct
@@ -63,28 +72,38 @@ typedef struct
     unsigned char EquippedItem;
 } Player;
 
+typedef struct
+{
+	bool Enabled;
+	bool InGame;
+    unsigned short HP;
+    unsigned short MaxHP;
+    unsigned char EnemyType;
+    unsigned char NameID;
+} Enemy;
+
 char* GetCharacterName(int charType)
 {
     switch(charType)
     {
         case 0:
-            return "Kevin";
+            return "Kevin";//Kevin
         case 1:
-            return "Mark";
+            return "Mark";//Mark
         case 2:
-            return "Jim";
+            return "Jim";//Jim
         case 3:
-            return "George";
+            return "George";//George
         case 4:
-            return "David";
+            return "David";//David
         case 5:
-            return "Alyssa";
+            return "Alyssa";//Alyssa
         case 6:
-            return "Yoko";
+            return "Yoko";//Yoko
         case 7:
-            return "Cindy";
+            return "Cindy";//Cindy
         default:
-            return "Unknown";
+            return "Unknown";//Unknown
     }
 }
 
@@ -324,5 +343,173 @@ char* GetScenarioName(unsigned short ScenarioID)
             return "showdown 3";
         default:
             return "";
+    }
+}
+
+
+char* GetEnemyName(int charType)
+{
+    switch(charType)
+    {
+        case 0:
+            return "Kevin";//Kevin
+        case 1:
+            return "Mark";//Mark
+        case 2:
+            return "Jim";//Jim
+        case 3:
+            return "George";//George
+        case 4:
+            return "David";//David
+        case 5:
+            return "Alyssa";//Alyssa
+        case 6:
+            return "Yoko";//Yoko
+        case 7:
+            return "Cindy";//Cindy
+        default:
+            return "Unknown";//Unknown
+    }
+}
+
+char* GetEnemyName2(int nameID)
+{
+    switch (nameID)
+    {
+		case 0:
+            return "Licker";
+        case 1:
+            return "Zombie";
+        case 2:
+            return "Dog";
+        case 3:
+            return "Worm";
+        case 4:
+            return "Mouse";
+        case 5:
+            return "Crow";
+        case 6:
+            return "Bee";
+        case 7:
+            return "Big Spider";
+        case 8:
+            return "Small Spider";
+        case 9:
+            return "Moth";
+        case 10:
+            return "Name10";
+        case 11:
+            return "Name11";
+        case 12:
+            return "Name12";
+        case 13:
+            return "Name13";
+        case 14:
+            return "Name14";
+        case 15:
+            return "Nyx-Tyrant";
+        case 16:
+            return "Alligator";
+        case 17:
+            return "Name17";
+        case 18:
+            return "Flea";
+        case 19:
+            return "Leech Boss";
+        case 20:
+            return "Licker Boss";
+        case 21:
+            return "Name21";
+        case 22:
+            return "Hunter";
+        case 23:
+            return "Frog";
+        case 24:
+            return "Name24";
+        case 25:
+            return "Name25";
+        case 26:
+            return "Name26";
+        case 27:
+            return "Leech Man";
+        case 28:
+            return "Name28";
+        case 29:
+            return "G Mutant";
+        case 30:
+            return "G Baby";
+        case 31:
+            return "Name31";
+        case 32:
+            return "Elephant";
+        case 33:
+            return "Lion";
+        case 34:
+            return "Tentacles";
+        case 35:
+            return "Name35";
+        case 36:
+            return "Scissor Tail";//Scissor Tail
+        case 37:
+            return "Name37";
+        case 38:
+            return "Name38";
+        case 39:
+            return "Name39";
+        case 40:
+            return "Tyrant?";
+        case 41:
+            return "Tyrant";
+        case 42:
+            return "Nyx";
+        case 43:
+            return "Thanatos";
+        case 44:
+            return "Nyx-Core";
+        case 45:
+            return "Axeman";
+        case 46:
+            return "Ivy Plant";
+        case 47:
+            return "Dorothy";
+        case 48:
+            return "Giant Wasp";
+        case 49:
+            return "Hornbill";
+        case 50:
+            return "Name50";
+        case 51:
+            return "Name51";
+        case 52:
+            return "Train";
+        case 53:
+            return "Box";
+        case 54:
+            return "Mine";
+        case 55:
+            return "Leech";
+        case 56:
+            return "";
+        case 57:
+            return "Name57";
+        case 58:
+            return "Gasoline Tank";
+        case 59:
+            return "Zombie Hands";
+        case 60:
+            return "Fire";
+        case 61:
+            return "Name61";
+        case 62:
+            return "Name62";
+        case 63:
+            return "Flea Team";
+        case 64:
+            return "Flea Boss";
+        case 65:
+            return "Hyena";
+        default:
+            return NULL;
+
     }
 }
