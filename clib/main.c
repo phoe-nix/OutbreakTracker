@@ -10,25 +10,26 @@
 #include "F2Addr.h"
 
 DWORD ProcessID = 0;
-HANDLE ProcessHandle = NULL;
+HANDLE ProcessHandle = 0;
 
 GameInfo info;
-Player Players[4];
+Player Players[5];
+Enemy Enemies[6];
 Item Items[256];
 
-DWORD GetProcessID(char* processname)
+int GetProcessID(char* processname)
 {
 	/* Successfully copy-pasted from random StackOverflow answer since I don't know how to work with Windows' crappy API.*/
 	HANDLE hProcessSnap;
 	PROCESSENTRY32 pe32;
-	DWORD result = NULL;
+	int result = 0;
 	hProcessSnap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
 	if (INVALID_HANDLE_VALUE == hProcessSnap) return(FALSE);
 	pe32.dwSize = sizeof(PROCESSENTRY32);
 	if (!Process32First(hProcessSnap, &pe32))
 	{
 	  CloseHandle(hProcessSnap);
-	  return(NULL);
+	  return(0);
 	}
 	do
 	{
@@ -77,6 +78,118 @@ unsigned int GetFrames()
 	    ReadProcessMemory(ProcessHandle, (PCVOID) F1_FrameCounter, &buffer, 4, (PDWORD) &bytesRead);
 	else
 	    ReadProcessMemory(ProcessHandle, (PCVOID) F2_FrameCounter, &buffer, 4, (PDWORD) &bytesRead);
+	return buffer;
+}
+
+unsigned char GetP1Coins()
+{
+	unsigned char buffer;
+	int bytesRead = 0;
+	    ReadProcessMemory(ProcessHandle, (PCVOID) F2_Coin, &buffer, 1, (PDWORD) &bytesRead);
+	return buffer;
+}
+
+unsigned char GetP2Coins()
+{
+	unsigned char buffer;
+	int bytesRead = 0;
+	    ReadProcessMemory(ProcessHandle, (PCVOID) F2_Coin+2, &buffer, 1, (PDWORD) &bytesRead);
+	return buffer;
+}
+
+unsigned char GetP3Coins()
+{
+	unsigned char buffer;
+	int bytesRead = 0;
+	    ReadProcessMemory(ProcessHandle, (PCVOID) F2_Coin+4, &buffer, 1, (PDWORD) &bytesRead);
+	return buffer;
+}
+
+unsigned char GetP4Coins()
+{
+	unsigned char buffer;
+	int bytesRead = 0;
+	    ReadProcessMemory(ProcessHandle, (PCVOID) F2_Coin+6, &buffer, 1, (PDWORD) &bytesRead);
+	return buffer;
+}
+
+unsigned char GetKilledZombies()
+{
+	unsigned char buffer;
+	int bytesRead = 0;
+	    ReadProcessMemory(ProcessHandle, (PCVOID) F2_KilledZombie, &buffer, 1, (PDWORD) &bytesRead);
+	return buffer;
+}
+
+unsigned int GetE1HP()//enemy HP
+{
+	unsigned int Pointer;
+	unsigned  buffer;
+	int bytesRead = 0;
+	if (info.CurrentFile == 1)
+	{
+		ReadProcessMemory(ProcessHandle, (PCVOID)F1_Pointer, &Pointer,4,0);
+	    ReadProcessMemory(ProcessHandle, (PCVOID)Pointer+0x20000000 + F1_EHPOffset, &buffer, 2, (PDWORD) &bytesRead);
+	}
+	else
+	{
+		ReadProcessMemory(ProcessHandle, (PCVOID)F2_Pointer, &Pointer,4,0);
+		ReadProcessMemory(ProcessHandle, (PCVOID)Pointer+0x20000000 + F2_EHPOffset, &buffer, 2, (PDWORD)&bytesRead);
+	}
+	return buffer;
+}
+
+unsigned int GetE2HP()//enemy HP
+{
+	unsigned int Pointer;
+	unsigned short buffer;
+	int bytesRead = 0;
+	if (info.CurrentFile == 1)
+	{
+		ReadProcessMemory(ProcessHandle, (PCVOID)F1_Pointer-4, &Pointer,4,0);
+	    ReadProcessMemory(ProcessHandle, (PCVOID)Pointer+0x20000000 + F1_EHPOffset, &buffer, 2, (PDWORD) &bytesRead);
+	}
+	else
+	{
+		ReadProcessMemory(ProcessHandle, (PCVOID)F2_Pointer-4, &Pointer,4,0);
+		ReadProcessMemory(ProcessHandle, (PCVOID)Pointer+0x20000000 + F2_EHPOffset, &buffer, 2, (PDWORD)&bytesRead);
+	}
+	return buffer;
+}
+
+unsigned int GetE3HP()//enemy HP
+{
+	unsigned int Pointer;
+	unsigned short buffer;
+	int bytesRead = 0;
+	if (info.CurrentFile == 1)
+	{
+		ReadProcessMemory(ProcessHandle, (PCVOID)F1_Pointer-8, &Pointer,4,0);
+	    ReadProcessMemory(ProcessHandle, (PCVOID)Pointer+0x20000000 + F1_EHPOffset, &buffer, 2, (PDWORD) &bytesRead);
+	}
+	else
+	{
+		ReadProcessMemory(ProcessHandle, (PCVOID)F2_Pointer-8, &Pointer,4,0);
+		ReadProcessMemory(ProcessHandle, (PCVOID)Pointer+0x20000000 + F2_EHPOffset, &buffer, 2, (PDWORD)&bytesRead);
+	}
+	return buffer;
+}
+
+unsigned int GetE4HP()//enemy HP
+{
+	unsigned int Pointer;
+	unsigned short buffer;
+	int bytesRead = 0;
+	if (info.CurrentFile == 1)
+	{
+		ReadProcessMemory(ProcessHandle, (PCVOID)F1_Pointer-12, &Pointer,4,0);
+	    ReadProcessMemory(ProcessHandle, (PCVOID)Pointer+0x20000000 + F1_EHPOffset, &buffer, 2, (PDWORD) &bytesRead);
+	}
+	else
+	{
+		ReadProcessMemory(ProcessHandle, (PCVOID)F2_Pointer-12, &Pointer,4,0);
+		ReadProcessMemory(ProcessHandle, (PCVOID)Pointer+0x20000000 + F2_EHPOffset, &buffer, 2, (PDWORD)&bytesRead);
+	}
 	return buffer;
 }
 
@@ -331,6 +444,72 @@ char GetCharacterInGame(int characterID)
 	return buffer;
 }
 
+char GetEnemyNameID(int enemyID)
+{
+    char buffer;
+	int bytesRead = 0;
+	if (info.CurrentFile == 1)
+		ReadProcessMemory(ProcessHandle, (PCVOID)F1_GetEnemyAddress(enemyID) + F1_EnemyNameIDOffset, &buffer, 1, (PDWORD)&bytesRead);
+	else
+		ReadProcessMemory(ProcessHandle, (PCVOID)F2_GetEnemyAddress(enemyID) + F2_EnemyNameIDOffset, &buffer, 1, (PDWORD)&bytesRead);
+	return buffer;
+}
+
+char GetEnemyType(int enemyID)
+{
+	char buffer;
+	int bytesRead = 0;
+	if (info.CurrentFile == 1)
+		ReadProcessMemory(ProcessHandle, (PCVOID)F1_GetEnemyAddress(enemyID) + F1_EnemyTypeOffset, &buffer, 1, (PDWORD)&bytesRead);
+	else
+		ReadProcessMemory(ProcessHandle, (PCVOID)F2_GetEnemyAddress(enemyID) + F2_EnemyTypeOffset, &buffer, 1, (PDWORD)&bytesRead);
+	return buffer;
+}
+
+unsigned short GetEnemyHealth(int enemyID)
+{
+  unsigned short buffer;
+  int bytesRead = 0;
+  if (info.CurrentFile == 1)
+      ReadProcessMemory(ProcessHandle, (PCVOID)F1_GetEnemyAddress(enemyID) + F1_EHPOffset, &buffer, 2, (PDWORD)&bytesRead);
+  else
+      ReadProcessMemory(ProcessHandle, (PCVOID)F2_GetEnemyAddress(enemyID) + F2_EHPOffset, &buffer, 2, (PDWORD)&bytesRead);
+  return buffer;
+}
+
+unsigned short GetEnemyMaxHealth(int enemyID)
+{
+  unsigned short buffer;
+  int bytesRead = 0;
+  if (info.CurrentFile == 1)
+      ReadProcessMemory(ProcessHandle, (PCVOID)F1_GetEnemyAddress(enemyID) + F1_EMaxHPOffset, &buffer, 2, (PDWORD)&bytesRead);
+  else
+      ReadProcessMemory(ProcessHandle, (PCVOID)F2_GetEnemyAddress(enemyID) + F2_EMaxHPOffset, &buffer, 2, (PDWORD)&bytesRead);
+  return buffer;
+}
+
+char GetEnemyEnabled(int enemyID)
+{
+    char buffer;
+	int bytesRead = 0;
+	if (info.CurrentFile == 1)
+		ReadProcessMemory(ProcessHandle, (PCVOID)F1_GetEnemyAddress(enemyID) + F1_EnemyEnabled, &buffer, 1, (PDWORD)&bytesRead);
+	else
+		ReadProcessMemory(ProcessHandle, (PCVOID)F2_GetEnemyAddress(enemyID) + F2_EnemyEnabled, &buffer, 1, (PDWORD)&bytesRead);
+	return buffer;
+}
+
+char GetEnemyInGame(int enemyID)
+{
+    char buffer;
+	int bytesRead = 0;
+	if (info.CurrentFile == 1)
+		ReadProcessMemory(ProcessHandle, (PCVOID)F1_GetEnemyAddress(enemyID) + F1_EnemyInGame, &buffer, 1, (PDWORD)&bytesRead);
+	else
+		ReadProcessMemory(ProcessHandle, (PCVOID)F2_GetEnemyAddress(enemyID) + F2_EnemyInGame, &buffer, 1, (PDWORD)&bytesRead);
+	return buffer;
+}
+
 char* GetStatusText(unsigned char stat)
 {
 	if (stat == 0x01)
@@ -362,7 +541,7 @@ char* GetStatusText(unsigned char stat)
 
 static int LInit (lua_State* L) {
 	ProcessID = GetProcessID("pcsx2.exe");
-	if (ProcessID != NULL)
+	if (ProcessID != 0)
 	{
 		ProcessHandle = OpenProcess(PROCESS_VM_READ, FALSE, ProcessID);
 		lua_pushboolean(L, 1);
@@ -379,6 +558,15 @@ static int LUpdate (lua_State* L)
 		return 0;
 	info.ScenarioID = GetScenarioID();
 	info.FrameCounter = GetFrames();
+	info.P1Coin = GetP1Coins();
+	info.P2Coin = GetP2Coins();
+	info.P3Coin = GetP3Coins();
+	info.P4Coin = GetP4Coins();
+	info.KilledZombie = GetKilledZombies();
+	//info.E1Start = GetE1HP();//enemy1 HP
+	//info.E2Start = GetE2HP();//enemy2 HP
+	//info.E3Start = GetE3HP();//enemy3 HP
+	//info.E4Start = GetE4HP();//enemy4 HP
 	UpdatePickups();
 	for (int i=0; i < 4; i++)
 	{
@@ -414,6 +602,17 @@ static int LUpdate (lua_State* L)
 		spinv = NULL;
 		dinv = NULL;
 		dspinv = NULL;
+	}
+	for (int i=0; i < 6; i++)
+	{
+		Enemies[i].Enabled = GetEnemyEnabled(i);
+		if (Enemies[i].Enabled == 0)
+			continue;
+		Enemies[i].InGame = GetEnemyInGame(i);
+		Enemies[i].HP = GetEnemyHealth(i);
+		Enemies[i].MaxHP = GetEnemyMaxHealth(i);
+		Enemies[i].EnemyType = GetEnemyType(i);
+		Enemies[i].NameID = GetEnemyNameID(i);
 	}
 	return 0;
 }
@@ -543,7 +742,48 @@ static int LGetPlayer (lua_State* L)
 
 	return 1;
 }
+static int LGetEnemy (lua_State* L)
+{
+	double enemyID = lua_tonumber(L, 1);
+	int i = (int)(enemyID-1);
+	char* charname= GetEnemyName(Enemies[i].EnemyType);
+	char* name = GetEnemyName2(Enemies[i].NameID);
 
+	lua_newtable(L);
+
+		lua_pushstring(L, "enabled");
+			lua_pushboolean(L, Enemies[i].Enabled);
+		lua_rawset(L, -3);
+
+		lua_pushstring(L, "inGame");
+			lua_pushboolean(L, Enemies[i].InGame);
+		lua_rawset(L, -3);
+
+		lua_pushstring(L, "HP");
+			lua_pushnumber(L, (double)Enemies[i].HP);
+		lua_rawset(L, -3);
+
+		lua_pushstring(L, "maxHP");
+			lua_pushnumber(L, (double)Enemies[i].MaxHP);
+		lua_rawset(L, -3);
+
+		lua_pushstring(L, "nameID");
+			lua_pushnumber(L, (double)Enemies[i].NameID);
+		lua_rawset(L, -3);
+
+		lua_pushstring(L, "type");
+			lua_pushstring(L, charname);
+		lua_rawset(L, -3);
+
+		lua_pushstring(L, "name");
+			if (name == NULL)
+				lua_pushstring(L, charname);
+			else
+				lua_pushstring(L, name);
+		lua_rawset(L, -3);
+
+	return 1;
+}
 static int LGetGameInfo (lua_State* L)
 {
 	lua_newtable(L);
@@ -555,6 +795,33 @@ static int LGetGameInfo (lua_State* L)
 		lua_rawset(L, -3);
 		lua_pushstring(L, "frames");
 			lua_pushnumber(L, (double)info.FrameCounter);
+		lua_rawset(L, -3);
+		lua_pushstring(L, "p1coins");
+			lua_pushnumber(L, (double)info.P1Coin);
+		lua_rawset(L, -3);
+		lua_pushstring(L, "p2coins");
+			lua_pushnumber(L, (double)info.P2Coin);
+		lua_rawset(L, -3);
+		lua_pushstring(L, "p3coins");
+			lua_pushnumber(L, (double)info.P3Coin);
+		lua_rawset(L, -3);
+		lua_pushstring(L, "p4coins");
+			lua_pushnumber(L, (double)info.P4Coin);
+		lua_rawset(L, -3);
+		lua_pushstring(L, "killedzombies");
+			lua_pushnumber(L, (double)info.KilledZombie);
+		lua_rawset(L, -3);
+		lua_pushstring(L, "E1HP");//enemy1 HP
+			lua_pushnumber(L, (double)info.E1Start);
+		lua_rawset(L, -3);
+		lua_pushstring(L, "E2HP");//enemy2 HP
+			lua_pushnumber(L, (double)info.E2Start);
+		lua_rawset(L, -3);
+		lua_pushstring(L, "E3HP");//enemy3 HP
+			lua_pushnumber(L, (double)info.E3Start);
+		lua_rawset(L, -3);
+		lua_pushstring(L, "E4HP");//enemy4 HP
+			lua_pushnumber(L, (double)info.E4Start);
 		lua_rawset(L, -3);
 	return 1;
 }
@@ -569,6 +836,7 @@ static const struct luaL_Reg library_functions [] = {
 	{"init", LInit},
 	{"update", LUpdate},
 	{"getPlayer", LGetPlayer},
+	{"getEnemy", LGetEnemy},
 	{"getGameInfo", LGetGameInfo},
 	{"about", LTestFunction},
 	{NULL, NULL}
