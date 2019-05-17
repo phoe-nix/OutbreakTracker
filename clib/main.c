@@ -13,8 +13,10 @@ DWORD ProcessID = 0;
 HANDLE ProcessHandle = 0;
 
 GameInfo info;
-Player Players[5];
-Enemy Enemies[6];
+Slot Slots[20];
+RItem RItems[MAX_ITEM];
+Player Players[4];
+Enemy Enemies[MAX_ENEMY];
 Item Items[256];
 
 int GetProcessID(char* processname)
@@ -57,6 +59,149 @@ char GetFile()
         return 2;
     else
         return -1;
+}
+
+unsigned short GetSlotNum(int slotNum)
+{
+  unsigned short buffer;
+  int bytesRead = 0;
+  if (info.CurrentFile == 1)
+      ReadProcessMemory(ProcessHandle, (PCVOID)F1_GetLobbyAddress(slotNum), &buffer, 2, (PDWORD)&bytesRead);
+  else
+      ReadProcessMemory(ProcessHandle, (PCVOID)F2_GetLobbyAddress(slotNum), &buffer, 2, (PDWORD)&bytesRead);
+  return buffer;
+}
+
+unsigned short GetSlotPlayer(int slotNum)
+{
+  unsigned short buffer;
+  int bytesRead = 0;
+  if (info.CurrentFile == 1)
+      ReadProcessMemory(ProcessHandle, (PCVOID)F1_GetLobbyAddress(slotNum) + F2_SlotPlayer, &buffer, 2, (PDWORD)&bytesRead);
+  else
+      ReadProcessMemory(ProcessHandle, (PCVOID)F2_GetLobbyAddress(slotNum) + F2_SlotPlayer, &buffer, 2, (PDWORD)&bytesRead);
+  return buffer;
+}
+
+unsigned short GetSlotMaxPlayer(int slotNum)
+{
+  unsigned short buffer;
+  int bytesRead = 0;
+  if (info.CurrentFile == 1)
+      ReadProcessMemory(ProcessHandle, (PCVOID)F1_GetLobbyAddress(slotNum) + F2_SlotMaxPlayer, &buffer, 2, (PDWORD)&bytesRead);
+  else
+      ReadProcessMemory(ProcessHandle, (PCVOID)F2_GetLobbyAddress(slotNum) + F2_SlotMaxPlayer, &buffer, 2, (PDWORD)&bytesRead);
+  return buffer;
+}
+
+unsigned char GetSlotStatus(int slotNum)
+{
+  unsigned char buffer;
+  int bytesRead = 0;
+  if (info.CurrentFile == 1)
+      ReadProcessMemory(ProcessHandle, (PCVOID)F1_GetLobbyAddress(slotNum) + F2_SlotStatus, &buffer, 1, (PDWORD)&bytesRead);
+  else
+      ReadProcessMemory(ProcessHandle, (PCVOID)F2_GetLobbyAddress(slotNum) + F2_SlotStatus, &buffer, 1, (PDWORD)&bytesRead);
+  return buffer;
+}
+
+unsigned char GetSlotPass(int slotNum)
+{
+  unsigned char buffer;
+  int bytesRead = 0;
+  if (info.CurrentFile == 1)
+      ReadProcessMemory(ProcessHandle, (PCVOID)F1_GetLobbyAddress(slotNum) + F2_SlotPass, &buffer, 1, (PDWORD)&bytesRead);
+  else
+      ReadProcessMemory(ProcessHandle, (PCVOID)F2_GetLobbyAddress(slotNum) + F2_SlotPass, &buffer, 1, (PDWORD)&bytesRead);
+  return buffer;
+}
+
+unsigned short GetSlotScenarioID(int slotNum)
+{
+	unsigned short buffer;
+	int bytesRead = 0;
+	if (info.CurrentFile == 1)
+	    ReadProcessMemory(ProcessHandle, (PCVOID)F1_GetLobbyAddress(slotNum) + F2_SlotScenarioID, &buffer, 2, (PDWORD) &bytesRead);
+	else
+	    ReadProcessMemory(ProcessHandle, (PCVOID)F2_GetLobbyAddress(slotNum) + F2_SlotScenarioID, &buffer, 2, (PDWORD) &bytesRead);
+	return buffer;
+}
+
+unsigned short GetSlotVersion(int slotNum)
+{
+	unsigned short buffer;
+	int bytesRead = 0;
+	if (info.CurrentFile == 1)
+	    ReadProcessMemory(ProcessHandle, (PCVOID)F1_GetLobbyAddress(slotNum) + F2_SlotVersion, &buffer, 2, (PDWORD) &bytesRead);
+	else
+	    ReadProcessMemory(ProcessHandle, (PCVOID)F2_GetLobbyAddress(slotNum) + F2_SlotVersion, &buffer, 2, (PDWORD) &bytesRead);
+	return buffer;
+}
+
+unsigned char GetHostStatus()
+{
+	unsigned char buffer;
+	int bytesRead = 0;
+	if (info.CurrentFile == 1)
+	    ReadProcessMemory(ProcessHandle, (PCVOID) F1_HostStatus, &buffer, 2, (PDWORD) &bytesRead);
+	else
+	    ReadProcessMemory(ProcessHandle, (PCVOID) F2_HostStatus, &buffer, 2, (PDWORD) &bytesRead);
+	return buffer;
+}
+
+unsigned short GetHostMaxPlayer()
+{
+	unsigned short buffer;
+	int bytesRead = 0;
+	if (info.CurrentFile == 1)
+	    ReadProcessMemory(ProcessHandle, (PCVOID) F1_HostMaxPlayer, &buffer, 2, (PDWORD) &bytesRead);
+	else
+	    ReadProcessMemory(ProcessHandle, (PCVOID) F2_HostMaxPlayer, &buffer, 2, (PDWORD) &bytesRead);
+	return buffer;
+}
+
+unsigned short GetHostPlayer()
+{
+	unsigned short buffer;
+	int bytesRead = 0;
+	if (info.CurrentFile == 1)
+	    ReadProcessMemory(ProcessHandle, (PCVOID) F1_HostPlayer, &buffer, 2, (PDWORD) &bytesRead);
+	else
+	    ReadProcessMemory(ProcessHandle, (PCVOID) F2_HostPlayer, &buffer, 2, (PDWORD) &bytesRead);
+	return buffer;
+}
+
+unsigned short GetHostTime()
+{
+	unsigned short buffer;
+	int bytesRead = 0;
+	if (info.CurrentFile == 1)
+	    ReadProcessMemory(ProcessHandle, (PCVOID) F1_HostTime, &buffer, 2, (PDWORD) &bytesRead);
+	else
+	    ReadProcessMemory(ProcessHandle, (PCVOID) F2_HostTime, &buffer, 2, (PDWORD) &bytesRead);
+	return buffer;
+}
+
+unsigned short GetHostScenarioID()
+{
+	unsigned short buffer;
+	int bytesRead = 0;
+	if (info.CurrentFile == 1)
+	    ReadProcessMemory(ProcessHandle, (PCVOID) F1_HostScenarioID, &buffer, 2, (PDWORD) &bytesRead);
+	else
+	    ReadProcessMemory(ProcessHandle, (PCVOID) F2_HostScenarioID, &buffer, 2, (PDWORD) &bytesRead);
+	return buffer;
+}
+
+unsigned short GetHostDifficulty()
+{
+	unsigned short buffer;
+	int bytesRead = 0;
+	if (info.CurrentFile == 1)
+	    ReadProcessMemory(ProcessHandle, (PCVOID) F1_HostDifficulty, &buffer, 2, (PDWORD) &bytesRead);
+	else
+	    ReadProcessMemory(ProcessHandle, (PCVOID) F2_HostDifficulty, &buffer, 2, (PDWORD) &bytesRead);
+	return buffer;
 }
 
 unsigned short GetScenarioID()
@@ -120,11 +265,11 @@ unsigned char GetKilledZombies()
 	    ReadProcessMemory(ProcessHandle, (PCVOID) F2_KilledZombie, &buffer, 1, (PDWORD) &bytesRead);
 	return buffer;
 }
-
+/*
 unsigned int GetE1HP()//enemy HP
 {
 	unsigned int Pointer;
-	unsigned  buffer;
+	unsigned short buffer;
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
 	{
@@ -138,81 +283,31 @@ unsigned int GetE1HP()//enemy HP
 	}
 	return buffer;
 }
-
-unsigned int GetE2HP()//enemy HP
-{
-	unsigned int Pointer;
-	unsigned short buffer;
-	int bytesRead = 0;
-	if (info.CurrentFile == 1)
-	{
-		ReadProcessMemory(ProcessHandle, (PCVOID)F1_Pointer-4, &Pointer,4,0);
-	    ReadProcessMemory(ProcessHandle, (PCVOID)Pointer+0x20000000 + F1_EHPOffset, &buffer, 2, (PDWORD) &bytesRead);
-	}
-	else
-	{
-		ReadProcessMemory(ProcessHandle, (PCVOID)F2_Pointer-4, &Pointer,4,0);
-		ReadProcessMemory(ProcessHandle, (PCVOID)Pointer+0x20000000 + F2_EHPOffset, &buffer, 2, (PDWORD)&bytesRead);
-	}
-	return buffer;
-}
-
-unsigned int GetE3HP()//enemy HP
-{
-	unsigned int Pointer;
-	unsigned short buffer;
-	int bytesRead = 0;
-	if (info.CurrentFile == 1)
-	{
-		ReadProcessMemory(ProcessHandle, (PCVOID)F1_Pointer-8, &Pointer,4,0);
-	    ReadProcessMemory(ProcessHandle, (PCVOID)Pointer+0x20000000 + F1_EHPOffset, &buffer, 2, (PDWORD) &bytesRead);
-	}
-	else
-	{
-		ReadProcessMemory(ProcessHandle, (PCVOID)F2_Pointer-8, &Pointer,4,0);
-		ReadProcessMemory(ProcessHandle, (PCVOID)Pointer+0x20000000 + F2_EHPOffset, &buffer, 2, (PDWORD)&bytesRead);
-	}
-	return buffer;
-}
-
-unsigned int GetE4HP()//enemy HP
-{
-	unsigned int Pointer;
-	unsigned short buffer;
-	int bytesRead = 0;
-	if (info.CurrentFile == 1)
-	{
-		ReadProcessMemory(ProcessHandle, (PCVOID)F1_Pointer-12, &Pointer,4,0);
-	    ReadProcessMemory(ProcessHandle, (PCVOID)Pointer+0x20000000 + F1_EHPOffset, &buffer, 2, (PDWORD) &bytesRead);
-	}
-	else
-	{
-		ReadProcessMemory(ProcessHandle, (PCVOID)F2_Pointer-12, &Pointer,4,0);
-		ReadProcessMemory(ProcessHandle, (PCVOID)Pointer+0x20000000 + F2_EHPOffset, &buffer, 2, (PDWORD)&bytesRead);
-	}
-	return buffer;
-}
-
+*/
 void UpdatePickups()
 {
     for (int i=0; i < 255; i++)
     {
         unsigned short typeBuffer;
         unsigned short countBuffer;
+        unsigned short pickBuffer;
         int bytesRead = 0;
         if (info.CurrentFile == 1)
         {
             ReadProcessMemory(ProcessHandle, (PCVOID)F1_PickupSpaceStart + (F1_PickupStructSize * i), &typeBuffer, 2, (PDWORD)&bytesRead);
             ReadProcessMemory(ProcessHandle, (PCVOID)F1_PickupSpaceStart + (F1_PickupStructSize * i) + F1_PickupCountOffset, &countBuffer, 2, (PDWORD)&bytesRead);
+            ReadProcessMemory(ProcessHandle, (PCVOID)F1_PickupSpaceStart + (F1_PickupStructSize * i) + F1_PickupOn, &pickBuffer, 2, (PDWORD)&bytesRead);
         }
         else if (info.CurrentFile == 2)
         {
             ReadProcessMemory(ProcessHandle, (PCVOID)F2_PickupSpaceStart + (F2_PickupStructSize * i), &typeBuffer, 2, (PDWORD)&bytesRead);
             ReadProcessMemory(ProcessHandle, (PCVOID)F2_PickupSpaceStart + (F2_PickupStructSize * i) + F2_PickupCountOffset, &countBuffer, 2, (PDWORD)&bytesRead);
+            ReadProcessMemory(ProcessHandle, (PCVOID)F2_PickupSpaceStart + (F2_PickupStructSize * i) + F2_PickupOn, &pickBuffer, 2, (PDWORD)&bytesRead);
         }
         Items[i].ID = i+1;
         Items[i].Type = typeBuffer;
         Items[i].Count = countBuffer;
+        Items[i].Pick = pickBuffer;
     }
 }
 
@@ -315,6 +410,112 @@ char* GetDeadSpecialInventory(int characterID)
 	return buffer;
 }
 
+void GetRoomItemF1(int cid)
+{
+		unsigned int Pointer;
+		unsigned char* buffer = malloc(196*MAX_ITEM);
+		int bytesRead = 0;
+
+		ReadProcessMemory(ProcessHandle, (PCVOID)F1_RoomItem, &Pointer,4,0);
+		ReadProcessMemory(ProcessHandle, (PCVOID)Pointer+0x20000000+0x40, buffer, 196*MAX_ITEM, (PDWORD)&bytesRead);
+
+		/* Warning! Unexplainable magic below! */
+		for (int i=0; i < MAX_ITEM; i++)
+		{
+			unsigned char* ptr = buffer+i*196;
+			char* ptr2 = buffer+10+i*196;
+			RItems[cid].RItem[i].ID = *ptr;
+			RItems[cid].RItem[i].EN = *ptr2;
+			if ((*ptr) != 0x00)
+			{
+				if (i != MAX_ITEM)
+				{
+					RItems[cid].RItem[i].Count = 0;
+					RItems[cid].RItem[i].Pick = 0;
+					for (int j=0; j < 1; j++)
+					{
+						if (*(ptr+j) != 0x00)
+						{
+							RItems[cid].RItem[i].Type = Items[*(ptr+j)-1].Type;
+							RItems[cid].RItem[i].Count += Items[*(ptr+j)-1].Count;
+							RItems[cid].RItem[i].Pick += Items[*(ptr+j)-1].Pick;
+						}
+					}
+				}
+				//else
+				//{
+					//RItems[cid].RItem[i].Type = Items[(*ptr)-1].Type;
+					//RItems[cid].RItem[i].Count = 1;
+				//}
+			}
+		}
+
+		free(buffer);
+		buffer = NULL;
+}
+/*
+unsigned int GetE1HP()//enemy HP
+{
+	unsigned int Pointer;
+	unsigned short buffer;
+	int bytesRead = 0;
+	if (info.CurrentFile == 1)
+	{
+		ReadProcessMemory(ProcessHandle, (PCVOID)F1_Pointer, &Pointer,4,0);
+	    ReadProcessMemory(ProcessHandle, (PCVOID)Pointer+0x20000000 + F1_EHPOffset, &buffer, 2, (PDWORD) &bytesRead);
+	}
+	else
+	{
+		ReadProcessMemory(ProcessHandle, (PCVOID)F2_Pointer, &Pointer,4,0);
+		ReadProcessMemory(ProcessHandle, (PCVOID)Pointer+0x20000000 + F2_EHPOffset, &buffer, 2, (PDWORD)&bytesRead);
+	}
+	return buffer;
+}
+*/
+void GetRoomItemF2(int cid)
+{
+		unsigned int Pointer;
+		unsigned int Pointer2;
+		unsigned char* buffer = malloc(192*MAX_ITEM);
+		int bytesRead = 0;
+
+		ReadProcessMemory(ProcessHandle, (PCVOID)F2_RoomItem, &Pointer,4,0);//24AF48
+		ReadProcessMemory(ProcessHandle, (PCVOID)Pointer+0x20000000+0x40, buffer, 192*MAX_ITEM, (PDWORD)&bytesRead);
+
+		/* Warning! Unexplainable magic below! */
+		for (int i=0; i < MAX_ITEM; i++)
+		{
+			unsigned char* ptr = buffer+(i)*192;
+			char* ptr2 = buffer+10+(i)*192;
+			RItems[cid].RItem[i].ID = *ptr;
+			RItems[cid].RItem[i].EN = *ptr2;
+			if ((*ptr) != 0x00)
+			{
+				if (i != MAX_ITEM)
+				{
+					RItems[cid].RItem[i].Count = 0;
+					RItems[cid].RItem[i].Pick = 0;
+					for (int j=0; j < 1; j++)
+					{
+						if (*(ptr+j) != 0x00)
+						{
+							RItems[cid].RItem[i].Type = Items[*(ptr+j)-1].Type;
+							RItems[cid].RItem[i].Count += Items[*(ptr+j)-1].Count;
+							RItems[cid].RItem[i].Pick += Items[*(ptr+j)-1].Pick;
+						}
+					}
+				}
+				//else
+				//{
+				//	RItems[cid].RItem[i].Type = Items[(*ptr)-1].Type;
+				//	RItems[cid].RItem[i].Count = 1;
+				//}
+			}
+		}
+
+		free(buffer);
+		buffer = NULL;
+}
 void GetCindyBag(int cid)
 {
 	if (Players[cid].CharacterType == 7)
@@ -358,6 +559,38 @@ void GetCindyBag(int cid)
 	}
 }
 
+double GetSize(int characterID)
+{
+  float buffer;
+  int bytesRead = 0;
+  if (info.CurrentFile == 1)
+      ReadProcessMemory(ProcessHandle, (PCVOID)F1_GetCharAddress(characterID) + F1_SizeOffset, &buffer, 4, (PDWORD)&bytesRead);
+  else
+      ReadProcessMemory(ProcessHandle, (PCVOID)F2_GetCharAddress(characterID) + F2_SizeOffset, &buffer, 4, (PDWORD)&bytesRead);
+  return (double)buffer;
+}
+
+double GetPower(int characterID)
+{
+  float buffer;
+  int bytesRead = 0;
+  if (info.CurrentFile == 1)
+      ReadProcessMemory(ProcessHandle, (PCVOID)F1_GetCharAddress(characterID) + F1_PowerOffset, &buffer, 4, (PDWORD)&bytesRead);
+  else
+      ReadProcessMemory(ProcessHandle, (PCVOID)F2_GetCharAddress(characterID) + F2_PowerOffset, &buffer, 4, (PDWORD)&bytesRead);
+  return (double)buffer;
+}
+
+double GetSpeed(int characterID)
+{
+  float buffer;
+  int bytesRead = 0;
+  if (info.CurrentFile == 1)
+      ReadProcessMemory(ProcessHandle, (PCVOID)F1_GetCharAddress(characterID) + F1_SpeedOffset, &buffer, 4, (PDWORD)&bytesRead);
+  else
+      ReadProcessMemory(ProcessHandle, (PCVOID)F2_GetCharAddress(characterID) + F2_SpeedOffset, &buffer, 4, (PDWORD)&bytesRead);
+  return (double)buffer;
+}
 
 double GetPercentage(int characterID)
 {
@@ -510,6 +743,17 @@ char GetEnemyInGame(int enemyID)
 	return buffer;
 }
 
+char GetPlayerNum()
+{
+    unsigned char buffer;
+	int bytesRead = 0;
+	if (info.CurrentFile == 1)
+		ReadProcessMemory(ProcessHandle, (PCVOID)F1_PlayerNum, &buffer, 1, (PDWORD)&bytesRead);
+	else
+		ReadProcessMemory(ProcessHandle, (PCVOID)F2_PlayerNum, &buffer, 1, (PDWORD)&bytesRead);
+	return buffer;
+}
+
 char* GetStatusText(unsigned char stat)
 {
 	if (stat == 0x01)
@@ -551,7 +795,65 @@ static int LInit (lua_State* L) {
 	return 1;
 }
 
-static int LUpdate (lua_State* L)
+static int LUpdateLobby (lua_State* L)
+{
+	info.CurrentFile = GetFile();
+	if (info.CurrentFile == -1)
+		return 0;
+	info.HostStatus = GetHostStatus();
+	info.HostTime = GetHostTime();
+	info.HostMaxPlayer = GetHostMaxPlayer();
+	info.HostPlayer = GetHostPlayer();
+	info.HostScenarioID = GetHostScenarioID();
+	info.HostDifficulty = GetHostDifficulty();
+	for (int i=0; i < 20; i++)
+	{
+		//Slots[i].Enabled = GetLobbySlotStatus(i);
+		//if (Slots[i].Enabled == 0)
+		//	continue;
+		Slots[i].SlotNum = GetSlotNum(i);
+		Slots[i].Status = GetSlotStatus(i);
+		Slots[i].Pass = GetSlotPass(i);
+		Slots[i].Player = GetSlotPlayer(i);
+		Slots[i].MaxPlayer = GetSlotMaxPlayer(i);
+		Slots[i].ScenarioID = GetSlotScenarioID(i);
+		Slots[i].Version = GetSlotVersion(i);
+	}
+	return 0;
+}
+
+static int LUpdateItem (lua_State* L)
+{
+	info.CurrentFile = GetFile();
+	if (info.CurrentFile == -1)
+		return 0;
+	for (int i=0; i < MAX_ITEM; i++)
+	{
+		if (info.CurrentFile == 1)
+			GetRoomItemF1(i);
+		else
+			GetRoomItemF2(i);
+		//char* inv = GetInventory(i);
+		//char* spinv = GetSpecialInventory(i);
+		//char* dinv = GetDeadInventory(i);
+		//char* dspinv = GetDeadSpecialInventory(i);
+		//memcpy(RItems[i].Inventory, inv, 4);
+		//memcpy(RItems[i].SpecialInventory, spinv, 8);
+		//memcpy(RItems[i].DeadInventory, dinv, 4);
+		//memcpy(RItems[i].DeadInventorySpecial, dspinv, 4);
+		//free(inv);
+		//free(spinv);
+		//free(dinv);
+		//free(dspinv);
+		//inv = NULL;
+		//spinv = NULL;
+		//dinv = NULL;
+		//dspinv = NULL;
+	}
+	return 0;
+}
+
+static int LUpdatePlayer (lua_State* L)
 {
 	info.CurrentFile = GetFile();
 	if (info.CurrentFile == -1)
@@ -563,11 +865,16 @@ static int LUpdate (lua_State* L)
 	info.P3Coin = GetP3Coins();
 	info.P4Coin = GetP4Coins();
 	info.KilledZombie = GetKilledZombies();
+	info.PlayerNum = GetPlayerNum();
 	//info.E1Start = GetE1HP();//enemy1 HP
-	//info.E2Start = GetE2HP();//enemy2 HP
-	//info.E3Start = GetE3HP();//enemy3 HP
-	//info.E4Start = GetE4HP();//enemy4 HP
 	UpdatePickups();
+
+	for (int i=0; i < 4; i++)
+	{
+		Players[i].CharacterType = GetCharacterType(i);
+		GetCindyBag(i);
+
+	}
 	for (int i=0; i < 4; i++)
 	{
 		Players[i].Enabled = GetCharacterEnabled(i);
@@ -579,6 +886,9 @@ static int LUpdate (lua_State* L)
 		Players[i].CharacterType = GetCharacterType(i);
 		Players[i].NameID = GetNameID(i);
 		Players[i].Virus = GetPercentage(i);
+		Players[i].Size = GetSize(i);
+		Players[i].Speed = GetSpeed(i);
+		Players[i].Power = GetPower(i);
 		Players[i].RoomID = GetRoomID(i);
 		Players[i].SpecialItem = GetSpecialItem(i);
 		Players[i].EquippedItem = GetEquippedItem(i);
@@ -603,7 +913,23 @@ static int LUpdate (lua_State* L)
 		dinv = NULL;
 		dspinv = NULL;
 	}
-	for (int i=0; i < 6; i++)
+	return 0;
+}
+
+static int LUpdateEnemy (lua_State* L)
+{
+	for (int i=0; i < MAX_ENEMY; i++)
+	{
+		Enemies[i].Enabled = GetEnemyEnabled(i);
+		Enemies[i].InGame = GetEnemyInGame(i);
+		if (Enemies[i].InGame == 0)
+			continue;
+		Enemies[i].HP = GetEnemyHealth(i);
+		Enemies[i].MaxHP = GetEnemyMaxHealth(i);
+		Enemies[i].EnemyType = GetEnemyType(i);
+		Enemies[i].NameID = GetEnemyNameID(i);
+	}
+	for (int i=0; i < MAX_ENEMY; i++)
 	{
 		Enemies[i].Enabled = GetEnemyEnabled(i);
 		if (Enemies[i].Enabled == 0)
@@ -617,6 +943,73 @@ static int LUpdate (lua_State* L)
 	return 0;
 }
 
+static int LGetLobby (lua_State* L)
+{
+	double slotNum = lua_tonumber(L, 1);
+	int i = (int)(slotNum-1);
+	double playerID = lua_tonumber(L, 1);
+	lua_newtable(L);
+
+		lua_pushstring(L, "num");
+			lua_pushnumber(L, (double)Slots[i].SlotNum);
+		lua_rawset(L, -3);
+		lua_pushstring(L, "status");
+			lua_pushnumber(L, (double)Slots[i].Status);
+		lua_rawset(L, -3);
+		lua_pushstring(L, "pass");
+			lua_pushnumber(L, (double)Slots[i].Pass);
+		lua_rawset(L, -3);
+		lua_pushstring(L, "version");
+			lua_pushnumber(L, (double)Slots[i].Version);
+		lua_rawset(L, -3);
+		lua_pushstring(L, "player");
+			lua_pushnumber(L, (double)Slots[i].Player);
+		lua_rawset(L, -3);
+		lua_pushstring(L, "maxplayer");
+			lua_pushnumber(L, (double)Slots[i].MaxPlayer);
+		lua_rawset(L, -3);
+		if (info.CurrentFile == 1)
+		{
+		lua_pushstring(L, "slotscenario");
+			lua_pushstring(L, GetF1LobScenarioName(Slots[i].ScenarioID));
+		lua_rawset(L, -3);
+		}
+		else
+		{
+		lua_pushstring(L, "slotscenario");
+			lua_pushstring(L, GetF2LobScenarioName(Slots[i].ScenarioID));
+		lua_rawset(L, -3);
+		}
+
+	return 1;
+}
+static int LGetItem (lua_State* L)
+{
+	double itemID = lua_tonumber(L, 1);
+	int i = (int)(itemID-1);
+
+	lua_newtable(L);
+
+		lua_pushstring(L, "roomitem");
+		lua_newtable(L);
+
+			for (int j=0; j < MAX_ITEM; j++)
+			{
+				lua_pushnumber(L, (double)j+1);
+				if (RItems[i].RItem[j].ID == 0x00||RItems[i].RItem[j].Count == 0xFFFF||RItems[i].RItem[j].EN != 0xFFFF||RItems[i].RItem[j].Pick == 1)
+				{
+					CreateEmptyItemTable
+				}
+				else
+				{
+					CreateItemTable(RItems[i].RItem[j]);
+				}
+			}
+
+		lua_rawset(L, -3);
+
+	return 1;
+}
 static int LGetPlayer (lua_State* L)
 {
 	double playerID = lua_tonumber(L, 1);
@@ -649,6 +1042,18 @@ static int LGetPlayer (lua_State* L)
 
 		lua_pushstring(L, "virus");
 			lua_pushnumber(L, Players[i].Virus);
+		lua_rawset(L, -3);
+
+		lua_pushstring(L, "size");
+			lua_pushnumber(L, Players[i].Size);
+		lua_rawset(L, -3);
+
+		lua_pushstring(L, "speed");
+			lua_pushnumber(L, Players[i].Speed);
+		lua_rawset(L, -3);
+
+		lua_pushstring(L, "power");
+			lua_pushnumber(L, Players[i].Power);
 		lua_rawset(L, -3);
 
 		lua_pushstring(L, "critBonus");
@@ -784,12 +1189,41 @@ static int LGetEnemy (lua_State* L)
 
 	return 1;
 }
+
 static int LGetGameInfo (lua_State* L)
 {
 	lua_newtable(L);
 		lua_pushstring(L, "currentFile");
 			lua_pushnumber(L, (double)info.CurrentFile);
 		lua_rawset(L, -3);
+		lua_pushstring(L, "hoststatus");
+			lua_pushnumber(L, (double)info.HostStatus);
+		lua_rawset(L, -3);
+		lua_pushstring(L, "hosttime");
+			lua_pushnumber(L, (double)info.HostTime);
+		lua_rawset(L, -3);
+		lua_pushstring(L, "hostmaxplayer");
+			lua_pushnumber(L, (double)info.HostMaxPlayer);
+		lua_rawset(L, -3);
+		lua_pushstring(L, "hostplayer");
+			lua_pushnumber(L, (double)info.HostPlayer);
+		lua_rawset(L, -3);
+		lua_pushstring(L, "difficulty");
+			lua_pushstring(L, GetDifficultyName(info.HostDifficulty));
+		lua_rawset(L, -3);
+
+		if (info.CurrentFile == 1)
+		{
+		lua_pushstring(L, "hostscenario");
+			lua_pushstring(L, GetF1LobScenarioName(info.HostScenarioID));
+		lua_rawset(L, -3);
+		}
+		else
+		{
+		lua_pushstring(L, "hostscenario");
+			lua_pushstring(L, GetF2LobScenarioName(info.HostScenarioID));
+		lua_rawset(L, -3);
+		}
 		lua_pushstring(L, "scenario");
 			lua_pushstring(L, GetScenarioName(info.ScenarioID));
 		lua_rawset(L, -3);
@@ -810,6 +1244,9 @@ static int LGetGameInfo (lua_State* L)
 		lua_rawset(L, -3);
 		lua_pushstring(L, "killedzombies");
 			lua_pushnumber(L, (double)info.KilledZombie);
+		lua_rawset(L, -3);
+		lua_pushstring(L, "playernum");
+			lua_pushnumber(L, (double)info.PlayerNum);
 		lua_rawset(L, -3);
 		lua_pushstring(L, "E1HP");//enemy1 HP
 			lua_pushnumber(L, (double)info.E1Start);
@@ -834,7 +1271,12 @@ static int LTestFunction (lua_State* L)
 
 static const struct luaL_Reg library_functions [] = {
 	{"init", LInit},
-	{"update", LUpdate},
+	{"updateLobby", LUpdateLobby},
+	{"updateItem", LUpdateItem},
+	{"updatePlayer", LUpdatePlayer},
+	{"updateEnemy", LUpdateEnemy},
+	{"getLobby", LGetLobby},
+	{"getItem", LGetItem},
 	{"getPlayer", LGetPlayer},
 	{"getEnemy", LGetEnemy},
 	{"getGameInfo", LGetGameInfo},
