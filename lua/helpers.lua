@@ -44,12 +44,107 @@ function GetRoomName(scenario, roomID)
 	end
 end
 
+function GetRoomName_j(scenario, roomID)
+	if not (RoomNames_j[scenario] == nil) then
+		if RoomNames_j[scenario][roomID] == nil then
+			return "Room ID: " .. tostring(roomID)
+		else
+			return RoomNames_j[scenario][roomID]
+		end
+	else
+		return "ERROR: Unknown scenario"
+	end
+end
+
+function GetScenarioIDString(id)
+	local scenariostring = "\n"..tostring(Slots[id].slotscenario)
+	if Slots[id].status ==3 or Slots[id].status ==4 then
+		return scenariostring
+	elseif Slots[id].status ==1 or Slots[id].status ==2 then
+		return "(free)\n"
+	else
+		return ""
+	end
+end
+
+function GetVersionString(id)
+	local vesionstring = tostring(Slots[id].version)
+	if Slots[id].version ==0x11 then
+		return "DVD-ROM"
+	elseif Slots[id].version ==0x12 then
+		return "HDD-ROM"
+	else
+		return ""
+	end
+end
+
+function GetSlotString(id)
+	local slotstring = tostring(Slots[id].num)
+		return slotstring
+end
+
+function GetPlayerString(id)
+	local playerstring = tostring(Slots[id].player) .. "/" .. tostring(Slots[id].maxplayer)
+	if Slots[id].status ==0 then
+		return "-/-P\nBusy"--red color
+	elseif Slots[id].status ==1 then
+		return "-/-P\nVacant"
+	elseif Slots[id].status ==2 then
+		return "-/-P\nBusy"--yellow color
+	elseif Slots[id].status ==3 then
+		return tostring(Slots[id].player) .. "/" .. tostring(Slots[id].maxplayer).."\nJoin in"--white color
+	elseif Slots[id].status ==4 then
+		return tostring(Slots[id].player) .. "/" .. tostring(Slots[id].maxplayer).."\nFull"--pink color
+	else
+		return playerstring
+	end
+end
+
 function GetPlayerHealthString(id)
 	local healthstring = tostring(Players[id].HP) .. "/" .. tostring(Players[id].maxHP)
 	if Players[id].status == "Dead" or Players[id].status == "Down" or Players[id].status == "Zombie" then
 		return Players[id].status
 	else
+		return healthstring
+	end
+end
+
+function GetEnemyHealthString(id)
+	local healthstring = tostring(Enemies[id].HP) .. "/" .. tostring(Enemies[id].maxHP)
+	if Enemies[id].HP == 0x7fff
+	or Enemies[id].nameID == 11
+	or Enemies[id].nameID == 12
+	or Enemies[id].nameID == 14 then
+		return "Invincible"
+	elseif (Enemies[id].HP == 0x0
+	or Enemies[id].HP == 0xffff
+	or Enemies[id].HP >= 0x8000)
+	and not (Enemies[id].nameID == 54
+	or Enemies[id].nameID == 58) then
+		return "Dead"
+	elseif (Enemies[id].HP == 0xffff
+	and Enemies[id].maxHP == 0x1
+	and Enemies[id].nameID == 54) then
+		return "Destroyed"
+	elseif (Enemies[id].HP == 0x0
+	and Enemies[id].nameID == 58) then
+		return "Exploded"
+	else
 		return healthstring 
+	end
+end
+
+function GetEnemyColor(id)
+if Enemies[id].nameID == 54
+		or Enemies[id].nameID == 58 
+		or Enemies[id].nameID == 60 then
+		return {255/255, 80/255, 40/255, 1}
+	elseif Enemies[id].nameID == 4
+		or Enemies[id].nameID == 46
+		or Enemies[id].nameID == 61 then
+		return {0, 1, 0, 1}--non enemy
+	else
+		return {1, 1, 1, 1}
 	end
 end
 
@@ -60,6 +155,18 @@ function GetStatusColor(id)
 		return {1, 0, 0, 1}
 	elseif Players[id].status == "Poison+Bleed" then
 		return {0, 1, 1, 1}
+	else
+		return {1, 1, 1, 1}
+	end
+end
+
+function GetSlotsColor(id)
+	if Slots[id].status ==0 then
+		return {1, 0, 0, 1}
+	elseif Slots[id].status ==2 then
+		return {1, 1, 0, 1}
+	elseif Slots[id].status ==4 then
+		return {1, 100/255, 240/255, 1}
 	else
 		return {1, 1, 1, 1}
 	end
@@ -83,4 +190,10 @@ function Time2string(x)
 	local s = math.floor((x / 1000) % 60)
 	local mi = math.floor(x % 1000 / 10)
 	return string.format("%02d", h) .. ":" .. string.format("%02d", m) .. ":" .. string.format("%02d", s) .. "." .. string.format("%2.2d", mi)
+end
+
+function Time2string2(x)
+	local m = math.floor((x / (60)) % 60)
+	local s = math.floor((x-60)%60)
+	return string.format("%02d", m) .. ":" .. string.format("%02d", s)
 end

@@ -390,6 +390,30 @@ SheetInfo.sheet =
             height=196,
 
         },
+        {
+            -- key
+            x=946,
+            y=467,
+            width=20,
+            height=20,
+
+        },
+        {
+            -- title bar
+            x=768,
+            y=1172,
+            width=300,
+            height=24,
+
+        },
+        {
+            -- slot bar
+            x=768,
+            y=1200,
+            width=300,
+            height=30,
+
+        },
     },
 
     sheetContentWidth = 1280,
@@ -446,6 +470,9 @@ SheetInfo.frameIndex =
     ["virus90"] = 45,
     ["virusOK"] = 46,
     ["wild things"] = 47,
+    ["key"] = 48,
+    ["title bar"] = 49,
+    ["slot bar"] = 50,
 }
 
 function SheetInfo:getSheet()

@@ -4,14 +4,15 @@ RoomNames = require "roomnames"
 
 function LoadAssets()
 	ItemCountFont = love.graphics.newImageFont("assets/ItemCountFont.png", "0123456789")
-	TimeFont = love.graphics.newImageFont("assets/TimeFont.png", "0123456789:.")
+	TimeFont = love.graphics.newImageFont("assets/TimeFont.png", "0123456789:./")
 	VirusFont = love.graphics.newImageFont("assets/VirusFont.png", "0123456789.%")
 	VirusFont:setFilter("nearest", "linear")
 	UIAtlas = LoadTextureAtlas("assets/ui.png", UIAtlasInfo)
 	ItemIcons = LoadTextureAtlas("assets/icons.png", IconLinks)
-	DefaultFont = love.graphics.newFont(12)
-	SmallFont = love.graphics.newFont(10)
-	VerySmallFont = love.graphics.newFont(9)
+	DefaultFont = love.graphics.newFont("assets/arialbd.ttf",18)
+	SmallFont = love.graphics.newFont("assets/arialbd.ttf",15)
+	VerySmallFont = love.graphics.newFont("assets/arialbd.ttf",12)
+	EnemyFont = love.graphics.newFont("assets/arialbd.ttf",13)
 end
 
 function LoadTextureAtlas(texture, links) -- Really dirty stuff here
