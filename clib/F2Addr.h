@@ -30,7 +30,9 @@ const int F2_EquippedItemOffset = 0xC8C;
 
 const int F2_PickupStructSize = 60;
 const int F2_PickupCountOffset = 30;
-const int F2_PickupOn = 34;
+const int F2_PickupOffset = 34;
+const int F2_PresentOffset = 26;//26 36
+const int F2_MixOffset = 21;
 
 int F2_GetCharAddress(int characterID)
 {
@@ -162,29 +164,29 @@ const int F2_HostDifficulty = 0x206020CA;
 //slot Scenario 62DDF6 62E324
 //slot num 63C56A 63C56C
 //slot1 628da0 +2players +4maxplayers slot2+15C
-//slot1 628DAE 00=Busy 01=Vacant 02=Busy(è®¾å®šä¸­) 03=Join in 04=Full 05=playing 06=opening
+//slot1 628DAE 00=Busy 01=Vacant 02=Busy(Éè¶¨ÖÐ) 03=Join in 04=Full 05=playing 06=opening
 //slot2 628EFC
 //62B672 num of players in door
 //63C56A num of players in chat room
 //63C56C num of players in lobbies
 
-const int F2_HostP1Start = 0x20630D40;
-const int F2_HostP2Start = 0x206310E8;
-const int F2_HostP3Start = 0x20631490;
-const int F2_HostP4Start = 0x20631838;
+const int F2_SlotP1Start = 0x20630D40;
+const int F2_SlotP2Start = 0x206310E8;
+const int F2_SlotP3Start = 0x20631490;
+const int F2_SlotP4Start = 0x20631838;
 
-int F2_GetHostCharAddress(int characterID)
+int F2_GetSlotCharAddress(int characterID)
 {
     switch (characterID)
     {
         case 0:
-            return F2_HostP1Start;
+            return F2_SlotP1Start;
         case 1:
-            return F2_HostP2Start;
+            return F2_SlotP2Start;
         case 2:
-            return F2_HostP3Start;
+            return F2_SlotP3Start;
         case 3:
-            return F2_HostP4Start;
+            return F2_SlotP4Start;
         default:
             return -1;
     }
@@ -265,3 +267,8 @@ int F2_GetLobbyAddress(int slotNum)
             return -1;
     }
 }
+
+const int F2_PassUB1 = 0x20490073;//Òì½ç
+const int F2_PassUB2 = 0x20490075;//Òì½ç
+const int F2_Pass4 = 0x20491268;//Í»ÆÆ
+//490073 750BB0 2916 3719 0154 6443 7688 1812 5551 6010 0652 6234 0533 9439 1421 1127 7840 6910

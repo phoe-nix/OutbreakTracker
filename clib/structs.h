@@ -1,4 +1,4 @@
-#define MAX_ITEM 16
+#define MAX_ITEM 32
 #define MAX_ENEMY 12
 
 #define true 1
@@ -47,7 +47,16 @@ typedef struct
 	unsigned char P3Coin;
 	unsigned char P4Coin;
 	unsigned char KilledZombie;
+	unsigned char Pass1;
+	unsigned char Pass2;
+	unsigned char Pass3;
+	unsigned short PassUB1;
+	unsigned char PassUB2;
+	unsigned short Pass4;
+	unsigned char Pass5;
+	unsigned char Pass6;
 	unsigned char PlayerNum;
+	unsigned char Difficulty;
 	unsigned int E1Start;
 	unsigned int E2Start;
 	unsigned int E3Start;
@@ -61,6 +70,8 @@ typedef struct
 	unsigned short Type;
 	unsigned short Count;
 	unsigned short Pick;
+	unsigned int Present;
+	unsigned char Mix;
 } Item;
 
 typedef struct
@@ -91,6 +102,31 @@ typedef struct
     Item CindyBag [4];
     unsigned char EquippedItem;
 } Player;
+
+typedef struct
+{
+	bool Enabled;
+	bool InGame;
+    unsigned short HP;
+    unsigned short MaxHP;
+    unsigned char CharacterType;
+    unsigned char NPCType;
+    double Virus;
+    double CritBonus;
+    double Size;
+    double Power;
+    double Speed;
+    unsigned short RoomID;
+    unsigned char Status;
+    unsigned char NameID;
+    unsigned char Inventory [4];
+    unsigned char SpecialItem;
+    unsigned char SpecialInventory [4];
+    unsigned char DeadInventory [4];
+    unsigned char DeadInventorySpecial [4];
+    Item CindyBag [4];
+    unsigned char EquippedItem;
+} SPlayer;
 
 typedef struct
 {
@@ -554,7 +590,7 @@ char* GetEnemyName2(int nameID)
         case 36:
             return "Sci.Tail";//Scissor Tail
         case 37:
-            return "ID:37";
+            return "ID:37";//f1 outbreak
         case 38:
             return "ID:38";
         case 39:
