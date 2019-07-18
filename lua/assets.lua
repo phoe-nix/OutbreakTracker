@@ -1,4 +1,5 @@
 local IconLinks = require "icondata"
+local IconLinks2 = require "icondata2"
 local UIAtlasInfo = require "uidata"
 RoomNames = require "roomnames"
 
@@ -9,6 +10,7 @@ function LoadAssets()
 	VirusFont:setFilter("nearest", "linear")
 	UIAtlas = LoadTextureAtlas("assets/ui.png", UIAtlasInfo)
 	ItemIcons = LoadTextureAtlas("assets/icons.png", IconLinks)
+	ItemIcons2 = LoadTextureAtlas("assets/StartingItem.png", IconLinks2)
 	DefaultFont = love.graphics.newFont("assets/arialbd.ttf",18)
 	SmallFont = love.graphics.newFont("assets/arialbd.ttf",15)
 	VerySmallFont = love.graphics.newFont("assets/arialbd.ttf",12)

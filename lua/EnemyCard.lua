@@ -22,7 +22,7 @@ function EnemyCard:draw(x, y)
 
 	local enemy = Enemies[self.id]
 
-	--self.healthLabel.color=(GetConditionColor2(GetConditionName(Enemies[self.id].HP, Enemies[self.id].maxHP)))
+	--self.nameLabel.color=(GetConditionColor2(GetConditionName2(Enemies[self.id].HP, Enemies[self.id].maxHP)))
 
 	self.nameLabel.text = Enemies[self.id].name
 	self.nameLabelShadow.text = Enemies[self.id].name

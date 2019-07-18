@@ -18,6 +18,29 @@ function GetConditionName(hp, hpmax)
 	return "down"
 end
 
+function GetConditionName2(hp, hpmax)
+	local percent = hp / hpmax
+	if (percent > 1) then
+		return "dead"
+	end
+	if (percent >= 0.75) then
+		return "fine"
+	end
+	if (percent >= 0.50) then
+		return "caution"
+	end
+	if (percent >= 0.25) then
+		return "caution2"
+	end
+	if (percent > 0) then
+		return "danger"
+	end
+	if (percent == 0) then
+		return "dead"
+	end
+	return "dead"
+end
+
 function GetConditionColor(r, stat)
 	if (r == "fine") then
 		return {68/255, 134/255, 10/255, 0.5}
@@ -29,6 +52,20 @@ function GetConditionColor(r, stat)
 		return {253/255, 25/255, 25/255, 0.5}
 	elseif (r == "down") then
 		return {150/255, 15/255, 15/255, 0.5}
+	end
+end
+
+function GetConditionColor2(r, stat)
+	if (r == "fine") then
+		return {68/255, 255/255, 10/255, 1}
+	elseif (r == "caution") then
+		return {247/255, 223/255, 27/255, 1}
+	elseif (r == "caution2") then
+		return {253/255, 166/255, 25/255, 1}
+	elseif (r == "danger") then
+		return {253/255, 25/255, 25/255, 1}
+	elseif (r == "dead") then
+		return {100/255, 100/255, 100/255, 1}
 	end
 end
 

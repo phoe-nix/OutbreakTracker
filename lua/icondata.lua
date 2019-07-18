@@ -2892,6 +2892,14 @@ SheetInfo.sheet =
             height=48,
 
         },
+        {
+            -- 2/unused13
+            x=1968,
+            y=336,
+            width=48,
+            height=48,
+
+        },
     },
 
     sheetContentWidth = 2016,
@@ -3263,6 +3271,7 @@ SheetInfo.frameIndex =
     ["2/unused11"] = 359,
     ["2/unused12"] = 360,
     ["2/unused13"] = 361,
+    ["empty"] = 362,
 }
 
 function SheetInfo:getSheet()

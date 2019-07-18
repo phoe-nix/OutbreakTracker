@@ -6,7 +6,7 @@ function LobbyCard:new(id)
 	o.id = id or 1
 
 	o.slotLabel	   = Label:new(10,31, "placeholder", VerySmallFont, "right", "up", 20, 20)
-	o.scenarioLabel	   = Label:new(40,31, "placeholder", VerySmallFont, "left", "up", 130, 20)
+	o.scenarioLabel	   = Label:new(40,31, "placeholder", VerySmallFont, "left", "up", 150, 20)
 	o.versionLabel	   = Label:new(170,31, "placeholder", VerySmallFont, "left", "up", 150, 12, {120/255, 180/255, 240/255, 1})
 	o.playerLabel	   = Label:new(250,31, "placeholder", VerySmallFont, "left", "up", 50, 24)
 
