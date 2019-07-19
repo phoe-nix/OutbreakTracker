@@ -151,6 +151,31 @@ typedef struct
 	unsigned short Version;
 } Slot;
 
+char* GetSlotCharacterName(int charType)
+{
+    switch(charType)
+    {
+        case 0:
+            return "Kevin ";//Kevin
+        case 1:
+            return "Mark ";//Mark
+        case 2:
+            return "Jim ";//Jim
+        case 3:
+            return "George ";//George
+        case 4:
+            return "David ";//David
+        case 5:
+            return "Alyssa ";//Alyssa
+        case 6:
+            return "Yoko ";//Yoko
+        case 7:
+            return "Cindy ";//Cindy
+        default:
+            return "Unknown";//Unknown
+    }
+}
+
 char* GetCharacterName(int charType)
 {
     switch(charType)
@@ -180,6 +205,8 @@ char* GetNPCName(int nameID)
 {
     switch (nameID)
     {
+        case 0:
+            return "Unknown";
         case 1:
             return "MACDOWELL";
         case 2:
@@ -192,8 +219,12 @@ char* GetNPCName(int nameID)
             return "HUNK";
         case 6:
             return "MIGUEL";
+        case 7:
+            return "Unknown";
         case 8:
             return "LUKE";
+        case 9:
+            return "Unknown";
         case 10:
             return "ARNOLD";
         case 11:
@@ -202,6 +233,12 @@ char* GetNPCName(int nameID)
             return "BILLY";
         case 13:
             return "HARSH";
+        case 14:
+            return "Unknown";
+        case 15:
+            return "Unknown";
+        case 16:
+            return "Unknown";
         case 17:
             return "PETER";
         case 18:
@@ -210,10 +247,14 @@ char* GetNPCName(int nameID)
             return "FRED";
         case 20:
             return "ANDY";
+        case 21:
+            return "Unknown";
         case 22:
             return "JEAN";
         case 23:
             return "TONY";
+        case 24:
+            return "Unknown";
         case 25:
             return "PATRICK";
         case 26:
@@ -226,14 +267,22 @@ char* GetNPCName(int nameID)
             return "BONE";
         case 30:
             return "BOB";
+        case 31:
+            return "Unknown";
         case 32:
             return "NATHAN";
         case 33:
             return "SAMUEL";
+        case 34:
+            return "Unknown";
         case 35:
             return "WILL";
+        case 36:
+            return "Unknown";
         case 37:
             return "ROGER";
+        case 38:
+            return "Unknown";
         case 39:
             return "CARTER";
         case 40:
@@ -248,6 +297,8 @@ char* GetNPCName(int nameID)
             return "GARY";
         case 45:
             return "RICHARD";
+        case 46:
+            return "Unknown";
         case 47:
             return "MICKEY";
         case 48:
@@ -258,6 +309,8 @@ char* GetNPCName(int nameID)
             return "AL:B";
         case 51:
             return "BEN";
+        case 52:
+            return "Unknown";
         case 53:
             return "REGAN";
         case 54:
@@ -268,10 +321,16 @@ char* GetNPCName(int nameID)
             return "LINDA";
         case 57:
             return "RITA";
+        case 58:
+            return "Unknown";
         case 59:
             return "MARY";
         case 60:
             return "KATE";
+        case 61:
+            return "Unknown";
+        case 62:
+            return "Unknown";
         case 63:
             return "DANNY";
         case 64:
@@ -280,8 +339,34 @@ char* GetNPCName(int nameID)
             return "GILL";
         case 66:
             return "GILL:B";
+        case 67:
+            return "Unknown";
+        case 68:
+            return "Unknown";
+        case 69:
+            return "Unknown";
+        case 70:
+            return "Unknown";
+        case 71:
+            return "Unknown";
+        case 72:
+            return "Unknown";
+        case 73:
+            return "Unknown";
         case 74:
             return "KEITH";
+        case 75:
+            return "Unknown";
+        case 76:
+            return "Unknown";
+        case 77:
+            return "Unknown";
+        case 78:
+            return "Unknown";
+        case 79:
+            return "Unknown";
+        case 80:
+            return "Unknown";
         case 81:
             return "KURT";
         case 82:
@@ -290,10 +375,38 @@ char* GetNPCName(int nameID)
             return "GARY:B";
         case 84:
             return "AL:C";
+        case 85:
+            return "Unknown";
+        case 86:
+            return "Unknown";
         case 87:
             return "DOROTHY";
+        case 88:
+            return "Unknown";
+        case 89:
+            return "Unknown";
+        case 90:
+            return "Unknown";
         case 91:
             return "YOKO:Z";
+        case 92:
+            return "Unknown";
+        case 93:
+            return "Unknown";
+        case 94:
+            return "Unknown";
+        case 95:
+            return "Unknown";
+        case 96:
+            return "Unknown";
+        case 97:
+            return "Unknown";
+        case 98:
+            return "Unknown";
+        case 99:
+            return "Unknown";
+        case 100:
+            return "Unknown";
         case 101:
             return "RAYMOND";
         case 102:
@@ -322,6 +435,8 @@ char* GetNPCName(int nameID)
             return "KARL";
         case 114:
             return "DUSTIN";
+        case 115:
+            return "Unknown";
         case 116:
             return "DEREK";
         case 117:
@@ -354,16 +469,44 @@ char* GetNPCName(int nameID)
             return "AMELIA";
         case 131:
             return "ETHAN";
+        case 132:
+            return "Unknown";
         case 133:
             return "HOWARD";
+        case 134:
+            return "Unknown";
         case 135:
             return "ISAAC";
+        case 136:
+            return "Unknown";
         case 137:
             return "KATHY";
+        case 138:
+            return "Unknown";
         case 139:
             return "ELENA";
+        case 140:
+            return "Unknown";
         case 141:
             return "FRANK";
+        case 142:
+            return "Unknown";
+        case 143:
+            return "Unknown";
+        case 144:
+            return "Unknown";
+        case 145:
+            return "Unknown";
+        case 146:
+            return "Unknown";
+        case 147:
+            return "Unknown";
+        case 148:
+            return "Unknown";
+        case 149:
+            return "Unknown";
+        case 150:
+            return "Unknown";
         case 151:
             return "RODNEY";
         default:
