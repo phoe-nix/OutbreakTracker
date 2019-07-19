@@ -205,8 +205,6 @@ char* GetNPCName(int nameID)
 {
     switch (nameID)
     {
-        case 0:
-            return "Unknown";
         case 1:
             return "MACDOWELL";
         case 2:
