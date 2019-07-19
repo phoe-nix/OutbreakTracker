@@ -63,9 +63,15 @@ function love.draw()
 		if (GameInfo.hoststatus >= 4 and GameInfo.hoststatus < 6 and GameInfo.scenario == "") then
 			love.graphics.printf(Time2string2(GameInfo.hosttime), 10, 190, 300, "left")
 			love.graphics.printf(GameInfo.hostplayer.."/"..GameInfo.hostmaxplayer+2,0, 190,290, "right")
-			UIAtlas:draw(GameInfo.hostscenario, 0, 0, 0, 1)
+			UIAtlas:draw(GameInfo.hostscenario, 4, 0, 0, 1)
 			love.graphics.setFont(DefaultFont)
 			love.graphics.printf(GameInfo.hostdifficulty, 0, 190, 300, "center")
+
+			for i=1, 4 do
+				if SPlayers[i].enabled then
+					SPlayerCards[i]:draw(0, (i-1)*100+210)
+				end
+			end
 		end
 
 		if (GameInfo.frames>0) then
@@ -243,13 +249,6 @@ function love.draw()
 		for i=1, 4 do
 			if Players[i].enabled then
 				PlayerCards[i]:draw(0, (i-1)*145)
-			end
-		end
-		for i=1, 4 do
-			if (GameInfo.hoststatus >= 4 and GameInfo.hoststatus < 6 and GameInfo.scenario == "") then
-				if SPlayers[i].enabled then
-					SPlayerCards[i]:draw(0, (i-1)*130+210)
-				end
 			end
 		end
 		for i=1, 6 do
