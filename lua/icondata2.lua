@@ -267,6 +267,14 @@ SheetInfo.sheet =
 SheetInfo.frameIndex =
 {
 	--
+    ["Kevin "] = 29,
+    ["Mark "] = 29,
+    ["Jim "] = 29,
+    ["George "] = 29,
+    ["David "] = 29,
+    ["Alyssa "] = 29,
+    ["Yoko "] = 29,
+    ["Cindy "] = 29,
     ["Kevin"] = 1,
     ["Mark"] = 2,
     ["Jim"] = 3,
