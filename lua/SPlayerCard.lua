@@ -42,10 +42,12 @@ function SPlayerCard:draw(x, y)
 
 	local sb = love.graphics.newSpriteBatch(UIAtlas.tex)
 	local sb2 = love.graphics.newSpriteBatch(ItemIcons2.tex)
-	local bustname = SPlayers[self.id].name
-	local iconname = "icon" .. SPlayers[self.id].name
+	local startitem = SPlayers[self.id].name
+	local bustname = "bust" .. SPlayers[self.id].name
+	local bx, by, bw, bh = UIAtlas.quads[bustname]:getViewport()
+	local scale = 140 / bh;
 
-	ItemIcons2:addSB(sb2, bustname, 8, 42, 0, 1, 1)
+	ItemIcons2:addSB(sb2, startitem, 8, 42, 0, 1, 1)
 
 	sb:setColor(20/255, 134/255, 10/255, 0.5)
 	UIAtlas:addSB(sb, "healthmask", 9, 5);
@@ -53,13 +55,15 @@ function SPlayerCard:draw(x, y)
 	UIAtlas:addSB(sb, "statusbar", 1, 2);
 
 	sb:setColor(1, 1, 1, 1)
-	UIAtlas:addSB(sb, iconname, 85, 16, 0, 1, 1)
+	UIAtlas:addSB(sb, bustname, 300 - bw * scale, 145 - bh * scale, 0, scale, scale)
 
 	sb:setColor(20/255, 48/255, 85/255, 0.8)
-	UIAtlas:addSB(sb, "ispecialmask", 9, 42);
+	UIAtlas:addSB(sb, "inventorymask", 8, 42);
+	--UIAtlas:addSB(sb, "ispecialmask", 9, 42);
 
 	sb:setColor(1, 1, 1, 1)
-	UIAtlas:addSB(sb, "invSpecial", 1, 39);
+	UIAtlas:addSB(sb, "invSingle", 0, 37);
+	--UIAtlas:addSB(sb, "invSpecial", 1, 39);
 
 	love.graphics.draw(sb)
 
