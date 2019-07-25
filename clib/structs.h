@@ -42,6 +42,9 @@ typedef struct
 	unsigned short HostScenarioID;
 	unsigned short ScenarioID;
 	unsigned int FrameCounter;
+	unsigned int GasTime;
+	unsigned int GasFlag;
+	unsigned char GasRandom;
 	unsigned char P1Coin;
 	unsigned char P2Coin;
 	unsigned char P3Coin;

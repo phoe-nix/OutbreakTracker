@@ -271,4 +271,32 @@ int F2_GetLobbyAddress(int slotNum)
 const int F2_PassUB1 = 0x20490073;//“ÏΩÁ
 const int F2_PassUB2 = 0x20490075;//“ÏΩÁ
 const int F2_Pass4 = 0x20491268;//Õª∆∆
+const int F2_Difficulty = 0x2049135A;
+const int F2_DTGasRandom = 0x2024ADB0;//24ADB0(offline) 491338(online)
+const int F2_DTGasFlag = 0x2048FFFC;
+const int F2_DTGasTime = 0x20491278;
+/*clear 4912A0
+//random set? 24AD30 397B80 397B82 491338 491353 49135E
+//gas address
+24ADB0 3F 98(89 95)  1 2F East Hall
+98 F1(AE 88)
+00
+//48FE74 02 = set2
+//48FE78 80 = set2
+//48FE79 04 = set2
+//48FE7A 01 = set2
+//48FE7C 80 = set2
+//48FF38 80 gas random
+//48FF3C 80
+//490266 04?
+//490356 02
+//4912CB 01
+//491338
+ online 8D=vh set1 online 8e= vh set2
+offline 93=easy 8b=normal 7c= hard 73=vh
+//491353 01
+//(item?) 49135E 2a =set 1 2b= set2 
+//49136F 01
+//493982 02
 //490073 750BB0 2916 3719 0154 6443 7688 1812 5551 6010 0652 6234 0533 9439 1421 1127 7840 6910
+*/

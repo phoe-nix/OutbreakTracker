@@ -227,6 +227,30 @@ unsigned int GetFrames()
 	return buffer;
 }
 
+unsigned int GetGasTime()
+{
+	unsigned int buffer;
+	int bytesRead = 0;
+	    ReadProcessMemory(ProcessHandle, (PCVOID) F2_DTGasTime, &buffer, 4, (PDWORD) &bytesRead);
+	return buffer;
+}
+
+unsigned int GetGasFlag()
+{
+	unsigned int buffer;
+	int bytesRead = 0;
+	    ReadProcessMemory(ProcessHandle, (PCVOID) F2_DTGasFlag, &buffer, 4, (PDWORD) &bytesRead);
+	return buffer;
+}
+
+unsigned char GetGasRandom()
+{
+	unsigned char buffer;
+	int bytesRead = 0;
+	    ReadProcessMemory(ProcessHandle, (PCVOID) F2_DTGasRandom, &buffer, 1, (PDWORD) &bytesRead);
+	return buffer;
+}
+
 unsigned char GetP1Coins()
 {
 	unsigned char buffer;
@@ -333,7 +357,10 @@ unsigned char GetDifficulty()
 {
 	unsigned char buffer;
 	int bytesRead = 0;
+	if (info.CurrentFile == 1)
 	    ReadProcessMemory(ProcessHandle, (PCVOID) F1_Difficulty, &buffer, 1, (PDWORD) &bytesRead);
+	else
+		ReadProcessMemory(ProcessHandle, (PCVOID) F2_Difficulty, &buffer, 1, (PDWORD) &bytesRead);
 	return buffer;
 }
 /*
@@ -496,7 +523,7 @@ void GetRoomItemF1(int cid)
 		int bytesRead = 0;
 
 		ReadProcessMemory(ProcessHandle, (PCVOID)F1_RoomItem, &Pointer,4,0);
-		ReadProcessMemory(ProcessHandle, (PCVOID)Pointer+0x20000000+0x40-(192*MAX_ITEM/2), buffer, 196*MAX_ITEM, (PDWORD)&bytesRead);
+		ReadProcessMemory(ProcessHandle, (PCVOID)Pointer+0x20000000+0x40-(196*MAX_ITEM/2), buffer, 196*MAX_ITEM, (PDWORD)&bytesRead);
 
 		/* Warning! Unexplainable magic below! */
 		for (int i=0; i < MAX_ITEM; i++)
@@ -725,7 +752,7 @@ char GetSlotCharacterEnabled(int characterID)
     char buffer;
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-		ReadProcessMemory(ProcessHandle, (PCVOID)F1_GetSlotCharAddress(characterID) + 2, &buffer, 1, (PDWORD)&bytesRead);
+		ReadProcessMemory(ProcessHandle, (PCVOID)F1_GetSlotCharAddress(characterID), &buffer, 1, (PDWORD)&bytesRead);
 	else
 		ReadProcessMemory(ProcessHandle, (PCVOID)F2_GetSlotCharAddress(characterID) + 6, &buffer, 1, (PDWORD)&bytesRead);
 	return buffer;
@@ -737,7 +764,7 @@ char GetSlotNPCType(int characterID)
 	char buffer;
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-		ReadProcessMemory(ProcessHandle, (PCVOID)F1_GetSlotCharAddress(characterID) + 2, &buffer, 1, (PDWORD)&bytesRead);
+		ReadProcessMemory(ProcessHandle, (PCVOID)F1_GetSlotCharAddress(characterID) + 230, &buffer, 1, (PDWORD)&bytesRead);
 	else
 		ReadProcessMemory(ProcessHandle, (PCVOID)F2_GetSlotCharAddress(characterID) + 2, &buffer, 1, (PDWORD)&bytesRead);
 	return buffer;
@@ -748,7 +775,7 @@ char GetSlotNameID(int characterID)
     char buffer;
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-		ReadProcessMemory(ProcessHandle, (PCVOID)F1_GetSlotCharAddress(characterID), &buffer, 1, (PDWORD)&bytesRead);
+		ReadProcessMemory(ProcessHandle, (PCVOID)F1_GetSlotCharAddress(characterID) + 228, &buffer, 1, (PDWORD)&bytesRead);
 	else
 		ReadProcessMemory(ProcessHandle, (PCVOID)F2_GetSlotCharAddress(characterID), &buffer, 1, (PDWORD)&bytesRead);
 	return buffer;
@@ -1003,6 +1030,9 @@ static int LUpdatePlayer (lua_State* L)
 		return 0;
 	info.ScenarioID = GetScenarioID();
 	info.FrameCounter = GetFrames();
+	info.GasTime = GetGasTime();
+	info.GasFlag = GetGasFlag();
+	info.GasRandom = GetGasRandom();
 	info.P1Coin = GetP1Coins();
 	info.P2Coin = GetP2Coins();
 	info.P3Coin = GetP3Coins();
@@ -1139,7 +1169,8 @@ static int LGetSlotPlayer (lua_State* L)
 {
 	double playerID = lua_tonumber(L, 1);
 	int i = (int)(playerID-1);
-	char* charname = GetCharacterName(SPlayers[i].NameID);
+	char* charname1 = GetSlotCharacterName(SPlayers[i].NameID);
+	char* charname2 = GetCharacterName(SPlayers[i].NameID);
 	char* name = GetNPCName(SPlayers[i].NameID);
 	char* statname = GetStatusText(SPlayers[i].Status);
 
@@ -1165,7 +1196,10 @@ static int LGetSlotPlayer (lua_State* L)
 
 		lua_pushstring(L, "name");
 			if (SPlayers[i].NPCType == 0)
-				lua_pushstring(L, charname);
+				if (info.CurrentFile == 1)
+					lua_pushstring(L, charname1);
+				else
+					lua_pushstring(L, charname2);
 			else
 				lua_pushstring(L, name);
 		lua_rawset(L, -3);
@@ -1422,6 +1456,15 @@ static int LGetGameInfo (lua_State* L)
 		lua_rawset(L, -3);
 		lua_pushstring(L, "frames");
 			lua_pushnumber(L, (double)info.FrameCounter);
+		lua_rawset(L, -3);
+		lua_pushstring(L, "gastime");
+			lua_pushnumber(L, (double)info.GasTime);
+		lua_rawset(L, -3);
+		lua_pushstring(L, "gasflag");
+			lua_pushnumber(L, (double)info.GasFlag);
+		lua_rawset(L, -3);
+		lua_pushstring(L, "gasrandom");
+			lua_pushnumber(L, (double)info.GasRandom);
 		lua_rawset(L, -3);
 		lua_pushstring(L, "p1coins");
 			lua_pushnumber(L, (double)info.P1Coin);
