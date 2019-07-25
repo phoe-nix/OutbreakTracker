@@ -231,7 +231,13 @@ end
 
 function Time2string2(x)
 	local m = math.floor((x / (60)) % 60)
-	local s = math.floor((x-60)%60)
+	local s = math.floor((x-60) % 60)
+	return string.format("%02d", m) .. ":" .. string.format("%02d", s)
+end
+
+function Time2string3(x)
+	local m = math.floor((x / (1800)) % 60)
+	local s = math.floor((x / 30) % 60)
 	return string.format("%02d", m) .. ":" .. string.format("%02d", s)
 end
 
