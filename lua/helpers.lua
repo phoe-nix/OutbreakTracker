@@ -234,3 +234,8 @@ function Time2string2(x)
 	local s = math.floor((x-60)%60)
 	return string.format("%02d", m) .. ":" .. string.format("%02d", s)
 end
+
+function IsOuNumber(num)
+	local num1= num%2
+		return string.format(num1)
+end
