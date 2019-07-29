@@ -56,6 +56,7 @@ function love.draw()
 	if InitResult == true and not(GameInfo.currentFile == 255) then
 		love.graphics.setFont(TimeFont)
 		if not(GameInfo.scenario == "") then
+			love.graphics.printf(GameInfo.itemrandom, 0, (145*p), 280, "center")
 			love.graphics.printf(Time2string(GameInfo.frames/0.03), 0, (145*p), 300, "right")
 			--love.graphics.setFont(DefaultFont)
 			--love.graphics.printf(GameInfo.scenario,0, 625,300, "right") --scenario
@@ -84,7 +85,6 @@ function love.draw()
 				ItemIcons:draw("2/11511", 150-8, (145*p)+56,0,0.75)
 				--love.graphics.printf((GameInfo.gasflag), 0, (145*p), 100, "center")
 				--love.graphics.printf(IsOuNumber(GameInfo.gasrandom), 0, (145*p), 280, "center")
-				love.graphics.printf(GameInfo.itemrandom, 0, (145*p), 280, "center")
 				love.graphics.printf(Time2string3(GameInfo.gastime), 150-8, (145*p)+90, 56, "center",0,0.65,0.65)
 				love.graphics.setFont(EnemyFont)
 				if(GameInfo.gasflag == 1) and (GameInfo.gasrandom%2 == 0) then
