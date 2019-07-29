@@ -146,7 +146,7 @@ function PlayerCard:draw(x, y)
 
 	love.graphics.setFont(VirusFont)
 	if Players[self.id].specialItem.type == 403 then
-		love.graphics.printf(tostring(Players[self.id].critBonus) .. "%", 118, 125, 46, "right")
+		love.graphics.printf({{25/255, 255/255, 25/255, 1},tostring(Players[self.id].critBonus) .. "%"}, 118, 125, 46, "right")
 	end
 	-- Here goes some weird magic 150, 120
 	local tx, ty = 192, 125
@@ -160,7 +160,7 @@ function PlayerCard:draw(x, y)
 	--love.graphics.printf(string.format("%d", siz) .. "%", tx+46, ty+3.5-60, 60, "right", 0, 1.0, 1.0)
 
 	local pow = math.floor(math.floor(Players[self.id].power*100+0.5))
-	love.graphics.printf({{253/255, 25/255, 25/255, 1},string.format("%d", pow) .. "%"}, tx+70, ty+3.5-20, 60, "left", 0, 1.0, 1.0)
+	love.graphics.printf({{25/255, 255/255, 255/255, 1},string.format("%d", pow) .. "%"}, tx+46, ty+3.5-20, 60, "right", 0, 1.0, 1.0)
 
 	--local spd = math.floor(math.floor(Players[self.id].speed*100+0.5))
 	--love.graphics.printf(string.format("%d", spd) .. "%", tx+46, ty+3.5-40, 60, "right", 0, 1.0, 1.0)
