@@ -82,9 +82,10 @@ function love.draw()
 			elseif (GameInfo.scenario == "desperate times") then
 				love.graphics.printf((GameInfo.killedzombies), 0, (145*p), 300, "left")
 				ItemIcons:draw("2/11511", 150-8, (145*p)+56,0,0.75)
-				love.graphics.printf((GameInfo.gasflag), 0, (145*p), 100, "center")
+				--love.graphics.printf((GameInfo.gasflag), 0, (145*p), 100, "center")
+				--love.graphics.printf(IsOuNumber(GameInfo.gasrandom), 0, (145*p), 280, "center")
+				love.graphics.printf(GameInfo.itemrandom, 0, (145*p), 280, "center")
 				love.graphics.printf(Time2string3(GameInfo.gastime), 150-8, (145*p)+90, 56, "center",0,0.65,0.65)
-				love.graphics.printf(IsOuNumber(GameInfo.gasrandom), 0, (145*p), 280, "center")
 				love.graphics.setFont(EnemyFont)
 				if(GameInfo.gasflag == 1) and (GameInfo.gasrandom%2 == 0) then
 					if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
