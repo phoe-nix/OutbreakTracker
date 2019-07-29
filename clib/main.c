@@ -251,6 +251,14 @@ unsigned char GetGasRandom()
 	return buffer;
 }
 
+unsigned char GetItemRandom()
+{
+	unsigned char buffer;
+	int bytesRead = 0;
+	    ReadProcessMemory(ProcessHandle, (PCVOID) F2_ItemRandom, &buffer, 1, (PDWORD) &bytesRead);
+	return buffer;
+}
+
 unsigned char GetP1Coins()
 {
 	unsigned char buffer;
@@ -1033,6 +1041,7 @@ static int LUpdatePlayer (lua_State* L)
 	info.GasTime = GetGasTime();
 	info.GasFlag = GetGasFlag();
 	info.GasRandom = GetGasRandom();
+	info.ItemRandom = GetItemRandom();
 	info.P1Coin = GetP1Coins();
 	info.P2Coin = GetP2Coins();
 	info.P3Coin = GetP3Coins();
@@ -1465,6 +1474,9 @@ static int LGetGameInfo (lua_State* L)
 		lua_rawset(L, -3);
 		lua_pushstring(L, "gasrandom");
 			lua_pushnumber(L, (double)info.GasRandom);
+		lua_rawset(L, -3);
+		lua_pushstring(L, "itemrandom");
+			lua_pushnumber(L, (double)info.ItemRandom);
 		lua_rawset(L, -3);
 		lua_pushstring(L, "p1coins");
 			lua_pushnumber(L, (double)info.P1Coin);
