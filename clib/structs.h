@@ -51,7 +51,6 @@ typedef struct
 	unsigned char P3Coin;
 	unsigned char P4Coin;
 	unsigned char KilledZombie;
-	unsigned char PlayerNum;
 	unsigned char Pass1;
 	unsigned char Pass2;
 	unsigned char Pass3;
@@ -60,6 +59,7 @@ typedef struct
 	unsigned short Pass4;
 	unsigned char Pass5;
 	unsigned char Pass6;
+	unsigned char PlayerNum;
 	unsigned char Difficulty;
 	unsigned int E1Start;
 	unsigned int E2Start;
@@ -69,7 +69,7 @@ typedef struct
 
 typedef struct
 {
-    unsigned char ID;
+    unsigned short ID;
     unsigned short EN;
 	unsigned short Type;
 	unsigned short Count;
@@ -146,16 +146,6 @@ typedef struct
 {
 	bool Enabled;
 	bool InGame;
-    unsigned short HP;
-    unsigned short MaxHP;
-    unsigned char EnemyType;
-    unsigned char NameID;
-} Enemy2;
-
-typedef struct
-{
-	bool Enabled;
-	bool InGame;
 	unsigned short SlotNum;
     unsigned char Status;
     unsigned char Pass;
@@ -170,23 +160,23 @@ char* GetSlotCharacterName(int charType)
     switch(charType)
     {
         case 0:
-            return "凯文 ";//Kevin
+            return "Kevin ";//Kevin
         case 1:
-            return "马克 ";//Mark
+            return "Mark ";//Mark
         case 2:
-            return "吉姆 ";//Jim
+            return "Jim ";//Jim
         case 3:
-            return "乔治 ";//George
+            return "George ";//George
         case 4:
-            return "大卫 ";//David
+            return "David ";//David
         case 5:
-            return "艾丽莎 ";//Alyssa
+            return "Alyssa ";//Alyssa
         case 6:
-            return "洋子 ";//Yoko
+            return "Yoko ";//Yoko
         case 7:
-            return "辛迪 ";//Cindy
+            return "Cindy ";//Cindy
         default:
-            return "未知";//未知
+            return "Unknown";//Unknown
     }
 }
 
@@ -195,23 +185,23 @@ char* GetCharacterName(int charType)
     switch(charType)
     {
         case 0:
-            return "凯文";//Kevin
+            return "Kevin";//Kevin
         case 1:
-            return "马克";//Mark
+            return "Mark";//Mark
         case 2:
-            return "吉姆";//Jim
+            return "Jim";//Jim
         case 3:
-            return "乔治";//George
+            return "George";//George
         case 4:
-            return "大卫";//David
+            return "David";//David
         case 5:
-            return "艾丽莎";//Alyssa
+            return "Alyssa";//Alyssa
         case 6:
-            return "洋子";//Yoko
+            return "Yoko";//Yoko
         case 7:
-            return "辛迪";//Cindy
+            return "Cindy";//Cindy
         default:
-            return "未知";//未知
+            return "Unknown";//Unknown
     }
 }
 
@@ -220,310 +210,309 @@ char* GetNPCName(int nameID)
     switch (nameID)
     {
         case 1:
-            return "麦克道尔";
+            return "MACDOWELL";//HPtype3
         case 2:
-            return "罗德里格斯";
+            return "RODRIGUEZ";//HPtype4
         case 3:
-            return "康拉德";
+            return "CONRAD";//HPtype2
         case 4:
-            return "汉克:B";
+            return "HUNK:B";//HPtype3
         case 5:
-            return "汉克";
+            return "HUNK";//HPtype5
         case 6:
-            return "米格尔";
+            return "MIGUEL";//HPtype3
         case 7:
-            return "未知";
+            return "Unknown";
         case 8:
-            return "卢克";
+            return "LUKE";//HPtype4
         case 9:
-            return "未知";
+            return "Unknown";
         case 10:
-            return "阿诺德";
+            return "ARNOLD";//HPtype5
         case 11:
-            return "马特";
+            return "MATT";//HPtype2
         case 12:
-            return "比利";
+            return "BILLY";//HPtype3
         case 13:
-            return "赫什";
+            return "HARSH";//HPtype3
         case 14:
-            return "未知";
+            return "Unknown";//
         case 15:
-            return "未知";
+            return "Unknown";//HARSH?
         case 16:
-            return "未知";
+            return "Unknown";//zombie?
         case 17:
-            return "彼得";
+            return "PETER";//HPtype3
         case 18:
-            return "马文";
+            return "MARVIN";//HPtype3
         case 19:
-            return "弗雷德";
+            return "FRED";//HPtype2
         case 20:
-            return "安迪";
+            return "ANDY";//HPtype3
         case 21:
-            return "未知";
+            return "Unknown";//MARVIN
         case 22:
-            return "吉恩";
+            return "JEAN";//HPtype4
         case 23:
-            return "托尼";
+            return "TONY";//HPtype4
         case 24:
-            return "未知";
+            return "Unknown";//MAN
         case 25:
-            return "帕特里克";
+            return "PATRICK";//HPtype3
         case 26:
-            return "劳埃德";
+            return "LLOYD";//HPtype3
         case 27:
-            return "奥斯汀";
+            return "AUSTIN";//HPtype3
         case 28:
-            return "克林特";
+            return "CLINT";//HPtype4
         case 29:
-            return "波恩";
+            return "BONE";//HPtype2
         case 30:
-            return "鲍勃";
+            return "BOB";//HPtype5
         case 31:
-            return "未知";
+            return "Unknown";//MAN
         case 32:
-            return "内森";
+            return "NATHAN";//HPtype3
         case 33:
-            return "塞缪尔";
+            return "SAMUEL";//HPtype4
         case 34:
-            return "未知";
+            return "Unknown";//bug
         case 35:
-            return "威尔";
+            return "WILL";//HPtype2
         case 36:
-            return "未知";
+            return "Unknown";//MAN
         case 37:
-            return "罗杰";
+            return "ROGER";//HPtype3
         case 38:
-            return "未知";
+            return "Unknown";//bug
         case 39:
-            return "卡特";
+            return "CARTER";//HPtype3
         case 40:
-            return "格雷格";
+            return "GREG";//HPtype6
         case 41:
-            return "弗罗斯特";
+            return "FROST";//HPtype4
         case 42:
-            return "弗罗斯特:B";
+            return "FROST:B";//HPtype3
         case 43:
-            return "杰克";
+            return "JAKE";//HPtype1
         case 44:
-            return "加里";
+            return "GARY";//HPtype3
         case 45:
-            return "理查德";
+            return "RICHARD";//HPtype4
         case 46:
-            return "未知";
+            return "Unknown";//MICK
         case 47:
-            return "米奇";
+            return "MICKEY";//HPtype2
         case 48:
-            return "阿尔";
+            return "AL";//HPtype3
         case 49:
-            return "斧男";
+            return "AXEMAN";//HPtype5
         case 50:
-            return "阿尔:B";
+            return "AL:B";//HPtype2
         case 51:
-            return "本";
+            return "BEN";//HPtype3
         case 52:
-            return "未知";
+            return "Unknown";//regan's daughter
         case 53:
-            return "瑞根";
+            return "REGAN";//HPtype3
         case 54:
-            return "瑞根:B";
+            return "REGAN:B";//HPtype3
         case 55:
-            return "莫妮卡";
+            return "MONICA";//HPtype2
         case 56:
-            return "琳达";
+            return "LINDA";//HPtype2
         case 57:
-            return "瑞塔";
+            return "RITA";//HPtype4
         case 58:
-            return "未知";
+            return "Unknown";//bug
         case 59:
-            return "玛丽";
+            return "MARY";//HPtype3
         case 60:
-            return "凯特";
+            return "KATE";//HPtype3
         case 61:
-            return "未知";
+            return "Unknown";//bug
         case 62:
-            return "未知";
+            return "Unknown";//bug
         case 63:
-            return "丹尼";
+            return "DANNY";//HPtype4
         case 64:
-            return "丹尼:B";
+            return "DANNY:B";//HPtype5
         case 65:
-            return "基尔";
+            return "GILL";//HPtype2
         case 66:
-            return "基尔:B";
+            return "GILL:B";//HPtype3
         case 67:
-            return "未知";
+            return "Unknown";//none
         case 68:
-            return "未知";
+            return "Unknown";//none
         case 69:
-            return "未知";
+            return "Unknown";//none
         case 70:
-            return "未知";
+            return "Unknown";//docter
         case 71:
-            return "未知";
+            return "Unknown";//none
         case 72:
-            return "未知";
+            return "Unknown";//none
         case 73:
-            return "未知";
+            return "Unknown";//cindy
         case 74:
-            return "基思";
+            return "KEITH";//HPtype4
         case 75:
-            return "未知";
+            return "Unknown";//none
         case 76:
-            return "未知";
+            return "Unknown";//none
         case 77:
-            return "未知";
+            return "Unknown";//none
         case 78:
-            return "未知";
+            return "Unknown";//none
         case 79:
-            return "未知";
+            return "Unknown";//none
         case 80:
-            return "未知";
+            return "Unknown";//none
         case 81:
-            return "科特";
+            return "KURT";//HPtype3
         case 82:
-            return "科特:B";
+            return "KURT:B";//HPtype3
         case 83:
-            return "加里:B";
+            return "GARY:B";//HPtype3
         case 84:
-            return "阿尔:C";
+            return "AL:C";//HPtype3
         case 85:
-            return "未知";
+            return "Unknown";//none
         case 86:
-            return "未知";
+            return "Unknown";//none
         case 87:
-            return "桃乐丝";
+            return "DOROTHY";//HPtype5
         case 88:
-            return "未知";
+            return "Unknown";//none
         case 89:
-            return "未知";
+            return "Unknown";//none
         case 90:
-            return "未知";
+            return "Unknown";//none
         case 91:
-            return "洋子:Z";
+            return "YOKO:Z";//HPtype4
         case 92:
-            return "未知";
+            return "Unknown";//none
         case 93:
-            return "未知";
+            return "Unknown";//none
         case 94:
-            return "未知";
+            return "Unknown";//none
         case 95:
-            return "未知";
+            return "Unknown";//none
         case 96:
-            return "未知";
+            return "Unknown";//none
         case 97:
-            return "未知";
+            return "Unknown";//none
         case 98:
-            return "未知";
+            return "Unknown";//none
         case 99:
-            return "未知";
+            return "Unknown";//none
         case 100:
-            return "未知";
+            return "Unknown";//mr.grey
         case 101:
-            return "雷蒙德";
+            return "RAYMOND";//HPtype3
         case 102:
-            return "亚瑟";
+            return "ARTHUR";//HPtype2
         case 103:
-            return "亚伦";
+            return "AARON";//HPtype5
         case 104:
-            return "多里安";
+            return "DORIAN";//HPtype3
         case 105:
-            return "埃利奥特";
+            return "ELLIOTT";//HPtype4
         case 106:
-            return "埃里克";
+            return "ERIC";//HPtype2
         case 107:
-            return "哈里";
+            return "HARRY";//HPtype2
         case 108:
-            return "红先生";
+            return "Mr.RED";//HPtype0
         case 109:
-            return "蓝先生";
+            return "Mr.BLUE";//HPtype0
         case 110:
-            return "绿先生";
+            return "Mr.GREEN";//HPtype6
         case 111:
-            return "金先生";
+            return "Mr.GOLD";//HPtype6
         case 112:
-            return "黑先生";
+            return "Mr.BLACK";//HPtype6
         case 113:
-            return "卡尔";
+            return "KARL";//HPtype5
         case 114:
-            return "达斯汀";
+            return "DUSTIN";//HPtype4
         case 115:
-            return "未知";
+            return "Unknown";//UBCS
         case 116:
-            return "德里克";
+            return "DEREK";//HPtype3
         case 117:
-            return "白女士";
+            return "Ms.WHITE";//HPtype0
         case 118:
-            return "桃女士";
+            return "Ms.PEACH";//HPtype6
         case 119:
-            return "水女士";
+            return "Ms.WATER";//HPtype6
         case 120:
-            return "莱恩";
+            return "LEN";//HPtype4
         case 121:
-            return "尼古拉斯";
+            return "NICOLAS";//HPtype3
         case 122:
-            return "肖恩";
+            return "SEAN";//HPtype5
         case 123:
-            return "菲利普";
+            return "PHILIP";//HPtype4
         case 124:
-            return "唐";
+            return "DON";//HPtype3
         case 125:
-            return "马修斯";
+            return "MATTHEW";//HPtype3
         case 126:
-            return "罗伯特";
+            return "ROBERT";//HPtype4
         case 127:
-            return "查克";
+            return "CHUCK";//HPtype2
         case 128:
-            return "金杰";
+            return "GINGER";//HPtype4
         case 129:
-            return "劳拉";
+            return "LAURA";//HPtype2
         case 130:
-            return "阿米莉亚";
+            return "AMELIA";//HPtype3
         case 131:
-            return "伊森";
+            return "ETHAN";//HPtype2
         case 132:
-            return "未知";
+            return "Unknown";//ETHAN
         case 133:
-            return "霍华德";
+            return "HOWARD";//HPtype3
         case 134:
-            return "未知";
+            return "Unknown";//HOWARD
         case 135:
-            return "艾萨克";
+            return "ISAAC";//HPtype4
         case 136:
-            return "未知";
+            return "Unknown";//ISAAC
         case 137:
-            return "凯茜";
+            return "KATHY";//HPtype2
         case 138:
-            return "未知";
+            return "Unknown";//KATHY
         case 139:
-            return "艾伦娜";
+            return "ELENA";//HPtype4
         case 140:
-            return "未知";
+            return "Unknown";//ELENA
         case 141:
-            return "弗兰克";
+            return "FRANK";//HPtype4
         case 142:
-            return "未知";
+            return "Unknown";//GOLDEN WOMAN
         case 143:
-            return "未知";
+            return "Unknown";//none
         case 144:
-            return "未知";
+            return "Unknown";//none
         case 145:
-            return "未知";
+            return "Unknown";//none
         case 146:
-            return "未知";
+            return "Unknown";//none
         case 147:
-            return "未知";
+            return "Unknown";//none
         case 148:
-            return "未知";
+            return "Unknown";//none
         case 149:
-            return "未知";
+            return "Unknown";//none
         case 150:
-            return "未知";
+            return "Unknown";//none
         case 151:
-            return "罗德尼";
-
+            return "RODNEY";//HPtype2
         default:
-            return NULL;//未知
+            return NULL;
 
     }
 }
@@ -533,66 +522,14 @@ char* GetDifficultyName(unsigned short Difficulty)
     switch (Difficulty)
     {
         case 0:
-            return "简单";
+            return "easy";
         case 1:
-            return "普通";
+            return "normal";
         case 2:
-            return "困难";
+            return "hard";
         case 3:
-            return "极难";
+            return "very hard";
 
-        default:
-            return "";
-    }
-}
-
-char* GetF1LobScenarioFullName(unsigned short F1LobScenarioID)
-{
-    switch (F1LobScenarioID)
-    {
-        case 0:
-            return "发生　outbreak";
-        case 1:
-            return "零下　below freezing point";
-        case 2:
-            return "巢窟　the hive";
-        case 3:
-            return "狱炎　hellfire";
-        case 4:
-            return "决议　decisions,decisions";
-        default:
-            return "";
-    }
-}
-
-char* GetF2LobScenarioFullName(unsigned short F2LobScenarioID)
-{
-    switch (F2LobScenarioID)
-    {
-        case 0:
-            return "初心　training ground";
-        case 1:
-            return "咆哮　wild things";
-        case 2:
-            return "异界underbelly";
-        case 3:
-            return "记忆　flashback";
-        case 4:
-            return "死守　desperate times";
-        case 5:
-            return "突破　end of the road";
-        case 6:
-            return "歼灭1　elimination 1";
-        case 7:
-            return "歼灭2　elimination 2";
-        case 8:
-            return "歼灭3　elimination 3";
-        case 9:
-            return "对峙1　showdown 1";
-        case 10:
-            return "对峙2　showdown 2";
-        case 11:
-            return "对峙3　showdown 3";
         default:
             return "";
     }
@@ -715,7 +652,7 @@ char* GetEnemyName(int charType)
         case 7:
             return "Cindy";//Cindy
         default:
-            return "未知";//未知
+            return "Unknown";//Unknown
     }
 }
 
@@ -724,79 +661,79 @@ char* GetEnemyName2(int nameID)
     switch (nameID)
     {
 		case 0:
-            return "舔食者";
+            return "Licker";
         case 1:
-            return "丧尸";
+            return "Zombie";
         case 2:
-            return "狗";
+            return "Dog";
         case 3:
-            return "虫";
+            return "Worm";
         case 4:
-            return "老鼠";
+            return "Mouse";//invincible
         case 5:
-            return "乌鸦";
+            return "Crow";
         case 6:
-            return "巨型黄蜂";
+            return "Giant Wasp";//poison
         case 7:
-            return "大蜘蛛";
+            return "Spider";
         case 8:
             return "ID:8";
         case 9:
-            return "飞蛾";
+            return "Giant Moth";
         case 10:
-            return "蠕虫";
+            return "Caterpillar";//caterpillar
         case 11:
-            return "藤蔓";
+            return "Drainer";//invincible
         case 12:
-            return "藤蔓";
+            return "Drainer";//invincible
         case 13:
-            return "花";
+            return "Evil Shade";//poison
         case 14:
-            return "藤蔓";
+            return "Drainer";//
         case 15:
-            return "夜之女神暴君";
+            return "Nyx-Tyrant";
         case 16:
-            return "鳄鱼";
+            return "Gnaw";//Alligator
         case 17:
             return "ID:17";//f1 outbreak
         case 18:
-            return "跳蚤";
+            return "Megabyte";//Flea
         case 19:
-            return "水蛭Boss";
+            return "G.Leech";//Leech Boss
         case 20:
-            return "舔食者Boss";
+            return "Suspended";//Licker Boss
         case 21:
             return "ID:21";
         case 22:
-            return "猎杀";
+            return "Hunter";
         case 23:
-            return "青蛙";
+            return "Hunter γ";//Frog
         case 24:
             return "ID:24";
         case 25:
             return "ID:25";
         case 26:
-            return "鲨鱼";
+            return "Neptune";//invincible
         case 27:
-            return "水蛭人";
+            return "Leechman";
         case 28:
             return "ID:28";
         case 29:
-            return "G突变体";
+            return "G-Mutant";
         case 30:
-            return "G幼体";
+            return "G-Embyro";
         case 31:
             return "ID:31";
         case 32:
-            return "大象";
+            return "Titan";//Elephant
         case 33:
-            return "狮子";
+            return "Lion";
         case 34:
-            return "触手";
+            return "Tentacles";
         case 35:
-            return "触手";
+            return "Ivy Plant";
         case 36:
-            return "剪刀尾";//Scissor Tail
+            return "Sci.Tail";//Scissor Tail
         case 37:
             return "ID:37";//f1 outbreak
         case 38:
@@ -804,59 +741,59 @@ char* GetEnemyName2(int nameID)
         case 39:
             return "ID:39";
         case 40:
-            return "暴君?";
+            return "Tyrant?";
         case 41:
-            return "暴君";
+            return "Tyrant";
         case 42:
-            return "夜之女神";
+            return "Nyx";
         case 43:
-            return "死神暴君";
+            return "Thanatos";
         case 44:
-            return "夜之女神核心";
+            return "Nyx-Core";
         case 45:
-            return "斧男";
+            return "Axeman";
         case 46:
-            return "大王花";
+            return "Rafflesia";
         case 47:
-            return "多萝西";
+            return "Dorothy";
         case 48:
-            return "飞虫";
+            return "Flying Bug";
         case 49:
-            return "犀鸟";
+            return "Hornbill";
         case 50:
             return "ID:50";
         case 51:
-            return "植物BOSS";
+            return "\"Dorothy\"";
         case 52:
-            return "车";
+            return "Train";
         case 53:
-            return "箱子";
+            return "Box";
         case 54:
-            return "地雷";
+            return "Mine";
         case 55:
-            return "小水蛭";
+            return "Leech";
         case 56:
-            return "ID:56";
+            return "ID:56";//
         case 57:
-            return "狙击手";
+            return "Sniper";
         case 58:
-            return "汽油罐";//Gasoline Tank
+            return "Gas.Tank";//Gasoline Tank
         case 59:
-            return "丧尸手";//Zombie Hands
+            return "Hands";//Zombie Hands
         case 60:
-            return "火柱";
+            return "Fire";
         case 61:
-            return "打字机";
+            return "Typewriter";
         case 62:
             return "ID:62";
         case 63:
-            return "跳蚤军团";
+            return "Megabytes";//Flea Team
         case 64:
-            return "跳蚤BOSS";
+            return "Gigabyte";//Flea Boss
         case 65:
-            return "鬣狗";
+            return "Hyena";
         default:
-            return "未知";
+            return "Unknown";
 
     }
 }

@@ -298,6 +298,7 @@ unsigned char GetKilledZombies()
 	    ReadProcessMemory(ProcessHandle, (PCVOID) F2_KilledZombie, &buffer, 1, (PDWORD) &bytesRead);
 	return buffer;
 }
+
 unsigned char GetPass1()
 {
 	unsigned char buffer;
@@ -321,6 +322,7 @@ unsigned char GetPass3()
 	    ReadProcessMemory(ProcessHandle, (PCVOID) F1_Pass3, &buffer, 1, (PDWORD) &bytesRead);
 	return buffer;
 }
+
 unsigned short GetPassUB1()
 {
 	unsigned short buffer;
@@ -752,7 +754,6 @@ char GetNameID(int characterID)
 		ReadProcessMemory(ProcessHandle, (PCVOID)F2_GetCharAddress(characterID) + F2_NameTypeOffset, &buffer, 1, (PDWORD)&bytesRead);
 	return buffer;
 }
-
 /* slot player enable */
 char GetSlotCharacterEnabled(int characterID)
 {
@@ -985,11 +986,6 @@ static int LUpdateSlotPlayer (lua_State* L)
 
 	for (int i=0; i < 4; i++)
 	{
-		SPlayers[i].NPCType = GetSlotNPCType(i);
-
-	}
-	for (int i=0; i < 4; i++)
-	{
 		SPlayers[i].Enabled = GetSlotCharacterEnabled(i);
 		if (SPlayers[i].Enabled == 0)
 			continue;
@@ -1161,13 +1157,13 @@ static int LGetLobby (lua_State* L)
 		if (info.CurrentFile == 1)
 		{
 		lua_pushstring(L, "slotscenario");
-			lua_pushstring(L, GetF1LobScenarioFullName(Slots[i].ScenarioID));
+			lua_pushstring(L, GetF1LobScenarioName(Slots[i].ScenarioID));
 		lua_rawset(L, -3);
 		}
 		else
 		{
 		lua_pushstring(L, "slotscenario");
-			lua_pushstring(L, GetF2LobScenarioFullName(Slots[i].ScenarioID));
+			lua_pushstring(L, GetF2LobScenarioName(Slots[i].ScenarioID));
 		lua_rawset(L, -3);
 		}
 
@@ -1510,9 +1506,6 @@ static int LGetGameInfo (lua_State* L)
 		lua_pushstring(L, "killedzombies");
 			lua_pushnumber(L, (double)info.KilledZombie);
 		lua_rawset(L, -3);
-		lua_pushstring(L, "playernum");
-			lua_pushnumber(L, (double)info.PlayerNum);
-		lua_rawset(L, -3);
 		lua_pushstring(L, "pass1");
 			lua_pushnumber(L, (double)info.Pass1);
 		lua_rawset(L, -3);
@@ -1537,9 +1530,13 @@ static int LGetGameInfo (lua_State* L)
 		lua_pushstring(L, "pass6");
 			lua_pushnumber(L, (double)info.Pass6);
 		lua_rawset(L, -3);
+		lua_pushstring(L, "playernum");
+			lua_pushnumber(L, (double)info.PlayerNum);
+		lua_rawset(L, -3);
 		lua_pushstring(L, "difficulty");
 			lua_pushstring(L, GetDifficultyName(info.Difficulty));
 		lua_rawset(L, -3);
+
 	return 1;
 }
 
