@@ -298,7 +298,6 @@ unsigned char GetKilledZombies()
 	    ReadProcessMemory(ProcessHandle, (PCVOID) F2_KilledZombie, &buffer, 1, (PDWORD) &bytesRead);
 	return buffer;
 }
-
 unsigned char GetPass1()
 {
 	unsigned char buffer;
@@ -322,7 +321,6 @@ unsigned char GetPass3()
 	    ReadProcessMemory(ProcessHandle, (PCVOID) F1_Pass3, &buffer, 1, (PDWORD) &bytesRead);
 	return buffer;
 }
-
 unsigned short GetPassUB1()
 {
 	unsigned short buffer;
@@ -754,6 +752,7 @@ char GetNameID(int characterID)
 		ReadProcessMemory(ProcessHandle, (PCVOID)F2_GetCharAddress(characterID) + F2_NameTypeOffset, &buffer, 1, (PDWORD)&bytesRead);
 	return buffer;
 }
+
 /* slot player enable */
 char GetSlotCharacterEnabled(int characterID)
 {
@@ -1162,13 +1161,13 @@ static int LGetLobby (lua_State* L)
 		if (info.CurrentFile == 1)
 		{
 		lua_pushstring(L, "slotscenario");
-			lua_pushstring(L, GetF1LobScenarioName(Slots[i].ScenarioID));
+			lua_pushstring(L, GetF1LobScenarioFullName(Slots[i].ScenarioID));
 		lua_rawset(L, -3);
 		}
 		else
 		{
 		lua_pushstring(L, "slotscenario");
-			lua_pushstring(L, GetF2LobScenarioName(Slots[i].ScenarioID));
+			lua_pushstring(L, GetF2LobScenarioFullName(Slots[i].ScenarioID));
 		lua_rawset(L, -3);
 		}
 
@@ -1180,6 +1179,10 @@ static int LGetSlotPlayer (lua_State* L)
 	int i = (int)(playerID-1);
 	char* charname1 = GetSlotCharacterName(SPlayers[i].NameID);
 	char* charname2 = GetCharacterName(SPlayers[i].NameID);
+	char* hp = GetCharacterHP(SPlayers[i].NameID);
+	char* npchp = GetNPCHP(SPlayers[i].NameID);
+	char* power = GetCharacterPower(SPlayers[i].NameID);
+	char* npcpower = GetNPCPower(SPlayers[i].NameID);
 	char* name = GetNPCName(SPlayers[i].NameID);
 	char* statname = GetStatusText(SPlayers[i].Status);
 
@@ -1195,6 +1198,20 @@ static int LGetSlotPlayer (lua_State* L)
 
 		lua_pushstring(L, "npctype");
 			lua_pushboolean(L, SPlayers[i].NPCType);
+		lua_rawset(L, -3);
+
+		lua_pushstring(L, "hp");
+			if (SPlayers[i].NPCType == 0)
+				lua_pushstring(L, hp);
+			else
+				lua_pushstring(L, npchp);
+		lua_rawset(L, -3);
+
+		lua_pushstring(L, "power");
+			if (SPlayers[i].NPCType == 0)
+				lua_pushstring(L, power);
+			else
+				lua_pushstring(L, npcpower);
 		lua_rawset(L, -3);
 
 		//lua_pushstring(L, "type");
@@ -1493,6 +1510,9 @@ static int LGetGameInfo (lua_State* L)
 		lua_pushstring(L, "killedzombies");
 			lua_pushnumber(L, (double)info.KilledZombie);
 		lua_rawset(L, -3);
+		lua_pushstring(L, "playernum");
+			lua_pushnumber(L, (double)info.PlayerNum);
+		lua_rawset(L, -3);
 		lua_pushstring(L, "pass1");
 			lua_pushnumber(L, (double)info.Pass1);
 		lua_rawset(L, -3);
@@ -1517,13 +1537,9 @@ static int LGetGameInfo (lua_State* L)
 		lua_pushstring(L, "pass6");
 			lua_pushnumber(L, (double)info.Pass6);
 		lua_rawset(L, -3);
-		lua_pushstring(L, "playernum");
-			lua_pushnumber(L, (double)info.PlayerNum);
-		lua_rawset(L, -3);
 		lua_pushstring(L, "difficulty");
 			lua_pushstring(L, GetDifficultyName(info.Difficulty));
 		lua_rawset(L, -3);
-
 	return 1;
 }
 
