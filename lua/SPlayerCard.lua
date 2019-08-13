@@ -22,13 +22,14 @@ function SPlayerCard:new(id)
 		o.icons[i] = ItemIcon:new(unpack(IconPositions[i]))
 	end
 
-	o.nameLabel 	  = Label:new(10 , 4, "placeholder", SmallFont)
-	o.nameLabelShadow = Label:new(12 , 5, "placeholder", SmallFont, nil, nil, nil, nil, {0, 0, 0, 1})
+	o.nameLabel 	  = Label:new(10, 4, "placeholder", SmallFont)
+	o.nameLabelShadow = Label:new(12, 5, "placeholder", SmallFont, nil, nil, nil, nil, {0, 0, 0, 1})
 	--o.roomLabel		  = Label:new(110, 0, "placeholder", SmallFont, "center", "center", 190, 40)
 	--o.roomLabelShadow = Label:new(111, 1, "placeholder", SmallFont, "center", "center", 190, 40, {0, 0, 0, 1})
 	--o.roomLabel_j		= Label:new(280, 2, "placeholder", SmallFont, "center", "up", 15, 145)
 	--o.roomLabelShadow_j = Label:new(281, 3, "placeholder", SmallFont, "center", "up", 15, 145, {0, 0, 0, 1})
-	--o.healthLabel	  = Label:new(8  ,21, "placeholder", VerySmallFont, "center", "up", 70, 10)
+	o.healthLabel	  = Label:new(8, 21, "placeholder", VerySmallFont, "center", "up", 70, 10)
+	o.powerLabel	  = Label:new(250, 130, "placeholder", VirusFont, "right", "up", 48, 15,{25/255, 255/255, 255/255, 1})
 
 
 	return setmetatable(o, self)
@@ -46,6 +47,8 @@ function SPlayerCard:draw(x, y)
 	local bustname = "bust" .. SPlayers[self.id].name
 	local bx, by, bw, bh = UIAtlas.quads[bustname]:getViewport()
 	local scale = 140 / bh;
+	local hp = SPlayers[self.id].hp
+	local power = SPlayers[self.id].power
 
 	ItemIcons2:addSB(sb2, startitem, 8, 42, 0, 1, 1)
 
@@ -73,6 +76,12 @@ function SPlayerCard:draw(x, y)
 	self.nameLabelShadow.text = SPlayers[self.id].name:upper()
 	self.nameLabelShadow:draw()
 	self.nameLabel:draw()
+
+	self.healthLabel.text = hp
+	self.healthLabel:draw()
+
+	self.powerLabel.text = power
+	self.powerLabel:draw()
 
 	love.graphics.pop()
 end
