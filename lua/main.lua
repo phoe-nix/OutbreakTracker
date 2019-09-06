@@ -56,7 +56,11 @@ function love.draw()
 	if InitResult == true and not(GameInfo.currentFile == 255) then
 		love.graphics.setFont(TimeFont)
 		if not(GameInfo.scenario == "") then
-			love.graphics.printf(GameInfo.itemrandom, 0, (145*p), 280, "center")
+			if GameInfo.currentFile == 1 then
+				love.graphics.printf(GameInfo.itemrandom%5+1, 0, (145*p+105), 12, "left")
+			else
+				love.graphics.printf(GameInfo.itemrandom+1, 0, (145*p+105), 12, "left")
+			end
 			love.graphics.printf(Time2string(GameInfo.frames/0.03), 0, (145*p), 300, "right")
 			--love.graphics.setFont(DefaultFont)
 			--love.graphics.printf(GameInfo.scenario,0, 625,300, "right") --scenario
@@ -372,7 +376,7 @@ function love.draw()
 		for i=1, 1 do
 			if not(GameInfo.scenario == "") then
 				if (GameInfo.frames>0) then
-					ItemCards[i]:draw(0, (145*p)*(1/0.6)+(100/0.6))
+					ItemCards[i]:draw(20, (145*p)*(1/0.6)+(100/0.6))
 				end
 			end
 		end
