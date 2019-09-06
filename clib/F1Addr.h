@@ -223,14 +223,15 @@ const int F1_Pass4 = 0x2048AC1A;//48ADCE
 const int F1_Pass5 = 0x2048AC1B;//48ADCF  on=48ADF3
 const int F1_Pass6 = 0x2048AC15;//4927=7500 4032=7480 40 4284=0200
 const int F1_Difficulty = 0x2048C01A;
+const int F1_ItemRandom = 0x2023BBA0;
 //pass 6D6570
-//事件零下48BF60
+//脢脗录镁脕茫脧脗48BF60
 //b7f 48AD93:0x00=off 0x01=on
 //b5f 48AD91:0x40=off 0x50=on
 //b4f 48AD92:0x00=off 0x40=on
-//零下pass 48AC17 A375=0x20 J126=0x40 C582=0x80
+//脕茫脧脗pass 48AC17 A375=0x20 J126=0x40 C582=0x80
 //48AC13 0634 0-1f 80-9f 4509 20-3f a0 bf 9741 40-7f c0-ff
-//狱炎谜题 1=0x20 2=0x40 3=0x80 4=0x100
+//脫眉脩脳脙脮脤芒 1=0x20 2=0x40 3=0x80 4=0x100
 //48AC1B 02
 const int F1_SlotP1Start = 0x20630F38;//62FCF0
 const int F1_SlotP2Start = 0x206312E0;//630F38 6312E0
