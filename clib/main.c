@@ -255,6 +255,9 @@ unsigned char GetItemRandom()
 {
 	unsigned char buffer;
 	int bytesRead = 0;
+	if (info.CurrentFile == 1)
+	    ReadProcessMemory(ProcessHandle, (PCVOID) F1_ItemRandom, &buffer, 1, (PDWORD) &bytesRead);
+	else
 	    ReadProcessMemory(ProcessHandle, (PCVOID) F2_ItemRandom, &buffer, 1, (PDWORD) &bytesRead);
 	return buffer;
 }
