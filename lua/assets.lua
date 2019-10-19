@@ -13,8 +13,7 @@ function LoadAssets()
 	ItemIcons2 = LoadTextureAtlas("assets/StartingItem.png", IconLinks2)
 	DefaultFont = love.graphics.newFont("assets/arialbd.ttf",18)
 	SmallFont = love.graphics.newFont("assets/arialbd.ttf",15)
-	VerySmallFont = love.graphics.newFont("assets/arialbd.ttf",12)
-	EnemyFont = love.graphics.newFont("assets/arialbd.ttf",13)
+	VerySmallFont = love.graphics.newFont("assets/arialbd.ttf",13)
 end
 
 function LoadTextureAtlas(texture, links) -- Really dirty stuff here
