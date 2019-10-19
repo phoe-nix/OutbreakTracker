@@ -7,10 +7,10 @@ function EnemyCard:new(id)
 
 
 
-	o.nameLabel 	   = Label:new(80, 0, "placeholder", EnemyFont, "left", "down", 110, 10, {0, 0, 0, 1})
-	o.nameLabelShadow  = Label:new(81, 1, "placeholder", EnemyFont, "left", "down", 110, 10, {0, 0, 0, 1})
-	o.healthLabel	   = Label:new(2,0, "placeholder", EnemyFont, "left", "down", 150, 10, {1, 1, 1, 1})
-	o.healthLabelShadow= Label:new(3,1, "placeholder", EnemyFont, "left", "down", 150, 10, {0, 0, 0, 1})
+	o.nameLabel 	   = Label:new(80, 0, "placeholder", VerySmallFont, "left", "down", 110, 10, {0, 0, 0, 1})
+	o.nameLabelShadow  = Label:new(81, 1, "placeholder", VerySmallFont, "left", "down", 110, 10, {0, 0, 0, 1})
+	o.healthLabel	   = Label:new(2,0, "placeholder", VerySmallFont, "left", "down", 150, 10, {1, 1, 1, 1})
+	o.healthLabelShadow= Label:new(3,1, "placeholder", VerySmallFont, "left", "down", 150, 10, {0, 0, 0, 1})
 
 
 	return setmetatable(o, self)
