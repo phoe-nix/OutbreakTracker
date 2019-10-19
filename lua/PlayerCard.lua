@@ -28,7 +28,7 @@ function PlayerCard:new(id)
 	o.roomLabelShadow = Label:new(111, 1, "placeholder", SmallFont, "center", "center", 190, 40, {0, 0, 0, 1})
 	--o.roomLabel_j		= Label:new(280, 2, "placeholder", SmallFont, "center", "up", 15, 145)
 	--o.roomLabelShadow_j = Label:new(281, 3, "placeholder", SmallFont, "center", "up", 15, 145, {0, 0, 0, 1})
-	o.healthLabel	  = Label:new(8  ,21, "placeholder", VerySmallFont, "center", "up", 70, 10)
+	o.healthLabel	  = Label:new(8  ,20, "placeholder", VerySmallFont, "center", "up", 70, 10)
 
 
 	return setmetatable(o, self)
