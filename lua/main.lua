@@ -85,12 +85,25 @@ function love.draw()
 				ItemIcons:draw("2/14005", 0, (145*p)-3,0,0.5)
 				love.graphics.printf(GameInfo.p1coins+GameInfo.p2coins+GameInfo.p3coins+GameInfo.p4coins, 26,(145*p), 300, "left")
 			elseif (GameInfo.scenario == "desperate times") then
-				love.graphics.printf((GameInfo.killedzombies), 0, (145*p), 300, "left")
+				if(GameInfo.fighttime2 == 0) then
+					love.graphics.printf((GameInfo.killedzombies), 0, (145*p), 300, "left")
+				end
+				if(GameInfo.garagetime > 0)then
+					love.graphics.printf(Time2string3(GameInfo.garagetime), 70, (145*p), 60, "center",0,1,1)
+				end
+				if(GameInfo.fighttime > 0) and (GameInfo.fighttime2 == 0xffff)then
+					love.graphics.printf(Time2string3(GameInfo.fighttime), 0, (145*p), 60, "center",0,1,1)
+				end
+				if(GameInfo.fighttime2 > 0) and not (GameInfo.fighttime2 == 0xffff) then
+					love.graphics.printf(Time2string3(GameInfo.fighttime2), 0, (145*p), 60, "center",0,1,1)
+				end
+				--ItemIcons:draw("2/11511", 0-4, (145*p-8),0,0.65)
+				--love.graphics.printf(Time2string3(GameInfo.gastime), 70, (145*p), 60, "center",0,1,1)
 				ItemIcons:draw("2/11511", 150-8, (145*p)+56,0,0.75)
 				--love.graphics.printf((GameInfo.gasflag), 0, (145*p), 100, "center")
 				--love.graphics.printf(IsOuNumber(GameInfo.gasrandom), 0, (145*p), 280, "center")
 				love.graphics.printf(Time2string3(GameInfo.gastime), 150-8, (145*p)+90, 56, "center",0,0.65,0.65)
-				love.graphics.setFont(EnemyFont)
+				love.graphics.setFont(VerySmallFont)
 				if(GameInfo.gasflag == 1) and (GameInfo.gasrandom%2 == 0) then
 					if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
 						love.graphics.printf({{1, 1, 0, 1},"Hallway\n1F lobby\nB1F West hall"}, 180, (145*p)+60, 150,  "left")
