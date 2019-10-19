@@ -192,6 +192,10 @@ function GetStatusColor(id)
 		return {1, 0, 0, 1}
 	elseif Players[id].status == "Poison+Bleed" then
 		return {0, 1, 1, 1}
+	elseif Players[id].status == "Gas" then
+		return {1, 1, 0, 1}
+	elseif Players[id].status == "Gas+Bleed" then
+		return {1, 0.5, 0, 1}
 	else
 		return {1, 1, 1, 1}
 	end
