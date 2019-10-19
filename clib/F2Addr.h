@@ -157,6 +157,7 @@ const int F2_HostScenarioID =  0x2062DDF6;
 const int F2_HostTime =  0x2062E768;
 const int F2_HostDifficulty = 0x206020CA;
 //wt door 0x477762 0x4777A2
+//dt unlock door 3BC0E4
 //p1power +BDC 47c90c 
 //num of player in game 24AFCC 49135f
 //slot character 630D40 6310E8 631490 631838
@@ -164,7 +165,7 @@ const int F2_HostDifficulty = 0x206020CA;
 //slot Scenario 62DDF6 62E324
 //slot num 63C56A 63C56C
 //slot1 628da0 +2players +4maxplayers slot2+15C
-//slot1 628DAE 00=Busy 01=Vacant 02=Busy(ËÆæÂÆö‰∏≠) 03=Join in 04=Full 05=playing 06=opening
+//slot1 628DAE 00=Busy 01=Vacant 02=Busy(…Ë∂®÷–) 03=Join in 04=Full 05=playing 06=opening
 //slot2 628EFC
 //62B672 num of players in door
 //63C56A num of players in chat room
@@ -268,13 +269,16 @@ int F2_GetLobbyAddress(int slotNum)
     }
 }
 
-const int F2_PassUB1 = 0x20490073;//ÂºÇÁïå
-const int F2_PassUB2 = 0x20490075;//ÂºÇÁïå
-const int F2_Pass4 = 0x20491268;//Á™ÅÁ†¥
+const int F2_PassUB1 = 0x20490073;//“ÏΩÁ
+const int F2_PassUB2 = 0x20490075;//“ÏΩÁ
+const int F2_Pass4 = 0x20491268;//Õª∆∆
 const int F2_Difficulty = 0x2049135A;
 const int F2_DTGasRandom = 0x2024ADB0;//24ADB0(offline) 491338(online)
 const int F2_DTGasFlag = 0x2048FFFC;
 const int F2_DTGasTime = 0x20491278;
+const int F2_DTFightTime = 0x2049126C;
+const int F2_DTFightTime2 = 0x2049124E;
+const int F2_DTGarageTime = 0x20491270;//48FE71 switch
 const int F2_ItemRandom = 0x2024AD30;//
 /*clear 4912A0
 //random set? 24AD30 397B80 397B82 491338 491353 49135E
@@ -300,4 +304,21 @@ offline 93=easy 8b=normal 7c= hard 73=vh
 //49136F 01
 //493982 02
 //490073 750BB0 2916 3719 0154 6443 7688 1812 5551 6010 0652 6234 0533 9439 1421 1127 7840 6910
+24AD7C
+24AE2C
+24AE43
+24AE48
+24AE57
+24AE74
+24AE84
+24AE88
+24AE94
+24AEF8
+24B320
+24B480
+24B4C8
+24B54C
+24D156
+24E164
+
 */

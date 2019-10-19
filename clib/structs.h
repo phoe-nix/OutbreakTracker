@@ -42,6 +42,9 @@ typedef struct
 	unsigned short HostScenarioID;
 	unsigned short ScenarioID;
 	unsigned int FrameCounter;
+	unsigned int FightTime;
+	unsigned short FightTime2;
+	unsigned int GarageTime;
 	unsigned int GasTime;
 	unsigned int GasFlag;
 	unsigned char GasRandom;
@@ -205,7 +208,7 @@ char* GetCharacterName(int charType)
     }
 }
 
-char* GetNPCName(int nameID)
+char* GetF1NPCName(int nameID)
 {
     switch (nameID)
     {
@@ -280,7 +283,7 @@ char* GetNPCName(int nameID)
         case 35:
             return "WILL";//HPtype2
         case 36:
-            return "Unknown";//MAN
+            return "Unknown";//WILL:B
         case 37:
             return "ROGER";//HPtype3
         case 38:
@@ -306,7 +309,7 @@ char* GetNPCName(int nameID)
         case 48:
             return "AL";//HPtype3
         case 49:
-            return "AXEMAN";//HPtype5
+            return "AXEMAN ";//HPtype5
         case 50:
             return "AL:B";//HPtype2
         case 51:
@@ -472,7 +475,7 @@ char* GetNPCName(int nameID)
         case 131:
             return "ETHAN";//HPtype2
         case 132:
-            return "Unknown";//ETHAN
+            return "Unknown";//ETHAN:B
         case 133:
             return "HOWARD";//HPtype3
         case 134:
@@ -489,6 +492,318 @@ char* GetNPCName(int nameID)
             return "ELENA";//HPtype4
         case 140:
             return "Unknown";//ELENA
+        case 141:
+            return "FRANK";//HPtype4
+        case 142:
+            return "Unknown";//GOLDEN WOMAN
+        case 143:
+            return "Unknown";//none
+        case 144:
+            return "Unknown";//none
+        case 145:
+            return "Unknown";//none
+        case 146:
+            return "Unknown";//none
+        case 147:
+            return "Unknown";//none
+        case 148:
+            return "Unknown";//none
+        case 149:
+            return "Unknown";//none
+        case 150:
+            return "Unknown";//none
+        case 151:
+            return "RODNEY";//HPtype2
+        default:
+            return NULL;
+
+    }
+}
+
+char* GetNPCName(int nameID)
+{
+    switch (nameID)
+    {
+        case 1:
+            return "MACDOWELL";//HPtype3
+        case 2:
+            return "RODRIGUEZ";//HPtype4
+        case 3:
+            return "CONRAD";//HPtype2
+        case 4:
+            return "HUNK:B";//HPtype3
+        case 5:
+            return "HUNK";//HPtype5
+        case 6:
+            return "MIGUEL";//HPtype3
+        case 7:
+            return "Unknown";
+        case 8:
+            return "LUKE";//HPtype4
+        case 9:
+            return "Unknown";
+        case 10:
+            return "ARNOLD";//HPtype5
+        case 11:
+            return "MATT";//HPtype2
+        case 12:
+            return "BILLY";//HPtype3
+        case 13:
+            return "HARSH";//HPtype3
+        case 14:
+            return "Unknown";//HARSH:B
+        case 15:
+            return "Unknown";//HARSH:C
+        case 16:
+            return "Unknown";//zombie?
+        case 17:
+            return "PETER";//HPtype3
+        case 18:
+            return "MARVIN";//HPtype3
+        case 19:
+            return "FRED";//HPtype2
+        case 20:
+            return "ANDY";//HPtype3
+        case 21:
+            return "Unknown";//MARVIN:B
+        case 22:
+            return "JEAN";//HPtype4
+        case 23:
+            return "TONY";//HPtype4
+        case 24:
+            return "Unknown";//PATRICK:B
+        case 25:
+            return "PATRICK";//HPtype3
+        case 26:
+            return "LLOYD";//HPtype3
+        case 27:
+            return "AUSTIN";//HPtype3
+        case 28:
+            return "CLINT";//HPtype4
+        case 29:
+            return "BONE";//HPtype2
+        case 30:
+            return "BOB";//HPtype5
+        case 31:
+            return "Unknown";//FIRST LEECHMAN
+        case 32:
+            return "NATHAN";//HPtype3
+        case 33:
+            return "SAMUEL";//HPtype4
+        case 34:
+            return "Unknown";//bug
+        case 35:
+            return "WILL";//HPtype2
+        case 36:
+            return "Unknown";//WILL:B
+        case 37:
+            return "ROGER";//HPtype3
+        case 38:
+            return "Unknown";//bug
+        case 39:
+            return "CARTER";//HPtype3
+        case 40:
+            return "GREG";//HPtype6
+        case 41:
+            return "FROST";//HPtype4
+        case 42:
+            return "FROST:B";//HPtype3
+        case 43:
+            return "JAKE";//HPtype1
+        case 44:
+            return "GARY";//HPtype3
+        case 45:
+            return "RICHARD";//HPtype4
+        case 46:
+            return "Unknown";//MICKEY:B
+        case 47:
+            return "MICKEY";//HPtype2
+        case 48:
+            return "AL";//HPtype3
+        case 49:
+            return "AXEMAN";//HPtype5
+        case 50:
+            return "AL:B";//HPtype2
+        case 51:
+            return "BEN";//HPtype3
+        case 52:
+            return "Unknown";//LUCY
+        case 53:
+            return "REGAN";//HPtype3
+        case 54:
+            return "REGAN:B";//HPtype3
+        case 55:
+            return "MONICA";//HPtype2
+        case 56:
+            return "LINDA";//HPtype2
+        case 57:
+            return "RITA";//HPtype4
+        case 58:
+            return "Unknown";//bug
+        case 59:
+            return "MARY";//HPtype3
+        case 60:
+            return "KATE";//HPtype3
+        case 61:
+            return "Unknown";//bug
+        case 62:
+            return "Unknown";//bug
+        case 63:
+            return "DANNY";//HPtype4
+        case 64:
+            return "DANNY:B";//HPtype5
+        case 65:
+            return "GILL";//HPtype2
+        case 66:
+            return "GILL:B";//HPtype3
+        case 67:
+            return "Unknown";//none
+        case 68:
+            return "Unknown";//none
+        case 69:
+            return "Unknown";//none
+        case 70:
+            return "Unknown";//docter
+        case 71:
+            return "Unknown";//none
+        case 72:
+            return "Unknown";//none
+        case 73:
+            return "Unknown";//cindy
+        case 74:
+            return "KEITH";//HPtype4
+        case 75:
+            return "Unknown";//none
+        case 76:
+            return "Unknown";//none
+        case 77:
+            return "Unknown";//none
+        case 78:
+            return "Unknown";//none
+        case 79:
+            return "Unknown";//none
+        case 80:
+            return "Unknown";//none
+        case 81:
+            return "KURT";//HPtype3
+        case 82:
+            return "KURT:B";//HPtype3
+        case 83:
+            return "GARY:B";//HPtype3
+        case 84:
+            return "AL:C";//HPtype3
+        case 85:
+            return "Unknown";//none
+        case 86:
+            return "Unknown";//none
+        case 87:
+            return "DOROTHY";//HPtype5
+        case 88:
+            return "Unknown";//none
+        case 89:
+            return "Unknown";//none
+        case 90:
+            return "Unknown";//none
+        case 91:
+            return "YOKO:Z";//HPtype4
+        case 92:
+            return "Unknown";//none
+        case 93:
+            return "Unknown";//none
+        case 94:
+            return "Unknown";//none
+        case 95:
+            return "Unknown";//none
+        case 96:
+            return "Unknown";//none
+        case 97:
+            return "Unknown";//none
+        case 98:
+            return "Unknown";//none
+        case 99:
+            return "Unknown";//none
+        case 100:
+            return "Unknown";//MR.GREY
+        case 101:
+            return "RAYMOND";//HPtype3
+        case 102:
+            return "ARTHUR";//HPtype2
+        case 103:
+            return "AARON";//HPtype5
+        case 104:
+            return "DORIAN";//HPtype3
+        case 105:
+            return "ELLIOTT";//HPtype4
+        case 106:
+            return "ERIC";//HPtype2
+        case 107:
+            return "HARRY";//HPtype2
+        case 108:
+            return "Mr.RED";//HPtype0
+        case 109:
+            return "Mr.BLUE";//HPtype0
+        case 110:
+            return "Mr.GREEN";//HPtype6
+        case 111:
+            return "Mr.GOLD";//HPtype6
+        case 112:
+            return "Mr.BLACK";//HPtype6
+        case 113:
+            return "KARL";//HPtype5
+        case 114:
+            return "DUSTIN";//HPtype4
+        case 115:
+            return "Unknown";//CECIL
+        case 116:
+            return "DEREK";//HPtype3
+        case 117:
+            return "Ms.WHITE";//HPtype0
+        case 118:
+            return "Ms.PEACH";//HPtype6
+        case 119:
+            return "Ms.WATER";//HPtype6
+        case 120:
+            return "LEN";//HPtype4
+        case 121:
+            return "NICOLAS";//HPtype3
+        case 122:
+            return "SEAN";//HPtype5
+        case 123:
+            return "PHILIP";//HPtype4
+        case 124:
+            return "DON";//HPtype3
+        case 125:
+            return "MATTHEW";//HPtype3
+        case 126:
+            return "ROBERT";//HPtype4
+        case 127:
+            return "CHUCK";//HPtype2
+        case 128:
+            return "GINGER";//HPtype4
+        case 129:
+            return "LAURA";//HPtype2
+        case 130:
+            return "AMELIA";//HPtype3
+        case 131:
+            return "ETHAN";//HPtype2
+        case 132:
+            return "Unknown";//ETHAN:B
+        case 133:
+            return "HOWARD";//HPtype3
+        case 134:
+            return "Unknown";//HOWARD:B
+        case 135:
+            return "ISAAC";//HPtype4
+        case 136:
+            return "Unknown";//ISAAC:B
+        case 137:
+            return "KATHY";//HPtype2
+        case 138:
+            return "Unknown";//KATHY:B
+        case 139:
+            return "ELENA";//HPtype4
+        case 140:
+            return "Unknown";//ELENA:B
         case 141:
             return "FRANK";//HPtype4
         case 142:

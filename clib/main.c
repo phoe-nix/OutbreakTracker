@@ -227,6 +227,30 @@ unsigned int GetFrames()
 	return buffer;
 }
 
+unsigned int GetFightTime()
+{
+	unsigned int buffer;
+	int bytesRead = 0;
+	    ReadProcessMemory(ProcessHandle, (PCVOID) F2_DTFightTime, &buffer, 4, (PDWORD) &bytesRead);
+	return buffer;
+}
+
+unsigned short GetFightTime2()
+{
+	unsigned short buffer;
+	int bytesRead = 0;
+	    ReadProcessMemory(ProcessHandle, (PCVOID) F2_DTFightTime2, &buffer, 2, (PDWORD) &bytesRead);
+	return buffer;
+}
+
+unsigned int GetGarageTime()
+{
+	unsigned int buffer;
+	int bytesRead = 0;
+	    ReadProcessMemory(ProcessHandle, (PCVOID) F2_DTGarageTime, &buffer, 4, (PDWORD) &bytesRead);
+	return buffer;
+}
+
 unsigned int GetGasTime()
 {
 	unsigned int buffer;
@@ -527,6 +551,7 @@ char* GetDeadSpecialInventory(int characterID)
 	return buffer;
 }
 
+
 void GetRoomItemF1(int cid)
 {
 		unsigned int Pointer;
@@ -545,54 +570,28 @@ void GetRoomItemF1(int cid)
 			RItems[cid].RItem[i].EN = *ptr2;
 			if ((*ptr) != 0x00)
 			{
-				if (i != MAX_ITEM)
+				RItems[cid].RItem[i].Count = 0;
+				RItems[cid].RItem[i].Pick = 0;
+				RItems[cid].RItem[i].Present = 0;
+				RItems[cid].RItem[i].Mix = 0;
+				for (int j=0; j < 1; j++)
 				{
-					RItems[cid].RItem[i].Count = 0;
-					RItems[cid].RItem[i].Pick = 0;
-					RItems[cid].RItem[i].Present = 0;
-					RItems[cid].RItem[i].Mix = 0;
-					for (int j=0; j < 1; j++)
+					if (*(ptr+j) != 0x00)
 					{
-						if (*(ptr+j) != 0x00)
-						{
-							RItems[cid].RItem[i].Type = Items[*(ptr+j)-1].Type;
-							RItems[cid].RItem[i].Count += Items[*(ptr+j)-1].Count;
-							RItems[cid].RItem[i].Pick += Items[*(ptr+j)-1].Pick;
-							RItems[cid].RItem[i].Present += Items[*(ptr+j)-1].Present;
-							RItems[cid].RItem[i].Mix += Items[*(ptr+j)-1].Mix;
-						}
+						RItems[cid].RItem[i].Type = Items[*(ptr+j)-1].Type;
+						RItems[cid].RItem[i].Count = Items[*(ptr+j)-1].Count;
+						RItems[cid].RItem[i].Pick = Items[*(ptr+j)-1].Pick;
+						RItems[cid].RItem[i].Present = Items[*(ptr+j)-1].Present;
+						RItems[cid].RItem[i].Mix = Items[*(ptr+j)-1].Mix;
 					}
 				}
-				//else
-				//{
-					//RItems[cid].RItem[i].Type = Items[(*ptr)-1].Type;
-					//RItems[cid].RItem[i].Count = 1;
-				//}
 			}
 		}
 
 		free(buffer);
 		buffer = NULL;
 }
-/*
-unsigned int GetE1HP()//enemy HP
-{
-	unsigned int Pointer;
-	unsigned short buffer;
-	int bytesRead = 0;
-	if (info.CurrentFile == 1)
-	{
-		ReadProcessMemory(ProcessHandle, (PCVOID)F1_Pointer, &Pointer,4,0);
-	    ReadProcessMemory(ProcessHandle, (PCVOID)Pointer+0x20000000 + F1_EHPOffset, &buffer, 2, (PDWORD) &bytesRead);
-	}
-	else
-	{
-		ReadProcessMemory(ProcessHandle, (PCVOID)F2_Pointer, &Pointer,4,0);
-		ReadProcessMemory(ProcessHandle, (PCVOID)Pointer+0x20000000 + F2_EHPOffset, &buffer, 2, (PDWORD)&bytesRead);
-	}
-	return buffer;
-}
-*/
+
 void GetRoomItemF2(int cid)
 {
 		unsigned int Pointer;
@@ -612,35 +611,28 @@ void GetRoomItemF2(int cid)
 			RItems[cid].RItem[i].EN = *ptr2;
 			if ((*ptr) != 0x00)
 			{
-				if (i != MAX_ITEM)
+				RItems[cid].RItem[i].Count = 0;
+				RItems[cid].RItem[i].Pick = 0;
+				RItems[cid].RItem[i].Present = 0;
+				RItems[cid].RItem[i].Mix = 0;
+				for (int j=0; j < 1; j++)
 				{
-					RItems[cid].RItem[i].Count = 0;
-					RItems[cid].RItem[i].Pick = 0;
-					RItems[cid].RItem[i].Present = 0;
-					RItems[cid].RItem[i].Mix = 0;
-					for (int j=0; j < 1; j++)
+					if (*(ptr+j) != 0x00)
 					{
-						if (*(ptr+j) != 0x00)
-						{
-							RItems[cid].RItem[i].Type = Items[*(ptr+j)-1].Type;
-							RItems[cid].RItem[i].Count += Items[*(ptr+j)-1].Count;
-							RItems[cid].RItem[i].Pick += Items[*(ptr+j)-1].Pick;
-							RItems[cid].RItem[i].Present += Items[*(ptr+j)-1].Present;
-							RItems[cid].RItem[i].Mix += Items[*(ptr+j)-1].Mix;
-						}
+						RItems[cid].RItem[i].Type = Items[*(ptr+j)-1].Type;
+						RItems[cid].RItem[i].Count = Items[*(ptr+j)-1].Count;
+						RItems[cid].RItem[i].Pick = Items[*(ptr+j)-1].Pick;
+						RItems[cid].RItem[i].Present = Items[*(ptr+j)-1].Present;
+						RItems[cid].RItem[i].Mix = Items[*(ptr+j)-1].Mix;
 					}
 				}
-				//else
-				//{
-				//	RItems[cid].RItem[i].Type = Items[(*ptr)-1].Type;
-				//	RItems[cid].RItem[i].Count = 1;
-				//}
 			}
 		}
 
 		free(buffer);
 		buffer = NULL;
 }
+
 void GetCindyBag(int cid)
 {
 	if (Players[cid].CharacterType == 7)
@@ -921,6 +913,10 @@ char* GetStatusText(unsigned char stat)
 		return "Bleed";
 	else if (stat == 0x03)
 		return "Poison+Bleed";
+	else if (stat == 0x04)
+		return "Gas";
+	else if (stat == 0x06)
+		return "Gas+Bleed";
 	else if (stat == 0x00)
 		return "OK";
 
@@ -1036,6 +1032,9 @@ static int LUpdatePlayer (lua_State* L)
 		return 0;
 	info.ScenarioID = GetScenarioID();
 	info.FrameCounter = GetFrames();
+	info.FightTime = GetFightTime();
+	info.FightTime2 = GetFightTime2();
+	info.GarageTime = GetGarageTime();
 	info.GasTime = GetGasTime();
 	info.GasFlag = GetGasFlag();
 	info.GasRandom = GetGasRandom();
@@ -1058,12 +1057,6 @@ static int LUpdatePlayer (lua_State* L)
 	//info.E1Start = GetE1HP();//enemy1 HP
 	UpdatePickups();
 
-	for (int i=0; i < 4; i++)
-	{
-		Players[i].CharacterType = GetCharacterType(i);
-		GetCindyBag(i);
-
-	}
 	for (int i=0; i < 4; i++)
 	{
 		Players[i].Enabled = GetCharacterEnabled(i);
@@ -1182,7 +1175,8 @@ static int LGetSlotPlayer (lua_State* L)
 	char* npchp = GetNPCHP(SPlayers[i].NameID);
 	char* power = GetCharacterPower(SPlayers[i].NameID);
 	char* npcpower = GetNPCPower(SPlayers[i].NameID);
-	char* name = GetNPCName(SPlayers[i].NameID);
+	char* name1 = GetF1NPCName(SPlayers[i].NameID);
+	char* name2 = GetNPCName(SPlayers[i].NameID);
 	char* statname = GetStatusText(SPlayers[i].Status);
 
 	lua_newtable(L);
@@ -1221,12 +1215,19 @@ static int LGetSlotPlayer (lua_State* L)
 
 		lua_pushstring(L, "name");
 			if (SPlayers[i].NPCType == 0)
+			{
 				if (info.CurrentFile == 1)
 					lua_pushstring(L, charname1);
 				else
 					lua_pushstring(L, charname2);
+			}
 			else
-				lua_pushstring(L, name);
+			{
+				if (info.CurrentFile == 1)
+					lua_pushstring(L, name1);
+				else
+					lua_pushstring(L, name2);
+			}
 		lua_rawset(L, -3);
 
 	return 1;
@@ -1481,6 +1482,15 @@ static int LGetGameInfo (lua_State* L)
 		lua_rawset(L, -3);
 		lua_pushstring(L, "frames");
 			lua_pushnumber(L, (double)info.FrameCounter);
+		lua_rawset(L, -3);
+		lua_pushstring(L, "fighttime");
+			lua_pushnumber(L, (double)info.FightTime);
+		lua_rawset(L, -3);
+		lua_pushstring(L, "fighttime2");
+			lua_pushnumber(L, (double)info.FightTime2);
+		lua_rawset(L, -3);
+		lua_pushstring(L, "garagetime");
+			lua_pushnumber(L, (double)info.GarageTime);
 		lua_rawset(L, -3);
 		lua_pushstring(L, "gastime");
 			lua_pushnumber(L, (double)info.GasTime);
