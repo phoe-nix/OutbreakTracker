@@ -141,6 +141,10 @@ function GetPlayerHealthString(id)
 	local healthstring = tostring(Players[id].HP) .. "/" .. tostring(Players[id].maxHP)
 	if Players[id].status == "Dead" or Players[id].status == "Down" or Players[id].status == "Zombie" then
 		return Players[id].status
+	elseif Players[id].status == "Bleed" or Players[id].status == "Poison+Bleed" or Players[id].status == "Gas+Bleed" then
+		return Players[id].HP .. "  " .. Time2string3(Players[id].bleedtime)
+	elseif Players[id].status == "Gas" then
+		return Players[id].HP .. "  " .. Time2string3(GameInfo.gastime)
 	else
 		return healthstring
 	end
