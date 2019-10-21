@@ -551,6 +551,16 @@ char* GetDeadSpecialInventory(int characterID)
 	return buffer;
 }
 
+unsigned short GetBleedTime(int characterID)
+{
+  unsigned short buffer;
+  int bytesRead = 0;
+  if (info.CurrentFile == 1)
+      ReadProcessMemory(ProcessHandle, (PCVOID)F1_GetCharAddress(characterID) + F1_BleedTimeOffset, &buffer, 2, (PDWORD)&bytesRead);
+  else
+      ReadProcessMemory(ProcessHandle, (PCVOID)F2_GetCharAddress(characterID) + F2_BleedTimeOffset, &buffer, 2, (PDWORD)&bytesRead);
+  return buffer;
+}
 
 void GetRoomItemF1(int cid)
 {
@@ -1065,6 +1075,7 @@ static int LUpdatePlayer (lua_State* L)
 		Players[i].InGame = GetCharacterInGame(i);
 		Players[i].HP = GetHealth(i);
 		Players[i].MaxHP = GetMaxHealth(i);
+		Players[i].BleedTime = GetBleedTime(i);
 		Players[i].CharacterType = GetCharacterType(i);
 		Players[i].NameID = GetNameID(i);
 		Players[i].Virus = GetPercentage(i);
@@ -1287,6 +1298,10 @@ static int LGetPlayer (lua_State* L)
 
 		lua_pushstring(L, "maxHP");
 			lua_pushnumber(L, (double)Players[i].MaxHP);
+		lua_rawset(L, -3);
+
+		lua_pushstring(L, "bleedtime");
+			lua_pushnumber(L, (double)Players[i].BleedTime);
 		lua_rawset(L, -3);
 
 		lua_pushstring(L, "type");

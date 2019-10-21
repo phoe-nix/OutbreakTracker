@@ -92,6 +92,7 @@ typedef struct
 	bool InGame;
     unsigned short HP;
     unsigned short MaxHP;
+    unsigned short BleedTime;
     unsigned char CharacterType;
     double Virus;
     double CritBonus;

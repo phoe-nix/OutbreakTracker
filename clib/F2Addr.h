@@ -27,6 +27,7 @@ const int F2_PowerOffset = 0xBDC;
 
 const int F2_InventoryOffset = 0xC94;
 const int F2_EquippedItemOffset = 0xC8C;
+const int F2_BleedTimeOffset = 0xC6A;
 
 const int F2_PickupStructSize = 60;
 const int F2_PickupCountOffset = 30;
