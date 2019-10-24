@@ -1,3 +1,77 @@
+function GetHealthbar(hp, hpmax)
+	local percent = hp / hpmax
+	if (percent > 1) then
+		return 0
+	end
+	if (percent == 1) then
+		return 1
+	end
+	if (percent >= 0.95) then
+		return 0.95
+	end
+	if (percent >= 0.90) then
+		return 0.90
+	end
+	if (percent >= 0.85) then
+		return 0.85
+	end
+	if (percent >= 0.80) then
+		return 0.80
+	end
+	if (percent >= 0.75) then
+		return 0.75
+	end
+	if (percent >= 0.70) then
+		return 0.70
+	end
+	if (percent >= 0.65) then
+		return 0.65
+	end
+	if (percent >= 0.60) then
+		return 0.65
+	end
+	if (percent >= 0.55) then
+		return 0.55
+	end
+	if (percent >= 0.50) then
+		return 0.50
+	end
+	if (percent >= 0.45) then
+		return 0.45
+	end
+	if (percent >= 0.40) then
+		return 0.40
+	end
+	if (percent >= 0.35) then
+		return 0.35
+	end
+	if (percent >= 0.30) then
+		return 0.30
+	end
+	if (percent >= 0.25) then
+		return 0.25
+	end
+	if (percent >= 0.20) then
+		return 0.20
+	end
+	if (percent >= 0.15) then
+		return 0.15
+	end
+	if (percent >= 0.10) then
+		return 0.10
+	end
+	if (percent >= 0.05) then
+		return 0.05
+	end
+	if (percent > 0) then
+		return 0.05
+	end
+	if (percent == 0) then
+		return 0
+	end
+	return 0
+end
+
 function GetConditionName(hp, hpmax)
 	local percent = hp / hpmax
 	if (percent >= 0.75) then
@@ -57,15 +131,17 @@ end
 
 function GetConditionColor2(r, stat)
 	if (r == "fine") then
-		return {68/255, 255/255, 10/255, 1}
+		return {68/255, 160/255, 10/255, 0.5}
 	elseif (r == "caution") then
-		return {247/255, 223/255, 27/255, 1}
+		return {247/255, 223/255, 27/255, 0.5}
 	elseif (r == "caution2") then
-		return {253/255, 166/255, 25/255, 1}
+		return {253/255, 166/255, 25/255, 0.5}
 	elseif (r == "danger") then
-		return {253/255, 25/255, 25/255, 1}
+		return {253/255, 25/255, 25/255, 0.5}
 	elseif (r == "dead") then
-		return {100/255, 100/255, 100/255, 1}
+		return {0/255, 0/255, 0/255, 0.5}
+	elseif (r == "Invincible") then
+		return {0/255, 0/255, 0/255, 0.5}
 	end
 end
 
@@ -145,6 +221,8 @@ function GetPlayerHealthString(id)
 		return Players[id].HP .. "  " .. Time2string3(Players[id].bleedtime)
 	elseif Players[id].status == "Gas" then
 		return Players[id].HP .. "  " .. Time2string3(GameInfo.gastime)
+	elseif Players[id].status == "Down+Gas" then
+		return "Down"
 	else
 		return healthstring
 	end
@@ -197,6 +275,8 @@ function GetStatusColor(id)
 	elseif Players[id].status == "Poison+Bleed" then
 		return {0, 1, 1, 1}
 	elseif Players[id].status == "Gas" then
+		return {1, 1, 0, 1}
+	elseif Players[id].status == "Down+Gas" then
 		return {1, 1, 0, 1}
 	elseif Players[id].status == "Gas+Bleed" then
 		return {1, 0.5, 0, 1}

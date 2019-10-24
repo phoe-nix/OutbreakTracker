@@ -7,13 +7,18 @@ require "Label"
 require "PlayerCard"
 require "SPlayerCard"
 require "EnemyCard"
+require "EnemyCard2"
 require "LobbyCard"
 require "ItemCard"
 
 local InitResult = false
 local RetryTimer = 0
-
+local scalex,scaley = 300, 740
 local errorX, errorY = 0, 300
+local PlayerSwtich=0
+local TimeSwtich=1
+local EnemyHPSwtich=1
+local ItemSwtich=1
 Slots = {}
 Items = {}
 Players = {}
@@ -26,6 +31,7 @@ ItemCards = {}
 PlayerCards = {}
 SPlayerCards = {}
 EnemyCards = {}
+EnemyCards2 = {}
 
 function love.load(args)
 	LoadAssets()
@@ -45,23 +51,37 @@ function love.load(args)
 	for i=1, 12 do
 		EnemyCards[i] = EnemyCard:new(i)
 	end
+	for i=1, 12 do
+		EnemyCards2[i] = EnemyCard2:new(i)
+	end
 	--love.window.setMode(800, 600, {resizable=true, vsync=false, minwidth=400, minheight=300})
 end
 
 function love.draw()
 	wx, wy, display = love.window.getMode()-- get window size
-	love.graphics.scale(wx/300, wy/740)
+	love.graphics.scale(wx/scalex, wy/scaley)
 
 	local p = GameInfo.playernum
 	if InitResult == true and not(GameInfo.currentFile == 255) then
 		love.graphics.setFont(TimeFont)
 		if not(GameInfo.scenario == "") then
-			if GameInfo.currentFile == 1 then
-				love.graphics.printf(GameInfo.itemrandom%5+1, 0, (145*p+105), 12, "left")
+			if EnemyHPSwtich==2 then
+				if GameInfo.currentFile == 1 then
+					love.graphics.printf(GameInfo.itemrandom%5+1, 0, (145*4+105), 12, "left")
+				else
+					love.graphics.printf(GameInfo.itemrandom+1, 0, (145*4+105), 12, "left")
+				end
 			else
-				love.graphics.printf(GameInfo.itemrandom+1, 0, (145*p+105), 12, "left")
+				if GameInfo.currentFile == 1 then
+					love.graphics.printf(GameInfo.itemrandom%5+1, 0, (145*p+105), 12, "left")
+				
+				else
+					love.graphics.printf(GameInfo.itemrandom+1, 0, (145*p+105), 12, "left")
+				end
 			end
+			if TimeSwtich==1 and EnemyHPSwtich<2 then
 			love.graphics.printf(Time2string(GameInfo.frames/0.03), 0, (145*p), 300, "right")
+			end
 			--love.graphics.setFont(DefaultFont)
 			--love.graphics.printf(GameInfo.scenario,0, 625,300, "right") --scenario
 		end
@@ -80,298 +100,300 @@ function love.draw()
 		end
 
 		if (GameInfo.frames>0) then
-			if (GameInfo.scenario == "wild things") then
+			if EnemyHPSwtich==1 then
+				if (GameInfo.scenario == "wild things") then
 				--UIAtlas:draw("wild things", 0, 576,0,0.6)
-				ItemIcons:draw("2/14005", 0, (145*p)-3,0,0.5)
-				love.graphics.printf(GameInfo.p1coins+GameInfo.p2coins+GameInfo.p3coins+GameInfo.p4coins, 26,(145*p), 300, "left")
-			elseif (GameInfo.scenario == "desperate times") then
-				if(GameInfo.fighttime2 == 0) then
-					love.graphics.printf((GameInfo.killedzombies), 0, (145*p), 300, "left")
-				end
-				if(GameInfo.garagetime > 0)then
-					love.graphics.printf(Time2string3(GameInfo.garagetime), 70, (145*p), 60, "center",0,1,1)
-				end
-				if(GameInfo.fighttime > 0) and (GameInfo.fighttime2 == 0xffff)then
-					love.graphics.printf(Time2string3(GameInfo.fighttime), 0, (145*p), 60, "center",0,1,1)
-				end
-				if(GameInfo.fighttime2 > 0) and not (GameInfo.fighttime2 == 0xffff) then
-					love.graphics.printf(Time2string3(GameInfo.fighttime2), 0, (145*p), 60, "center",0,1,1)
-				end
-				--ItemIcons:draw("2/11511", 0-4, (145*p-8),0,0.65)
-				--love.graphics.printf(Time2string3(GameInfo.gastime), 70, (145*p), 60, "center",0,1,1)
-				ItemIcons:draw("2/11511", 150-8, (145*p)+56,0,0.75)
-				--love.graphics.printf((GameInfo.gasflag), 0, (145*p), 100, "center")
-				--love.graphics.printf(IsOuNumber(GameInfo.gasrandom), 0, (145*p), 280, "center")
-				love.graphics.printf(Time2string3(GameInfo.gastime), 150-8, (145*p)+90, 56, "center",0,0.65,0.65)
-				love.graphics.setFont(VerySmallFont)
-				if(GameInfo.gasflag == 1) and (GameInfo.gasrandom%2 == 0) then
-					if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
-						love.graphics.printf({{1, 1, 0, 1},"Hallway\n1F lobby\nB1F West hall"}, 180, (145*p)+60, 150,  "left")
-					elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
-						love.graphics.printf({{1, 1, 0, 1},"Hallway\nB1F West hall"}, 180, (145*p)+60, 150,  "left")
+					ItemIcons:draw("2/14005", 0, (145*p)-3,0,0.5)
+					love.graphics.printf(GameInfo.p1coins+GameInfo.p2coins+GameInfo.p3coins+GameInfo.p4coins, 26,(145*p), 300, "left")
+				elseif (GameInfo.scenario == "desperate times") then
+					if(GameInfo.fighttime2 == 0) then
+						love.graphics.printf((GameInfo.killedzombies), 0, (145*p), 300, "left")
 					end
-				elseif(GameInfo.gasflag == 2) and (GameInfo.gasrandom%2 == 0) then
-					if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
-						love.graphics.printf({{1, 1, 0, 1},"2F East hall\nNight-duty room\nAutopsy Room"}, 180, (145*p)+60, 150,  "left")
-					elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
-						love.graphics.printf({{1, 1, 0, 1},"2F East hall\nAutopsy Room"}, 180, (145*p)+60, 150,  "left")
+					if(GameInfo.garagetime > 0)then
+						love.graphics.printf(Time2string3(GameInfo.garagetime), 70, (145*p), 60, "center",0,1,1)
 					end
-				elseif(GameInfo.gasflag == 4) and (GameInfo.gasrandom%2 == 0) then
-					if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
-						love.graphics.printf({{1, 1, 0, 1},"Waiting room\n1F East hall\nParking Garage"}, 180, (145*p)+60, 150,  "left")
-					elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
-						love.graphics.printf({{1, 1, 0, 1},"1F East hall\nParking Garage"}, 180, (145*p)+60, 150,  "left")
+					if(GameInfo.fighttime > 0) and (GameInfo.fighttime2 == 0xffff)then
+						love.graphics.printf(Time2string3(GameInfo.fighttime), 0, (145*p), 60, "center",0,1,1)
 					end
-				elseif(GameInfo.gasflag == 8) and (GameInfo.gasrandom%2 == 0) then
-					if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
-						love.graphics.printf({{1, 1, 0, 1},"2F East hall\nEast office\nInterrogation room"}, 180, (145*p)+60, 150,  "left")
-					elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
-						love.graphics.printf({{1, 1, 0, 1},"East office\nInterrogation room"}, 180, (145*p)+60, 150,  "left")
+					if(GameInfo.fighttime2 > 0) and not (GameInfo.fighttime2 == 0xffff) then
+						love.graphics.printf(Time2string3(GameInfo.fighttime2), 0, (145*p), 60, "center",0,1,1)
 					end
-				elseif(GameInfo.gasflag == 16) and (GameInfo.gasrandom%2 == 0) then
-					if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
-						love.graphics.printf({{1, 1, 0, 1},"1F Lobby\nB1F East hall\nNight-duty room"}, 180, (145*p)+60, 150,  "left")
-					elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
-						love.graphics.printf({{1, 1, 0, 1},"B1F East hall\nNight-duty room"}, 180, (145*p)+60, 150,  "left")
+					--ItemIcons:draw("2/11511", 0-4, (145*p-8),0,0.65)
+					--love.graphics.printf(Time2string3(GameInfo.gastime), 70, (145*p), 60, "center",0,1,1)
+					ItemIcons:draw("2/11511", 150-8, (145*p)+56,0,0.75)
+					--love.graphics.printf((GameInfo.gasflag), 0, (145*p), 100, "center")
+					--love.graphics.printf(IsOuNumber(GameInfo.gasrandom), 0, (145*p), 280, "center")
+					love.graphics.printf(Time2string3(GameInfo.gastime), 150-8, (145*p)+90, 56, "center",0,0.65,0.65)
+					love.graphics.setFont(VerySmallFont)
+					if(GameInfo.gasflag == 1) and (GameInfo.gasrandom%2 == 0) then
+						if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
+							love.graphics.printf({{1, 1, 0, 1},"Hallway\n1F lobby\nB1F West hall"}, 180, (145*p)+60, 150,  "left")
+						elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
+							love.graphics.printf({{1, 1, 0, 1},"Hallway\nB1F West hall"}, 180, (145*p)+60, 150,  "left")
+						end
+					elseif(GameInfo.gasflag == 2) and (GameInfo.gasrandom%2 == 0) then
+						if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
+							love.graphics.printf({{1, 1, 0, 1},"2F East hall\nNight-duty room\nAutopsy Room"}, 180, (145*p)+60, 150,  "left")
+						elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
+							love.graphics.printf({{1, 1, 0, 1},"2F East hall\nAutopsy Room"}, 180, (145*p)+60, 150,  "left")
+						end
+					elseif(GameInfo.gasflag == 4) and (GameInfo.gasrandom%2 == 0) then
+						if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
+							love.graphics.printf({{1, 1, 0, 1},"Waiting room\n1F East hall\nParking Garage"}, 180, (145*p)+60, 150,  "left")
+						elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
+							love.graphics.printf({{1, 1, 0, 1},"1F East hall\nParking Garage"}, 180, (145*p)+60, 150,  "left")
+						end
+					elseif(GameInfo.gasflag == 8) and (GameInfo.gasrandom%2 == 0) then
+						if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
+							love.graphics.printf({{1, 1, 0, 1},"2F East hall\nEast office\nInterrogation room"}, 180, (145*p)+60, 150,  "left")
+						elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
+							love.graphics.printf({{1, 1, 0, 1},"East office\nInterrogation room"}, 180, (145*p)+60, 150,  "left")
+						end
+					elseif(GameInfo.gasflag == 16) and (GameInfo.gasrandom%2 == 0) then
+						if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
+							love.graphics.printf({{1, 1, 0, 1},"1F Lobby\nB1F East hall\nNight-duty room"}, 180, (145*p)+60, 150,  "left")
+						elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
+							love.graphics.printf({{1, 1, 0, 1},"B1F East hall\nNight-duty room"}, 180, (145*p)+60, 150,  "left")
+						end
+					elseif(GameInfo.gasflag == 32) and (GameInfo.gasrandom%2 == 0) then
+						if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
+							love.graphics.printf({{1, 1, 0, 1},"East office\nSubstation room\nKennel"}, 180, (145*p)+60, 150,  "left")
+						elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
+							love.graphics.printf({{1, 1, 0, 1},"Substation room\nKennel"}, 180, (145*p)+60, 150,  "left")
+						end
+					elseif(GameInfo.gasflag == 64) and (GameInfo.gasrandom%2 == 0) then
+						if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
+							love.graphics.printf({{1, 1, 0, 1},"1F Lobby\nB1F East hall\nParking Garage"}, 180, (145*p)+60, 150,  "left")
+						elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
+							love.graphics.printf({{1, 1, 0, 1},"1F Lobby\nB1F East hall"}, 180, (145*p)+60, 150,  "left")
+						end
+					elseif(GameInfo.gasflag == 128) and (GameInfo.gasrandom%2 == 0) then
+						if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
+							love.graphics.printf({{1, 1, 0, 1},"Interrogation room\nB1F West hall\nKennel"}, 180, (145*p)+60, 150,  "left")
+						elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
+							love.graphics.printf({{1, 1, 0, 1},"B1F West hall\nKennel"}, 180, (145*p)+60, 150,  "left")
+						end
+					elseif(GameInfo.gasflag == 256) and (GameInfo.gasrandom%2 == 0) then
+						if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
+							love.graphics.printf({{1, 1, 0, 1},"Waiting room\nHallway\nB1F East hall"}, 180, (145*p)+60, 150,  "left")
+						elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
+							love.graphics.printf({{1, 1, 0, 1},"Hallway\nB1F East hall"}, 180, (145*p)+60, 150,  "left")
+						end
+					elseif(GameInfo.gasflag == 512) and (GameInfo.gasrandom%2 == 0) then
+						if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
+							love.graphics.printf({{1, 1, 0, 1},"East office\n1F East hall\nSubstation room"}, 180, (145*p)+60, 150,  "left")
+						elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
+							love.graphics.printf({{1, 1, 0, 1},"1F Lobby\n1F East hall"}, 180, (145*p)+60, 150,  "left")
+						end
 					end
-				elseif(GameInfo.gasflag == 32) and (GameInfo.gasrandom%2 == 0) then
-					if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
-						love.graphics.printf({{1, 1, 0, 1},"East office\nSubstation room\nKennel"}, 180, (145*p)+60, 150,  "left")
-					elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
-						love.graphics.printf({{1, 1, 0, 1},"Substation room\nKennel"}, 180, (145*p)+60, 150,  "left")
-					end
-				elseif(GameInfo.gasflag == 64) and (GameInfo.gasrandom%2 == 0) then
-					if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
-						love.graphics.printf({{1, 1, 0, 1},"1F Lobby\nB1F East hall\nParking Garage"}, 180, (145*p)+60, 150,  "left")
-					elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
-						love.graphics.printf({{1, 1, 0, 1},"1F Lobby\nB1F East hall"}, 180, (145*p)+60, 150,  "left")
-					end
-				elseif(GameInfo.gasflag == 128) and (GameInfo.gasrandom%2 == 0) then
-					if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
-						love.graphics.printf({{1, 1, 0, 1},"Interrogation room\nB1F West hall\nKennel"}, 180, (145*p)+60, 150,  "left")
-					elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
-						love.graphics.printf({{1, 1, 0, 1},"B1F West hall\nKennel"}, 180, (145*p)+60, 150,  "left")
-					end
-				elseif(GameInfo.gasflag == 256) and (GameInfo.gasrandom%2 == 0) then
-					if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
-						love.graphics.printf({{1, 1, 0, 1},"Waiting room\nHallway\nB1F East hall"}, 180, (145*p)+60, 150,  "left")
-					elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
-						love.graphics.printf({{1, 1, 0, 1},"Hallway\nB1F East hall"}, 180, (145*p)+60, 150,  "left")
-					end
-				elseif(GameInfo.gasflag == 512) and (GameInfo.gasrandom%2 == 0) then
-					if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
-						love.graphics.printf({{1, 1, 0, 1},"East office\n1F East hall\nSubstation room"}, 180, (145*p)+60, 150,  "left")
-					elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
-						love.graphics.printf({{1, 1, 0, 1},"1F Lobby\n1F East hall"}, 180, (145*p)+60, 150,  "left")
-					end
-				end
 
-				if(GameInfo.gasflag == 1) and (GameInfo.gasrandom%2 == 1) then
-					if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
-						love.graphics.printf({{1, 1, 0, 1},"2F East Hall\nNight-duty room\nSubstation room"}, 180, (145*p)+60, 150,  "left")
-					elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
-						love.graphics.printf({{1, 1, 0, 1},"Night-duty room\nSubstation room"}, 180, (145*p)+60, 150,  "left")
+					if(GameInfo.gasflag == 1) and (GameInfo.gasrandom%2 == 1) then
+						if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
+							love.graphics.printf({{1, 1, 0, 1},"2F East Hall\nNight-duty room\nSubstation room"}, 180, (145*p)+60, 150,  "left")
+						elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
+							love.graphics.printf({{1, 1, 0, 1},"Night-duty room\nSubstation room"}, 180, (145*p)+60, 150,  "left")
+						end
+					elseif(GameInfo.gasflag == 2) and (GameInfo.gasrandom%2 == 1) then
+						if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
+							love.graphics.printf({{1, 1, 0, 1},"Waiting room\n1F Lobby\nB1F West Hall"}, 180, (145*p)+60, 150,  "left")
+						elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
+							love.graphics.printf({{1, 1, 0, 1},"Waiting room\nB1F West Hall"}, 180, (145*p)+60, 150,  "left")
+						end
+					elseif(GameInfo.gasflag == 4) and (GameInfo.gasrandom%2 == 1) then
+						if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
+							love.graphics.printf({{1, 1, 0, 1},"2F East Hall\nHallway\nSubstation room"}, 180, (145*p)+60, 150,  "left")
+						elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
+							love.graphics.printf({{1, 1, 0, 1},"2F East Hall\nHallway"}, 180, (145*p)+60, 150,  "left")
+						end
+					elseif(GameInfo.gasflag == 8)and (GameInfo.gasrandom%2 == 1) then
+						if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
+							love.graphics.printf({{1, 1, 0, 1},"Interrogation room\n1F East hall\nParking garage"}, 180, (145*p)+60, 150,  "left")
+						elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
+							love.graphics.printf({{1, 1, 0, 1},"1F East hall\nParking garage"}, 180, (145*p)+60, 150,  "left")
+						end
+					elseif(GameInfo.gasflag == 16) and (GameInfo.gasrandom%2 == 1) then
+						if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
+							love.graphics.printf({{1, 1, 0, 1},"Night-duty room\nAutopsy room\nKennel"}, 180, (145*p)+60, 180,  "left")
+						elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
+							love.graphics.printf({{1, 1, 0, 1},"Autopsy room\nKennel"}, 180, (145*p)+60, 180,  "left")
+						end
+					elseif(GameInfo.gasflag == 32) and (GameInfo.gasrandom%2 == 1) then
+						if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
+							love.graphics.printf({{1, 1, 0, 1},"East office\nInterrogation room\nSubstation room"}, 180, (145*p)+60, 150,  "left")
+						elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
+							love.graphics.printf({{1, 1, 0, 1},"East office\nInterrogation room"}, 180, (145*p)+60, 150,  "left")
+						end
+					elseif(GameInfo.gasflag == 64) and (GameInfo.gasrandom%2 == 1) then
+						if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
+							love.graphics.printf({{1, 1, 0, 1},"Waiting room\nEast office\nB1F East Hall"}, 180, (145*p)+60, 150,  "left")
+						elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
+							love.graphics.printf({{1, 1, 0, 1},"Waiting room\nB1F East Hall"}, 180, (145*p)+60, 150,  "left")
+						end
+					elseif(GameInfo.gasflag == 128) and (GameInfo.gasrandom%2 == 1) then
+						if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
+							love.graphics.printf({{1, 1, 0, 1},"2F East Hall\n1F Lobby\nHallway"}, 180, (145*p)+60, 150,  "left")
+						elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
+							love.graphics.printf({{1, 1, 0, 1},"1F Lobby\nHallway"}, 180, (145*p)+60, 150,  "left")
+						end
+					elseif(GameInfo.gasflag == 256) and (GameInfo.gasrandom%2 == 1) then
+						if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
+							love.graphics.printf({{1, 1, 0, 1},"Night-duty room\nAutopsy room\nParking garage"}, 180, (145*p)+60, 150,  "left")
+						elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
+							love.graphics.printf({{1, 1, 0, 1},"Autopsy room\nParking garage"}, 180, (145*p)+60, 150,  "left")
+						end
+					elseif(GameInfo.gasflag == 512) and (GameInfo.gasrandom%2 == 1) then
+						if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
+							love.graphics.printf({{1, 1, 0, 1},"2F East Hall\nInterrogation room\nKennel"}, 180, (145*p)+60, 150,  "left")
+						elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
+							love.graphics.printf({{1, 1, 0, 1},"2F East Hall\nInterrogation room"}, 180, (145*p)+60, 150,  "left")
+						end
 					end
-				elseif(GameInfo.gasflag == 2) and (GameInfo.gasrandom%2 == 1) then
-					if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
-						love.graphics.printf({{1, 1, 0, 1},"Waiting room\n1F Lobby\nB1F West Hall"}, 180, (145*p)+60, 150,  "left")
-					elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
-						love.graphics.printf({{1, 1, 0, 1},"Waiting room\nB1F West Hall"}, 180, (145*p)+60, 150,  "left")
-					end
-				elseif(GameInfo.gasflag == 4) and (GameInfo.gasrandom%2 == 1) then
-					if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
-						love.graphics.printf({{1, 1, 0, 1},"2F East Hall\nHallway\nSubstation room"}, 180, (145*p)+60, 150,  "left")
-					elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
-						love.graphics.printf({{1, 1, 0, 1},"2F East Hall\nHallway"}, 180, (145*p)+60, 150,  "left")
-					end
-				elseif(GameInfo.gasflag == 8)and (GameInfo.gasrandom%2 == 1) then
-					if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
-						love.graphics.printf({{1, 1, 0, 1},"Interrogation room\n1F East hall\nParking garage"}, 180, (145*p)+60, 150,  "left")
-					elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
-						love.graphics.printf({{1, 1, 0, 1},"1F East hall\nParking garage"}, 180, (145*p)+60, 150,  "left")
-					end
-				elseif(GameInfo.gasflag == 16) and (GameInfo.gasrandom%2 == 1) then
-					if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
-						love.graphics.printf({{1, 1, 0, 1},"Night-duty room\nAutopsy room\nKennel"}, 180, (145*p)+60, 180,  "left")
-					elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
-						love.graphics.printf({{1, 1, 0, 1},"Autopsy room\nKennel"}, 180, (145*p)+60, 180,  "left")
-					end
-				elseif(GameInfo.gasflag == 32) and (GameInfo.gasrandom%2 == 1) then
-					if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
-						love.graphics.printf({{1, 1, 0, 1},"East office\nInterrogation room\nSubstation room"}, 180, (145*p)+60, 150,  "left")
-					elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
-						love.graphics.printf({{1, 1, 0, 1},"East office\nInterrogation room"}, 180, (145*p)+60, 150,  "left")
-					end
-				elseif(GameInfo.gasflag == 64) and (GameInfo.gasrandom%2 == 1) then
-					if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
-						love.graphics.printf({{1, 1, 0, 1},"Waiting room\nEast office\nB1F East Hall"}, 180, (145*p)+60, 150,  "left")
-					elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
-						love.graphics.printf({{1, 1, 0, 1},"Waiting room\nB1F East Hall"}, 180, (145*p)+60, 150,  "left")
-					end
-				elseif(GameInfo.gasflag == 128) and (GameInfo.gasrandom%2 == 1) then
-					if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
-						love.graphics.printf({{1, 1, 0, 1},"2F East Hall\n1F Lobby\nHallway"}, 180, (145*p)+60, 150,  "left")
-					elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
-						love.graphics.printf({{1, 1, 0, 1},"1F Lobby\nHallway"}, 180, (145*p)+60, 150,  "left")
-					end
-				elseif(GameInfo.gasflag == 256) and (GameInfo.gasrandom%2 == 1) then
-					if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
-						love.graphics.printf({{1, 1, 0, 1},"Night-duty room\nAutopsy room\nParking garage"}, 180, (145*p)+60, 150,  "left")
-					elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
-						love.graphics.printf({{1, 1, 0, 1},"Autopsy room\nParking garage"}, 180, (145*p)+60, 150,  "left")
-					end
-				elseif(GameInfo.gasflag == 512) and (GameInfo.gasrandom%2 == 1) then
-					if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
-						love.graphics.printf({{1, 1, 0, 1},"2F East Hall\nInterrogation room\nKennel"}, 180, (145*p)+60, 150,  "left")
-					elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
-						love.graphics.printf({{1, 1, 0, 1},"2F East Hall\nInterrogation room"}, 180, (145*p)+60, 150,  "left")
-					end
-				end
 
-			elseif (GameInfo.scenario == "below freezing point") then
-				love.graphics.setFont(DefaultFont)
-				if(GameInfo.pass1 >= 0x0 and GameInfo.pass1 <= 0x1F or GameInfo.pass1 >= 0x80 and GameInfo.pass1 <= 0x9F) then
-					love.graphics.printf("0634", 0, (145*p), 300, "left")
-				elseif(GameInfo.pass1 >= 0x20 and GameInfo.pass1 <= 0x3F or GameInfo.pass1 >= 0xA0 and GameInfo.pass1 <= 0xBF) then
-					love.graphics.printf("4509", 0, (145*p), 300, "left")
-				elseif(GameInfo.pass1 >= 0x40 and GameInfo.pass1 <= 0x7F or GameInfo.pass1 >= 0xC0 and GameInfo.pass1 <= 0xFF) then
-					love.graphics.printf("9741", 0, (145*p), 300, "left")
-				end
-				if(GameInfo.pass2 == 0x20) then
-					love.graphics.printf("-A375-B482", 40, (145*p), 300, "left")
-				elseif(GameInfo.pass2 == 0x40) then
-					love.graphics.printf("-J126-D580", 40, (145*p), 300, "left")
-				elseif(GameInfo.pass2 == 0x80) then
-					love.graphics.printf("-C582-A194", 40, (145*p), 300, "left")
-				end
-			elseif (GameInfo.scenario == "the hive") then
-				love.graphics.setFont(DefaultFont)
-				if(GameInfo.pass1 >= 0x0 and GameInfo.pass1 <= 0x1F or
-					GameInfo.pass1 >= 0x80 and GameInfo.pass1 <= 0x9F) then
-					love.graphics.printf("3555-0930", 0, (145*p), 300, "left")
-				elseif(GameInfo.pass1 >= 0x20 and GameInfo.pass1 <= 0x3F or
-						GameInfo.pass1 >= 0x60 and GameInfo.pass1 <= 0x7F or
-						GameInfo.pass1 >= 0xA0 and GameInfo.pass1 <= 0xBF or
-						GameInfo.pass1 >= 0xE0 and GameInfo.pass1 <= 0xFF) then
-					love.graphics.printf("5315-0930", 0, (145*p), 300, "left")
-				elseif(GameInfo.pass1 >= 0x40 and GameInfo.pass1 <= 0x5F or
+				elseif (GameInfo.scenario == "below freezing point") then
+					love.graphics.setFont(DefaultFont)
+					if(GameInfo.pass1 >= 0x0 and GameInfo.pass1 <= 0x1F or GameInfo.pass1 >= 0x80 and GameInfo.pass1 <= 0x9F) then
+						love.graphics.printf("0634", 0, (145*p), 300, "left")
+					elseif(GameInfo.pass1 >= 0x20 and GameInfo.pass1 <= 0x3F or GameInfo.pass1 >= 0xA0 and GameInfo.pass1 <= 0xBF) then
+						love.graphics.printf("4509", 0, (145*p), 300, "left")
+					elseif(GameInfo.pass1 >= 0x40 and GameInfo.pass1 <= 0x7F or GameInfo.pass1 >= 0xC0 and GameInfo.pass1 <= 0xFF) then
+						love.graphics.printf("9741", 0, (145*p), 300, "left")
+					end
+					if(GameInfo.pass2 == 0x20) then
+						love.graphics.printf("-A375-B482", 40, (145*p), 300, "left")
+					elseif(GameInfo.pass2 == 0x40) then
+						love.graphics.printf("-J126-D580", 40, (145*p), 300, "left")
+					elseif(GameInfo.pass2 == 0x80) then
+						love.graphics.printf("-C582-A194", 40, (145*p), 300, "left")
+					end
+				elseif (GameInfo.scenario == "the hive") then
+					love.graphics.setFont(DefaultFont)
+					if(GameInfo.pass1 >= 0x0 and GameInfo.pass1 <= 0x1F or
+						GameInfo.pass1 >= 0x80 and GameInfo.pass1 <= 0x9F) then
+						love.graphics.printf("3555-0930", 0, (145*p), 300, "left")
+					elseif(GameInfo.pass1 >= 0x20 and GameInfo.pass1 <= 0x3F or
+							GameInfo.pass1 >= 0x60 and GameInfo.pass1 <= 0x7F or
+							GameInfo.pass1 >= 0xA0 and GameInfo.pass1 <= 0xBF or
+							GameInfo.pass1 >= 0xE0 and GameInfo.pass1 <= 0xFF) then
+						love.graphics.printf("5315-0930", 0, (145*p), 300, "left")
+					elseif(GameInfo.pass1 >= 0x40 and GameInfo.pass1 <= 0x5F or
 						GameInfo.pass1 >= 0xC0 and GameInfo.pass1 <= 0xDF) then
-					love.graphics.printf("8211-0930", 0, (145*p), 300, "left")
-				end
-			elseif (GameInfo.scenario == "hellfire") then
-				love.graphics.setFont(DefaultFont)
-				if(GameInfo.pass3 >= 0x0 and GameInfo.pass3 <= 0x1) then
-					love.graphics.printf("0721-DCH", 0, (145*p), 300, "left")
-				elseif(GameInfo.pass3 >= 0x2 and GameInfo.pass3 <= 0x3) then
-					love.graphics.printf("2287-JIA", 0, (145*p), 300, "left")
-				elseif(GameInfo.pass3 >= 0x4 and GameInfo.pass3 <= 0x7) then
-					love.graphics.printf("6354-BAE", 0, (145*p), 300, "left")
-				elseif(GameInfo.pass3 >= 0x8 and GameInfo.pass3 <= 0xF) then
-					love.graphics.printf("5128-GGF", 0, (145*p), 300, "left")
-				end
-				if(GameInfo.pass4 == 0x4000) then
-					love.graphics.printf("-1234", 85, (145*p), 300, "left")
-				elseif(GameInfo.pass4 == 0x4020) then
-					love.graphics.printf("-234", 85, (145*p), 300, "left")
-				elseif(GameInfo.pass4 == 0x4040) then
-					love.graphics.printf("-134", 85, (145*p), 300, "left")
-				elseif(GameInfo.pass4 == 0x4060) then
-					love.graphics.printf("-34", 85, (145*p), 300, "left")
-				elseif(GameInfo.pass4 == 0x4080) then
-					love.graphics.printf("-124", 85, (145*p), 300, "left")
-				elseif(GameInfo.pass4 == 0x40C0) then
-					love.graphics.printf("-14", 85, (145*p), 300, "left")
-				elseif(GameInfo.pass4 == 0x40E0) then
-					love.graphics.printf("-4", 85, (145*p), 300, "left")
-				elseif(GameInfo.pass4 == 0x4100) then
-					love.graphics.printf("-1", 85, (145*p), 300, "left")
-				elseif(GameInfo.pass4 == 0x4120) then
-					love.graphics.printf("-23", 85, (145*p), 300, "left")
-				elseif(GameInfo.pass4 == 0x4140) then
-					love.graphics.printf("-13", 85, (145*p), 300, "left")
-				elseif(GameInfo.pass4 == 0x4160) then
-					love.graphics.printf("-3", 85, (145*p), 300, "left")
-				elseif(GameInfo.pass4 == 0x4180) then
-					love.graphics.printf("-12", 85, (145*p), 300, "left")
-				elseif(GameInfo.pass4 == 0x41A0) then
-					love.graphics.printf("-2", 85, (145*p), 300, "left")
-				elseif(GameInfo.pass4 == 0x41C0) then
-					love.graphics.printf("-1", 85, (145*p), 300, "left")
-				end
-			elseif (GameInfo.scenario == "decisions,decisions") then
-				love.graphics.setFont(DefaultFont)
-				if(GameInfo.pass3 == 0x40) then
-					love.graphics.printf("4161", 0, (145*p), 300, "left")
-				elseif(GameInfo.pass3 == 0x80) then
-					love.graphics.printf("4032", 0, (145*p), 300, "left")
-				elseif(GameInfo.pass3 == 0x00) and (GameInfo.pass6 == 0x01 or
-				GameInfo.pass6 == 0x5 or
-				GameInfo.pass6 == 0x9 or
-				GameInfo.pass6 == 0x1D or
-				GameInfo.pass6 == 0x75 or
-				GameInfo.pass6 == 0x79 or
-				GameInfo.pass6 == 0x7D) then
+						love.graphics.printf("8211-0930", 0, (145*p), 300, "left")
+					end
+				elseif (GameInfo.scenario == "hellfire") then
+					love.graphics.setFont(DefaultFont)
+					if(GameInfo.pass3 >= 0x0 and GameInfo.pass3 <= 0x1) then
+						love.graphics.printf("0721-DCH", 0, (145*p), 300, "left")
+					elseif(GameInfo.pass3 >= 0x2 and GameInfo.pass3 <= 0x3) then
+						love.graphics.printf("2287-JIA", 0, (145*p), 300, "left")
+					elseif(GameInfo.pass3 >= 0x4 and GameInfo.pass3 <= 0x7) then
+						love.graphics.printf("6354-BAE", 0, (145*p), 300, "left")
+					elseif(GameInfo.pass3 >= 0x8 and GameInfo.pass3 <= 0xF) then
+						love.graphics.printf("5128-GGF", 0, (145*p), 300, "left")
+					end
+					if(GameInfo.pass4 == 0x4000) then
+						love.graphics.printf("-1234", 85, (145*p), 300, "left")
+					elseif(GameInfo.pass4 == 0x4020) then
+						love.graphics.printf("-234", 85, (145*p), 300, "left")
+					elseif(GameInfo.pass4 == 0x4040) then
+						love.graphics.printf("-134", 85, (145*p), 300, "left")
+					elseif(GameInfo.pass4 == 0x4060) then
+						love.graphics.printf("-34", 85, (145*p), 300, "left")
+					elseif(GameInfo.pass4 == 0x4080) then
+						love.graphics.printf("-124", 85, (145*p), 300, "left")
+					elseif(GameInfo.pass4 == 0x40C0) then
+						love.graphics.printf("-14", 85, (145*p), 300, "left")
+					elseif(GameInfo.pass4 == 0x40E0) then
+						love.graphics.printf("-4", 85, (145*p), 300, "left")
+					elseif(GameInfo.pass4 == 0x4100) then
+						love.graphics.printf("-1", 85, (145*p), 300, "left")
+					elseif(GameInfo.pass4 == 0x4120) then
+						love.graphics.printf("-23", 85, (145*p), 300, "left")
+					elseif(GameInfo.pass4 == 0x4140) then
+						love.graphics.printf("-13", 85, (145*p), 300, "left")
+					elseif(GameInfo.pass4 == 0x4160) then
+						love.graphics.printf("-3", 85, (145*p), 300, "left")
+					elseif(GameInfo.pass4 == 0x4180) then
+						love.graphics.printf("-12", 85, (145*p), 300, "left")
+					elseif(GameInfo.pass4 == 0x41A0) then
+						love.graphics.printf("-2", 85, (145*p), 300, "left")
+					elseif(GameInfo.pass4 == 0x41C0) then
+						love.graphics.printf("-1", 85, (145*p), 300, "left")
+					end
+				elseif (GameInfo.scenario == "decisions,decisions") then
+					love.graphics.setFont(DefaultFont)
+					if(GameInfo.pass3 == 0x40) then
+						love.graphics.printf("4161", 0, (145*p), 300, "left")
+					elseif(GameInfo.pass3 == 0x80) then
+						love.graphics.printf("4032", 0, (145*p), 300, "left")
+					elseif(GameInfo.pass3 == 0x00) and (GameInfo.pass6 == 0x01 or
+					GameInfo.pass6 == 0x5 or
+					GameInfo.pass6 == 0x9 or
+					GameInfo.pass6 == 0x1D or
+					GameInfo.pass6 == 0x75 or
+					GameInfo.pass6 == 0x79 or
+					GameInfo.pass6 == 0x7D) then
 					love.graphics.printf("4927", 0, (145*p), 300, "left")
-				elseif(GameInfo.pass3 == 0x00) and (GameInfo.pass6 == 0x2 or
-				GameInfo.pass6 == 0x6 or
-				GameInfo.pass6 == 0xA or
-				GameInfo.pass6 == 0x1E or
-				GameInfo.pass6 == 0x76 or
-				GameInfo.pass6 == 0x7A or
-				GameInfo.pass6 == 0x7E) then
+					elseif(GameInfo.pass3 == 0x00) and (GameInfo.pass6 == 0x2 or
+					GameInfo.pass6 == 0x6 or
+					GameInfo.pass6 == 0xA or
+					GameInfo.pass6 == 0x1E or
+					GameInfo.pass6 == 0x76 or
+					GameInfo.pass6 == 0x7A or
+					GameInfo.pass6 == 0x7E) then
 					love.graphics.printf("4284", 0, (145*p), 300, "left")
-				end
+					end
 				
-				if(GameInfo.difficulty == "easy") then
-					love.graphics.printf("-03:25", 40, (145*p), 300, "left")
-				elseif(GameInfo.difficulty == "normal") then
-					love.graphics.printf("-10:05", 40, (145*p), 300, "left")
-				elseif(GameInfo.difficulty == "hard") then
-					love.graphics.printf("-07:40", 40, (145*p), 300, "left")
-				elseif(GameInfo.difficulty == "very hard") then
-					love.graphics.printf("-02:50", 40, (145*p), 300, "left")
+					if(GameInfo.difficulty == "easy") then
+						love.graphics.printf("-03:25", 40, (145*p), 300, "left")
+					elseif(GameInfo.difficulty == "normal") then
+						love.graphics.printf("-10:05", 40, (145*p), 300, "left")
+					elseif(GameInfo.difficulty == "hard") then
+						love.graphics.printf("-07:40", 40, (145*p), 300, "left")
+					elseif(GameInfo.difficulty == "very hard") then
+						love.graphics.printf("-02:50", 40, (145*p), 300, "left")
+					end
+				elseif (GameInfo.scenario == "underbelly") then
+					love.graphics.setFont(DefaultFont)
+					if(GameInfo.passub1 >= 0x2) and (GameInfo.passub1 < 0x4) then
+						love.graphics.printf("2916", 0, (145*p), 300, "left")
+					elseif(GameInfo.passub1 >= 0x4) and (GameInfo.passub1 < 0x8)then
+						love.graphics.printf("3719", 0, (145*p), 300, "left")
+					elseif(GameInfo.passub1 >= 0x8) and (GameInfo.passub1 < 0x10)then
+						love.graphics.printf("0154", 0, (145*p), 300, "left")
+					elseif(GameInfo.passub1 >= 0x10) and (GameInfo.passub1 < 0x20)then
+						love.graphics.printf("6443", 0, (145*p), 300, "left")
+					elseif(GameInfo.passub1 >= 0x20) and (GameInfo.passub1 < 0x40)then
+						love.graphics.printf("7688", 0, (145*p), 300, "left")
+					elseif(GameInfo.passub1 >= 0x40) and (GameInfo.passub1 < 0x80)then
+						love.graphics.printf("1812", 0, (145*p), 300, "left")
+					elseif(GameInfo.passub1 >= 0x80) and (GameInfo.passub1 < 0x100)then
+						love.graphics.printf("5551", 0, (145*p), 300, "left")
+					elseif(GameInfo.passub1 >= 0x100) and (GameInfo.passub1 < 0x200)then
+						love.graphics.printf("6010", 0, (145*p), 300, "left")
+					elseif(GameInfo.passub1 >= 0x200) and (GameInfo.passub1 < 0x400)then
+						love.graphics.printf("0652", 0, (145*p), 300, "left")
+					elseif(GameInfo.passub1 >= 0x400) and (GameInfo.passub1 < 0x800)then
+						love.graphics.printf("6234", 0, (145*p), 300, "left")
+					elseif(GameInfo.passub1 >= 0x800) and (GameInfo.passub1 < 0x1000)then
+						love.graphics.printf("0533", 0, (145*p), 300, "left")
+					elseif(GameInfo.passub1 >= 0x1000) and (GameInfo.passub1 < 0x2000)then
+						love.graphics.printf("9439", 0, (145*p), 300, "left")
+					elseif(GameInfo.passub1 >= 0x2000) and (GameInfo.passub1 < 0x4000)then
+						love.graphics.printf("1421", 0, (145*p), 300, "left")
+					elseif(GameInfo.passub1 >= 0x4000) and (GameInfo.passub1 < 0x8000)then
+						love.graphics.printf("1127", 0, (145*p), 300, "left")
+					elseif(GameInfo.passub1 >= 0x8000) and (GameInfo.passub1 < 0x10000)then
+						love.graphics.printf("7840", 0, (145*p), 300, "left")
+					elseif(GameInfo.passub2 == 0x1) or
+					(GameInfo.passub2 == 0x3) or
+					(GameInfo.passub2 == 0x5) or
+					(GameInfo.passub2 == 0x7) then
+						love.graphics.printf("6910", 0, (145*p), 300, "left")
+					end
+				elseif (GameInfo.scenario == "end of the road") then
+					love.graphics.setFont(DefaultFont)
+					love.graphics.printf(GameInfo.pass4, 0, (145*p), 300, "left")
 				end
-			elseif (GameInfo.scenario == "underbelly") then
-				love.graphics.setFont(DefaultFont)
-				if(GameInfo.passub1 >= 0x2) and (GameInfo.passub1 < 0x4) then
-				love.graphics.printf("2916", 0, (145*p), 300, "left")
-				elseif(GameInfo.passub1 >= 0x4) and (GameInfo.passub1 < 0x8)then
-				love.graphics.printf("3719", 0, (145*p), 300, "left")
-				elseif(GameInfo.passub1 >= 0x8) and (GameInfo.passub1 < 0x10)then
-				love.graphics.printf("0154", 0, (145*p), 300, "left")
-				elseif(GameInfo.passub1 >= 0x10) and (GameInfo.passub1 < 0x20)then
-				love.graphics.printf("6443", 0, (145*p), 300, "left")
-				elseif(GameInfo.passub1 >= 0x20) and (GameInfo.passub1 < 0x40)then
-				love.graphics.printf("7688", 0, (145*p), 300, "left")
-				elseif(GameInfo.passub1 >= 0x40) and (GameInfo.passub1 < 0x80)then
-				love.graphics.printf("1812", 0, (145*p), 300, "left")
-				elseif(GameInfo.passub1 >= 0x80) and (GameInfo.passub1 < 0x100)then
-				love.graphics.printf("5551", 0, (145*p), 300, "left")
-				elseif(GameInfo.passub1 >= 0x100) and (GameInfo.passub1 < 0x200)then
-				love.graphics.printf("6010", 0, (145*p), 300, "left")
-				elseif(GameInfo.passub1 >= 0x200) and (GameInfo.passub1 < 0x400)then
-				love.graphics.printf("0652", 0, (145*p), 300, "left")
-				elseif(GameInfo.passub1 >= 0x400) and (GameInfo.passub1 < 0x800)then
-				love.graphics.printf("6234", 0, (145*p), 300, "left")
-				elseif(GameInfo.passub1 >= 0x800) and (GameInfo.passub1 < 0x1000)then
-				love.graphics.printf("0533", 0, (145*p), 300, "left")
-				elseif(GameInfo.passub1 >= 0x1000) and (GameInfo.passub1 < 0x2000)then
-				love.graphics.printf("9439", 0, (145*p), 300, "left")
-				elseif(GameInfo.passub1 >= 0x2000) and (GameInfo.passub1 < 0x4000)then
-				love.graphics.printf("1421", 0, (145*p), 300, "left")
-				elseif(GameInfo.passub1 >= 0x4000) and (GameInfo.passub1 < 0x8000)then
-				love.graphics.printf("1127", 0, (145*p), 300, "left")
-				elseif(GameInfo.passub1 >= 0x8000) and (GameInfo.passub1 < 0x10000)then
-				love.graphics.printf("7840", 0, (145*p), 300, "left")
-				elseif(GameInfo.passub2 == 0x1) or
-				(GameInfo.passub2 == 0x3) or
-				(GameInfo.passub2 == 0x5) or
-				(GameInfo.passub2 == 0x7) then
-				love.graphics.printf("6910", 0, (145*p), 300, "left")
-				end
-			elseif (GameInfo.scenario == "end of the road") then
-				love.graphics.setFont(DefaultFont)
-				love.graphics.printf(GameInfo.pass4, 0, (145*p), 300, "left")
 			end
 		end
 
@@ -385,32 +407,89 @@ function love.draw()
 				LobbyCards[i]:draw(0, (i-1)*32)		
 			end
 		end
-
-		for i=1, 1 do
-			if not(GameInfo.scenario == "") then
-				if (GameInfo.frames>0) then
-					ItemCards[i]:draw(20, (145*p)*(1/0.6)+(100/0.6))
+		if EnemyHPSwtich==2 then
+			if ItemSwtich ==1 then
+				for i=1, 1 do
+					if not(GameInfo.scenario == "") then
+						if (GameInfo.frames>0) then
+							ItemCards[i]:draw(20, (145*4)*(1/0.6)+(100/0.6))
+						end
+					end
+				end	
+			end
+			else
+			if ItemSwtich ==1 then
+				for i=1, 1 do
+					if not(GameInfo.scenario == "") then
+						if (GameInfo.frames>0) then
+							ItemCards[i]:draw(20, (145*p)*(1/0.6)+(100/0.6))
+						end
+					end
+				end	
+			end
+		end
+		if PlayerSwtich==0 then
+			for i=1, 4 do
+				if Players[i].enabled then
+					PlayerCards[i]:draw(0, (i-1)*145)
 				end
 			end
 		end
-		for i=1, 4 do
-			if Players[i].enabled then
-				PlayerCards[i]:draw(0, (i-1)*145)
+		if PlayerSwtich==1 then
+			for i=1, 1 do
+				if Players[i].enabled then
+					PlayerCards[i]:draw(0, (i-1)*145)
+				end
 			end
 		end
-		for i=1, 6 do
-			if Enemies[i].inGame then
-				EnemyCards[i]:draw(0,(i-1)*14+(145*p)+25)
+		if PlayerSwtich==2 then
+			for i=2, 2 do
+				if Players[i].enabled then
+					PlayerCards[i]:draw(0, (i-2)*145)
+				end
 			end
 		end
-		for i=7, 12 do
-			if Enemies[i].inGame then
-				EnemyCards[i]:draw(152,(i-7)*14+(145*p)+25)
+		if PlayerSwtich==3 then
+			for i=3, 3 do
+				if Players[i].enabled then
+					PlayerCards[i]:draw(0, (i-3)*145)
+				end
 			end
 		end
-		for i=12, 12 do--for plant boss
-			if Enemies[i].enabled then
-				EnemyCards[i]:draw(152,(i-7)*14+(145*p)+25)
+		if PlayerSwtich==4 then
+			for i=4, 4 do
+				if Players[i].enabled then
+					PlayerCards[i]:draw(0, (i-4)*145)
+				end
+			end
+		end
+		if PlayerSwtich<4 and EnemyHPSwtich==2 then
+			for i=1, 12 do
+				if Enemies[i].inGame then
+					EnemyCards2[i]:draw(0,(i-1)*40+(145*1)+5)
+				end
+			end
+			for i=12, 12 do--for plant boss
+				if Enemies[i].enabled then
+					EnemyCards2[i]:draw(0,(i-1)*40+(145*1)+5)
+				end
+			end
+		end
+		if EnemyHPSwtich==1 then
+			for i=1, 6 do
+				if Enemies[i].inGame then
+					EnemyCards[i]:draw(0,(i-1)*14+(145*p)+25)
+				end
+			end
+			for i=7, 12 do
+				if Enemies[i].inGame then
+					EnemyCards[i]:draw(152,(i-7)*14+(145*p)+25)
+				end
+			end
+			for i=12, 12 do--for plant boss
+				if Enemies[i].enabled then
+					EnemyCards[i]:draw(152,(i-7)*14+(145*p)+25)
+				end
 			end
 		end
 	elseif InitResult == false then
@@ -463,10 +542,46 @@ function love.keypressed(key)
 	wx, wy, display = love.window.getMode()
 	local p = GameInfo.playernum
 	if not(GameInfo.scenario == "") then
-    if key == "s" then love.window.setMode(110, (145*p)) love.window.setPosition( x, y ) end
-    if key == "t" then love.window.setMode(300, 20+(145*p)) love.window.setPosition( x, y )end
-    if key == "e" then love.window.setMode(300, 105+(145*p)) love.window.setPosition( x, y )end
-    if key == "d" then love.window.setMode(300, 740) love.window.setPosition( x, y )end
-	if key == "f4" then love.window.setMode(wx, wy,{resizable=true, vsync=false, borderless=true}) love.window.setPosition( x, y )end
+		if key =="kp0" then
+			PlayerSwtich=0 EnemyHPSwtich=1
+		end
+		if key =="kp1" then
+			PlayerSwtich=1 EnemyHPSwtich=2
+		end
+		if key =="kp2" then
+			PlayerSwtich=2 EnemyHPSwtich=2
+		end
+		if key =="kp3" then
+			PlayerSwtich=3 EnemyHPSwtich=2
+		end
+		if key =="kp4" then
+			PlayerSwtich=4 EnemyHPSwtich=2
+		end
+		if key =="t" then
+			if TimeSwtich == 0 then TimeSwtich=1
+			elseif TimeSwtich==1 then TimeSwtich=0
+			end
+		end
+		if key =="i" then
+			if ItemSwtich == 0 then ItemSwtich=1
+			elseif ItemSwtich==1 then ItemSwtich=0
+			end
+		end
+		if key =="e" then
+			if EnemyHPSwtich == 0 then EnemyHPSwtich=1
+			elseif EnemyHPSwtich==1 then EnemyHPSwtich=0
+			end
+		end
+		if key == "1" then love.window.setMode(300, (145*1),{resizable=true}) love.window.setPosition(x, y)scalex,scaley = 300, (145*1) end
+		if key == "2" then love.window.setMode(300, (145*2),{resizable=true}) love.window.setPosition(x, y)scalex,scaley = 300, (145*2) end
+		if key == "3" then love.window.setMode(300, (145*3),{resizable=true}) love.window.setPosition(x, y)scalex,scaley = 300, (145*3) end
+		if key == "4" then love.window.setMode(300, (145*4),{resizable=true}) love.window.setPosition(x, y)scalex,scaley = 300, (145*4) end
+		if key == "a" then love.window.setMode(300, 160+(145*p),{resizable=true}) love.window.setPosition(x, y)scalex,scaley = 300, 160+(145*p) end
+		if key == "d" then love.window.setMode(300, 160+(145*4),{resizable=true}) love.window.setPosition(x, y)scalex,scaley = 300, 160+(145*4) end
+		if key == "s" then love.window.setMode(110, (145*p),{resizable=true}) love.window.setPosition(x, y)scalex,scaley = 110,(145*p) end
+		--if key == "t" then love.window.setMode(300, 20+(145*p),{resizable=true}) love.window.setPosition(x, y)scalex,scaley = 300, 20+(145*p)end
+		--if key == "e" then love.window.setMode(300, 105+(145*p)) love.window.setPosition(x, y)end
+		--if key == "d" then love.window.setMode(300, 740) love.window.setPosition(x, y)end
+		if key == "f4" then love.window.setMode(wx, wy,{resizable=true, borderless=true}) love.window.setPosition(x, y)end
 	end
 end
