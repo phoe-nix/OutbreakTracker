@@ -1,8 +1,13 @@
 How to use:
+
 download love2d 11.2
+
 https://bitbucket.org/rude/love/downloads/
-extract update.zip, then put all files into "love2d 11.2" folder
+
+extract update.zip, then put all files into "love2d 11.2" folder.
+
 Run OutbreakTracker.exe
+
 if can't see anything in program, you need update video card driver.
 
 How to build
