@@ -321,6 +321,7 @@ SheetInfo.frameIndex =
     ["MICKEY"] = 20,		--20 Hemostat (1)
     ["AL"] = 18,			--18 Recovery Pill (1)
     ["AXEMAN"] = 24,		--24 Iron Pipe
+    ["AXEMAN "] = 24,		--24 Iron Pipe
     ["AL:B"] = 13,			--13 Mixed Herb (G+G+G)
     ["BEN"] = 9,			--9 Green Herb
     ["REGAN"] = 21,		--21 Antidote (1)

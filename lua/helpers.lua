@@ -131,7 +131,7 @@ end
 
 function GetConditionColor2(r, stat)
 	if (r == "fine") then
-		return {68/255, 160/255, 10/255, 0.5}
+		return {68/255, 134/255, 10/255, 0.5}
 	elseif (r == "caution") then
 		return {247/255, 223/255, 27/255, 0.5}
 	elseif (r == "caution2") then
@@ -233,7 +233,8 @@ function GetEnemyHealthString(id)
 	if Enemies[id].HP == 0x7fff
 	or Enemies[id].nameID == 11
 	or Enemies[id].nameID == 12
-	or Enemies[id].nameID == 14 then
+	or Enemies[id].nameID == 14
+	or Enemies[id].nameID == 26 then
 		return "Invincible"
 	elseif (Enemies[id].HP == 0x0
 	or Enemies[id].HP == 0xffff

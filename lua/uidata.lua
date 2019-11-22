@@ -531,6 +531,7 @@ SheetInfo.frameIndex =
     ["bustBEN"] = 4,
     ["bustERIC"] = 4,
     ["bustLLOYD"] = 4,
+    ["bustAXEMAN "] = 4,
     ["bustMr.BLACK"] = 4,
     ["bustNATHAN"] = 4,
     ["bustPHILIP"] = 4,
