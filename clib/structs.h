@@ -42,6 +42,7 @@ typedef struct
 	unsigned short HostScenarioID;
 	unsigned short ScenarioID;
 	unsigned int FrameCounter;
+	unsigned short EscapeTime;
 	unsigned int FightTime;
 	unsigned short FightTime2;
 	unsigned int GarageTime;
