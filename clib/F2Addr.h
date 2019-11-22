@@ -166,7 +166,7 @@ const int F2_HostDifficulty = 0x206020CA;
 //slot Scenario 62DDF6 62E324
 //slot num 63C56A 63C56C
 //slot1 628da0 +2players +4maxplayers slot2+15C
-//slot1 628DAE 00=Busy 01=Vacant 02=Busy(Éè¶¨ÖĞ) 03=Join in 04=Full 05=playing 06=opening
+//slot1 628DAE 00=Busy 01=Vacant 02=Busy(è®¾å®šä¸­) 03=Join in 04=Full 05=playing 06=opening
 //slot2 628EFC
 //62B672 num of players in door
 //63C56A num of players in chat room
@@ -270,9 +270,11 @@ int F2_GetLobbyAddress(int slotNum)
     }
 }
 
-const int F2_PassUB1 = 0x20490073;//Òì½ç
-const int F2_PassUB2 = 0x20490075;//Òì½ç
-const int F2_Pass4 = 0x20491268;//Í»ÆÆ
+const int F2_PassUB1 = 0x20490073;//å¼‚ç•Œ
+const int F2_PassUB2 = 0x20490075;//å¼‚ç•Œ
+const int F2_EscapeTime = 0x20491256;//å¼‚ç•Œ
+const int F2_FBTime = 0x20491254;//è®°å¿†
+const int F2_Pass4 = 0x20491268;//çªç ´
 const int F2_Difficulty = 0x2049135A;
 const int F2_DTGasRandom = 0x2024ADB0;//24ADB0(offline) 491338(online)
 const int F2_DTGasFlag = 0x2048FFFC;
