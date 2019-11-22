@@ -227,6 +227,14 @@ unsigned int GetFrames()
 	return buffer;
 }
 
+unsigned int GetEscapeTime()
+{
+	unsigned int buffer;
+	int bytesRead = 0;
+	    ReadProcessMemory(ProcessHandle, (PCVOID) F2_EscapeTime, &buffer, 2, (PDWORD) &bytesRead);
+	return buffer;
+}
+
 unsigned int GetFightTime()
 {
 	unsigned int buffer;
@@ -940,8 +948,10 @@ char* GetStatusText(unsigned char stat)
 	if (info.CurrentFile == 2)
 	    if (stat >= 0x30 && stat <= 0x34)
 	        return "Zombie";
-	    else if (stat >= 0x08 && stat <= 0x0C)
+	    else if (stat >= 0x08 && stat < 0x0C)
 	        return "Down";
+		else if (stat == 0x0C)
+	        return "Down+Gas";
 	    else if (stat > 0x0C)
 	        return "Dead";
 
@@ -1042,6 +1052,7 @@ static int LUpdatePlayer (lua_State* L)
 		return 0;
 	info.ScenarioID = GetScenarioID();
 	info.FrameCounter = GetFrames();
+	info.EscapeTime = GetEscapeTime();
 	info.FightTime = GetFightTime();
 	info.FightTime2 = GetFightTime2();
 	info.GarageTime = GetGarageTime();
@@ -1432,6 +1443,10 @@ static int LGetEnemy (lua_State* L)
 			lua_pushboolean(L, Enemies[i].InGame);
 		lua_rawset(L, -3);
 
+		lua_pushstring(L, "alive");
+			lua_pushnumber(L, Enemies[i].InGame);
+		lua_rawset(L, -3);
+
 		lua_pushstring(L, "HP");
 			lua_pushnumber(L, (double)Enemies[i].HP);
 		lua_rawset(L, -3);
@@ -1497,6 +1512,9 @@ static int LGetGameInfo (lua_State* L)
 		lua_rawset(L, -3);
 		lua_pushstring(L, "frames");
 			lua_pushnumber(L, (double)info.FrameCounter);
+		lua_rawset(L, -3);
+		lua_pushstring(L, "escapetime");
+			lua_pushnumber(L, (double)info.EscapeTime);
 		lua_rawset(L, -3);
 		lua_pushstring(L, "fighttime");
 			lua_pushnumber(L, (double)info.FightTime);
