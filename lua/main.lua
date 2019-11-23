@@ -314,7 +314,7 @@ function love.draw()
 						elseif(GameInfo.pass4 == 0x40E0) then
 							love.graphics.printf("-4", 85, (145*p), 300, "left")
 						elseif(GameInfo.pass4 == 0x4100) then
-							love.graphics.printf("-1", 85, (145*p), 300, "left")
+							love.graphics.printf("-123", 85, (145*p), 300, "left")
 						elseif(GameInfo.pass4 == 0x4120) then
 							love.graphics.printf("-23", 85, (145*p), 300, "left")
 						elseif(GameInfo.pass4 == 0x4140) then
@@ -334,21 +334,9 @@ function love.draw()
 							love.graphics.printf("4161", 0, (145*p), 300, "left")
 						elseif(GameInfo.pass3 == 0x80) then
 							love.graphics.printf("4032", 0, (145*p), 300, "left")
-						elseif(GameInfo.pass3 == 0x00) and (GameInfo.pass6 == 0x01 or
-								GameInfo.pass6 == 0x5 or
-								GameInfo.pass6 == 0x9 or
-								GameInfo.pass6 == 0x1D or
-								GameInfo.pass6 == 0x75 or
-								GameInfo.pass6 == 0x79 or
-								GameInfo.pass6 == 0x7D) then
+						elseif(GameInfo.pass3 == 0x00) and (GameInfo.pass6%2 == 0x1) then
 								love.graphics.printf("4927", 0, (145*p), 300, "left")
-						elseif(GameInfo.pass3 == 0x00) and (GameInfo.pass6 == 0x2 or
-								GameInfo.pass6 == 0x6 or
-								GameInfo.pass6 == 0xA or
-								GameInfo.pass6 == 0x1E or
-								GameInfo.pass6 == 0x76 or
-								GameInfo.pass6 == 0x7A or
-								GameInfo.pass6 == 0x7E) then
+						elseif(GameInfo.pass3 == 0x00) and (GameInfo.pass6%2 == 0x0) then
 								love.graphics.printf("4284", 0, (145*p), 300, "left")
 						end
 					
@@ -395,10 +383,7 @@ function love.draw()
 								love.graphics.printf("1127", 0, (145*p), 300, "left")
 							elseif(GameInfo.passub1 >= 0x8000) and (GameInfo.passub1 < 0x10000)then
 								love.graphics.printf("7840", 0, (145*p), 300, "left")
-							elseif(GameInfo.passub2 == 0x1) or
-									(GameInfo.passub2 == 0x3) or
-									(GameInfo.passub2 == 0x5) or
-									(GameInfo.passub2 == 0x7) then
+							elseif(GameInfo.passub2%2 == 0x1) then
 									love.graphics.printf("6910", 0, (145*p), 300, "left")
 							end
 						else
@@ -417,7 +402,7 @@ function love.draw()
 					end
 				end
 			end
-    
+
 			if (GameInfo.hoststatus == 3 and GameInfo.scenario == "") then
 				UIAtlas:draw("title bar", 0, 2, 0, 1)
 				love.graphics.setFont(VerySmallFont)
@@ -540,11 +525,6 @@ function love.draw()
 		end
 
 		if Style==1 then
-			if GameInfo.currentFile == 1 then
-				love.graphics.printf(GameInfo.itemrandom%5+1, 2, 145+5, 12, "left")
-			else
-				love.graphics.printf(GameInfo.itemrandom+1, 2, 145+5, 12, "left")
-			end
 			if (GameInfo.hoststatus >= 4 and GameInfo.hoststatus < 6 and GameInfo.scenario == "") then
 				UIAtlas:draw(GameInfo.hostscenario, 0, 0, 0, 0.60)
 				love.graphics.printf(Time2string2(GameInfo.hosttime), 2, 115, 300, "left")
@@ -565,10 +545,10 @@ function love.draw()
 				else
 					love.graphics.printf(Time2string(GameInfo.frames/0.03), 300*1, 185, 300, "right")
 				end
-					if GameInfo.currentFile == 1 then
-					love.graphics.printf(GameInfo.itemrandom%5+1, 0, (145*4+105), 12, "left")
+				if GameInfo.currentFile == 1 then
+					love.graphics.printf(GameInfo.itemrandom%5+1, 2, 145+5, 12, "left")
 				else
-					love.graphics.printf(GameInfo.itemrandom+1, 0, (145*4+105), 12, "left")
+					love.graphics.printf(GameInfo.itemrandom+1, 2, 145+5, 12, "left")
 				end
 			end
 			if (GameInfo.frames>0) then
@@ -776,7 +756,7 @@ function love.draw()
 					elseif(GameInfo.pass4 == 0x40E0) then
 						love.graphics.printf("-4", 300*p+85, 185, 300, "left")
 					elseif(GameInfo.pass4 == 0x4100) then
-						love.graphics.printf("-1", 300*p+85, 185, 300, "left")
+						love.graphics.printf("-123", 300*p+85, 185, 300, "left")
 					elseif(GameInfo.pass4 == 0x4120) then
 						love.graphics.printf("-23", 300*p+85, 185, 300, "left")
 					elseif(GameInfo.pass4 == 0x4140) then
@@ -796,21 +776,9 @@ function love.draw()
 						love.graphics.printf("4161", 300*p, 185, 300, "left")
 					elseif(GameInfo.pass3 == 0x80) then
 						love.graphics.printf("4032", 300*p, 185, 300, "left")
-					elseif(GameInfo.pass3 == 0x00) and (GameInfo.pass6 == 0x01 or
-							GameInfo.pass6 == 0x5 or
-							GameInfo.pass6 == 0x9 or
-							GameInfo.pass6 == 0x1D or
-							GameInfo.pass6 == 0x75 or
-							GameInfo.pass6 == 0x79 or
-							GameInfo.pass6 == 0x7D) then
+					elseif(GameInfo.pass3 == 0x00) and (GameInfo.pass6%2 == 0x1) then
 							love.graphics.printf("4927", 300*p, 185, 300, "left")
-					elseif(GameInfo.pass3 == 0x00) and (GameInfo.pass6 == 0x2 or
-							GameInfo.pass6 == 0x6 or
-							GameInfo.pass6 == 0xA or
-							GameInfo.pass6 == 0x1E or
-							GameInfo.pass6 == 0x76 or
-							GameInfo.pass6 == 0x7A or
-							GameInfo.pass6 == 0x7E) then
+					elseif(GameInfo.pass3 == 0x00) and (GameInfo.pass6%2 == 0x0) then
 							love.graphics.printf("4284", 300*p, 185, 300, "left")
 					end
 				
@@ -857,10 +825,7 @@ function love.draw()
 							love.graphics.printf("1127", 300*p, 185, 300, "left")
 						elseif(GameInfo.passub1 >= 0x8000) and (GameInfo.passub1 < 0x10000)then
 							love.graphics.printf("7840", 300*p, 185, 300, "left")
-						elseif(GameInfo.passub2 == 0x1) or
-								(GameInfo.passub2 == 0x3) or
-								(GameInfo.passub2 == 0x5) or
-								(GameInfo.passub2 == 0x7) then
+						elseif(GameInfo.passub2%2 == 0x1) then
 								love.graphics.printf("6910", 300*p, 185, 300, "left")
 						end
 					else
@@ -878,6 +843,26 @@ function love.draw()
 					love.graphics.printf(GameInfo.pass4, 300*p, 185, 300, "left")
 				end
 			end
+			if (GameInfo.hoststatus == 3 and GameInfo.scenario == "") then
+				UIAtlas:draw("title bar", 0, 2, 0, 1)
+				love.graphics.setFont(VerySmallFont)
+				love.graphics.printf("No.",10, 8,20, "right")
+				love.graphics.printf("Title & Scenario",40, 8,130, "left")
+				love.graphics.printf("HEADS",250, 8,50, "left")
+				for i=1, 5 do
+					LobbyCards[i]:draw(0, (i-1)*32)		
+				end
+				for i=6, 10 do
+					LobbyCards[i]:draw(300, (i-6)*32)		
+				end
+				for i=11, 15 do
+					LobbyCards[i]:draw(600, (i-11)*32)		
+				end
+				for i=16, 20 do
+					LobbyCards[i]:draw(900, (i-16)*32)		
+				end
+			end
+
 			for i=1, 4 do
 				if Players[i].enabled then
 					PlayerCards[i]:draw((i-1)*300, 0)
@@ -932,13 +917,13 @@ function love.draw()
 		love.graphics.setFont(DefaultFont)
 		love.graphics.printf("Unable to find PCSX2 process.\n Will try again in " .. tostring(math.floor(5-RetryTimer + 0.5)) .. ".", errorX, errorY, 300, "center")
 		love.graphics.setFont(VerySmallFont)
-		love.graphics.printf("Hotkeys list:\n F1: Help menu.\n F4: No border.\n 1/2/3/4: Change window size.\n Num0/1/2/3/4: Switch player status and show\n big bar for enemy.\n E: Off/On Enemy hp number.\n S: Simple window.\n A: Auto size.\n D: Default.\n H/V: Change layout style.", 4, 4, 300, "left")
+		love.graphics.printf("Hotkeys list:\n F1: Help menu.\n F4: No border.\n 1/2/3/4: Change window size.\n Num0/1/2/3/4: Switch player status and show\n big bar for enemy.\n E: Off/On Enemy hp number.\n S: Simple window.\n A: Auto size.\n D: Default.\n H/V: Change layout style.\nCredits\n    Program: Fothsid, killme\n    Thanks: morshi, alyssaprimp\nCode: github.com/phoe-nix/OutbreakTracker", 4, 4, 300, "left")
 	elseif InitResult == true and GameInfo.currentFile == 255 then
 		love.graphics.setFont(DefaultFont)
 		love.graphics.printf("This is not Biohazard Outbreak game.\n Will try again in " .. tostring(math.floor(5-RetryTimer + 0.5)) .. ".", errorX, errorY, 300, "center")
 		love.graphics.setFont(VerySmallFont)
-		love.graphics.printf("Hotkeys list:\n F1: Help menu.\n F4: No border.\n 1/2/3/4: Change window size.\n Num0/1/2/3/4: Switch player status and show\n big bar for enemy.\n E: Off/On Enemy hp number.\n S: Simple window.\n A: Auto size.\n D: Default.\n H/V: Change layout style.", 4, 4, 300, "left")
-		end
+		love.graphics.printf("Hotkeys list:\n F1: Help menu.\n F4: No border.\n 1/2/3/4: Change window size.\n Num0/1/2/3/4: Switch player status and show\n big bar for enemy.\n E: Off/On Enemy hp number.\n S: Simple window.\n A: Auto size.\n D: Default.\n H/V: Change layout style.\nCredits\n    Program: Fothsid, killme\n    Thanks: morshi, alyssaprimp\nCode: github.com/phoe-nix/OutbreakTracker", 4, 4, 300, "left")
+	end
 end
 
 function love.update(dt)
