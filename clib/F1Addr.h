@@ -4,7 +4,7 @@ const int F1_P1Start = 0x20476DD0; // 0x204772E0 Not the actual start, but used 
 const int F1_P2Start = 0x20477EB0;
 const int F1_P3Start = 0x20478F90;
 const int F1_P4Start = 0x2047A070;
-const int F1_PickupSpaceStart = 0x20396812; // 1 item - 60 bytes
+const int F1_PickupSpaceStart = 0x20396810; // 1 item - 60 bytes
 const int F1_DeadInventoryStart = 0x2048BDE2;
 const int F1_VirusMaxStart = 0x206E6C70;
 const int F1_ScenarioIDAddr = 0x203065AA;
@@ -30,10 +30,11 @@ const int F1_EquippedItemOffset = 0xC7C;
 const int F1_BleedTimeOffset = 0xC5A;
 
 const int F1_PickupStructSize = 60;
-const int F1_PickupCountOffset = 30;
-const int F1_PickupOffset = 34;
-const int F1_PresentOffset = 26;
-const int F1_MixOffset = 21;
+const int F1_PickupCountOffset = 32;
+const int F1_PickupOffset = 36;
+const int F1_PresentOffset = 28;
+const int F1_MixOffset = 23;
+const int F1_IDOffset = 2;
 
 int F1_GetCharAddress(int characterID) // clunckiest thing ever
 {
@@ -220,20 +221,30 @@ int F1_GetLobbyAddress(int slotNum)
 const int F1_Pass1 = 0x2048AC13;
 const int F1_Pass2 = 0x2048AC17;
 const int F1_Pass3 = 0x2048AC14;
-const int F1_Pass4 = 0x2048AC1A;//48ADCE
+const int F1_Pass4 = 0x2048AC1A;//48AC1A 48ADCE
 const int F1_Pass5 = 0x2048AC1B;//48ADCF  on=48ADF3
 const int F1_Pass6 = 0x2048AC15;//4927=7500 4032=7480 40 4284=0200
 const int F1_Difficulty = 0x2048C01A;
 const int F1_ItemRandom = 0x2023BBA0;//23BB28 23C055 23BD20 426AA9 23BBA0 23BD24
-//pass 6D6570
-//ÊÂ¼þÁãÏÂ48BF60
-//b7f 48AD93:0x00=off 0x01=on
-//b5f 48AD91:0x40=off 0x50=on
-//b4f 48AD92:0x00=off 0x40=on
-//ÁãÏÂpass 48AC17 A375=0x20 J126=0x40 C582=0x80
-//48AC13 0634 0-1f 80-9f 4509 20-3f a0 bf 9741 40-7f c0-ff
-//ÓüÑ×ÃÕÌâ 1=0x20 2=0x40 3=0x80 4=0x100
-//48AC1B 02
+/*pass 6D6570
+äº‹ä»¶é›¶ä¸‹48BF60
+b7f 48AD93:0x00=off 0x01=on
+b5f 48AD91:0x40=off 0x50=on
+b4f 48AD92:0x00=off 0x40=on
+é›¶ä¸‹pass 48AC17 A375=0x20 J126=0x40 C582=0x80
+48AC13 0634 0-1f 80-9f 4509 20-3f a0 bf 9741 40-7f c0-ff
+ç‹±ç‚Žè°œé¢˜ 1=0x20 2=0x40 3=0x80 4=0x100
+48AC1B 02
+48ADCE
+    :0 44 110
+1234:
+12  : C
+1  4: 24 60
+   4: 20 64
+  3 : 10 54
+ 2  : 8 4C
+1   : 4 40 8C C8 114 150
+*/
 const int F1_SlotP1Start = 0x20630E54;//+3A8 62FCF0
 const int F1_SlotP2Start = 0x206311FC;//630F38 6312E0
 const int F1_SlotP3Start = 0x206315A4;
