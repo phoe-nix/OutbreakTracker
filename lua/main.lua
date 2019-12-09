@@ -11,6 +11,7 @@ require "EnemyCard2"
 require "EnemyCard3"
 require "LobbyCard"
 require "ItemCard"
+require "ItemCard2"
 
 local InitResult = false
 local RetryTimer = 0
@@ -22,9 +23,11 @@ local EnemyHPSwtich=1
 local ItemSwtich=1
 local Style=0
 local HelpMenu=0
+local ItemList=0
 
 Slots = {}
 Items = {}
+Items2 = {}
 Players = {}
 SPlayers = {}
 Enemies = {}
@@ -32,6 +35,7 @@ GameInfo = {}
 
 LobbyCards = {}
 ItemCards = {}
+ItemCards2 = {}
 PlayerCards = {}
 SPlayerCards = {}
 EnemyCards = {}
@@ -46,6 +50,9 @@ function love.load(args)
 	end
 	for i=1, 1 do
 		ItemCards[i] = ItemCard:new(i)
+	end
+	for i=1, 255 do
+		ItemCards2[i] = ItemCard2:new(i)
 	end
 	for i=1, 4 do
 		PlayerCards[i] = PlayerCard:new(i)
@@ -501,26 +508,45 @@ function love.draw()
 					end
 				end
 			end
-			if EnemyHPSwtich==2 then
+			if not(GameInfo.scenario == "" and GameInfo.frames == 0) then
 				if ItemSwtich ==1 then
-					for i=1, 1 do
-						if not(GameInfo.scenario == "") then
-							if (GameInfo.frames>0) then
-								ItemCards[i]:draw(20, (145*4)*(1/0.6)+(100/0.6))
-							end
+					if EnemyHPSwtich==2 then
+						for i=1, 1 do
+							ItemCards[i]:draw(20, (145*4)*(1/0.6)+(100/0.6))
 						end
-					end	
+					else
+						for i=1, 1 do
+							ItemCards[i]:draw(20, (145*p)*(1/0.6)+(100/0.6))
+						end	
+					end
 				end
-				else
-				if ItemSwtich ==1 then
-					for i=1, 1 do
-						if not(GameInfo.scenario == "") then
-							if (GameInfo.frames>0) then
-								ItemCards[i]:draw(20, (145*p)*(1/0.6)+(100/0.6))
-							end
-						end
-					end	
-				end
+				if ItemList==1 then
+					love.graphics.rectangle('line',2,2,296,201,3,3,1)
+					love.graphics.setColor( 0, 0, 0, 0.85 )
+					love.graphics.rectangle('fill',2,2,296,201,3,3,1)
+					love.graphics.setColor( 1, 1, 1, 1 )
+					for i=1, 10 do
+						ItemCards2[i]:draw(45*(i-1), 0)
+					end
+					for i=11, 20 do
+						ItemCards2[i]:draw(45*(i-11), 45*1)
+					end
+					for i=21, 30 do
+						ItemCards2[i]:draw(45*(i-21), 45*2)
+					end
+					for i=31, 40 do
+						ItemCards2[i]:draw(45*(i-31), 45*3)
+					end
+					for i=41, 50 do
+						ItemCards2[i]:draw(45*(i-41), 45*4)
+					end
+					for i=51, 60 do
+						ItemCards2[i]:draw(45*(i-51), 45*5)
+					end
+					for i=61, 70 do
+						ItemCards2[i]:draw(45*(i-61), 45*6)
+					end
+				end	
 			end
 		end
 
@@ -868,13 +894,6 @@ function love.draw()
 					PlayerCards[i]:draw((i-1)*300, 0)
 				end
 			end
-			for i=1, 1 do
-				if not(GameInfo.scenario == "") then
-					if (GameInfo.frames>0) then
-						ItemCards[i]:draw(20, 145+(60/0.6))
-					end
-				end
-			end	
 			if EnemyHPSwtich==0 then
 				for i=1, 12 do
 					if Enemies[i].inGame then
@@ -903,6 +922,35 @@ function love.draw()
 					end
 				end
 			end
+			if not(GameInfo.scenario == "" and GameInfo.frames>0) then
+				for i=1, 1 do
+					ItemCards[i]:draw(20, 145+(60/0.6))
+				end
+				if ItemList==1 then
+					love.graphics.rectangle('line',2,2,296,201,3,3,1)
+					love.graphics.setColor( 0, 0, 0, 0.85 )
+					love.graphics.rectangle('fill',2,2,296,201,3,3,1)
+					love.graphics.setColor( 1, 1, 1, 1 )
+					for i=1, 10 do
+						ItemCards2[i]:draw(45*(i-1), 0)
+					end
+					for i=11, 20 do
+						ItemCards2[i]:draw(45*(i-11), 45*1)
+					end
+					for i=21, 30 do
+						ItemCards2[i]:draw(45*(i-21), 45*2)
+					end
+					for i=31, 40 do
+						ItemCards2[i]:draw(45*(i-31), 45*3)
+					end
+					for i=41, 50 do
+						ItemCards2[i]:draw(45*(i-41), 45*4)
+					end
+					for i=51, 60 do
+						ItemCards2[i]:draw(45*(i-51), 45*5)
+					end
+				end	
+			end	
 		end
 		if HelpMenu==1 then
 			love.graphics.rectangle('line',2,2,296,201,3,3,1)
@@ -910,19 +958,19 @@ function love.draw()
 			love.graphics.rectangle('fill',2,2,296,201,3,3,1)
 			love.graphics.setFont(VerySmallFont)
 			love.graphics.setColor( 1, 1, 1, 1 )
-			love.graphics.printf("Hotkeys list:\n 1/2/3/4: Change window size.\n Num0/1/2/3/4: Switch player&E.Healthy bar.\n E: Off/On Enemy hp number.\n S: Simple window.\n A: Auto size.\n D: Default.\n F4: No border.\n H/V: Change layout style.\nCredits\n    Program: Fothsid, killme\n    Thanks: morshi, alyssaprimp\nCode: github.com/phoe-nix/OutbreakTracker", 4, 4, 300, "left")
+			love.graphics.printf("Hotkeys list:\n F1: Show/hide Help menu.\n F2: Show/hide item list.\n F4: No border.\n 1/2/3/4: Change window size.\n Num0/1/2/3/4: Switch player&E.Healthy bar.\n E: Off/On Enemy hp number.\n S: Simple window.\n A: Auto size.\n D: Default.\n H/V: Change layout style.\n ESC: Exit.", 4, 4, 300, "left")
 		end
 
 	elseif InitResult == false then
 		love.graphics.setFont(DefaultFont)
 		love.graphics.printf("Unable to find PCSX2 process.\n Will try again in " .. tostring(math.floor(5-RetryTimer + 0.5)) .. ".", errorX, errorY, 300, "center")
 		love.graphics.setFont(VerySmallFont)
-		love.graphics.printf("Hotkeys list:\n F1: Help menu.\n F4: No border.\n 1/2/3/4: Change window size.\n Num0/1/2/3/4: Switch player status and show\n big bar for enemy.\n E: Off/On Enemy hp number.\n S: Simple window.\n A: Auto size.\n D: Default.\n H/V: Change layout style.\nCredits\n    Program: Fothsid, killme\n    Thanks: morshi, alyssaprimp\nCode: github.com/phoe-nix/OutbreakTracker", 4, 4, 300, "left")
+		love.graphics.printf("Hotkeys list:\n F1: Show/hide Help menu.\n F2: Show/hide item list.\n F4: No border.\n 1/2/3/4: Change window size.\n Num0/1/2/3/4: Switch player status and show\n big bar for enemy.\n E: Off/On Enemy hp number.\n S: Simple window.\n A: Auto size.\n D: Default.\n H/V: Change layout style.\n ESC: Exit.\nCredits\n    Program: Fothsid, killme\n    Thanks: morshi, alyssaprimp\nCode: github.com/phoe-nix/OutbreakTracker", 4, 4, 300, "left")
 	elseif InitResult == true and GameInfo.currentFile == 255 then
 		love.graphics.setFont(DefaultFont)
 		love.graphics.printf("This is not Biohazard Outbreak game.\n Will try again in " .. tostring(math.floor(5-RetryTimer + 0.5)) .. ".", errorX, errorY, 300, "center")
 		love.graphics.setFont(VerySmallFont)
-		love.graphics.printf("Hotkeys list:\n F1: Help menu.\n F4: No border.\n 1/2/3/4: Change window size.\n Num0/1/2/3/4: Switch player status and show\n big bar for enemy.\n E: Off/On Enemy hp number.\n S: Simple window.\n A: Auto size.\n D: Default.\n H/V: Change layout style.\nCredits\n    Program: Fothsid, killme\n    Thanks: morshi, alyssaprimp\nCode: github.com/phoe-nix/OutbreakTracker", 4, 4, 300, "left")
+		love.graphics.printf("Hotkeys list:\n F1: Show/hide Help menu.\n F2: Show/hide item list.\n F4: No border.\n 1/2/3/4: Change window size.\n Num0/1/2/3/4: Switch player status and show\n big bar for enemy.\n E: Off/On Enemy hp number.\n S: Simple window.\n A: Auto size.\n D: Default.\n H/V: Change layout style.\n ESC: Exit.\nCredits\n    Program: Fothsid, killme\n    Thanks: morshi, alyssaprimp\nCode: github.com/phoe-nix/OutbreakTracker", 4, 4, 300, "left")
 	end
 end
 
@@ -952,6 +1000,9 @@ function love.update(dt)
 			for i=1, 1 do
 				Items[i] = tracker.getItem(i)
 			end
+			for i=1, 255 do
+				Items2[i] = tracker.getItem2(i)
+			end
 			for i=1, 4 do
 				Players[i] = tracker.getPlayer(i)
 			end
@@ -973,6 +1024,11 @@ function love.keypressed(key)
 	if key == "f1" then
 		if HelpMenu==0 then HelpMenu=1
 		else HelpMenu=0
+		end
+	end	
+	if key == "f2" then
+		if ItemList==0 then ItemList=1
+		else ItemList=0
 		end
 	end
 	if key == "d" then love.window.setMode(300, 160+(145*4),{resizable=true}) love.window.setPosition(x, y)scalex,scaley = 300, 160+(145*4) Style = 0 end
