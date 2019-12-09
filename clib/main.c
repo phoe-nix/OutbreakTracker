@@ -429,6 +429,7 @@ void UpdatePickups()
 {
     for (int i=0; i < 255; i++)
     {
+        unsigned char numberBuffer;
         unsigned short typeBuffer;
         unsigned short countBuffer;
         unsigned short pickBuffer;
@@ -437,7 +438,8 @@ void UpdatePickups()
         int bytesRead = 0;
         if (info.CurrentFile == 1)
         {
-            ReadProcessMemory(ProcessHandle, (PCVOID)F1_PickupSpaceStart + (F1_PickupStructSize * i), &typeBuffer, 2, (PDWORD)&bytesRead);
+            ReadProcessMemory(ProcessHandle, (PCVOID)F1_PickupSpaceStart + (F1_PickupStructSize * i), &numberBuffer, 1, (PDWORD)&bytesRead);
+            ReadProcessMemory(ProcessHandle, (PCVOID)F1_PickupSpaceStart + (F1_PickupStructSize * i) + F1_IDOffset, &typeBuffer, 2, (PDWORD)&bytesRead);
             ReadProcessMemory(ProcessHandle, (PCVOID)F1_PickupSpaceStart + (F1_PickupStructSize * i) + F1_PickupCountOffset, &countBuffer, 2, (PDWORD)&bytesRead);
             ReadProcessMemory(ProcessHandle, (PCVOID)F1_PickupSpaceStart + (F1_PickupStructSize * i) + F1_PickupOffset, &pickBuffer, 2, (PDWORD)&bytesRead);
             ReadProcessMemory(ProcessHandle, (PCVOID)F1_PickupSpaceStart + (F1_PickupStructSize * i) + F1_PresentOffset, &presentBuffer, 4, (PDWORD)&bytesRead);
@@ -445,12 +447,14 @@ void UpdatePickups()
         }
         else if (info.CurrentFile == 2)
         {
-            ReadProcessMemory(ProcessHandle, (PCVOID)F2_PickupSpaceStart + (F2_PickupStructSize * i), &typeBuffer, 2, (PDWORD)&bytesRead);
+            ReadProcessMemory(ProcessHandle, (PCVOID)F2_PickupSpaceStart + (F2_PickupStructSize * i), &numberBuffer, 1, (PDWORD)&bytesRead);
+            ReadProcessMemory(ProcessHandle, (PCVOID)F2_PickupSpaceStart + (F2_PickupStructSize * i) + F2_IDOffset, &typeBuffer, 2, (PDWORD)&bytesRead);
             ReadProcessMemory(ProcessHandle, (PCVOID)F2_PickupSpaceStart + (F2_PickupStructSize * i) + F2_PickupCountOffset, &countBuffer, 2, (PDWORD)&bytesRead);
             ReadProcessMemory(ProcessHandle, (PCVOID)F2_PickupSpaceStart + (F2_PickupStructSize * i) + F2_PickupOffset, &pickBuffer, 2, (PDWORD)&bytesRead);
             ReadProcessMemory(ProcessHandle, (PCVOID)F2_PickupSpaceStart + (F2_PickupStructSize * i) + F2_PresentOffset, &presentBuffer, 4, (PDWORD)&bytesRead);
             ReadProcessMemory(ProcessHandle, (PCVOID)F2_PickupSpaceStart + (F2_PickupStructSize * i) + F2_MixOffset, &mixBuffer, 1, (PDWORD)&bytesRead);
         }
+        Items[i].Number = numberBuffer;
         Items[i].ID = i+1;
         Items[i].Type = typeBuffer;
         Items[i].Count = countBuffer;
@@ -1025,22 +1029,6 @@ static int LUpdateItem (lua_State* L)
 			GetRoomItemF1(i);
 		else
 			GetRoomItemF2(i);
-		//char* inv = GetInventory(i);
-		//char* spinv = GetSpecialInventory(i);
-		//char* dinv = GetDeadInventory(i);
-		//char* dspinv = GetDeadSpecialInventory(i);
-		//memcpy(RItems[i].Inventory, inv, 4);
-		//memcpy(RItems[i].SpecialInventory, spinv, 8);
-		//memcpy(RItems[i].DeadInventory, dinv, 4);
-		//memcpy(RItems[i].DeadInventorySpecial, dspinv, 4);
-		//free(inv);
-		//free(spinv);
-		//free(dinv);
-		//free(dspinv);
-		//inv = NULL;
-		//spinv = NULL;
-		//dinv = NULL;
-		//dspinv = NULL;
 	}
 	return 0;
 }
@@ -1254,7 +1242,7 @@ static int LGetSlotPlayer (lua_State* L)
 
 	return 1;
 }
-static int LGetItem (lua_State* L)
+static int LGetItem(lua_State* L)
 {
 	double itemID = lua_tonumber(L, 1);
 	int i = (int)(itemID-1);
@@ -1283,6 +1271,42 @@ static int LGetItem (lua_State* L)
 
 		lua_rawset(L, -3);
 
+	return 1;
+}
+static int LGetItem2(lua_State* L)
+{
+	double itemID = lua_tonumber(L, 1);
+	int i = (int)(itemID-1);
+
+	lua_newtable(L);
+
+		for (int j=0; j < 255; j++)
+		{
+		lua_pushstring(L, "number");
+			lua_pushnumber(L, Items[i].Number);
+		lua_rawset(L, -3);
+
+		lua_pushstring(L, "id");
+			lua_pushnumber(L, (double)Items[i].ID);
+		lua_rawset(L, -3);
+
+		lua_pushstring(L, "type");
+			lua_pushnumber(L, (double)Items[i].Type);
+		lua_rawset(L, -3);
+
+		lua_pushstring(L, "count");
+			lua_pushnumber(L, (double)Items[i].Count);
+		lua_rawset(L, -3);
+
+		lua_pushstring(L, "pick");
+			lua_pushnumber(L, (double)Items[i].Pick);
+		lua_rawset(L, -3);
+
+		lua_pushstring(L, "mix");
+			lua_pushnumber(L, Items[i].Mix);
+		lua_rawset(L, -3);
+
+		}
 	return 1;
 }
 static int LGetPlayer (lua_State* L)
@@ -1602,6 +1626,7 @@ static const struct luaL_Reg library_functions [] = {
 	{"getLobby", LGetLobby},
 	{"getSlotPlayer", LGetSlotPlayer},
 	{"getItem", LGetItem},
+	{"getItem2", LGetItem2},
 	{"getPlayer", LGetPlayer},
 	{"getEnemy", LGetEnemy},
 	{"getGameInfo", LGetGameInfo},
