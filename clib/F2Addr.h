@@ -4,7 +4,7 @@ const int F2_P1Start = 0x2047BD30; // 0x2047C23C Not the actual start, but used 
 const int F2_P2Start = 0x2047CE30;
 const int F2_P3Start = 0x2047DF30;
 const int F2_P4Start = 0x2047F030;
-const int F2_PickupSpaceStart = 0x20397B82; // 1 item - 60 bytes // settings byte on offset ITEM_PTR+37?
+const int F2_PickupSpaceStart = 0x20397B80; // 1 item - 60 bytes // settings byte on offset ITEM_PTR+37?
 const int F2_DeadInventoryStart = 0x20491146;
 const int F2_VirusMaxStart = 0x20728500;
 const int F2_ScenarioIDAddr = 0x203137BA;
@@ -30,10 +30,11 @@ const int F2_EquippedItemOffset = 0xC8C;
 const int F2_BleedTimeOffset = 0xC6A;
 
 const int F2_PickupStructSize = 60;
-const int F2_PickupCountOffset = 30;
-const int F2_PickupOffset = 34;
-const int F2_PresentOffset = 26;//26 36
-const int F2_MixOffset = 21;
+const int F2_PickupCountOffset = 32;
+const int F2_PickupOffset = 36;
+const int F2_PresentOffset = 28;//28 38
+const int F2_MixOffset = 23;
+const int F2_IDOffset = 2;
 
 int F2_GetCharAddress(int characterID)
 {
