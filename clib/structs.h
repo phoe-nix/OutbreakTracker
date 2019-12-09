@@ -73,6 +73,7 @@ typedef struct
 
 typedef struct
 {
+	unsigned char Number;
     unsigned short ID;
     unsigned short EN;
 	unsigned short Type;
@@ -317,7 +318,7 @@ char* GetF1NPCName(int nameID)
         case 51:
             return "BEN";//HPtype3
         case 52:
-            return "Unknown";//regan's daughter
+            return "LUCY";//regan's daughter
         case 53:
             return "REGAN";//HPtype3
         case 54:
@@ -485,19 +486,19 @@ char* GetF1NPCName(int nameID)
         case 135:
             return "ISAAC";//HPtype4
         case 136:
-            return "Unknown";//ISAAC
+            return "ISAAC:B";//ISAAC:B
         case 137:
             return "KATHY";//HPtype2
         case 138:
-            return "Unknown";//KATHY
+            return "KATHY:B";//KATHY
         case 139:
             return "ELENA";//HPtype4
         case 140:
-            return "Unknown";//ELENA
+            return "ELENA:B";//ELENA
         case 141:
             return "FRANK";//HPtype4
         case 142:
-            return "Unknown";//GOLDEN WOMAN
+            return "KATHY:C";//GOLDEN WOMAN
         case 143:
             return "Unknown";//none
         case 144:
@@ -516,6 +517,22 @@ char* GetF1NPCName(int nameID)
             return "Unknown";//none
         case 151:
             return "RODNEY";//HPtype2
+        case 201:
+            return "KEVIN?";//none
+        case 202:
+            return "MARK?";//none
+        case 203:
+            return "JIM?";//none
+        case 204:
+            return "GEORGE?";//none
+        case 205:
+            return "DAVID?";//none
+        case 206:
+            return "ALYSSA?";//none
+        case 207:
+            return "YOKO?";//none
+        case 208:
+            return "CINDY?";//none
         default:
             return NULL;
 
@@ -629,7 +646,7 @@ char* GetNPCName(int nameID)
         case 51:
             return "BEN";//HPtype3
         case 52:
-            return "Unknown";//LUCY
+            return "LUCY";//LUCY
         case 53:
             return "REGAN";//HPtype3
         case 54:
@@ -789,27 +806,27 @@ char* GetNPCName(int nameID)
         case 131:
             return "ETHAN";//HPtype2
         case 132:
-            return "Unknown";//ETHAN:B
+            return "ETHAN:B";//ETHAN:B
         case 133:
             return "HOWARD";//HPtype3
         case 134:
-            return "Unknown";//HOWARD:B
+            return "HOWARD:B";//HOWARD:B
         case 135:
             return "ISAAC";//HPtype4
         case 136:
-            return "Unknown";//ISAAC:B
+            return "ISAAC:B";//ISAAC:B
         case 137:
             return "KATHY";//HPtype2
         case 138:
-            return "Unknown";//KATHY:B
+            return "KATHY:B";//KATHY:B
         case 139:
             return "ELENA";//HPtype4
         case 140:
-            return "Unknown";//ELENA:B
+            return "ELENA:B";//ELENA:B
         case 141:
             return "FRANK";//HPtype4
         case 142:
-            return "Unknown";//GOLDEN WOMAN
+            return "KATHY:C";//GOLDEN WOMAN
         case 143:
             return "Unknown";//none
         case 144:
@@ -828,6 +845,22 @@ char* GetNPCName(int nameID)
             return "Unknown";//none
         case 151:
             return "RODNEY";//HPtype2
+        case 201:
+            return "KEVIN?";//none
+        case 202:
+            return "MARK?";//none
+        case 203:
+            return "JIM?";//none
+        case 204:
+            return "GEORGE?";//none
+        case 205:
+            return "DAVID?";//none
+        case 206:
+            return "ALYSSA?";//none
+        case 207:
+            return "YOKO?";//none
+        case 208:
+            return "CINDY?";//none
         default:
             return NULL;
 
