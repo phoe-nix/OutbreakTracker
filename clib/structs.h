@@ -81,6 +81,7 @@ typedef struct
 	unsigned short Pick;
 	unsigned int Present;
 	unsigned char Mix;
+	unsigned char RoomID;
 } Item;
 
 typedef struct

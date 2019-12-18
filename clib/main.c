@@ -435,6 +435,7 @@ void UpdatePickups()
         unsigned short pickBuffer;
         unsigned int presentBuffer;
         unsigned char mixBuffer;
+        unsigned char roomidBuffer;
         int bytesRead = 0;
         if (info.CurrentFile == 1)
         {
@@ -444,6 +445,7 @@ void UpdatePickups()
             ReadProcessMemory(ProcessHandle, (PCVOID)F1_PickupSpaceStart + (F1_PickupStructSize * i) + F1_PickupOffset, &pickBuffer, 2, (PDWORD)&bytesRead);
             ReadProcessMemory(ProcessHandle, (PCVOID)F1_PickupSpaceStart + (F1_PickupStructSize * i) + F1_PresentOffset, &presentBuffer, 4, (PDWORD)&bytesRead);
             ReadProcessMemory(ProcessHandle, (PCVOID)F1_PickupSpaceStart + (F1_PickupStructSize * i) + F1_MixOffset, &mixBuffer, 1, (PDWORD)&bytesRead);
+            ReadProcessMemory(ProcessHandle, (PCVOID)F1_PickupSpaceStart + (F1_PickupStructSize * i) + F1_ItemRoomIDOffset, &roomidBuffer, 1, (PDWORD)&bytesRead);
         }
         else if (info.CurrentFile == 2)
         {
@@ -453,6 +455,7 @@ void UpdatePickups()
             ReadProcessMemory(ProcessHandle, (PCVOID)F2_PickupSpaceStart + (F2_PickupStructSize * i) + F2_PickupOffset, &pickBuffer, 2, (PDWORD)&bytesRead);
             ReadProcessMemory(ProcessHandle, (PCVOID)F2_PickupSpaceStart + (F2_PickupStructSize * i) + F2_PresentOffset, &presentBuffer, 4, (PDWORD)&bytesRead);
             ReadProcessMemory(ProcessHandle, (PCVOID)F2_PickupSpaceStart + (F2_PickupStructSize * i) + F2_MixOffset, &mixBuffer, 1, (PDWORD)&bytesRead);
+            ReadProcessMemory(ProcessHandle, (PCVOID)F2_PickupSpaceStart + (F2_PickupStructSize * i) + F2_ItemRoomIDOffset, &roomidBuffer, 1, (PDWORD)&bytesRead);
         }
         Items[i].Number = numberBuffer;
         Items[i].ID = i+1;
@@ -461,6 +464,7 @@ void UpdatePickups()
         Items[i].Pick = pickBuffer;
         Items[i].Present = presentBuffer;
         Items[i].Mix = mixBuffer;
+        Items[i].RoomID = roomidBuffer;
     }
 }
 
@@ -1302,10 +1306,17 @@ static int LGetItem2(lua_State* L)
 			lua_pushnumber(L, (double)Items[i].Pick);
 		lua_rawset(L, -3);
 
+		lua_pushstring(L, "present");
+			lua_pushnumber(L, (double)Items[i].Present);
+		lua_rawset(L, -3);
+
 		lua_pushstring(L, "mix");
 			lua_pushnumber(L, Items[i].Mix);
 		lua_rawset(L, -3);
 
+		lua_pushstring(L, "roomid");
+			lua_pushnumber(L, Items[i].RoomID);
+		lua_rawset(L, -3);
 		}
 	return 1;
 }

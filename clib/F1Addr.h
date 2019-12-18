@@ -30,6 +30,7 @@ const int F1_EquippedItemOffset = 0xC7C;
 const int F1_BleedTimeOffset = 0xC5A;
 
 const int F1_PickupStructSize = 60;
+const int F1_ItemRoomIDOffset = 57;
 const int F1_PickupCountOffset = 32;
 const int F1_PickupOffset = 36;
 const int F1_PresentOffset = 28;
@@ -227,13 +228,13 @@ const int F1_Pass6 = 0x2048AC15;//4927=7500 4032=7480 40 4284=0200
 const int F1_Difficulty = 0x2048C01A;
 const int F1_ItemRandom = 0x2023BBA0;//23BB28 23C055 23BD20 426AA9 23BBA0 23BD24
 /*pass 6D6570
-äº‹ä»¶é›¶ä¸‹48BF60
+ÊÂ¼þÁãÏÂ48BF60
 b7f 48AD93:0x00=off 0x01=on
 b5f 48AD91:0x40=off 0x50=on
 b4f 48AD92:0x00=off 0x40=on
-é›¶ä¸‹pass 48AC17 A375=0x20 J126=0x40 C582=0x80
+ÁãÏÂpass 48AC17 A375=0x20 J126=0x40 C582=0x80
 48AC13 0634 0-1f 80-9f 4509 20-3f a0 bf 9741 40-7f c0-ff
-ç‹±ç‚Žè°œé¢˜ 1=0x20 2=0x40 3=0x80 4=0x100
+ÓüÑ×ÃÕÌâ 1=0x20 2=0x40 3=0x80 4=0x100
 48AC1B 02
 48ADCE
     :0 44 110
