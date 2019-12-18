@@ -24,6 +24,7 @@ local ItemSwtich=1
 local Style=0
 local HelpMenu=0
 local ItemList=0
+local RoomName=1
 
 Slots = {}
 Items = {}
@@ -36,6 +37,7 @@ GameInfo = {}
 LobbyCards = {}
 ItemCards = {}
 ItemCards2 = {}
+ItemCards3 = {}
 PlayerCards = {}
 SPlayerCards = {}
 EnemyCards = {}
@@ -53,6 +55,9 @@ function love.load(args)
 	end
 	for i=1, 255 do
 		ItemCards2[i] = ItemCard2:new(i)
+	end
+	for i=1, 255 do
+		ItemCards3[i] = ItemCard3:new(i)
 	end
 	for i=1, 4 do
 		PlayerCards[i] = PlayerCard:new(i)
@@ -346,7 +351,7 @@ function love.draw()
 						elseif(GameInfo.pass3 == 0x00) and (GameInfo.pass6%2 == 0x0) then
 								love.graphics.printf("4284", 0, (145*p), 300, "left")
 						end
-					
+
 						if(GameInfo.difficulty == "easy") then
 							love.graphics.printf("-03:25", 40, (145*p), 300, "left")
 						elseif(GameInfo.difficulty == "normal") then
@@ -403,6 +408,7 @@ function love.draw()
 							love.graphics.setFont(TimeFont)
 							love.graphics.printf(Time2string3(GameInfo.escapetime), 0, (145*p), 60, "center",0,1,1)
 						end
+
 					elseif (GameInfo.scenario == "end of the road") then
 						love.graphics.setFont(DefaultFont)
 						love.graphics.printf(GameInfo.pass4, 0, (145*p), 300, "left")
@@ -415,12 +421,12 @@ function love.draw()
 				love.graphics.setFont(VerySmallFont)
 				love.graphics.printf("No.",10, 8,20, "right")
 				love.graphics.printf("Title & Scenario",40, 8,130, "left")
-				love.graphics.printf("HEADS",250, 8,50, "left")
+				love.graphics.printf("HEADS",240, 8,50, "left")
 				for i=1, 20 do
 					LobbyCards[i]:draw(0, (i-1)*32)		
 				end
 			end
-    
+
 			if PlayerSwtich==0 then
 				for i=1, 4 do
 					if Players[i].enabled then
@@ -508,7 +514,7 @@ function love.draw()
 					end
 				end
 			end
-			if not(GameInfo.scenario == "" and GameInfo.frames == 0) then
+			if not(GameInfo.scenario == "") and (GameInfo.frames > 0) then
 				if ItemSwtich ==1 then
 					if EnemyHPSwtich==2 then
 						for i=1, 1 do
@@ -521,30 +527,175 @@ function love.draw()
 					end
 				end
 				if ItemList==1 then
-					love.graphics.rectangle('line',2,2,296,201,3,3,1)
-					love.graphics.setColor( 0, 0, 0, 0.85 )
-					love.graphics.rectangle('fill',2,2,296,201,3,3,1)
+					love.graphics.rectangle('line',2,2,296,30*20,3,3,1)
+					love.graphics.setColor( 0, 0, 0, 1 )
+					love.graphics.rectangle('fill',2,2,296,30*20,3,3,1)
 					love.graphics.setColor( 1, 1, 1, 1 )
 					for i=1, 10 do
 						ItemCards2[i]:draw(45*(i-1), 0)
 					end
 					for i=11, 20 do
-						ItemCards2[i]:draw(45*(i-11), 45*1)
+						ItemCards2[i]:draw(45*(i-11), 44*1)
 					end
 					for i=21, 30 do
-						ItemCards2[i]:draw(45*(i-21), 45*2)
+						ItemCards2[i]:draw(45*(i-21), 44*2)
 					end
 					for i=31, 40 do
-						ItemCards2[i]:draw(45*(i-31), 45*3)
+						ItemCards2[i]:draw(45*(i-31), 44*3)
 					end
 					for i=41, 50 do
-						ItemCards2[i]:draw(45*(i-41), 45*4)
+						ItemCards2[i]:draw(45*(i-41), 44*4)
 					end
 					for i=51, 60 do
-						ItemCards2[i]:draw(45*(i-51), 45*5)
+						ItemCards2[i]:draw(45*(i-51), 44*5)
 					end
 					for i=61, 70 do
-						ItemCards2[i]:draw(45*(i-61), 45*6)
+						ItemCards2[i]:draw(45*(i-61), 44*6)
+					end
+					for i=71, 80 do
+						ItemCards2[i]:draw(45*(i-71), 44*7)
+					end
+					for i=81, 90 do
+						ItemCards2[i]:draw(45*(i-81), 44*8)
+					end
+					for i=91, 100 do
+						ItemCards2[i]:draw(45*(i-91), 44*9)
+					end
+					for i=101, 110 do
+						ItemCards2[i]:draw(45*(i-101), 44*10)
+					end
+					for i=111, 120 do
+						ItemCards2[i]:draw(45*(i-111), 44*11)
+					end
+					for i=121, 130 do
+						ItemCards2[i]:draw(45*(i-121), 44*12)
+					end
+					for i=131, 140 do
+						ItemCards2[i]:draw(45*(i-131), 44*13)
+					end
+					for i=141, 150 do
+						ItemCards2[i]:draw(45*(i-141), 44*14)
+					end
+					for i=151, 160 do
+						ItemCards2[i]:draw(45*(i-151), 44*15)
+					end
+					for i=161, 170 do
+						ItemCards2[i]:draw(45*(i-161), 44*16)
+					end
+					for i=171, 180 do
+						ItemCards2[i]:draw(45*(i-171), 44*17)
+					end
+					for i=181, 190 do
+						ItemCards2[i]:draw(45*(i-181), 44*18)
+					end
+					for i=191, 200 do
+						ItemCards2[i]:draw(45*(i-191), 44*19)
+					end
+					for i=201, 210 do
+						ItemCards2[i]:draw(45*(i-201), 44*20)
+					end
+				end	
+				if ItemList==2 then
+					love.graphics.rectangle('line',2,2,296,30*20,3,3,1)
+					love.graphics.setColor( 0, 0, 0, 1 )
+					love.graphics.rectangle('fill',2,2,296,30*20,3,3,1)
+					love.graphics.setColor( 1, 1, 1, 1 )
+					for i=1, 10 do
+						ItemCards3[i]:draw(45*(i-1), 0)
+					end
+					for i=11, 20 do
+						ItemCards3[i]:draw(45*(i-11), 44*1)
+					end
+					for i=21, 30 do
+						ItemCards3[i]:draw(45*(i-21), 44*2)
+					end
+					for i=31, 40 do
+						ItemCards3[i]:draw(45*(i-31), 44*3)
+					end
+					for i=41, 50 do
+						ItemCards3[i]:draw(45*(i-41), 44*4)
+					end
+					for i=51, 60 do
+						ItemCards3[i]:draw(45*(i-51), 44*5)
+					end
+					for i=61, 70 do
+						ItemCards3[i]:draw(45*(i-61), 44*6)
+					end
+					for i=71, 80 do
+						ItemCards3[i]:draw(45*(i-71), 44*7)
+					end
+					for i=81, 90 do
+						ItemCards3[i]:draw(45*(i-81), 44*8)
+					end
+					for i=91, 100 do
+						ItemCards3[i]:draw(45*(i-91), 44*9)
+					end
+					for i=101, 110 do
+						ItemCards3[i]:draw(45*(i-101), 44*10)
+					end
+					for i=111, 120 do
+						ItemCards3[i]:draw(45*(i-111), 44*11)
+					end
+					for i=121, 130 do
+						ItemCards3[i]:draw(45*(i-121), 44*12)
+					end
+					for i=131, 140 do
+						ItemCards3[i]:draw(45*(i-131), 44*13)
+					end
+					for i=141, 150 do
+						ItemCards3[i]:draw(45*(i-141), 44*14)
+					end
+					for i=151, 160 do
+						ItemCards3[i]:draw(45*(i-151), 44*15)
+					end
+					for i=161, 170 do
+						ItemCards3[i]:draw(45*(i-161), 44*16)
+					end
+					for i=171, 180 do
+						ItemCards3[i]:draw(45*(i-171), 44*17)
+					end
+					for i=181, 190 do
+						ItemCards3[i]:draw(45*(i-181), 44*18)
+					end
+					for i=191, 200 do
+						ItemCards3[i]:draw(45*(i-191), 44*19)
+					end
+					for i=201, 210 do
+						ItemCards3[i]:draw(45*(i-201), 44*20)
+					end
+						love.graphics.rectangle('line',2,605,296,133,3,3,1)
+						love.graphics.setColor( 0, 0, 0, 0.85 )
+						love.graphics.rectangle('fill',2,605,296,133,3,3,1)
+						love.graphics.setColor( 1, 1, 1, 1 )
+						love.graphics.setFont(MiniFont)
+					if RoomName == 1 then
+						for i=1,13 do
+						love.graphics.printf("1"*(i-1)*2+1,2, 605+10*(i-1),12, "right")
+						love.graphics.printf(GetRoomName(GameInfo.scenario,(i-1)*2+1),16, 606+10*(i-1),140, "left")
+						love.graphics.printf("1"*(i-1)*2+2,150, 605+10*(i-1),12, "right")
+						love.graphics.printf(GetRoomName(GameInfo.scenario,(i-1)*2+2),166, 606+10*(i-1),150, "left")
+						end
+					elseif RoomName == 2 then
+						for i=1,13 do
+						love.graphics.printf("1"*(i-1)*2+27,2, 605+10*(i-1),12, "right")
+						love.graphics.printf(GetRoomName(GameInfo.scenario,(i-1)*2+27),16, 606+10*(i-1),150, "left")
+						love.graphics.printf("1"*(i-1)*2+28,150, 605+10*(i-1),12, "right")
+						love.graphics.printf(GetRoomName(GameInfo.scenario,(i-1)*2+28),166, 606+10*(i-1),150, "left")
+						end
+					elseif RoomName == 3 then
+						for i=1,13 do
+						love.graphics.printf("1"*(i-1)*2+53,2, 605+10*(i-1),12, "right")
+						love.graphics.printf(GetRoomName(GameInfo.scenario,(i-1)*2+53),16, 606+10*(i-1),150, "left")
+						love.graphics.printf("1"*(i-1)*2+54,150, 605+10*(i-1),12, "right")
+						love.graphics.printf(GetRoomName(GameInfo.scenario,(i-1)*2+54),166, 606+10*(i-1),150, "left")
+						end
+					elseif RoomName == 4 then
+						for i=1,10 do
+						love.graphics.printf("1"*(i-1)*2+79,2, 605+10*(i-1),12, "right")
+						love.graphics.printf(GetRoomName(GameInfo.scenario,(i-1)*2+79),16, 606+10*(i-1),150, "left")
+						love.graphics.printf("1"*(i-1)*2+80,150, 605+10*(i-1),12, "right")
+						love.graphics.printf(GetRoomName(GameInfo.scenario,(i-1)*2+80),166, 606+10*(i-1),150, "left")
+						end
 					end
 				end	
 			end
@@ -874,7 +1025,7 @@ function love.draw()
 				love.graphics.setFont(VerySmallFont)
 				love.graphics.printf("No.",10, 8,20, "right")
 				love.graphics.printf("Title & Scenario",40, 8,130, "left")
-				love.graphics.printf("HEADS",250, 8,50, "left")
+				love.graphics.printf("HEADS",240, 8,50, "left")
 				for i=1, 5 do
 					LobbyCards[i]:draw(0, (i-1)*32)		
 				end
@@ -922,35 +1073,92 @@ function love.draw()
 					end
 				end
 			end
-			if not(GameInfo.scenario == "" and GameInfo.frames>0) then
+			if not(GameInfo.scenario == "") and (GameInfo.frames > 0) then
 				for i=1, 1 do
 					ItemCards[i]:draw(20, 145+(60/0.6))
 				end
 				if ItemList==1 then
-					love.graphics.rectangle('line',2,2,296,201,3,3,1)
+					love.graphics.rectangle('line',2,2,900,201,3,3,1)
 					love.graphics.setColor( 0, 0, 0, 0.85 )
-					love.graphics.rectangle('fill',2,2,296,201,3,3,1)
+					love.graphics.rectangle('fill',2,2,900,201,3,3,1)
 					love.graphics.setColor( 1, 1, 1, 1 )
-					for i=1, 10 do
-						ItemCards2[i]:draw(45*(i-1), 0)
+					for i=1, 30 do
+						ItemCards2[i]:draw(46*(i-1), 0)
 					end
-					for i=11, 20 do
-						ItemCards2[i]:draw(45*(i-11), 45*1)
+					for i=31, 60 do
+						ItemCards2[i]:draw(46*(i-31), 44*1)
 					end
-					for i=21, 30 do
-						ItemCards2[i]:draw(45*(i-21), 45*2)
+					for i=61, 90 do
+						ItemCards2[i]:draw(46*(i-61), 44*2)
 					end
-					for i=31, 40 do
-						ItemCards2[i]:draw(45*(i-31), 45*3)
+					for i=91, 120 do
+						ItemCards2[i]:draw(46*(i-91), 44*3)
 					end
-					for i=41, 50 do
-						ItemCards2[i]:draw(45*(i-41), 45*4)
+					for i=121, 150 do
+						ItemCards2[i]:draw(46*(i-121), 44*4)
 					end
-					for i=51, 60 do
-						ItemCards2[i]:draw(45*(i-51), 45*5)
+					for i=151, 180 do
+						ItemCards2[i]:draw(46*(i-151), 44*5)
 					end
-				end	
-			end	
+					for i=181, 210 do
+						ItemCards2[i]:draw(46*(i-181), 44*6)
+					end
+				end
+				if ItemList==2 then
+					love.graphics.rectangle('line',2,2,897,201,3,3,1)
+					love.graphics.setColor( 0, 0, 0, 0.85 )
+					love.graphics.rectangle('fill',2,2,897,201,3,3,1)
+					love.graphics.setColor( 1, 1, 1, 1 )
+					for i=1, 30 do
+						ItemCards3[i]:draw(46*(i-1), 0)
+					end
+					for i=31, 60 do
+						ItemCards3[i]:draw(46*(i-31), 44*1)
+					end
+					for i=61, 90 do
+						ItemCards3[i]:draw(46*(i-61), 44*2)
+					end
+					for i=91, 120 do
+						ItemCards3[i]:draw(46*(i-91), 44*3)
+					end
+					for i=121, 150 do
+						ItemCards3[i]:draw(46*(i-121), 44*4)
+					end
+					for i=151, 180 do
+						ItemCards3[i]:draw(46*(i-151), 44*5)
+					end
+					for i=181, 210 do
+						ItemCards3[i]:draw(46*(i-181), 44*6)
+					end
+						love.graphics.rectangle('line',902,2,296,201,3,3,1)
+						love.graphics.setColor( 0, 0, 0, 0.85 )
+						love.graphics.rectangle('fill',902,2,296,201,3,3,1)
+						love.graphics.setColor( 1, 1, 1, 1 )
+						love.graphics.setFont(MiniFont)
+					if RoomName == 1 then
+						for i=1,20 do
+						love.graphics.printf("1"*(i-1)*2+1,902, 10*(i-1)+2,12, "right")
+						love.graphics.printf(GetRoomName(GameInfo.scenario,(i-1)*2+1),916, 10*(i-1)+2,140, "left")
+						love.graphics.printf("1"*(i-1)*2+2,1050, 10*(i-1)+2,12, "right")
+						love.graphics.printf(GetRoomName(GameInfo.scenario,(i-1)*2+2),1066, 10*(i-1)+2,150, "left")
+						end
+					elseif RoomName == 2 then
+						for i=1,20 do
+						love.graphics.printf("1"*(i-1)*2+41,902, 10*(i-1)+2,12, "right")
+						love.graphics.printf(GetRoomName(GameInfo.scenario,(i-1)*2+41),916, 10*(i-1)+2,140, "left")
+						love.graphics.printf("1"*(i-1)*2+42,1050, 10*(i-1)+2,12, "right")
+						love.graphics.printf(GetRoomName(GameInfo.scenario,(i-1)*2+42),1066, 10*(i-1)+2,150, "left")
+						end
+					elseif RoomName == 3 then
+						for i=1,9 do
+						love.graphics.printf("1"*(i-1)*2+81,902, 10*(i-1)+2,12, "right")
+						love.graphics.printf(GetRoomName(GameInfo.scenario,(i-1)*2+81),916, 10*(i-1)+2,140, "left")
+						love.graphics.printf("1"*(i-1)*2+82,1050, 10*(i-1)+2,12, "right")
+						love.graphics.printf(GetRoomName(GameInfo.scenario,(i-1)*2+82),1066, 10*(i-1)+2,150, "left")
+						end
+					end
+				end
+			end
 		end
 		if HelpMenu==1 then
 			love.graphics.rectangle('line',2,2,296,201,3,3,1)
@@ -958,19 +1166,19 @@ function love.draw()
 			love.graphics.rectangle('fill',2,2,296,201,3,3,1)
 			love.graphics.setFont(VerySmallFont)
 			love.graphics.setColor( 1, 1, 1, 1 )
-			love.graphics.printf("Hotkeys list:\n F1: Show/hide Help menu.\n F2: Show/hide item list.\n F4: No border.\n 1/2/3/4: Change window size.\n Num0/1/2/3/4: Switch player&E.Healthy bar.\n E: Off/On Enemy hp number.\n S: Simple window.\n A: Auto size.\n D: Default.\n H/V: Change layout style.\n ESC: Exit.", 4, 4, 300, "left")
+			love.graphics.printf("Hotkeys list:\n F1: Show/hide help menu.\n F2: Show/hide item list.\n F3: Switch room name list.\n F4: No border.\n 1/2/3/4: Change window size.\n Num0/1/2/3/4: Switch player&E.Healthy bar.\n E: Off/On Enemy hp number.\n S: Simple window.\n A: Auto size.\n D: Default.\n H/V: Change layout style.\n ESC: Exit.", 4, 4, 300, "left")
 		end
 
 	elseif InitResult == false then
 		love.graphics.setFont(DefaultFont)
 		love.graphics.printf("Unable to find PCSX2 process.\n Will try again in " .. tostring(math.floor(5-RetryTimer + 0.5)) .. ".", errorX, errorY, 300, "center")
 		love.graphics.setFont(VerySmallFont)
-		love.graphics.printf("Hotkeys list:\n F1: Show/hide Help menu.\n F2: Show/hide item list.\n F4: No border.\n 1/2/3/4: Change window size.\n Num0/1/2/3/4: Switch player status and show\n big bar for enemy.\n E: Off/On Enemy hp number.\n S: Simple window.\n A: Auto size.\n D: Default.\n H/V: Change layout style.\n ESC: Exit.\nCredits\n    Program: Fothsid, killme\n    Thanks: morshi, alyssaprimp\nCode: github.com/phoe-nix/OutbreakTracker", 4, 4, 300, "left")
+		love.graphics.printf("Hotkeys list:\n F1: Show/hide help menu.\n F2: Show/hide item list.\n F3: Switch room name list.\n F4: No border.\n 1/2/3/4: Change window size.\n Num0/1/2/3/4: Switch player status and show\n big bar for enemy.\n E: Off/On Enemy hp number.\n S: Simple window.\n A: Auto size.\n D: Default.\n H/V: Change layout style.\n ESC: Exit.\nCredits\n    Program: Fothsid, killme\n    Thanks: morshi, alyssaprimp\nCode: github.com/phoe-nix/OutbreakTracker", 4, 4, 300, "left")
 	elseif InitResult == true and GameInfo.currentFile == 255 then
 		love.graphics.setFont(DefaultFont)
 		love.graphics.printf("This is not Biohazard Outbreak game.\n Will try again in " .. tostring(math.floor(5-RetryTimer + 0.5)) .. ".", errorX, errorY, 300, "center")
 		love.graphics.setFont(VerySmallFont)
-		love.graphics.printf("Hotkeys list:\n F1: Show/hide Help menu.\n F2: Show/hide item list.\n F4: No border.\n 1/2/3/4: Change window size.\n Num0/1/2/3/4: Switch player status and show\n big bar for enemy.\n E: Off/On Enemy hp number.\n S: Simple window.\n A: Auto size.\n D: Default.\n H/V: Change layout style.\n ESC: Exit.\nCredits\n    Program: Fothsid, killme\n    Thanks: morshi, alyssaprimp\nCode: github.com/phoe-nix/OutbreakTracker", 4, 4, 300, "left")
+		love.graphics.printf("Hotkeys list:\n F1: Show/hide help menu.\n F2: Show/hide item list.\n F3: Switch room name list.\n F4: No border.\n 1/2/3/4: Change window size.\n Num0/1/2/3/4: Switch player status and show\n big bar for enemy.\n E: Off/On Enemy hp number.\n S: Simple window.\n A: Auto size.\n D: Default.\n H/V: Change layout style.\n ESC: Exit.\nCredits\n    Program: Fothsid, killme\n    Thanks: morshi, alyssaprimp\nCode: github.com/phoe-nix/OutbreakTracker", 4, 4, 300, "left")
 	end
 end
 
@@ -1028,7 +1236,24 @@ function love.keypressed(key)
 	end	
 	if key == "f2" then
 		if ItemList==0 then ItemList=1
+		elseif ItemList==1 then ItemList=2
 		else ItemList=0
+		end
+	end
+	if key == "f3" then
+		if	ItemList==2 then
+			if Style==0 then
+				if RoomName==1 then RoomName=2
+				elseif RoomName==2 then RoomName=3
+				elseif RoomName==3 then RoomName=4
+				else RoomName=1
+				end
+			else
+				if RoomName==1 then RoomName=2
+				elseif RoomName==2 then RoomName=3
+				else RoomName=1
+				end
+			end
 		end
 	end
 	if key == "d" then love.window.setMode(300, 160+(145*4),{resizable=true}) love.window.setPosition(x, y)scalex,scaley = 300, 160+(145*4) Style = 0 end
