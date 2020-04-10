@@ -21,14 +21,15 @@ function ItemCard2:draw(x, y)
 	local item = Items2[self.id]
 
 		for i=1, 1 do
-			if not(Items2[self.id].number == 0) then
+			if(Items2[self.id].pick < 5) and (Items2[self.id].type > 0) and(Items2[self.id].count > 0) then
 				if (Items2[self.id].id == -1
 				or Items2[self.id].count == 0xffff
 				or Items2[self.id].pick > 0
 				or Items2[self.id].mix == 0x20) then
 					self.icons[i].type = Items2[self.id].type
 					self.icons[i].count = Items2[self.id].count
-					love.graphics.setColor( 1, 1, 1, 0.25 )
+					self.icons[i].pick = Items2[self.id].pick
+					love.graphics.setColor( 1, 1, 1, 0.45 )
 					self.icons[i]:draw()
 				else
 					self.icons[i].type = Items2[self.id].type
@@ -65,14 +66,14 @@ function ItemCard3:draw(x, y)
 	local item = Items2[self.id]
 
 		for i=1, 1 do
-			if not(Items2[self.id].number == 0) then
+			if(Items2[self.id].pick < 5) and (Items2[self.id].type > 0) and(Items2[self.id].count > 0) then
 				if (Items2[self.id].id == -1
 				or Items2[self.id].count == 0xffff
 				or Items2[self.id].pick > 0
 				or Items2[self.id].mix == 0x20) then
 					self.icons[i].type = Items2[self.id].type
 					self.icons[i].roomid = Items2[self.id].roomid
-					love.graphics.setColor( 1, 1, 1, 0.25 )
+					love.graphics.setColor( 1, 1, 1, 0.45 )
 					self.icons[i]:draw()
 				else
 					self.icons[i].type = Items2[self.id].type

@@ -57,9 +57,19 @@ function ItemCard:draw(x, y)
 
 		for i=1, 32 do
 			if not(Items[self.id].roomitem[i].id == -1) then
+				if (Items[self.id].roomitem[i].pick > 0) then
 				self.icons[i].type = Items[self.id].roomitem[i].type
 				self.icons[i].count = Items[self.id].roomitem[i].count
+				self.icons[i].pick = Items[self.id].roomitem[i].pick
+				love.graphics.setColor( 1, 1, 1, 0.45 )
 				self.icons[i]:draw()
+				else
+				self.icons[i].type = Items[self.id].roomitem[i].type
+				self.icons[i].count = Items[self.id].roomitem[i].count
+				self.icons[i].pick = Items[self.id].roomitem[i].pick
+				love.graphics.setColor( 1, 1, 1, 1 )
+				self.icons[i]:draw()
+				end
 			end
 		end
 

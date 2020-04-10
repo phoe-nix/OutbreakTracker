@@ -5,6 +5,7 @@ function ItemIcon:new(x, y)
 	local o = {}
 	o.count = 0
 	o.type = 0
+	o.pick = 0
 	o.equipped = false
 	o.w = 48
 	o.h = 48
@@ -20,11 +21,19 @@ function ItemIcon:draw(drawCount)
 	local name = tostring(GameInfo.currentFile) .. "/" .. tostring(self.type)
 	ItemIcons:draw(name, self.x, self.y)
 	if dc then
+		if self.pick>0 then
+		love.graphics.setFont(DefaultFont)
+		love.graphics.setColor( 0, 1, 0, 1 )
+		love.graphics.printf(tostring"P"..(self.pick), self.x, self.y+28, 46, "right")
+		else
+		love.graphics.setColor( 1, 1, 1, 1 )
 		love.graphics.printf(tostring(self.count), self.x, self.y+30, 46, "right")
+		end
 	end
 	if self.equipped then
 		UIAtlas:draw("equip", self.x + 5, self.y + 2)
 	end
+	love.graphics.setColor( 1, 1, 1, 1 )
 	love.graphics.setFont(oldfont)
 end
 
@@ -60,4 +69,19 @@ function ItemIcon2:draw(drawRoomID)
 	end
 	love.graphics.setColor( 1, 1, 1, 1 )
 	love.graphics.setFont(oldfont)
+end
+ItemIcon3 = {}
+ItemIcon3.__index = ItemIcon3
+
+function ItemIcon3:new(x, y)
+	local o = {}
+	o.count = 0
+	o.type = 0
+	o.pick = 0
+	o.equipped = false
+	o.w = 48
+	o.h = 48
+	o.x = x or 1
+	o.y = y or 1
+	return setmetatable(o, self)
 end
