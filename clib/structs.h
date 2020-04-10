@@ -16,6 +16,9 @@ typedef int bool;
         lua_pushstring(L, "count"); \
             lua_pushnumber(L, (double)sd.Count); \
         lua_rawset(L, -3); \
+        lua_pushstring(L, "pick"); \
+            lua_pushnumber(L, (double)sd.Pick); \
+        lua_rawset(L, -3); \
     lua_rawset(L, -3);
 
 #define CreateEmptyItemTable \
@@ -27,6 +30,9 @@ typedef int bool;
             lua_pushnumber(L, 0); \
         lua_rawset(L, -3); \
         lua_pushstring(L, "count"); \
+            lua_pushnumber(L, 0); \
+        lua_rawset(L, -3); \
+        lua_pushstring(L, "pick"); \
             lua_pushnumber(L, 0); \
         lua_rawset(L, -3); \
     lua_rawset(L, -3);

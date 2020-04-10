@@ -939,10 +939,6 @@ char* GetStatusText(unsigned char stat)
 		return "Bleed";
 	else if (stat == 0x03)
 		return "Poison+Bleed";
-	else if (stat == 0x04)
-		return "Gas";
-	else if (stat == 0x06)
-		return "Gas+Bleed";
 	else if (stat == 0x00)
 		return "OK";
 
@@ -962,6 +958,10 @@ char* GetStatusText(unsigned char stat)
 	        return "Down+Gas";
 	    else if (stat > 0x0C)
 	        return "Dead";
+		else if (stat == 0x04)
+			return "Gas";
+		else if (stat == 0x06)
+			return "Gas+Bleed";
 
 	return "unknown";
 }
@@ -1262,7 +1262,7 @@ static int LGetItem(lua_State* L)
 				if (RItems[i].RItem[j].ID == 0x00||
 				RItems[i].RItem[j].Count == 0xFFFF||
 				RItems[i].RItem[j].EN != 0xFFFF||
-				RItems[i].RItem[j].Pick > 0 && RItems[i].RItem[j].Present ==0||
+				//RItems[i].RItem[j].Pick > 0 && RItems[i].RItem[j].Present ==0||
 				RItems[i].RItem[j].Mix == 0x20)
 				{
 					CreateEmptyItemTable
