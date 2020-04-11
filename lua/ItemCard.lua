@@ -56,8 +56,10 @@ function ItemCard:draw(x, y)
 	local item = Items[self.id]
 
 		for i=1, 32 do
+			--if(Items[self.id].roomitem[i].pick < 5) and (Items[self.id].roomitem[i].type > 0) and(Items[self.id].roomitem[i].count > 0) then
 			if not(Items[self.id].roomitem[i].id == -1) then
-				if (Items[self.id].roomitem[i].pick > 0) then
+				if (Items[self.id].roomitem[i].mix == 0x20
+				or (Items[self.id].roomitem[i].pick > 0) and (Items[self.id].roomitem[i].present == 0)) then
 				self.icons[i].type = Items[self.id].roomitem[i].type
 				self.icons[i].count = Items[self.id].roomitem[i].count
 				self.icons[i].pick = Items[self.id].roomitem[i].pick
