@@ -439,7 +439,7 @@ void UpdatePickups()
         int bytesRead = 0;
         if (info.CurrentFile == 1)
         {
-            ReadProcessMemory(ProcessHandle, (PCVOID)F1_PickupSpaceStart + (F1_PickupStructSize * i), &numberBuffer, 1, (PDWORD)&bytesRead);
+            ReadProcessMemory(ProcessHandle, (PCVOID)F1_PickupSpaceStart + (F1_PickupStructSize * i) + F1_NumberOffset, &numberBuffer, 1, (PDWORD)&bytesRead);
             ReadProcessMemory(ProcessHandle, (PCVOID)F1_PickupSpaceStart + (F1_PickupStructSize * i) + F1_IDOffset, &typeBuffer, 2, (PDWORD)&bytesRead);
             ReadProcessMemory(ProcessHandle, (PCVOID)F1_PickupSpaceStart + (F1_PickupStructSize * i) + F1_PickupCountOffset, &countBuffer, 2, (PDWORD)&bytesRead);
             ReadProcessMemory(ProcessHandle, (PCVOID)F1_PickupSpaceStart + (F1_PickupStructSize * i) + F1_PickupOffset, &pickBuffer, 2, (PDWORD)&bytesRead);
@@ -449,7 +449,7 @@ void UpdatePickups()
         }
         else if (info.CurrentFile == 2)
         {
-            ReadProcessMemory(ProcessHandle, (PCVOID)F2_PickupSpaceStart + (F2_PickupStructSize * i), &numberBuffer, 1, (PDWORD)&bytesRead);
+            ReadProcessMemory(ProcessHandle, (PCVOID)F2_PickupSpaceStart + (F2_PickupStructSize * i) + F2_NumberOffset, &numberBuffer, 1, (PDWORD)&bytesRead);
             ReadProcessMemory(ProcessHandle, (PCVOID)F2_PickupSpaceStart + (F2_PickupStructSize * i) + F2_IDOffset, &typeBuffer, 2, (PDWORD)&bytesRead);
             ReadProcessMemory(ProcessHandle, (PCVOID)F2_PickupSpaceStart + (F2_PickupStructSize * i) + F2_PickupCountOffset, &countBuffer, 2, (PDWORD)&bytesRead);
             ReadProcessMemory(ProcessHandle, (PCVOID)F2_PickupSpaceStart + (F2_PickupStructSize * i) + F2_PickupOffset, &pickBuffer, 2, (PDWORD)&bytesRead);
