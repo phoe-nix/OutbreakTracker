@@ -7,11 +7,8 @@ require "Label"
 require "PlayerCard"
 require "SPlayerCard"
 require "EnemyCard"
-require "EnemyCard2"
-require "EnemyCard3"
 require "LobbyCard"
 require "ItemCard"
-require "ItemCard2"
 
 local InitResult = false
 local RetryTimer = 0
