@@ -223,6 +223,8 @@ function GetPlayerHealthString(id)
 		return Players[id].HP .. "  " .. Time2string3(GameInfo.gastime)
 	elseif Players[id].status == "Down+Gas" then
 		return "Down"
+	elseif Players[id].status == "Cleared" then
+		return "Cleared"
 	else
 		return healthstring
 	end
@@ -234,7 +236,9 @@ function GetEnemyHealthString(id)
 	or Enemies[id].nameID == 11
 	or Enemies[id].nameID == 12
 	or Enemies[id].nameID == 14
-	or Enemies[id].nameID == 26 then
+	or Enemies[id].nameID == 26
+	or Enemies[id].nameID == 34
+	or Enemies[id].nameID == 56 then
 		return "Invincible"
 	elseif (Enemies[id].HP == 0x0
 	or Enemies[id].HP == 0xffff
@@ -281,6 +285,8 @@ function GetStatusColor(id)
 		return {1, 1, 0, 1}
 	elseif Players[id].status == "Gas+Bleed" then
 		return {1, 0.5, 0, 1}
+	elseif Players[id].status == "Cleared" then
+		return {0, 1, 0, 1}
 	else
 		return {1, 1, 1, 1}
 	end

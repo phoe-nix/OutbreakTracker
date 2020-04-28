@@ -25,7 +25,9 @@ function EnemyCard:draw(x, y)
 	or Enemies[self.id].nameID == 11
 	or Enemies[self.id].nameID == 12
 	or Enemies[self.id].nameID == 14
-	or Enemies[self.id].nameID == 26 then
+	or Enemies[self.id].nameID == 26
+	or Enemies[self.id].nameID == 34
+	or Enemies[self.id].nameID == 56 then
 		love.graphics.setColor(1,0,0,0.3)
 		love.graphics.rectangle('fill',4,4,72,7,0,0,1)
 		--love.graphics.rectangle('fill',4,4,(GetHealthbar(Enemies[self.id].HP, Enemies[self.id].maxHP))*72,7,0,0,1)
@@ -75,7 +77,9 @@ function EnemyCard2:draw(x, y)
 	or Enemies[self.id].nameID == 11
 	or Enemies[self.id].nameID == 12
 	or Enemies[self.id].nameID == 14
-	or Enemies[self.id].nameID == 26 then
+	or Enemies[self.id].nameID == 26
+	or Enemies[self.id].nameID == 34
+	or Enemies[self.id].nameID == 56 then
 		love.graphics.setColor(1,0,0,0.3)
 		love.graphics.rectangle('fill',4,4,72,7,0,0,1)
 		--love.graphics.rectangle('fill',4,4,(GetHealthbar(Enemies[self.id].HP, Enemies[self.id].maxHP))*72,7,0,0,1)
@@ -121,7 +125,9 @@ function EnemyCard3:draw(x, y)
 	or Enemies[self.id].nameID == 11
 	or Enemies[self.id].nameID == 12
 	or Enemies[self.id].nameID == 14
-	or Enemies[self.id].nameID == 26 then
+	or Enemies[self.id].nameID == 26
+	or Enemies[self.id].nameID == 34
+	or Enemies[self.id].nameID == 56 then
 		love.graphics.setColor(1,0,0,0.3)
 		love.graphics.rectangle('fill',6, 19,288,16,0,0,1)
 		--love.graphics.rectangle('fill',6, 19,(GetHealthbar(Enemies[self.id].HP, Enemies[self.id].maxHP))*290,14,0,0,1)
