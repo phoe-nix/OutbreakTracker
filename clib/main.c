@@ -735,6 +735,28 @@ double GetSpeed(int characterID)
   return (double)buffer;
 }
 
+double GetPositionX(int characterID)
+{
+  float buffer;
+  int bytesRead = 0;
+  if (info.CurrentFile == 1)
+      ReadProcessMemory(ProcessHandle, (PCVOID)F1_GetCharAddress(characterID) + F1_PositionX, &buffer, 4, (PDWORD)&bytesRead);
+  else
+      ReadProcessMemory(ProcessHandle, (PCVOID)F2_GetCharAddress(characterID) + F2_PositionX, &buffer, 4, (PDWORD)&bytesRead);
+  return (double)buffer;
+}
+
+double GetPositionY(int characterID)
+{
+  float buffer;
+  int bytesRead = 0;
+  if (info.CurrentFile == 1)
+      ReadProcessMemory(ProcessHandle, (PCVOID)F1_GetCharAddress(characterID) + F1_PositionY, &buffer, 4, (PDWORD)&bytesRead);
+  else
+      ReadProcessMemory(ProcessHandle, (PCVOID)F2_GetCharAddress(characterID) + F2_PositionY, &buffer, 4, (PDWORD)&bytesRead);
+  return (double)buffer;
+}
+
 double GetPercentage(int characterID)
 {
 	int currentBuffer;
@@ -941,7 +963,7 @@ char* GetStatusText(unsigned char stat)
 		return "Poison+Bleed";
 	else if (stat == 0x00)
 		return "OK";
-
+//0x2000 loading
 	if (info.CurrentFile == 1)
 	    if (stat >= 0x80)
 			return "Zombie";
@@ -949,6 +971,8 @@ char* GetStatusText(unsigned char stat)
 	        return "Down";
 	    else if (stat > 0x1C)
 	        return "Dead";
+	    else if (stat == 0x4)
+	        return "Cleared";
 	if (info.CurrentFile == 2)
 	    if (stat >= 0x30 && stat <= 0x34)
 	        return "Zombie";
@@ -1085,6 +1109,8 @@ static int LUpdatePlayer (lua_State* L)
 		Players[i].Size = GetSize(i);
 		Players[i].Speed = GetSpeed(i);
 		Players[i].Power = GetPower(i);
+		Players[i].PositionX = GetPositionX(i);
+		Players[i].PositionY = GetPositionY(i);
 		Players[i].RoomID = GetRoomID(i);
 		Players[i].SpecialItem = GetSpecialItem(i);
 		Players[i].EquippedItem = GetEquippedItem(i);
@@ -1374,6 +1400,14 @@ static int LGetPlayer (lua_State* L)
 			lua_pushnumber(L, Players[i].CritBonus);
 		lua_rawset(L, -3);
 
+		lua_pushstring(L, "positionX");
+			lua_pushnumber(L, Players[i].PositionX);
+		lua_rawset(L, -3);
+
+		lua_pushstring(L, "positionY");
+			lua_pushnumber(L, Players[i].PositionY);
+		lua_rawset(L, -3);
+
 		lua_pushstring(L, "roomID");
 			lua_pushnumber(L, (double)Players[i].RoomID);
 		lua_rawset(L, -3);
@@ -1465,8 +1499,13 @@ static int LGetEnemy (lua_State* L)
 {
 	double enemyID = lua_tonumber(L, 1);
 	int i = (int)(enemyID-1);
-	char* charname= GetEnemyName(Enemies[i].EnemyType);
-	char* name = GetEnemyName2(Enemies[i].NameID);
+	char* zombiename= GetZombieName(Enemies[i].EnemyType);
+	char* dogname= GetDogName(Enemies[i].EnemyType);
+	char* stname= GetSTName(Enemies[i].EnemyType);
+	char* lionname= GetLionName(Enemies[i].EnemyType);
+	char* tyrantname= GetTyrantName(Enemies[i].EnemyType);
+	char* thanatosname= GetThanatosName(Enemies[i].EnemyType);
+	char* name = GetEnemyName(Enemies[i].NameID);
 
 	lua_newtable(L);
 
@@ -1495,12 +1534,25 @@ static int LGetEnemy (lua_State* L)
 		lua_rawset(L, -3);
 
 		lua_pushstring(L, "type");
-			lua_pushstring(L, charname);
+			lua_pushnumber(L, Enemies[i].EnemyType);
+			//lua_pushstring(L, zombiename);
 		lua_rawset(L, -3);
 
 		lua_pushstring(L, "name");
 			if (name == NULL)
-				lua_pushstring(L, charname);
+				lua_pushstring(L, zombiename);
+			else if(name == "Zombie"&& zombiename != NULL)
+				lua_pushstring(L, zombiename);
+			else if(name == "Dog"&& dogname != NULL)
+				lua_pushstring(L, dogname);
+			else if(name == "Sci.Tail"&& stname != NULL)
+				lua_pushstring(L, stname);
+			else if(name == "Lion"&& lionname != NULL)
+				lua_pushstring(L, lionname);
+			else if(name == "Tyrant"&& tyrantname != NULL)
+				lua_pushstring(L, tyrantname);
+			else if(name == "Thanatos"&& thanatosname != NULL)
+				lua_pushstring(L, thanatosname);
 			else
 				lua_pushstring(L, name);
 		lua_rawset(L, -3);

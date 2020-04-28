@@ -19,6 +19,9 @@ typedef int bool;
         lua_pushstring(L, "pick"); \
             lua_pushnumber(L, (double)sd.Pick); \
         lua_rawset(L, -3); \
+        lua_pushstring(L, "present"); \
+            lua_pushnumber(L, (double)sd.Present); \
+        lua_rawset(L, -3); \
     lua_rawset(L, -3);
 
 #define CreateEmptyItemTable \
@@ -33,6 +36,9 @@ typedef int bool;
             lua_pushnumber(L, 0); \
         lua_rawset(L, -3); \
         lua_pushstring(L, "pick"); \
+            lua_pushnumber(L, 0); \
+        lua_rawset(L, -3); \
+        lua_pushstring(L, "present"); \
             lua_pushnumber(L, 0); \
         lua_rawset(L, -3); \
     lua_rawset(L, -3);
@@ -108,6 +114,8 @@ typedef struct
     double Size;
     double Power;
     double Speed;
+    double PositionX;
+    double PositionY;
     unsigned short RoomID;
     unsigned char Status;
     unsigned char NameID;
@@ -987,33 +995,106 @@ char* GetScenarioName(unsigned short ScenarioID)
     }
 }
 
-
-char* GetEnemyName(int charType)
+char* GetZombieName(int charType)
+{
+    switch(charType)
+    {
+        //case 18:
+        //    return "Amelia";
+        case 31:
+            return "G.Zombie";//GreenZombie
+        case 70:
+            return "Kevin";
+        case 71:
+            return "Mark";
+        case 72:
+            return "Jim";
+        case 73:
+            return "George";
+        case 74:
+            return "David";
+        case 75:
+            return "Alyssa";
+        case 76:
+            return "Yoko";
+        case 77:
+            return "Cindy";
+        case 80:
+            return "Bob";
+        case 85:
+            return "Will";
+        default:
+            return "Zombie";
+    }
+}
+char* GetDogName(int charType)
+{
+    switch(charType)
+    {
+        case 1:
+            return "Cerberus";//GreenZombie
+        case 4:
+            return "Shepherd";//Shepherd Dog
+        default:
+            return "Dog";
+    }
+}
+char* GetSTName(int charType)
 {
     switch(charType)
     {
         case 0:
-            return "Kevin";//Kevin
+            return "Sci.Tail";//Scissor Tail
         case 1:
-            return "Mark";//Mark
-        case 2:
-            return "Jim";//Jim
-        case 3:
-            return "George";//George
-        case 4:
-            return "David";//David
-        case 5:
-            return "Alyssa";//Alyssa
-        case 6:
-            return "Yoko";//Yoko
-        case 7:
-            return "Cindy";//Cindy
+            return "Sci.Tail P";//Scissor Tail Purple
         default:
-            return "Unknown";//Unknown
+            return "Sci.Tail";
     }
 }
-
-char* GetEnemyName2(int nameID)
+char* GetLionName(int charType)
+{
+    switch(charType)
+    {
+        case 0:
+            return "Stalker";//Scissor Tail
+        case 1:
+            return "Feral";//Scissor Tail Purple
+        default:
+            return "Lion";
+    }
+}
+char* GetTyrantName(int charType)
+{
+    switch(charType)
+    {
+        case 0:
+            return "Tyrant";//Scissor Tail
+        case 1:
+            return "Tyrant R";//Scissor Tail Purple
+        default:
+            return "Tyrant";
+    }
+}
+char* GetThanatosName(int charType)
+{
+    switch(charType)
+    {
+        case 0:
+            return "Thanatos";//Scissor Tail
+        case 1:
+            return "Thanatos R";//Scissor Tail Purple
+        default:
+            return "Thanatos";
+    }
+}
+//dog: White dog4, Cerberus1
+//lion: Stalker, Feral
+//licker: Licker1
+//Thanatos: Thanatos, Thanatos R
+//Tyrant: Tyrant, Tyrant R, Tyrant C
+//megabyte:0, purple1
+//Scissor Tail: 0,purple1
+char* GetEnemyName(int nameID)
 {
     switch (nameID)
     {
@@ -1130,7 +1211,7 @@ char* GetEnemyName2(int nameID)
         case 55:
             return "Leech";
         case 56:
-            return "ID:56";//
+            return "L.Tentacles";//Leech Tentacles
         case 57:
             return "Sniper";
         case 58:

@@ -10,6 +10,8 @@ const int F1_VirusMaxStart = 0x206E6C70;
 const int F1_ScenarioIDAddr = 0x203065AA;
 const int F1_FrameCounter = 0x2048BF78;
 
+const int F1_PositionX = 0x38;
+const int F1_PositionY = 0x40;
 const int F1_RoomIDOffset = 0x1E2;
 const int F1_CharacterEnabled = 0;
 const int F1_CharacterInGame = 1;
@@ -74,7 +76,7 @@ const int F1_E12Start = 0x20429530;
 const int F1_EnemyEnabled = 0;
 const int F1_EnemyInGame = 1;
 const int F1_EnemyNameIDOffset = 3;
-const int F1_EnemyTypeOffset = 4;
+const int F1_EnemyTypeOffset = 0xBBA;
 const int F1_EnemyStatusOffset = 0x32;
 
 int F1_GetEnemyAddress(int enemyID)
