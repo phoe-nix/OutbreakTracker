@@ -54,7 +54,22 @@ function ItemCard:draw(x, y)
 	love.graphics.translate(x, y)
 
 	local item = Items[self.id]
+	local p = GameInfo.playernum
 
+	if p == 1 then
+		for i=1, 32 do
+			--if(Items[self.id].roomitem[i].pick < 5) and (Items[self.id].roomitem[i].type > 0) and(Items[self.id].roomitem[i].count > 0) then
+			if not(Items[self.id].roomitem[i].id == -1) then
+				if not(Items[self.id].roomitem[i].mix == 0x20
+				or (Items[self.id].roomitem[i].pick > 0) and (Items[self.id].roomitem[i].present == 0)) then
+				self.icons[i].type = Items[self.id].roomitem[i].type
+				self.icons[i].count = Items[self.id].roomitem[i].count
+				love.graphics.setColor( 1, 1, 1, 1 )
+				self.icons[i]:draw()
+				end
+			end
+		end
+	else
 		for i=1, 32 do
 			--if(Items[self.id].roomitem[i].pick < 5) and (Items[self.id].roomitem[i].type > 0) and(Items[self.id].roomitem[i].count > 0) then
 			if not(Items[self.id].roomitem[i].id == -1) then
@@ -63,7 +78,7 @@ function ItemCard:draw(x, y)
 				self.icons[i].type = Items[self.id].roomitem[i].type
 				self.icons[i].count = Items[self.id].roomitem[i].count
 				self.icons[i].pick = Items[self.id].roomitem[i].pick
-				love.graphics.setColor( 1, 1, 1, 0.45 )
+				love.graphics.setColor( 1, 1, 1, 0.25 )
 				self.icons[i]:draw()
 				else
 				self.icons[i].type = Items[self.id].roomitem[i].type
@@ -74,7 +89,7 @@ function ItemCard:draw(x, y)
 				end
 			end
 		end
-
+	end
 
 	love.graphics.pop()
 end
@@ -110,7 +125,7 @@ function ItemCard2:draw(x, y)
 					self.icons[i].type = Items2[self.id].type
 					self.icons[i].count = Items2[self.id].count
 					self.icons[i].pick = Items2[self.id].pick
-					love.graphics.setColor( 1, 1, 1, 0.45 )
+					love.graphics.setColor( 1, 1, 1, 0.25 )
 					self.icons[i]:draw()
 				else
 					self.icons[i].type = Items2[self.id].type
@@ -156,7 +171,7 @@ function ItemCard3:draw(x, y)
 					self.icons[i].type = Items2[self.id].type
 					self.icons[i].roomid = Items2[self.id].roomid
 					--self.icons[i].pick = Items2[self.id].pick
-					love.graphics.setColor( 1, 1, 1, 0.45 )
+					love.graphics.setColor( 1, 1, 1, 0.25 )
 					self.icons[i]:draw()
 				else
 					self.icons[i].type = Items2[self.id].type
