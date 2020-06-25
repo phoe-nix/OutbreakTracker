@@ -217,14 +217,14 @@ function GetPlayerHealthString(id)
 	local healthstring = tostring(Players[id].HP) .. "/" .. tostring(Players[id].maxHP)
 	if Players[id].status == "Dead" or Players[id].status == "Down" or Players[id].status == "Zombie" then
 		return Players[id].status
-	elseif Players[id].status == "Bleed" or Players[id].status == "Poison+Bleed" or Players[id].status == "Gas+Bleed" then
-		return Players[id].HP .. "  " .. Time2string3(Players[id].bleedtime)
 	elseif Players[id].status == "Gas" then
 		return Players[id].HP .. "  " .. Time2string3(GameInfo.gastime)
 	elseif Players[id].status == "Down+Gas" then
 		return "Down"
 	elseif Players[id].status == "Cleared" then
 		return "Cleared"
+	--elseif Players[id].vgstoptime >0 then
+	--	return Players[id].HP .. "  " .. Time2string3(Players[id].vgstoptime)
 	else
 		return healthstring
 	end
@@ -334,6 +334,12 @@ function Time2string3(x)
 	local m = math.floor((x / (1800)) % 60)
 	local s = math.floor((x / 30) % 60)
 	return string.format("%02d", m) .. ":" .. string.format("%02d", s)
+end
+
+function Time2string4(x)
+	local m = math.floor((x / (1800)) % 60)
+	local s = math.floor((x / 60) % 60)
+	return string.format("%0d", m) .. ":" .. string.format("%02d", s)
 end
 
 function IsOuNumber(num)
