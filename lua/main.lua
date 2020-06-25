@@ -89,12 +89,14 @@ function love.draw()
 						love.graphics.printf(GameInfo.itemrandom%5+1, 0, (145*4+105), 12, "left")
 					else
 						love.graphics.printf(GameInfo.itemrandom+1, 0, (145*4+105), 12, "left")
+						--love.graphics.printf(GameInfo.itemrandom2, 0, (145*4+125), 12, "left")
 					end
 				else
 					if GameInfo.currentFile == 1 then
 						love.graphics.printf(GameInfo.itemrandom%5+1, 0, (145*p+105), 12, "left")
 					else
 						love.graphics.printf(GameInfo.itemrandom+1, 0, (145*p+105), 12, "left")
+						--love.graphics.printf(GameInfo.itemrandom2, 0, (145*p+125), 12, "left")
 					end
 				end
 				if TimeSwtich==1 and EnemyHPSwtich<2 then
@@ -322,6 +324,8 @@ function love.draw()
 							love.graphics.printf("-34", 85, (145*p), 300, "left")
 						elseif(GameInfo.pass4 == 0x4080) then
 							love.graphics.printf("-124", 85, (145*p), 300, "left")
+						elseif(GameInfo.pass4 == 0x40A0) then
+							love.graphics.printf("-24", 85, (145*p), 300, "left")
 						elseif(GameInfo.pass4 == 0x40C0) then
 							love.graphics.printf("-14", 85, (145*p), 300, "left")
 						elseif(GameInfo.pass4 == 0x40E0) then
@@ -845,7 +849,7 @@ function love.draw()
 								end
 							elseif(GameInfo.gasflag == 16) then
 								if(GameInfo.difficulty == "hard" or GameInfo.difficulty == "very hard") then
-									love.graphics.printf({{1, 1, 0, 1},GetRoomName(GameInfo.scenario,10).."\n"..GetRoomName(GameInfo.scenario,12).."\n"..GetRoomName(GameInfo.scenario,15)}, 180, (145*p)+60, 180,  "left")
+									love.graphics.printf({{1, 1, 0, 1},GetRoomName(GameInfo.scenario,10).."\n"..GetRoomName(GameInfo.scenario,12).."\n"..GetRoomName(GameInfo.scenario,15)}, 300*p, 120, 150, "left")
 								elseif(GameInfo.difficulty == "easy" or GameInfo.difficulty == "normal") then
 									love.graphics.printf({{1, 1, 0, 1},GetRoomName(GameInfo.scenario,12).."\n"..GetRoomName(GameInfo.scenario,15)}, 300*p, 120, 150, "left")
 								end
@@ -933,6 +937,8 @@ function love.draw()
 						love.graphics.printf("-34", 300*p+85, 185, 300, "left")
 					elseif(GameInfo.pass4 == 0x4080) then
 						love.graphics.printf("-124", 300*p+85, 185, 300, "left")
+					elseif(GameInfo.pass4 == 0x40A0) then
+						love.graphics.printf("-24", 300*p+85, 185, 300, "left")
 					elseif(GameInfo.pass4 == 0x40C0) then
 						love.graphics.printf("-14", 300*p+85, 185, 300, "left")
 					elseif(GameInfo.pass4 == 0x40E0) then
