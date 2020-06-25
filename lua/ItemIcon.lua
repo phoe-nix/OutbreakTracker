@@ -21,16 +21,30 @@ function ItemIcon:draw(drawCount)
 	local name = tostring(GameInfo.currentFile) .. "/" .. tostring(self.type)
 	ItemIcons:draw(name, self.x, self.y)
 	if dc then
+		if self.type==15 then
+		love.graphics.setColor( 20/255, 200/255, 255/255, 1 )
+		love.graphics.printf(tostring(self.count), self.x, self.y+30, 46, "right")
+		elseif self.type==16 then
+		love.graphics.setColor( 255/255, 0/255, 0/255, 1 )
+		love.graphics.printf(tostring(self.count), self.x, self.y+30, 46, "right")
+		elseif self.type==17 then
+		love.graphics.setColor( 0/255, 255/255, 0/255, 1 )
+		love.graphics.printf(tostring(self.count), self.x, self.y+30, 46, "right")
+		elseif self.type==18 then
+		love.graphics.setColor( 255/255, 255/255, 255/255, 1 )
+		love.graphics.printf(tostring(self.count), self.x, self.y+30, 46, "right")
+		else
+		love.graphics.setColor( 253/255, 253/255, 168/255, 1 )
+		love.graphics.printf(tostring(self.count), self.x, self.y+30, 46, "right")
+		end
 		if self.pick>0 then
 		love.graphics.setFont(DefaultFont)
-		love.graphics.setColor( 0, 1, 0, 1 )
-		love.graphics.printf(tostring"P"..(self.pick), self.x, self.y+28, 46, "right")
-		else
-		love.graphics.setColor( 1, 1, 1, 1 )
-		love.graphics.printf(tostring(self.count), self.x, self.y+30, 46, "right")
+		love.graphics.setColor( 1, 1, 0, 1 )
+		love.graphics.printf(tostring"P"..(self.pick), self.x, self.y+0, 46, "right")
 		end
 	end
 	if self.equipped then
+		love.graphics.setColor( 1, 1, 1, 1 )
 		UIAtlas:draw("equip", self.x + 5, self.y + 2)
 	end
 	love.graphics.setColor( 1, 1, 1, 1 )
@@ -60,9 +74,12 @@ function ItemIcon2:draw(drawRoomID)
 	local name = tostring(GameInfo.currentFile) .. "/" .. tostring(self.type)
 	ItemIcons:draw(name, self.x, self.y)
 	if dc then
+		if self.roomid>0 then
 		--love.graphics.printf(tostring(self.count), self.x, self.y+30, 46, "right")
-		love.graphics.setColor( 0, 1, 0, 1 )
-		love.graphics.printf(tostring(self.roomid), self.x, self.y+30, 46, "right")
+		love.graphics.setFont(DefaultFont)
+		love.graphics.setColor( 1, 1, 1, 1 )
+		love.graphics.printf(tostring(self.roomid), self.x, self.y+28, 46, "right")
+		end
 	end
 	if self.equipped then
 		UIAtlas:draw("equip", self.x + 5, self.y + 2)
