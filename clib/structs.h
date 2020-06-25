@@ -62,6 +62,7 @@ typedef struct
 	unsigned int GasFlag;
 	unsigned char GasRandom;
 	unsigned char ItemRandom;
+	//unsigned short ItemRandom2;
 	unsigned char P1Coin;
 	unsigned char P2Coin;
 	unsigned char P3Coin;
@@ -108,6 +109,9 @@ typedef struct
     unsigned short HP;
     unsigned short MaxHP;
     unsigned short BleedTime;
+    unsigned short AntiVirusTime;
+    unsigned short AntiVirusGTime;
+    unsigned short HerbTime;
     unsigned char CharacterType;
     double Virus;
     double CritBonus;
@@ -333,7 +337,7 @@ char* GetF1NPCName(int nameID)
         case 51:
             return "BEN";//HPtype3
         case 52:
-            return "LUCY";//regan's daughter
+            return "Unknown";//regan's daughter
         case 53:
             return "REGAN";//HPtype3
         case 54:
@@ -533,21 +537,21 @@ char* GetF1NPCName(int nameID)
         case 151:
             return "RODNEY";//HPtype2
         case 201:
-            return "KEVIN?";//none
+            return "Kevin";//none
         case 202:
-            return "MARK?";//none
+            return "Mark";//none
         case 203:
-            return "JIM?";//none
+            return "Jim";//none
         case 204:
-            return "GEORGE?";//none
+            return "George";//none
         case 205:
-            return "DAVID?";//none
+            return "David";//none
         case 206:
-            return "ALYSSA?";//none
+            return "Alyssa";//none
         case 207:
-            return "YOKO?";//none
+            return "Yoko";//none
         case 208:
-            return "CINDY?";//none
+            return "Cindy";//none
         default:
             return NULL;
 
@@ -661,7 +665,7 @@ char* GetNPCName(int nameID)
         case 51:
             return "BEN";//HPtype3
         case 52:
-            return "LUCY";//LUCY
+            return "Unknown";//LUCY
         case 53:
             return "REGAN";//HPtype3
         case 54:
@@ -821,27 +825,27 @@ char* GetNPCName(int nameID)
         case 131:
             return "ETHAN";//HPtype2
         case 132:
-            return "ETHAN:B";//ETHAN:B
+            return "Unknown";//ETHAN:B
         case 133:
             return "HOWARD";//HPtype3
         case 134:
-            return "HOWARD:B";//HOWARD:B
+            return "Unknown";//HOWARD:B
         case 135:
             return "ISAAC";//HPtype4
         case 136:
-            return "ISAAC:B";//ISAAC:B
+            return "Unknown";//ISAAC:B
         case 137:
             return "KATHY";//HPtype2
         case 138:
-            return "KATHY:B";//KATHY:B
+            return "Unknown";//KATHY:B
         case 139:
             return "ELENA";//HPtype4
         case 140:
-            return "ELENA:B";//ELENA:B
+            return "Unknown";//ELENA:B
         case 141:
             return "FRANK";//HPtype4
         case 142:
-            return "KATHY:C";//GOLDEN WOMAN
+            return "Unknown";//GOLDEN WOMAN
         case 143:
             return "Unknown";//none
         case 144:
@@ -861,21 +865,21 @@ char* GetNPCName(int nameID)
         case 151:
             return "RODNEY";//HPtype2
         case 201:
-            return "KEVIN?";//none
+            return "Kevin";//none
         case 202:
-            return "MARK?";//none
+            return "Mark";//none
         case 203:
-            return "JIM?";//none
+            return "Jim";//none
         case 204:
-            return "GEORGE?";//none
+            return "George";//none
         case 205:
-            return "DAVID?";//none
+            return "David";//none
         case 206:
-            return "ALYSSA?";//none
+            return "Alyssa";//none
         case 207:
-            return "YOKO?";//none
+            return "Yoko";//none
         case 208:
-            return "CINDY?";//none
+            return "Cindy";//none
         default:
             return NULL;
 
@@ -1056,9 +1060,9 @@ char* GetLionName(int charType)
     switch(charType)
     {
         case 0:
-            return "Stalker";//Scissor Tail
+            return "Stalker";
         case 1:
-            return "Feral";//Scissor Tail Purple
+            return "Feral";
         default:
             return "Lion";
     }
@@ -1068,9 +1072,11 @@ char* GetTyrantName(int charType)
     switch(charType)
     {
         case 0:
-            return "Tyrant";//Scissor Tail
+            return "Tyrant";
         case 1:
-            return "Tyrant R";//Scissor Tail Purple
+            return "Tyrant R";
+        case 3:
+            return "Tyrant C";
         default:
             return "Tyrant";
     }
@@ -1567,6 +1573,22 @@ char* GetNPCHP(int charType)
             return "Unknown";//none
         case 151:
             return "1300~1600";//94
+        case 201:
+            return "Unknown";//none
+        case 202:
+            return "Unknown";//none
+        case 203:
+            return "Unknown";//none
+        case 204:
+            return "Unknown";//none
+        case 205:
+            return "Unknown";//none
+        case 206:
+            return "Unknown";//none
+        case 207:
+            return "Unknown";//none
+        case 208:
+            return "Unknown";//none
         default:
             return NULL;
 
@@ -1904,6 +1926,22 @@ char* GetNPCPower(int charType)
             return "Unknown";//none
         case 151:
             return "94%";
+        case 201:
+            return "Unknown";//none
+        case 202:
+            return "Unknown";//none
+        case 203:
+            return "Unknown";//none
+        case 204:
+            return "Unknown";//none
+        case 205:
+            return "Unknown";//none
+        case 206:
+            return "Unknown";//none
+        case 207:
+            return "Unknown";//none
+        case 208:
+            return "Unknown";//none
         default:
             return NULL;
 
