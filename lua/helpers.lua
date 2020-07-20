@@ -145,6 +145,22 @@ function GetConditionColor2(r, stat)
 	end
 end
 
+function GetConditionColor3(r, stat)
+	if (r == "fine") then
+		return {109/255, 131/255, 227/255, 1}
+	elseif (r == "caution") then
+		return {247/255, 223/255, 27/255, 0.75}
+	elseif (r == "caution2") then
+		return {253/255, 166/255, 25/255, 0.75}
+	elseif (r == "danger") then
+		return {253/255, 25/255, 25/255, 0.75}
+	elseif (r == "dead") then
+		return {0/255, 0/255, 0/255, 0.5}
+	elseif (r == "Invincible") then
+		return {0/255, 0/255, 0/255, 0.5}
+	end
+end
+
 function GetRoomName(scenario, roomID)
 	if not (RoomNames[scenario] == nil) then
 		if RoomNames[scenario][roomID] == nil then
@@ -230,6 +246,62 @@ function GetPlayerHealthString(id)
 	end
 end
 
+function GetEnemiesHealthString2(id)
+	local healthstring = tostring(Enemies2[id].HP)
+	if Enemies2[id].HP == 0x7fff
+	or Enemies2[id].nameID == 11
+	or Enemies2[id].nameID == 12
+	or Enemies2[id].nameID == 14
+	or Enemies2[id].nameID == 26
+	or Enemies2[id].nameID == 34
+	or Enemies2[id].nameID == 56 then
+		return "Inv."
+	elseif (Enemies2[id].HP == 0x0
+	or Enemies2[id].HP == 0xffff
+	or Enemies2[id].HP >= 0x8000)
+	and not (Enemies2[id].nameID == 54
+	or Enemies2[id].nameID == 58) then
+		return "Dead"
+	elseif (Enemies2[id].HP == 0xffff
+	and Enemies2[id].maxHP == 0x1
+	and Enemies2[id].nameID == 54) then
+		return "Destroyed"
+	elseif (Enemies2[id].HP == 0x0
+	and Enemies2[id].nameID == 58) then
+		return "Exploded"
+	else
+		return healthstring 
+	end
+end
+
+function GetBossHealthString(id)
+	local healthstring = tostring(Boss[id].HP)
+	if Boss[id].HP == 0x7fff
+	or Boss[id].nameID == 11
+	or Boss[id].nameID == 12
+	or Boss[id].nameID == 14
+	or Boss[id].nameID == 26
+	or Boss[id].nameID == 34
+	or Boss[id].nameID == 56 then
+		return "Inv."
+	elseif (Boss[id].HP == 0x0
+	or Boss[id].HP == 0xffff
+	or Boss[id].HP >= 0x8000)
+	and not (Boss[id].nameID == 54
+	or Boss[id].nameID == 58) then
+		return "Dead"
+	elseif (Boss[id].HP == 0xffff
+	and Boss[id].maxHP == 0x1
+	and Boss[id].nameID == 54) then
+		return "Destroyed"
+	elseif (Boss[id].HP == 0x0
+	and Boss[id].nameID == 58) then
+		return "Exploded"
+	else
+		return healthstring 
+	end
+end
+
 function GetEnemyHealthString(id)
 	local healthstring = tostring(Enemies[id].HP) .. "/" .. tostring(Enemies[id].maxHP)
 	if Enemies[id].HP == 0x7fff
@@ -258,6 +330,20 @@ function GetEnemyHealthString(id)
 	end
 end
 
+function GetBossColor(id)
+if Boss[id].nameID == 54
+		or Boss[id].nameID == 58 
+		or Boss[id].nameID == 60 then
+		return {255/255, 80/255, 40/255, 1}
+	elseif Boss[id].nameID == 4
+		or Boss[id].nameID == 46
+		or Boss[id].nameID == 61 then
+		return {0, 1, 0, 1}--non enemy
+	else
+		return {1, 1, 1, 1}
+	end
+end
+
 function GetEnemyColor(id)
 if Enemies[id].nameID == 54
 		or Enemies[id].nameID == 58 
@@ -266,6 +352,20 @@ if Enemies[id].nameID == 54
 	elseif Enemies[id].nameID == 4
 		or Enemies[id].nameID == 46
 		or Enemies[id].nameID == 61 then
+		return {0, 1, 0, 1}--non enemy
+	else
+		return {1, 1, 1, 1}
+	end
+end
+
+function GetEnemyColor2(id)
+if Enemies2[id].nameID == 54
+		or Enemies2[id].nameID == 58 
+		or Enemies2[id].nameID == 60 then
+		return {255/255, 80/255, 40/255, 1}
+	elseif Enemies2[id].nameID == 4
+		or Enemies2[id].nameID == 46
+		or Enemies2[id].nameID == 61 then
 		return {0, 1, 0, 1}--non enemy
 	else
 		return {1, 1, 1, 1}
@@ -316,12 +416,20 @@ function GetVirusState(virus)
 	end
 end
 
+function RealTime(x)
+	local h = math.floor(x / 3600)
+	local m = math.floor((x / 60) % 60)
+	local s = math.floor(x % 60)
+	local mi = math.floor((x * 10)%10 / 1)
+	return string.format("%02d", h) .. ":" .. string.format("%02d", m) .. ":" .. string.format("%02d", s) .. "." .. string.format("%.1d", mi)
+end
+
 function Time2string(x)
 	local h = math.floor(((x / (3600000)) % 24))
 	local m = math.floor((x / (60000)) % 60)
 	local s = math.floor((x / 1000) % 60)
-	local mi = math.floor(x % 1000 / 10)
-	return string.format("%02d", h) .. ":" .. string.format("%02d", m) .. ":" .. string.format("%02d", s) .. "." .. string.format("%2.2d", mi)
+	local mi = math.floor(x % 1000 / 100)
+	return string.format("%02d", h) .. ":" .. string.format("%02d", m) .. ":" .. string.format("%02d", s) .. "." .. string.format("%.1d", mi)
 end
 
 function Time2string2(x)
@@ -336,8 +444,14 @@ function Time2string3(x)
 	return string.format("%02d", m) .. ":" .. string.format("%02d", s)
 end
 
-function Time2string4(x)
+function Time2string4(x)--bleeding time
 	local m = math.floor((x / (1800)) % 60)
+	local s = math.floor((x / 30) % 60)
+	return string.format("%0d", m) .. ":" .. string.format("%02d", s)
+end
+
+function Time2string5(x)--stopping virus time
+	local m = math.floor((x / (3600)) % 60)
 	local s = math.floor((x / 60) % 60)
 	return string.format("%0d", m) .. ":" .. string.format("%02d", s)
 end

@@ -14,7 +14,8 @@ function LoadAssets()
 	DefaultFont = love.graphics.newFont("assets/arialbd.ttf",18)
 	SmallFont = love.graphics.newFont("assets/arialbd.ttf",15)
 	VerySmallFont = love.graphics.newFont("assets/arialbd.ttf",13)
-	MiniFont = love.graphics.newFont(9)
+	MiniFont = love.graphics.newFont("assets/arialnb.ttf",11)
+	--MiniFont = love.graphics.newFont(9)
 end
 
 function LoadTextureAtlas(texture, links) -- Really dirty stuff here

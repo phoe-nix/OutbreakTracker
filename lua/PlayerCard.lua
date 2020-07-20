@@ -78,7 +78,7 @@ function PlayerCard:draw(x, y)
 		sb:setColor(1, 1, 1, 1)
 		UIAtlas:addSB(sb, "invDouble", 0, 37);
 	end
-	if Players[self.id].type == "Alyssa" then
+	if Players[self.id].type == "Alyssa" and not (Players[self.id].status == "Dead") then
 		love.graphics.setFont(VerySmallFont)
 		love.graphics.printf("I",118, 92,12, "center")
 		love.graphics.printf("S",130, 92,12, "center")
@@ -134,7 +134,7 @@ function PlayerCard:draw(x, y)
 
 	love.graphics.setFont(VerySmallFont)
 	love.graphics.setColor( 0, 1, 0, 1 )
-	if Players[self.id].type == "Alyssa" then
+	if Players[self.id].type == "Alyssa" and not (Players[self.id].status == "Dead") then
 		if (GameInfo.scenario == "outbreak") then
 			if Players[self.id].roomID == 1 then
 				if(math.floor(Players[self.id].positionX*100+0.5) > 922211-25000
@@ -641,29 +641,30 @@ function PlayerCard:draw(x, y)
 	local b = Players[self.id].antivirusgtime
 	local c = Players[self.id].herbtime
 	local d = Players[self.id].bleedtime
+	local e = Players[self.id].status
 
 	if GameInfo.currentFile == 1 then
 		if b > 0 then
-			ItemIcons:draw("1/317", 250, 66,0,0.65)
-			love.graphics.printf({{0, 0, 0, 1},Time2string4(b)},241,73,60,"right")
-			love.graphics.printf({{1, 1, 1, 1},Time2string4(b)},240,72,60,"right")
+			ItemIcons:draw("1/317", 250, 64,0,0.65)
+			love.graphics.printf({{0, 0, 0, 1},Time2string5(b)},241,73,60,"right")
+			love.graphics.printf({{1, 1, 1, 1},Time2string5(b)},240,72,60,"right")
 		end
 	end
 	if a > c then
 		if a > 0 then
 			ItemIcons:draw("1/316", 250, 82,0,0.65)
-			love.graphics.printf({{0, 0, 0, 1},Time2string4(a)},241,91,60,"right")
-			love.graphics.printf({{1, 1, 1, 1},Time2string4(a)},240,90,60,"right")
+			love.graphics.printf({{0, 0, 0, 1},Time2string5(a)},241,91,60,"right")
+			love.graphics.printf({{1, 1, 1, 1},Time2string5(a)},240,90,60,"right")
 		end
 	else
 		if c > 0 then
 			ItemIcons:draw("1/316", 250, 82,0,0.65)
-			love.graphics.printf({{0, 0, 0, 1},Time2string4(c)},241,91,60,"right")
-			love.graphics.printf({{1, 1, 1, 1},Time2string4(c)},240,90,60,"right")
+			love.graphics.printf({{0, 0, 0, 1},Time2string5(c)},241,91,60,"right")
+			love.graphics.printf({{1, 1, 1, 1},Time2string5(c)},240,90,60,"right")
 		end
 	end
 
-	if d > 0 then
+	if d > 0 and e =="Bleed" then
 		if b > 0 and GameInfo.currentFile == 1 then
 			ItemIcons:draw("1/311", 250, 46,0,0.65)
 			love.graphics.printf({{0, 0, 0, 1},Time2string4(d)},241,55,60,"right")
@@ -675,7 +676,7 @@ function PlayerCard:draw(x, y)
 			love.graphics.printf({{1, 0, 0, 1},Time2string4(d)},240,72,60,"right")
 		else
 			ItemIcons:draw("1/311", 250, 82,0,0.65)
-			love.graphics.printf({{0, 0, 0, 1},Time2string4(d)},217,91,60,"right")
+			love.graphics.printf({{0, 0, 0, 1},Time2string4(d)},241,91,60,"right")
 			love.graphics.printf({{1, 0, 0, 1},Time2string4(d)},240,90,60,"right")
 		end
 	end
