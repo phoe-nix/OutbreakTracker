@@ -233,7 +233,7 @@ function PlayerCard:draw(x, y)
 				and math.floor(Players[self.id].positionY*100+0.5) > 977602-25000
 				and math.floor(Players[self.id].positionY*100+0.5) < 977602+25000) then
 					if(GameInfo.difficulty == "very hard") then
-						love.graphics.printf("W",118, 104,12, "center")--1F Corridor¡ú Lounge Stairs
+						love.graphics.printf("W",118, 104,12, "center")--1F Corridorâ†’ Lounge Stairs
 					elseif(GameInfo.difficulty == "hard") then
 						love.graphics.printf("P",130, 104,12, "center")
 					else
@@ -493,7 +493,7 @@ function PlayerCard:draw(x, y)
 				and math.floor(Players[self.id].positionY*100+0.5) > 947788-25000
 				and math.floor(Players[self.id].positionY*100+0.5) < 947788+25000) then
 					if GameInfo.difficulty == "very hard" then
-						love.graphics.printf("S",130, 92,12, "center")--1F Lobby¡ú Main Hall
+						love.graphics.printf("S",130, 92,12, "center")--1F Lobbyâ†’ Main Hall
 					elseif GameInfo.difficulty == "hard" then
 						love.graphics.printf("P",130, 104,12, "center")
 					else
@@ -507,7 +507,7 @@ function PlayerCard:draw(x, y)
 				and math.floor(Players[self.id].positionY*100+0.5) > 847397-25000
 				and math.floor(Players[self.id].positionY*100+0.5) < 847397+25000) then
 					if GameInfo.difficulty == "very hard" then
-						love.graphics.printf("S",130, 92,12, "center")--1F Lobby¡ú Hallway
+						love.graphics.printf("S",130, 92,12, "center")--1F Lobbyâ†’ Hallway
 					elseif GameInfo.difficulty == "hard" then
 						love.graphics.printf("P",130, 104,12, "center")
 					else
@@ -664,7 +664,7 @@ function PlayerCard:draw(x, y)
 		end
 	end
 
-	if d > 0 and e =="Bleed" then
+	if d > 0 and (e =="Bleed" or e =="Poison+Bleed" or e =="Gas+Bleed") then
 		if b > 0 and GameInfo.currentFile == 1 then
 			ItemIcons:draw("1/311", 250, 46,0,0.65)
 			love.graphics.printf({{0, 0, 0, 1},Time2string4(d)},241,55,60,"right")
