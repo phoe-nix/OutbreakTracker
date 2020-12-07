@@ -200,6 +200,7 @@ function love.draw()
 		if Style==0 then
 			time_x = 0
 			time_y = 145*p
+			lobby_n = 20
 			lobby_x = 0
 			lobby_y = 32
 			hostmap_x = 0
@@ -235,20 +236,21 @@ function love.draw()
 		else
 			time_x = 300
 			time_y = 185
+			lobby_n = 5
 			lobby_x = 0
 			lobby_y = 32
-			hostmap_x = 0
+			hostmap_x = 1090
 			hostmap_y = 0
-			hostmap_scale = 0.60
-			hosttime_x =2
-			hosttime_y =115
-			hostplayer_x = 2
-			hostplayer_y = 135
-			hostdifficulty_x = 2
-			hostdifficulty_y = 155
-			slotplayer_x = 300
+			hostmap_scale = 1
+			hosttime_x =1102
+			hosttime_y =15
+			hostplayer_x = 1102
+			hostplayer_y = 35
+			hostdifficulty_x = 1130
+			hostdifficulty_y = 15
+			slotplayer_x = 290
 			slotplayer_y = 0
-			slotplayer_z = 150
+			slotplayer_z = 0
 			timeleft_x = 300*p
 			timeleft_y = 185
 			passwt_x = 300*p+60
@@ -276,17 +278,28 @@ function love.draw()
 			love.graphics.printf("No.",10, 8,20, "right")
 			love.graphics.printf("Title & Scenario",40, 8,130, "left")
 			love.graphics.printf("HEADS",240, 8,50, "left")
-			for i=1, 20 do
+			for i=1, lobby_n do
 				LobbyCards[i]:draw(lobby_x, (i-1)*lobby_y)		
+			end
+			if Style==1 then
+				for i=6, 10 do
+					LobbyCards[i]:draw(300, (i-6)*lobby_y)		
+				end
+				for i=11, 15 do
+					LobbyCards[i]:draw(300*2, (i-11)*lobby_y)		
+				end
+				for i=16, 20 do
+					LobbyCards[i]:draw(300*3, (i-16)*lobby_y)		
+				end
 			end
 		end
 
 		if (hs >= 4 and hs < 6 and s=="") then
 			UIAtlas:draw(hm, hostmap_x, hostmap_y, 0, hostmap_scale)
-			love.graphics.printf(Time2string2(GameInfo.hosttime), 15, 595, 300, "left")
-			love.graphics.printf(hp.."/"..GameInfo.hostmaxplayer+2, 15, 620, 300, "left")
+			love.graphics.printf(Time2string2(GameInfo.hosttime), hosttime_x, hosttime_y, 300, "left")
+			love.graphics.printf(hp.."/"..hmp+2, hostplayer_x, hostplayer_y, 300, "left")
 			love.graphics.setFont(DefaultFont)
-			love.graphics.printf(GameInfo.hostdifficulty, 10, 590, 200, "right")
+			love.graphics.printf(hd, hostdifficulty_x, hostdifficulty_y, 200, "right")
 
 			for i=1, 4 do
 				if SPlayers[i].enabled then
@@ -612,6 +625,46 @@ function love.draw()
 						end
 					end
 				end
+				if EnemyHPSwtich==2 then
+					if Style==0 then
+						--for i=8, 8 do
+						--	--if Boss[i].nameID==32 then
+							--	BossCards[i]:draw(0,(i-8)*1+(145*p)+20)
+							--end
+						--end
+                
+						for i=1, 6 do
+							if Enemies[i].inGame then
+								EnemyCards2[i]:draw(0,(i-1)*14+(145*p)+20)
+							end
+						end
+						for i=7, 12 do
+							if Enemies[i].inGame then
+								EnemyCards2[i]:draw(150,(i-7)*14+(145*p)+20)
+							end
+						end
+						for i=12, 12 do--for plant boss
+							if Enemies[i].enabled then
+								if not Enemies[i].inGame then
+									EnemyCards2[i]:draw(150,(i-7)*14+(145*p)+20)
+								end
+							end
+						end
+					else
+						for i=1, 12 do
+							if Enemies[i].inGame then
+								EnemyCards2[i]:draw(300*p,(i-1)*15+2)
+							end
+						end
+						for i=12, 12 do--for plant boss
+							if Enemies[i].enabled then
+								if not Enemies[i].inGame then
+									EnemyCards2[i]:draw(300*p,(i-1)*15+2)
+								end
+							end
+						end
+					end
+				end
 				if EnemyList==1 then
 					if Style==0 then
 						for i=1, 80 do
@@ -645,7 +698,7 @@ function love.draw()
 			end
 		end
 		love.graphics.setFont(TimeFont)
-		if EnemyHPSwtich<2 and f > 0 and EnemyList == 0 and ItemList ==0 then
+		if EnemyHPSwtich<3 and f > 0 and EnemyList == 0 and ItemList ==0 then
 			if (s == "wild things") then
 				if(GameInfo.wttime > 0) and not (GameInfo.wttime == 0xffff) then
 					love.graphics.printf(Time2string3(GameInfo.wttime), timeleft_x, timeleft_y, 300, "left")
@@ -964,19 +1017,19 @@ function love.draw()
 			love.graphics.rectangle('fill',2,2,296,201,3,3,1)
 			love.graphics.setFont(VerySmallFont)
 			love.graphics.setColor( 1, 1, 1, 1 )
-			love.graphics.printf("Hotkeys list:\n F1: Show/hide help menu.\n F2: Show/hide item list/ F3: Switch room list.\n F4: Show/hide enemy list. F5: No border.\n 1/2/3/4: Change window size.\n I: Show/hide item list in current room.\n T: Switch/hide RTA/Real Timers.\n E: Show/hide enemy list in current room.\n S: Simple window.\n A: Auto size.\n D: Default.\n H/V: Change layout style.\n ESC: Exit.", 4, 4, 300, "left")
+			love.graphics.printf("Hotkeys list:\n F1: Show/hide help menu.\n F2: Show/hide item list/ F3: Switch room list.\n F4: Show/hide enemy list. F5: No border.\n 1/2/3/4: Change window size.\n I: Show/hide item list in current room.\n T: Switch/hide RTA/Real Timers.\n E: Switch/hide enemy HP in current room.\n S: Simple window.\n A: Auto size.\n D: Default.\n H/V: Change layout style.\n ESC: Exit.", 4, 4, 300, "left")
 		end
 
 	elseif InitResult == false then
 		love.graphics.setFont(DefaultFont)
 		love.graphics.printf("Unable to find PCSX2 process.\n Will try again in " .. tostring(math.floor(5-RetryTimer + 0.5)) .. ".", errorX, errorY, 300, "center")
 		love.graphics.setFont(VerySmallFont)
-		love.graphics.printf("Hotkeys list:\n F1: Show/hide help menu.\n F2: Show/hide item list/ F3: Switch room list.\n F4: Show/hide enemy list. F5: No border.\n 1/2/3/4: Change window size.\n I: Show/hide item list in current room.\n T: Switch/hide RTA/IGT Timers.\n E: Show/hide enemy list in current room.\n S: Simple window.\n A: Auto size.\n D: Default.\n H/V: Change layout style.\n ESC: Exit.\n\nCredits\n    Program: Fothsid, killme\n    Thanks: morshi, alyssaprimp\nCode: github.com/phoe-nix/OutbreakTracker", 4, 4, 300, "left")
+		love.graphics.printf("Hotkeys list:\n F1: Show/hide help menu.\n F2: Show/hide item list/ F3: Switch room list.\n F4: Show/hide enemy list. F5: No border.\n 1/2/3/4: Change window size.\n I: Show/hide item list in current room.\n T: Switch/hide RTA/IGT Timers.\n E: Switch/hide enemy HP in current room.\n S: Simple window.\n A: Auto size.\n D: Default.\n H/V: Change layout style.\n ESC: Exit.\n\nCredits\n    Program: Fothsid, killme\n    Thanks: morshi, alyssaprimp\nCode: github.com/phoe-nix/OutbreakTracker", 4, 4, 300, "left")
 	elseif InitResult == true and GameInfo.currentFile == 255 then
 		love.graphics.setFont(DefaultFont)
 		love.graphics.printf("This is not Biohazard Outbreak game.\n Will try again in " .. tostring(math.floor(5-RetryTimer + 0.5)) .. ".", errorX, errorY, 300, "center")
 		love.graphics.setFont(VerySmallFont)
-		love.graphics.printf("Hotkeys list:\n F1: Show/hide help menu.\n F2: Show/hide item list/ F3: Switch room list.\n F4: Show/hide enemy list. F5: No border.\n 1/2/3/4: Change window size.\n I: Show/hide item list in current room.\n T: Switch/hide RTA/IGT Timers.\n E: Show/hide enemy list in current room.\n S: Simple window.\n A: Auto size.\n D: Default.\n H/V: Change layout style.\n ESC: Exit.\n\nCredits\n    Program: Fothsid, killme\n    Thanks: morshi, alyssaprimp\nCode: github.com/phoe-nix/OutbreakTracker", 4, 4, 300, "left")
+		love.graphics.printf("Hotkeys list:\n F1: Show/hide help menu.\n F2: Show/hide item list/ F3: Switch room list.\n F4: Show/hide enemy list. F5: No border.\n 1/2/3/4: Change window size.\n I: Show/hide item list in current room.\n T: Switch/hide RTA/IGT Timers.\n E: Switch/hide enemy HP in current room.\n S: Simple window.\n A: Auto size.\n D: Default.\n H/V: Change layout style.\n ESC: Exit.\n\nCredits\n    Program: Fothsid, killme\n    Thanks: morshi, alyssaprimp\nCode: github.com/phoe-nix/OutbreakTracker", 4, 4, 300, "left")
 	end
 end
 
@@ -1135,7 +1188,8 @@ function love.keypressed(key)
 			end
 			if key =="e" then
 				if EnemyHPSwtich == 0 then EnemyHPSwtich=1
-				elseif EnemyHPSwtich==1 then EnemyHPSwtich=0
+				elseif EnemyHPSwtich==1 then EnemyHPSwtich=2
+				elseif EnemyHPSwtich==2 then EnemyHPSwtich=0
 				end
 			end
 			if key == "1" then love.window.setMode(300, (145*1),{resizable=true,vsync = 3}) love.window.setPosition(x, y)scalex,scaley = 300, (145*1) end
