@@ -1,6 +1,6 @@
 ItemCard = {}
 ItemCard.__index = ItemCard
-local x, y = 60, 48
+local x, y = 56, 48
 local IconPositions = {
 --[[ x  | y  ]]--
 	{0*x, 1*y-y},--1

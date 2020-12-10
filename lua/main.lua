@@ -229,10 +229,11 @@ function love.draw()
 			gasroom_y = 145*p+60
 			playercard_x = 0
 			playercard_y = 145
-			itemcard_x = 20
+			itemcard_x = 40
 			itemcard_y = (2+145*p)*(1/0.6)+(100/0.6)
 			itemset_x = 4
 			itemset_y = 720
+			itemr_y = 145*p+110
 		else
 			time_x = 300
 			time_y = 185
@@ -265,10 +266,11 @@ function love.draw()
 			gasroom_y = 120
 			playercard_x = 300
 			playercard_y = 0
-			itemcard_x = 20
+			itemcard_x = 40
 			itemcard_y = 145+(60/0.6)
 			itemset_x = 4
 			itemset_y = 195
+			itemr_y = 155
 		end
 
 		love.graphics.setFont(TimeFont)
@@ -326,18 +328,17 @@ function love.draw()
 				elseif TimeSwtich==2 then
 					love.graphics.printf(RealTime(timer), time_x, time_y, 300, "right")
 				end
-			end
-			if (f>0) then
+				if not(s == "") and (f > 0) and ItemSwtich ==1 then
+					for i=1, 1 do
+					love.graphics.printf(itemset+1 .."\n"..math.floor(r/10), 0, itemr_y, 30, "center")
+						ItemCards[i]:draw(itemcard_x, itemcard_y)
+					end
+				end
 				if PlayerList == 1 then
 					for i=1, 4 do
 						if Players[i].enabled then
 							PlayerCards[i]:draw((i-1)*playercard_x, (i-1)*playercard_y)
 						end
-					end
-				end
-				if not(s == "") and (f > 0) and ItemSwtich ==1 then
-					for i=1, 1 do
-						ItemCards[i]:draw(itemcard_x, itemcard_y)
 					end
 				end
 				if ItemList==1 then
@@ -406,7 +407,7 @@ function love.draw()
 							ItemCards2[i]:draw(1+45*(i-201), 1+44*20)
 						end
 						love.graphics.setFont(VerySmallFont)
-						love.graphics.printf("Item set: "..itemset+1, 4, 720, 300, "left")
+						love.graphics.printf("Item set: "..itemset+1 .."-"..math.floor(r/10), 4, 720, 300, "left")
 					else
 						for i=1, 30 do
 							ItemCards2[i]:draw(1+46*(i-1), 1)
