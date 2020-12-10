@@ -431,7 +431,7 @@ function love.draw()
 							ItemCards2[i]:draw(1+46*(i-181), 1+44*6)
 						end
 						love.graphics.setFont(VerySmallFont)
-						love.graphics.printf("Item set: "..itemset+1, 4, 190, 300, "left")
+						love.graphics.printf("Item set: "..itemset+1 .."-"..math.floor(r/10), 4, 190, 300, "left")
 					end
 				end
 
