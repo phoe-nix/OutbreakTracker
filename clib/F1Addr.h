@@ -1,14 +1,14 @@
 // I'm way too lazy to f&@! with defines lol.
 
-const int F1_P1Start = 0x20476DD0; // 0x204772E0 Not the actual start, but used as anchor point.
-const int F1_P2Start = 0x20477EB0;
-const int F1_P3Start = 0x20478F90;
-const int F1_P4Start = 0x2047A070;
-const int F1_PickupSpaceStart = 0x2039680C; // 1 item - 60 bytes
-const int F1_DeadInventoryStart = 0x2048BDE2;
-const int F1_VirusMaxStart = 0x206E6C70;
-const int F1_ScenarioIDAddr = 0x203065AA;
-const int F1_FrameCounter = 0x2048BF78;
+const int F1_P1Start = 0x476DD0; // 0x204772E0 Not the actual start, but used as anchor point.
+const int F1_P2Start = 0x477EB0;
+const int F1_P3Start = 0x478F90;
+const int F1_P4Start = 0x47A070;
+const int F1_PickupSpaceStart = 0x39680C; // 1 item - 60 bytes
+const int F1_DeadInventoryStart = 0x48BDE2;
+const int F1_VirusMaxStart = 0x6E6C70;
+const int F1_ScenarioIDAddr = 0x3065AA;
+const int F1_FrameCounter = 0x48BF78;
 
 const int F1_PositionX = 0x38;
 const int F1_PositionY = 0x40;
@@ -30,6 +30,9 @@ const int F1_NameTypeOffset = 0xBB4;
 const int F1_InventoryOffset = 0xC84;
 const int F1_EquippedItemOffset = 0xC7C;
 const int F1_BleedTimeOffset = 0xC5A;
+const int F1_AntiVirusTimeOffset = 0xBB6;//anti-virus time
+const int F1_AntiVirusGTimeOffset = 0xBB8;//anti-virus g time
+const int F1_HerbTimeOffset = 0xBBA;//herb time
 
 const int F1_PickupStructSize = 60;
 const int F1_ItemRoomIDOffset = 1;
@@ -56,28 +59,29 @@ int F1_GetCharAddress(int characterID) // clunckiest thing ever
             return -1;
     }
 }
-const int F1_RoomItem = 0x2023BD90;//room item pointer 0x24AF48
-const int F1_Pointer = 0x20386B94;//enemy HP
+const int F1_RoomItem = 0x23BD90;//room item pointer 0x24AF48
+const int F1_Pointer = 0x386B94;//enemy HP
 const int F1_EHPOffset = 0x544;
 
 const int F1_EMaxHPOffset = 0x546;
-const int F1_E1Start = 0x20420000;
-const int F1_E2Start = 0x20420D90;
-const int F1_E3Start = 0x20421B20;
-const int F1_E4Start = 0x204228B0;
-const int F1_E5Start = 0x20423640;
-const int F1_E6Start = 0x204243D0;
-const int F1_E7Start = 0x20425160;
-const int F1_E8Start = 0x20425EF0;
-const int F1_E9Start = 0x20426C80;
-const int F1_E10Start = 0x20427A10;
-const int F1_E11Start = 0x204287A0;
-const int F1_E12Start = 0x20429530;
+const int F1_E1Start = 0x420000;
+const int F1_E2Start = 0x420D90;
+const int F1_E3Start = 0x421B20;
+const int F1_E4Start = 0x4228B0;
+const int F1_E5Start = 0x423640;
+const int F1_E6Start = 0x4243D0;
+const int F1_E7Start = 0x425160;
+const int F1_E8Start = 0x425EF0;
+const int F1_E9Start = 0x426C80;
+const int F1_E10Start = 0x427A10;
+const int F1_E11Start = 0x4287A0;
+const int F1_E12Start = 0x429530;
 const int F1_EnemyEnabled = 0;
 const int F1_EnemyInGame = 1;
 const int F1_EnemyNameIDOffset = 3;
 const int F1_EnemyTypeOffset = 0xBBA;
 const int F1_EnemyStatusOffset = 0x32;
+const int F1_EnemyListOffset = 0x71A030;
 
 int F1_GetEnemyAddress(int enemyID)
 {
@@ -132,18 +136,19 @@ int F1_GetEnemy2Address(int enemyID)
             return -1;
     }
 }
-const int F1_PlayerNum =  0x2023BE14;//23C004
-const int F1_HostStatus =  0x2062E230;
-const int F1_HostPlayer =  0x206547AA;//number of players 629602 62E682 6547AA 68AF31
-const int F1_HostMaxPlayer =  0x205FFFDA;//number of players 629604
-const int F1_HostScenarioID =  0x2062E236;//62E750
-const int F1_HostTime =  0x2062EB80;//
-const int F1_HostDifficulty = 0x2060292A;
+const int F1_DoorHP = 0x472F90;
+const int F1_PlayerNum =  0x23BE14;//23C004
+const int F1_HostStatus =  0x62E230;
+const int F1_HostPlayer =  0x6547AA;//number of players 629602 62E682 6547AA 68AF31
+const int F1_HostMaxPlayer =  0x5FFFDA;//number of players 629604
+const int F1_HostScenarioID =  0x62E236;//62E750
+const int F1_HostTime =  0x62EB80;//
+const int F1_HostDifficulty = 0x60292A;
 
-const int F1_LobP1Start = 0x20630D40;
-const int F1_LobP2Start = 0x206310E8;
-const int F1_LobP3Start = 0x20631490;
-const int F1_LobP4Start = 0x20631838;
+const int F1_LobP1Start = 0x630D40;
+const int F1_LobP2Start = 0x6310E8;
+const int F1_LobP3Start = 0x631490;
+const int F1_LobP4Start = 0x631838;
 
 const int F1_SlotPlayer = 0x2;
 const int F1_SlotMaxPlayer = 0x4;
@@ -152,26 +157,26 @@ const int F1_SlotPass = 0xF;
 const int F1_SlotScenarioID = 0x14;
 const int F1_SlotVersion = 0x16;//0x11=dvd, 0x12=hdd
 const int F1_SlotTitle = 0x18;
-const int F1_Slot1 = 0x20629600;
-const int F1_Slot2 = 0x2062975C;
-const int F1_Slot3 = 0x206298B8;
-const int F1_Slot4 = 0x20629A14;
-const int F1_Slot5 = 0x20629B70;
-const int F1_Slot6 = 0x20629CCC;
-const int F1_Slot7 = 0x20629E28;
-const int F1_Slot8 = 0x20629F84;
-const int F1_Slot9 = 0x2062A0E0;
-const int F1_Slot10 = 0x2062A23C;
-const int F1_Slot11 = 0x2062A398;
-const int F1_Slot12 = 0x2062A4F4;
-const int F1_Slot13 = 0x2062A650;
-const int F1_Slot14 = 0x2062A7AC;
-const int F1_Slot15 = 0x2062A908;
-const int F1_Slot16 = 0x2062AA64;
-const int F1_Slot17 = 0x2062ABC0;
-const int F1_Slot18 = 0x2062AD1C;
-const int F1_Slot19 = 0x2062AE78;
-const int F1_Slot20 = 0x2062AFD4;
+const int F1_Slot1 = 0x629600;
+const int F1_Slot2 = 0x62975C;
+const int F1_Slot3 = 0x6298B8;
+const int F1_Slot4 = 0x629A14;
+const int F1_Slot5 = 0x629B70;
+const int F1_Slot6 = 0x629CCC;
+const int F1_Slot7 = 0x629E28;
+const int F1_Slot8 = 0x629F84;
+const int F1_Slot9 = 0x62A0E0;
+const int F1_Slot10 = 0x62A23C;
+const int F1_Slot11 = 0x62A398;
+const int F1_Slot12 = 0x62A4F4;
+const int F1_Slot13 = 0x62A650;
+const int F1_Slot14 = 0x62A7AC;
+const int F1_Slot15 = 0x62A908;
+const int F1_Slot16 = 0x62AA64;
+const int F1_Slot17 = 0x62ABC0;
+const int F1_Slot18 = 0x62AD1C;
+const int F1_Slot19 = 0x62AE78;
+const int F1_Slot20 = 0x62AFD4;
 
 int F1_GetLobbyAddress(int slotNum)
 {
@@ -222,14 +227,16 @@ int F1_GetLobbyAddress(int slotNum)
     }
 }
 
-const int F1_Pass1 = 0x2048AC13;
-const int F1_Pass2 = 0x2048AC17;
-const int F1_Pass3 = 0x2048AC14;
-const int F1_Pass4 = 0x2048AC1A;//48AC1A 48ADCE
-const int F1_Pass5 = 0x2048AC1B;//48ADCF  on=48ADF3
-const int F1_Pass6 = 0x2048AC15;//4927=7500 4032=7480 40 4284=0200
-const int F1_Difficulty = 0x2048C01A;
-const int F1_ItemRandom = 0x2023BBA0;//23BB28 23C055 23BD20 426AA9 23BBA0 23BD24
+const int F1_Pass1 = 0x48AC13;
+const int F1_Pass2 = 0x48AC17;
+const int F1_Pass3 = 0x48AC14;
+const int F1_Pass4 = 0x48AC1A;//48AC1A 48ADCE
+const int F1_Pass5 = 0x48AC1B;//48ADCF  on=48ADF3
+const int F1_Pass6 = 0x48AC15;//4927=7500 4032=7480 40 4284=0200
+const int F1_Difficulty = 0x48C01A;
+const int F1_ItemRandom = 0x23BB20;//23BB28 23C055 23BD20 426AA9 23BBA0 23BD24
+const int F1_ItemRandom2 = 0x23BBA1;
+const int F1_Cleared = 0x48BF60;//
 /*pass 6D6570
 ÊÂ¼þÁãÏÂ48BF60
 b7f 48AD93:0x00=off 0x01=on
@@ -249,10 +256,10 @@ b4f 48AD92:0x00=off 0x40=on
  2  : 8 4C
 1   : 4 40 8C C8 114 150
 */
-const int F1_SlotP1Start = 0x20630E54;//+3A8 62FCF0
-const int F1_SlotP2Start = 0x206311FC;//630F38 6312E0
-const int F1_SlotP3Start = 0x206315A4;
-const int F1_SlotP4Start = 0x2063194C;
+const int F1_SlotP1Start = 0x630E54;//+3A8 62FCF0
+const int F1_SlotP2Start = 0x6311FC;//630F38 6312E0
+const int F1_SlotP3Start = 0x6315A4;
+const int F1_SlotP4Start = 0x63194C;
 
 int F1_GetSlotCharAddress(int characterID)
 {

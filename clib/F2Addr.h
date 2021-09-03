@@ -1,14 +1,14 @@
 // I'm way too lazy to f&@! with defines lol.
 
-const int F2_P1Start = 0x2047BD30; // 0x2047C23C Not the actual start, but used as anchor point.
-const int F2_P2Start = 0x2047CE30;
-const int F2_P3Start = 0x2047DF30;
-const int F2_P4Start = 0x2047F030;
-const int F2_PickupSpaceStart = 0x20397B7C; // 1 item - 60 bytes // settings byte on offset ITEM_PTR+37?
-const int F2_DeadInventoryStart = 0x20491146;
-const int F2_VirusMaxStart = 0x20728500;
-const int F2_ScenarioIDAddr = 0x203137BA;
-const int F2_FrameCounter = 0x204912B8;
+const int F2_P1Start = 0x47BD30; // 0x2047C23C Not the actual start, but used as anchor point.
+const int F2_P2Start = 0x47CE30;
+const int F2_P3Start = 0x47DF30;
+const int F2_P4Start = 0x47F030;
+const int F2_PickupSpaceStart = 0x397B7C; // 1 item - 60 bytes // settings byte on offset ITEM_PTR+37?
+const int F2_DeadInventoryStart = 0x491146;
+const int F2_VirusMaxStart = 0x728500;
+const int F2_ScenarioIDAddr = 0x3137BA;
+const int F2_FrameCounter = 0x4912B8;
 
 const int F2_PositionX = 0x38;
 const int F2_PositionY = 0x40;
@@ -30,6 +30,8 @@ const int F2_PowerOffset = 0xBDC;
 const int F2_InventoryOffset = 0xC94;
 const int F2_EquippedItemOffset = 0xC8C;
 const int F2_BleedTimeOffset = 0xC6A;
+const int F2_AntiVirusTimeOffset = 0xBCA;//anti-virus time
+const int F2_HerbTimeOffset = 0xBCE;//herb time
 
 const int F2_PickupStructSize = 60;
 const int F2_ItemRoomIDOffset = 1;
@@ -57,44 +59,45 @@ int F2_GetCharAddress(int characterID)
     }
 }
 
-const int F2_RoomItem = 0x2024AF48;//room item pointer 0x24AF48 387CB0
+const int F2_RoomItem = 0x24AF48;//room item pointer 0x24AF48 387CB0
 int F2_GetItemAddress(int characterID)
 {
     switch (characterID)
     {
         case 0:
-            return 0x203BA200;
+            return 0x3BA200;
         case 1:
-            return 0x203B9B40;
+            return 0x3B9B40;
         case 2:
-            return 0x203B9B40;
+            return 0x3B9B40;
         case 3:
-            return 0x203B9B40;
+            return 0x3B9B40;
         default:
             return -1;
     }
 }
 
-const int F2_Pointer = 0x20388314;//enemy HP
+const int F2_Pointer = 0x388314;//enemy HP
 const int F2_EHPOffset = 0x540;
 const int F2_EMaxHPOffset = 0x542;
-const int F2_E1Start = 0x204245D0;
-const int F2_E2Start = 0x20425380;
-const int F2_E3Start = 0x20426130;
-const int F2_E4Start = 0x20426EE0;
-const int F2_E5Start = 0x20427C90;
-const int F2_E6Start = 0x20428A40;
-const int F2_E7Start = 0x204297F0;
-const int F2_E8Start = 0x2042A5A0;
-const int F2_E9Start = 0x2042B350;
-const int F2_E10Start = 0x2042C100;
-const int F2_E11Start = 0x2042CEB0;
-const int F2_E12Start = 0x2042DC60;
+const int F2_E1Start = 0x4245D0;
+const int F2_E2Start = 0x425380;
+const int F2_E3Start = 0x426130;
+const int F2_E4Start = 0x426EE0;
+const int F2_E5Start = 0x427C90;
+const int F2_E6Start = 0x428A40;
+const int F2_E7Start = 0x4297F0;
+const int F2_E8Start = 0x42A5A0;
+const int F2_E9Start = 0x42B350;
+const int F2_E10Start = 0x42C100;
+const int F2_E11Start = 0x42CEB0;
+const int F2_E12Start = 0x42DC60;
 const int F2_EnemyEnabled = 0;
 const int F2_EnemyInGame = 1;
 const int F2_EnemyNameIDOffset = 3;
 const int F2_EnemyTypeOffset = 0xBD2;
 const int F2_EnemyStatusOffset = 0x32;//8,32,cb0,1F3
+const int F2_EnemyListOffset = 0x760630;//760712;
 
 int F2_GetEnemyAddress(int enemyID)
 {
@@ -150,19 +153,20 @@ int F2_GetEnemy2Address(int enemyID)
     }
 }
 
-const int F2_Coin = 0x20491188;//wild things
-const int F2_KilledZombie = 0x20491268;//47ca64,49010c,491268,desperate times
-const int F2_MaxZombie = 0x2179464a;
-const int F2_DTStart = 0x20490f6c;
-const int F2_PlayerNum =  0x2024AFCC;
-const int F2_HostStatus =  0x2062DDF0;
-const int F2_HostPlayer =  0x206411E6;//number of players
-const int F2_HostMaxPlayer =  0x205FF77A;//number of players
-const int F2_HostScenarioID =  0x2062DDF6;
-const int F2_HostTime =  0x2062E768;
-const int F2_HostDifficulty = 0x206020CA;
-//wt door 0x477762 0x4777A2
-//dt unlock door 3BC0E4
+const int F2_Coin = 0x491188;//wild things
+const int F2_KilledZombie = 0x491268;//47ca64,49010c,491268,desperate times
+//const int F2_MaxZombie = 0x2179464a;
+const int F2_DTStart = 0x490f6c;
+const int F2_PlayerNum =  0x24AFCC;
+const int F2_HostStatus =  0x62DDF0;
+const int F2_HostPlayer =  0x6411E6;//number of players
+const int F2_HostMaxPlayer =  0x5FF77A;//number of players
+const int F2_HostScenarioID =  0x62DDF6;
+const int F2_HostTime =  0x62E768;
+const int F2_HostDifficulty = 0x6020CA;
+const int F2_DoorHP = 0x477720;//4776E0
+//wt door 0x477762 0x4777A2  first locked door 3BC2C0
+//dt unlock door 3BC0E4 door flag 49021C
 //p1power +BDC 47c90c 
 //num of player in game 24AFCC 49135f
 //slot character 630D40 6310E8 631490 631838
@@ -176,10 +180,10 @@ const int F2_HostDifficulty = 0x206020CA;
 //63C56A num of players in chat room
 //63C56C num of players in lobbies
 
-const int F2_SlotP1Start = 0x20630D40;
-const int F2_SlotP2Start = 0x206310E8;
-const int F2_SlotP3Start = 0x20631490;
-const int F2_SlotP4Start = 0x20631838;
+const int F2_SlotP1Start = 0x630D40;
+const int F2_SlotP2Start = 0x6310E8;
+const int F2_SlotP3Start = 0x631490;
+const int F2_SlotP4Start = 0x631838;
 
 int F2_GetSlotCharAddress(int characterID)
 {
@@ -204,26 +208,26 @@ const int F2_SlotPass = 0xF;
 const int F2_SlotScenarioID = 0x14;
 const int F2_SlotVersion = 0x16;//0x11=dvd, 0x12=hdd
 const int F2_SlotTitle = 0x18;
-const int F2_Slot1 = 0x20628DA0;
-const int F2_Slot2 = 0x20628EFC;
-const int F2_Slot3 = 0x20629058;
-const int F2_Slot4 = 0x206291B4;
-const int F2_Slot5 = 0x20629310;
-const int F2_Slot6 = 0x2062946C;
-const int F2_Slot7 = 0x206295C8;
-const int F2_Slot8 = 0x20629724;
-const int F2_Slot9 = 0x20629880;
-const int F2_Slot10 = 0x206299DC;
-const int F2_Slot11 = 0x20629B38;
-const int F2_Slot12 = 0x20629C94;
-const int F2_Slot13 = 0x20629DF0;
-const int F2_Slot14 = 0x20629F4C;
-const int F2_Slot15 = 0x2062A0A8;
-const int F2_Slot16 = 0x2062A204;
-const int F2_Slot17 = 0x2062A360;
-const int F2_Slot18 = 0x2062A4BC;
-const int F2_Slot19 = 0x2062A618;
-const int F2_Slot20 = 0x2062A774;
+const int F2_Slot1 = 0x628DA0;
+const int F2_Slot2 = 0x628EFC;
+const int F2_Slot3 = 0x629058;
+const int F2_Slot4 = 0x6291B4;
+const int F2_Slot5 = 0x629310;
+const int F2_Slot6 = 0x62946C;
+const int F2_Slot7 = 0x6295C8;
+const int F2_Slot8 = 0x629724;
+const int F2_Slot9 = 0x629880;
+const int F2_Slot10 = 0x6299DC;
+const int F2_Slot11 = 0x629B38;
+const int F2_Slot12 = 0x629C94;
+const int F2_Slot13 = 0x629DF0;
+const int F2_Slot14 = 0x629F4C;
+const int F2_Slot15 = 0x62A0A8;
+const int F2_Slot16 = 0x62A204;
+const int F2_Slot17 = 0x62A360;
+const int F2_Slot18 = 0x62A4BC;
+const int F2_Slot19 = 0x62A618;
+const int F2_Slot20 = 0x62A774;
 
 int F2_GetLobbyAddress(int slotNum)
 {
@@ -274,20 +278,306 @@ int F2_GetLobbyAddress(int slotNum)
     }
 }
 
-const int F2_PassUB1 = 0x20490073;//“ÏΩÁ
-const int F2_PassUB2 = 0x20490075;//“ÏΩÁ
-const int F2_EscapeTime = 0x20491256;//“ÏΩÁ
-const int F2_FBTime = 0x20491254;//º«“‰
-const int F2_Pass4 = 0x20491268;//Õª∆∆
-const int F2_Difficulty = 0x2049135A;
-const int F2_DTGasRandom = 0x2024ADB0;//24ADB0(offline) 491338(online)
-const int F2_DTGasFlag = 0x2048FFFC;
-const int F2_DTGasTime = 0x20491278;
-const int F2_DTFightTime = 0x2049126C;
-const int F2_DTFightTime2 = 0x2049124E;
-const int F2_DTGarageTime = 0x20491270;//48FE71 switch
-const int F2_ItemRandom = 0x2024AD30;//
+const int F2_WTTime = 0x491248;//≈ÿœ¯
+const int F2_PassWT = 0x48FE7B;//≈ÿœ¯
+const int F2_PassDT1 = 0x490070;//À¿ ÿ
+const int F2_PassDT2 = 0x490072;//À¿ ÿ
+const int F2_PassDT3 = 0x48FE70;//À¿ ÿ adlib 48FE70
+const int F2_PassUB1 = 0x490073;//“ÏΩÁ
+const int F2_PassUB2 = 0x490075;//“ÏΩÁ
+const int F2_PassUB3 = 0x48FE76;//“ÏΩÁ adlib 48FE76
+const int F2_EscapeTime = 0x491256;//“ÏΩÁ
+const int F2_FBTime = 0x491254;//º«“‰
+const int F2_Pass4 = 0x491268;//Õª∆∆
+const int F2_Difficulty = 0x49135A;
+const int F2_DTGasRandom = 0x24ADB0;//24ADB0(offline) 491338(online)
+const int F2_DTGasFlag = 0x48FFFC;
+const int F2_DTGasTime = 0x491278;
+const int F2_DTFightTime = 0x49126C;
+const int F2_DTFightTime2 = 0x49124E;
+const int F2_DTGarageTime = 0x491270;//48FE71 switch
+const int F2_ItemRandom = 0x24AD30;//
+const int F2_ItemRandom2 = 0x24ADB1;//DE C2
+const int F2_Cleared = 0x4912A0;//4912A0 4912C9
 /*clear 4912A0
+24AD31 item set in next game
+112334
+112334
+112344
+122344
+122344
+123344
+112334
+112344
+122344
+122344
+12334
+
+[0x40]
+112334
+112344
+
+[0x80]
+112334
+122344
+
+00 1 random B0 00
+01 1 random 00 B0
+02 2 random AD 60
+03 3 random 5A 11
+04 3 random 5A C1
+05 4 random 07 72
+06 1 random B4 22
+07 1 random B4 D2
+08 2 random 61 83
+09 3 random 0E 34
+0A 3 random 0E E4
+0B 4 random BB 94
+0C 1 random 68 45
+0D 1 random 68 F5
+0E 2 random 15 A6
+0F 3 random C2 56
+10 4 random 6F 07
+11 4 random 6F B7
+12 1 random 1C 68
+13 2 random C9 18
+14 2 random C9 C8
+15 3 random 76 79
+16 4 random 23 2A
+17 4 random 23 DA
+18 1 random D0 8A
+19 2 random 7D 3B
+1A 2 random 7D EB
+1B 3 random 2A 9C
+1C 4 random D7 4C
+1D 4 random D7 FC
+1E 1 random 84 AD
+1F 2 random 31 5E
+20 3 random DE 0E
+21 3 random DE BE
+22 4 random 8B 6F
+23 1 random 38 20
+24 1 random 38 D0
+25 2 random E5 80
+26 3 random 92 31
+27 3 random 92 E1
+28 4 random 3F 92
+29 1 random EC 42
+2A 1 random EC F2
+2B 2 random 99 A3
+2C 3 random 46 54
+2D 4 random F3 04
+2E 4 random F3 B4
+2F 1 random A0 65
+30 2 random 4D 16
+31 2 random 4D C6
+32 3
+33 4
+34 4
+35 1
+36 2
+37 2
+38 3
+39 4
+3A 4
+3B 1
+3C 2
+3D 3
+3E 3
+3F 4
+40 1
+41 1
+42 2
+43 3
+44 3
+45 4
+46 1
+47 1
+48 2
+49 3
+4A 4
+4B 4
+4C 1
+4D 2
+4E 2
+4F 3
+50 4
+51 4
+52 1
+53 2
+54 2
+55 3
+56 4
+57 4
+58 1
+59 2
+5A 3
+5B 3
+5C 4
+5D 1
+5E 1
+5F 2
+60 3
+61 3
+62 4
+63 1
+64 1
+65 2
+66 3
+67 3
+68 4
+69 1
+6A 2
+6B 2
+6C 3
+6D 4
+6E 4
+6F 1
+70 2
+71 2
+72 3
+73 4
+74 4
+75 1
+76 2
+77 3
+78 3
+79 4
+7A 1
+7B 1
+7C 2
+7D 3
+7E 3
+7F 4
+80 1
+81 1
+82 2
+83 3
+84 3
+85 4
+86 1
+87 2
+88 2
+89 3
+8A 4
+8B 4
+8C 1
+8D 2
+8E 2
+8F 3
+90 4
+91 4
+92 1
+93 2
+94 3
+95 3
+96 4
+97 1
+98 1
+99 2
+9A 3
+9B 3
+9C 4
+9D 1
+9E 1
+9F 2
+A0 3
+A1 3
+A2 4
+A3 1
+A4 2
+A5 2
+A6 3
+A7 4
+A8 4
+A9 1
+AA 2
+AB 2
+AC 3
+AD 4
+AE 4
+AF 1
+B0 2
+B1 3
+B2 3
+B3 4
+B4 1
+B5 1
+B6 2
+B7 3
+B8 3
+B9 4
+BA 1
+BB 1
+BC 2
+BD 3
+BE 3
+BF 4
+C0 1
+C1 2
+C2 2
+C3 3
+C4 4
+C5 4
+C6 1
+C7 2
+C8 2
+C9 3
+CA 4
+CB 4
+CC 1
+CD 2
+CE 2
+CF 3
+D0 4
+D1 1	18 D1
+D2 1
+D3 2
+D4 3
+D5 3
+D6 4
+D7 1
+D8 1
+D9 2
+DA 3
+DB 3
+DC 4
+DD 1
+DE 2
+DF 2
+E0 3
+E1 4
+E2 4
+E3 1
+E4 2
+E5 2
+E6 3
+E7 4
+E8 4
+E9 1
+EA 2
+EB 2
+EC 3
+ED 4
+EE 1
+EF 1
+F0 2
+F1 3
+F2 3
+F3 4
+F4 1
+F5 1
+F6 2
+F7 3
+F8 3
+F9 4
+FA 1
+FB 2
+FC 2
+FD 3
+FE 4
+FF 4
+
 //random set? 24AD30 397B80 397B82 491338 491353 49135E
 //gas address
 24ADB0 3F 98(89 95)  1 2F East Hall
@@ -310,7 +600,11 @@ offline 93=easy 8b=normal 7c= hard 73=vh
 //(item?) 49135E 2a =set 1 2b= set2 
 //49136F 01
 //493982 02
+//490071 		39DJ LV4U EXP2 E67C 6SR2 Q898 44V7 K3G6 SW4D FM54 5TF3 4NZH B37B LYNX 9AAA YTY7
+//490070 74EE70 2236 1587 2994 3048 4425 5170 6703 7312 8669 9851 0764 3516 5835 6249 7177 9408
 //490073 750BB0 2916 3719 0154 6443 7688 1812 5551 6010 0652 6234 0533 9439 1421 1127 7840 6910
+//490070 		DESK MISS FREE JUNK NEWS CARD DIET POEM BEER LOCK TEST SOFA WINE TAPE GOLF PLAN
+
 24AD7C
 24AE2C
 24AE43
