@@ -808,6 +808,7 @@ double GetSpeed(int characterID)
       ReadProcessMemory(ProcessHandle, (PCVOID)BasePointer+F2_GetCharAddress(characterID) + F2_SpeedOffset, &buffer, 4, (PDWORD)&bytesRead);
   return (double)buffer;
 }
+*/
 double GetPositionX(int characterID)
 {
   float buffer;
@@ -829,7 +830,6 @@ double GetPositionY(int characterID)
       ReadProcessMemory(ProcessHandle, (PCVOID)BasePointer+F2_GetCharAddress(characterID) + F2_PositionY, &buffer, 4, (PDWORD)&bytesRead);
   return (double)buffer;
 }
-*/
 
 double GetPercentage(int characterID)
 {
