@@ -136,7 +136,67 @@ int F1_GetEnemy2Address(int enemyID)
             return -1;
     }
 }
+
+const int F1_Door1HP = 0x472FC0;//472FC0/472FF0
+const int F1_Door2HP = 0x473086;//473086
+const int F1_Door3HP = 0x4731C0;//4731C0/473220
+const int F1_Door4HP = 0x473232;//473232/473260
+const int F1_Door5HP = 0x473504;//473504/4735F0
+const int F1_Door6HP = 0x473652;//room 102
+const int F1_Door7HP = 0x473712;//room 201
+const int F1_Door8HP = 0x4737D2;//room 202
+const int F1_Door9HP = 0x4739B6;//4739B6/473A70 dd t-shaped
+const int F1_Door10HP = 0x473A40;//473A40/473A72 store room
+
+int F1_GetDoorHP(int doorID)
+{
+    switch (doorID)
+    {
+        case 0:return F1_Door1HP;
+        case 1:return F1_Door2HP;
+        case 2:return F1_Door3HP;
+        case 3:return F1_Door4HP;
+        case 4:return F1_Door5HP;
+        case 5:return F1_Door6HP;
+        case 6:return F1_Door7HP;
+        case 7:return F1_Door8HP;
+        case 8:return F1_Door9HP;
+        case 9:return F1_Door10HP;
+        default:return -1;
+    }
+}
+
+const int F1_Door1Flag = 0x48AFBC;//48AFBC
+const int F1_Door2Flag = 0x48AFEC;//48AFEC
+const int F1_Door3Flag = 0x48AD90;//
+const int F1_Door4Flag = 0x48B058;//48B058
+const int F1_Door5Flag = 0x48B10C;//48B10C/48B148
+const int F1_Door6Flag = 0x48B160;//room 102
+const int F1_Door7Flag = 0x48B190;//room 201
+const int F1_Door8Flag = 0x48B1C0;//room 202
+const int F1_Door9Flag = 0x48B238;//48B238/48B268 dd t-shaped
+const int F1_Door10Flag = 0x48B25C;//48B25C/48B268 store room
+
+int F1_GetDoorFlag(int doorID)
+{
+    switch (doorID)
+    {
+        case 0:return F1_Door1Flag;
+        case 1:return F1_Door2Flag;
+        case 2:return F1_Door3Flag;
+        case 3:return F1_Door4Flag;
+        case 4:return F1_Door5Flag;
+        case 5:return F1_Door6Flag;
+        case 6:return F1_Door7Flag;
+        case 7:return F1_Door8Flag;
+        case 8:return F1_Door9Flag;
+        case 9:return F1_Door10Flag;
+        default:return -1;
+    }
+}
+
 const int F1_DoorHP = 0x472F90;
+const int F1_DoorFlag = 0x48ADBC;//lock flag
 const int F1_PlayerNum =  0x23BE14;//23C004
 const int F1_HostStatus =  0x62E230;
 const int F1_HostPlayer =  0x6547AA;//number of players 629602 62E682 6547AA 68AF31
@@ -236,6 +296,7 @@ const int F1_Pass6 = 0x48AC15;//4927=7500 4032=7480 40 4284=0200
 const int F1_Difficulty = 0x48C01A;
 const int F1_ItemRandom = 0x23BB20;//23BB28 23C055 23BD20 426AA9 23BBA0 23BD24
 const int F1_ItemRandom2 = 0x23BBA1;
+const int F1_PuzzleRandom = 0x23BBA0;// puzzle set
 const int F1_Cleared = 0x48BF60;//
 /*pass 6D6570
 ÊÂ¼þÁãÏÂ48BF60

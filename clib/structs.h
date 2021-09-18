@@ -1,5 +1,6 @@
 #define MAX_ITEM 32
 #define MAX_ENEMY 12
+#define MAX_DOOR 19
 
 #define true 1
 #define false 0
@@ -54,6 +55,8 @@ typedef struct
 	unsigned short HostScenarioID;
 	unsigned short ScenarioID;
 	unsigned int FrameCounter;
+	unsigned char Cleared;
+	unsigned short WTTime;
 	unsigned short EscapeTime;
 	unsigned int FightTime;
 	unsigned short FightTime2;
@@ -62,21 +65,24 @@ typedef struct
 	unsigned int GasFlag;
 	unsigned char GasRandom;
 	unsigned char ItemRandom;
-	//unsigned short ItemRandom2;
-	unsigned char P1Coin;
-	unsigned char P2Coin;
-	unsigned char P3Coin;
-	unsigned char P4Coin;
+	unsigned char ItemRandom2;
+	unsigned char PuzzleRandom;
+	unsigned char Coin;
 	unsigned char KilledZombie;
+	unsigned char PlayerNum;
+	unsigned short PassDT1;
+	unsigned char PassWT;
+	unsigned char PassDT2;
+	unsigned char PassDT3;
 	unsigned char Pass1;
 	unsigned char Pass2;
 	unsigned char Pass3;
 	unsigned short PassUB1;
 	unsigned char PassUB2;
+	unsigned char PassUB3;
 	unsigned short Pass4;
 	unsigned char Pass5;
 	unsigned char Pass6;
-	unsigned char PlayerNum;
 	unsigned char Difficulty;
 	unsigned int E1Start;
 	unsigned int E2Start;
@@ -96,6 +102,21 @@ typedef struct
 	unsigned char Mix;
 	unsigned char RoomID;
 } Item;
+
+typedef struct
+{
+	bool Enabled;
+	bool InGame;
+    unsigned char Number;
+    unsigned char Flag;
+    unsigned short HP;
+    unsigned short MaxHP;
+    unsigned char BossType;
+    unsigned char NameID;
+	unsigned char RoomID;
+    unsigned char Type;
+    unsigned char Status;
+} Enemy2;
 
 typedef struct
 {
@@ -169,6 +190,12 @@ typedef struct
 
 typedef struct
 {
+	unsigned short HP;
+	unsigned short Flag;
+} Door;
+
+typedef struct
+{
 	bool Enabled;
 	bool InGame;
 	unsigned short SlotNum;
@@ -180,7 +207,7 @@ typedef struct
 	unsigned short Version;
 } Slot;
 
-char* GetSlotCharacterName(int charType)
+char* GetCharacterNameF1(int charType)
 {
     switch(charType)
     {

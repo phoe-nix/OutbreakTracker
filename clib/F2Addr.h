@@ -164,8 +164,121 @@ const int F2_HostMaxPlayer =  0x5FF77A;//number of players
 const int F2_HostScenarioID =  0x62DDF6;
 const int F2_HostTime =  0x62E768;
 const int F2_HostDifficulty = 0x6020CA;
-const int F2_DoorHP = 0x477720;//4776E0
-//wt door 0x477762 0x4777A2  first locked door 3BC2C0
+const int F2_DoorHP = 0x477722;//4776E0
+const int F2_DoorFlag = 0x49021C;//lock flag
+
+const int F2_Door1HP = 0x477762;//4777A2 后巷门
+const int F2_Door2HP = 0x477720;//477760 餐厅后门
+const int F2_Door3HP = 0x477724;//餐厅厨房S
+const int F2_Door4HP = 0x477726;//餐厅厨房W
+const int F2_Door5HP = 0x4777E4;//477820 园内南>东门
+const int F2_Door6HP = 0x4777E0;//477864 园内南>北门
+const int F2_Door7HP = 0x477824;//477860 园内东>北门
+const int F2_Door8HP = 0x4779E2;//477A66 大象舞台
+const int F2_Door9HP = 0x4778AE;//477B64 异界 东侧
+const int F2_Door10HP = 0x4777A4;//4778A0 异界 西侧
+const int F2_Door11HP = 0x4778AC;//4779A0 休息室右
+const int F2_Door12HP = 0x4778AA;//4779A2 休息室左
+const int F2_Door13HP = 0x477B26;//477BE0 记忆203房
+const int F2_Door14HP = 0x477724;//4777E0 大厅>1楼大堂
+const int F2_Door15HP = 0x477824;//477920 办公室>1楼东侧
+const int F2_Door16HP = 0x4777E4;//477BE0 1楼大堂>U走廊
+const int F2_Door17HP = 0x4779A0;//4779E0 停尸房
+const int F2_Door18HP = 0x477A62;//477AA0 狗屋
+const int F2_Door19HP = 0x477B00;//eotr hole hp
+
+int F2_GetDoorHP(int doorID)
+{
+    switch (doorID)
+    {
+        case 0:return F2_Door1HP;
+        case 1:return F2_Door2HP;
+        case 2:return F2_Door3HP;
+        case 3:return F2_Door4HP;
+        case 4:return F2_Door5HP;
+        case 5:return F2_Door6HP;
+        case 6:return F2_Door7HP;
+        case 7:return F2_Door8HP;
+        case 8:return F2_Door9HP;
+        case 9:return F2_Door10HP;
+        case 10:return F2_Door11HP;
+        case 11:return F2_Door12HP;
+        case 12:return F2_Door13HP;
+        case 13:return F2_Door14HP;
+        case 14:return F2_Door15HP;
+        case 15:return F2_Door16HP;
+        case 16:return F2_Door17HP;
+        case 17:return F2_Door18HP;
+        case 18:return F2_Door19HP;
+        default:return -1;
+    }
+}
+const int F2_Door1Flag = 0x490234;//490228/490234 后巷门
+const int F2_Door2Flag = 0x490228;//49021C/490228 餐厅后门
+const int F2_Door3Flag = 0x49021C;//餐厅厨房S
+const int F2_Door4Flag = 0x49021C;//餐厅厨房W
+const int F2_Door5Flag = 0x490240;//490240/49024C 园内南>东门
+const int F2_Door6Flag = 0x490240;//490240/490258 园内南>北门
+const int F2_Door7Flag = 0x490258;//49024C/490258 园内东>北门
+const int F2_Door8Flag = 0x4902B8;//4902A0/4902B8 大象舞台
+const int F2_Door9Flag = 0x4902E8;//490264/4902E8 异界 东侧
+const int F2_Door10Flag = 0x490234;//490234/490264 异界 西侧
+const int F2_Door11Flag = 0x490294;//490264/490294 休息室右
+const int F2_Door12Flag = 0x490294;//490264/490294 休息室左
+const int F2_Door13Flag = 0x490300;//490300 4902DC 记忆203房
+const int F2_Door14Flag = 0x49021C;//49021C/490240 大厅>1楼大堂
+const int F2_Door15Flag = 0x49027C;//49024C/49027C 办公室>1楼东侧
+const int F2_Door16Flag = 0x490300;//490240/490300 1楼大堂>U走廊
+const int F2_Door17Flag = 0x490294;//490294/4902A0 停尸房
+const int F2_Door18Flag = 0x4902C4;//4902B8/4902C4 狗屋
+const int F2_Door19Flag = 0x48FFF4;//eotr hole hp
+
+int F2_GetDoorFlag(int doorID)
+{
+    switch (doorID)
+    {
+        case 0:return F2_Door1Flag;
+        case 1:return F2_Door2Flag;
+        case 2:return F2_Door3Flag;
+        case 3:return F2_Door4Flag;
+        case 4:return F2_Door5Flag;
+        case 5:return F2_Door6Flag;
+        case 6:return F2_Door7Flag;
+        case 7:return F2_Door8Flag;
+        case 8:return F2_Door9Flag;
+        case 9:return F2_Door10Flag;
+        case 10:return F2_Door11Flag;
+        case 11:return F2_Door12Flag;
+        case 12:return F2_Door13Flag;
+        case 13:return F2_Door14Flag;
+        case 14:return F2_Door15Flag;
+        case 15:return F2_Door16Flag;
+        case 16:return F2_Door17Flag;
+        case 17:return F2_Door18Flag;
+        case 18:return F2_Door19Flag;
+        default:return -1;
+    }
+}
+
+/*
+咆哮 8个门
+异界 4个门
+记忆 1个门
+死守 5个门
+突破 1个洞
+wt door 0x477762 0x4777A2 flag 490234 first locked door 3BC2C0
+49021C 餐厅S FLAG>=4 and flag<8 lock;unlock: >=8 and <= 0x0C 
+49021C 餐厅W FLAG>=8 lock unlock: <8 and
+490234 后巷门FLAG 02=lock 00=unlock
+490228 餐厅后门FLAG 03=lock 02=unlock
+490240 园区东门I lock:>=04 and <8 unlock:<4
+490240 园区南门P lock:%2=0 unlock:%2=1
+49024C 园区北门I 07=lock 03=unlock
+4902A0 大象舞台P 03=lock 01=unlock
+
+突破
+477B00 hole hp
+48FFF5 (490035) flag 20=broke, 00= block
 //dt unlock door 3BC0E4 door flag 49021C
 //p1power +BDC 47c90c 
 //num of player in game 24AFCC 49135f
@@ -179,7 +292,7 @@ const int F2_DoorHP = 0x477720;//4776E0
 //62B672 num of players in door
 //63C56A num of players in chat room
 //63C56C num of players in lobbies
-
+*/
 const int F2_SlotP1Start = 0x630D40;
 const int F2_SlotP2Start = 0x6310E8;
 const int F2_SlotP3Start = 0x631490;
@@ -298,6 +411,7 @@ const int F2_DTFightTime2 = 0x49124E;
 const int F2_DTGarageTime = 0x491270;//48FE71 switch
 const int F2_ItemRandom = 0x24AD30;//
 const int F2_ItemRandom2 = 0x24ADB1;//DE C2
+const int F2_PuzzleRandom = 0x24ADB0;// puzzle set
 const int F2_Cleared = 0x4912A0;//4912A0 4912C9
 /*clear 4912A0
 24AD31 item set in next game

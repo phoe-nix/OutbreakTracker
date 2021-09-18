@@ -19,7 +19,7 @@ RItem RItems[MAX_ITEM];
 Player Players[4];
 Enemy Enemies[MAX_ENEMY];
 Item Items[256];
-Door Doors[256];
+Door Doors[MAX_DOOR];
 Enemy2 Enemies2[80];
 
 int GetProcessID(char* processname)
@@ -379,6 +379,17 @@ unsigned char GetItemRandom2()
 	return buffer;
 }
 
+unsigned char GetPuzzleRandom()
+{
+	unsigned char buffer;
+	int bytesRead = 0;
+	if (info.CurrentFile == 1)
+	    ReadProcessMemory(ProcessHandle, (PCVOID)BasePointer+F1_PuzzleRandom, &buffer, 1, (PDWORD) &bytesRead);
+	else
+	    ReadProcessMemory(ProcessHandle, (PCVOID)BasePointer+F2_PuzzleRandom, &buffer, 1, (PDWORD) &bytesRead);
+	return buffer;
+}
+
 unsigned char GetCoin()
 {
 	unsigned char buffer1;
@@ -580,16 +591,26 @@ void UpdatePickups()
     }
 }
 
-void UpdateDoors()
+unsigned short GetDoorHP(int doorID)
 {
-    for (int i=0; i < 255; i++)
-    {
-        unsigned short hpBuffer;
-        int bytesRead = 0;
-		if (info.CurrentFile == 2)
-            ReadProcessMemory(ProcessHandle, (PCVOID)BasePointer+F2_DoorHP + (2 * i), &hpBuffer, 2, (PDWORD)&bytesRead);
-        Doors[i].HP = hpBuffer;
-    }
+  unsigned short buffer;
+  int bytesRead = 0;
+  if (info.CurrentFile == 1)
+      ReadProcessMemory(ProcessHandle, (PCVOID)BasePointer+F1_GetDoorHP(doorID), &buffer, 2, (PDWORD)&bytesRead);
+  else
+      ReadProcessMemory(ProcessHandle, (PCVOID)BasePointer+F2_GetDoorHP(doorID), &buffer, 2, (PDWORD)&bytesRead);
+  return buffer;
+}
+
+unsigned short GetDoorFlag(int doorID)
+{
+  unsigned short buffer;
+  int bytesRead = 0;
+  if (info.CurrentFile == 1)
+      ReadProcessMemory(ProcessHandle, (PCVOID)BasePointer+F1_GetDoorFlag(doorID), &buffer, 2, (PDWORD)&bytesRead);
+  else
+      ReadProcessMemory(ProcessHandle, (PCVOID)BasePointer+F2_GetDoorFlag(doorID), &buffer, 2, (PDWORD)&bytesRead);
+  return buffer;
 }
 
 unsigned short GetRoomID(int characterID)
@@ -786,7 +807,7 @@ double GetPower(int characterID)
       ReadProcessMemory(ProcessHandle, (PCVOID)BasePointer+F2_GetCharAddress(characterID) + F2_PowerOffset, &buffer, 4, (PDWORD)&bytesRead);
   return (double)buffer;
 }
-/*
+
 double GetSize(int characterID)
 {
   float buffer;
@@ -808,7 +829,6 @@ double GetSpeed(int characterID)
       ReadProcessMemory(ProcessHandle, (PCVOID)BasePointer+F2_GetCharAddress(characterID) + F2_SpeedOffset, &buffer, 4, (PDWORD)&bytesRead);
   return (double)buffer;
 }
-*/
 double GetPositionX(int characterID)
 {
   float buffer;
@@ -1231,6 +1251,7 @@ static int LUpdate (lua_State* L)
 	info.GasRandom = GetGasRandom();
 	info.ItemRandom = GetItemRandom();
 	info.ItemRandom2 = GetItemRandom2();
+	info.PuzzleRandom = GetPuzzleRandom();
 	info.Coin = GetCoin();
 	info.KilledZombie = GetKilledZombies();
 	info.PassWT = GetPassWT();
@@ -1248,7 +1269,6 @@ static int LUpdate (lua_State* L)
 	info.Pass6 = GetPass6();
 	info.Difficulty = GetDifficulty();
 	UpdatePickups();
-	UpdateDoors();
 	UpdateEnemyList();
 
 	for (int i=0; i < 4; i++)
@@ -1266,11 +1286,11 @@ static int LUpdate (lua_State* L)
 		Players[i].CharacterType = GetCharacterType(i);
 		Players[i].NameID = GetNameID(i);
 		Players[i].Virus = GetPercentage(i);
-		//Players[i].Size = GetSize(i);
-		//Players[i].Speed = GetSpeed(i);
+		Players[i].Size = GetSize(i);
+		Players[i].Speed = GetSpeed(i);
 		Players[i].Power = GetPower(i);
-		//Players[i].PositionX = GetPositionX(i);
-		//Players[i].PositionY = GetPositionY(i);
+		Players[i].PositionX = GetPositionX(i);
+		Players[i].PositionY = GetPositionY(i);
 		Players[i].RoomID = GetRoomID(i);
 		Players[i].SpecialItem = GetSpecialItem(i);
 		Players[i].EquippedItem = GetEquippedItem(i);
@@ -1326,6 +1346,12 @@ static int LUpdate (lua_State* L)
 		else
 			GetRoomItemF2(i);
 	}
+	for (int i=0; i < MAX_DOOR; i++)
+	{
+		Doors[i].HP = GetDoorHP(i);
+		Doors[i].Flag = GetDoorFlag(i);
+	}
+
 	return 0;
 }
 
@@ -1752,11 +1778,11 @@ static int LGetItem(lua_State* L)
 			for (int j=0; j < MAX_ITEM; j++)
 			{
 				lua_pushnumber(L, (double)j+1);
-				if (RItems[i].RItem[j].ID == 0x00||
-				RItems[i].RItem[j].Count == 0xFFFF||
-				RItems[i].RItem[j].EN != 0xFFFF||
-				//RItems[i].RItem[j].Pick > 0 && RItems[i].RItem[j].Present ==0||
-				RItems[i].RItem[j].Mix == 0x20)
+				if (RItems->RItem[j].ID == 0x00||
+				RItems->RItem[j].Count == 0xFFFF||
+				RItems->RItem[j].EN != 0xFFFF||
+				//RItems->RItem[j].Pick > 0 && RItems->RItem[j].Present ==0||
+				RItems->RItem[j].Mix == 0x20)
 				{
 					CreateEmptyItemTable
 				}
@@ -1813,7 +1839,7 @@ static int LGetItem2(lua_State* L)
 		}
 	return 1;
 }
-/*
+
 static int LGetDoor(lua_State* L)
 {
 	double doorID = lua_tonumber(L, 1);
@@ -1821,15 +1847,17 @@ static int LGetDoor(lua_State* L)
 
 	lua_newtable(L);
 
-		for (int j=0; j < 255; j++)
-		{
 		lua_pushstring(L, "HP");
 			lua_pushnumber(L, (double)Doors[i].HP);
 		lua_rawset(L, -3);
-		}
+
+		lua_pushstring(L, "flag");
+			lua_pushnumber(L, (double)Doors[i].Flag);
+		lua_rawset(L, -3);
+
 	return 1;
 }
-*/
+
 static int LGetGameInfo (lua_State* L)
 {
 	lua_newtable(L);
@@ -1902,6 +1930,9 @@ static int LGetGameInfo (lua_State* L)
 		lua_rawset(L, -3);
 		lua_pushstring(L, "itemrandom2");
 			lua_pushnumber(L, (double)info.ItemRandom2);
+		lua_rawset(L, -3);
+		lua_pushstring(L, "puzzlerandom");
+			lua_pushnumber(L, (double)info.PuzzleRandom);
 		lua_rawset(L, -3);
 		lua_pushstring(L, "coin");
 			lua_pushnumber(L, (double)info.Coin);
@@ -1976,7 +2007,7 @@ static const struct luaL_Reg library_functions [] = {
 	{"getEnemyList", LgetEnemyList},
 	{"getItem", LGetItem},
 	{"getItem2", LGetItem2},
-	//{"getDoor", LGetDoor},
+	{"getDoor", LGetDoor},
 	{"getGameInfo", LGetGameInfo},
 	{"about", LTestFunction},
 	{NULL, NULL}
