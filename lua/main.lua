@@ -508,7 +508,7 @@ function love.draw()
 							ItemCards2[i]:draw(1+45*(i-201), 1+44*20)
 						end
 						love.graphics.setFont(VerySmallFont)
-						love.graphics.printf("Item set: "..itemset+1 .."-"..math.floor(r/10), 4, 720, 300, "left")
+						love.graphics.printf("Item set: "..itemset+1 .."-"..math.floor(r/10)+1, 4, 720, 300, "left")
 					else
 						for i=1, 30 do
 							ItemCards2[i]:draw(1+46*(i-1), 1)
@@ -532,7 +532,7 @@ function love.draw()
 							ItemCards2[i]:draw(1+46*(i-181), 1+44*6)
 						end
 						love.graphics.setFont(VerySmallFont)
-						love.graphics.printf("Item set: "..itemset+1 .."-"..math.floor(r/10), 4, 190, 300, "left")
+						love.graphics.printf("Item set: "..itemset+1 .."-"..math.floor(r/10)+1, 4, 190, 300, "left")
 					end
 				end
 
