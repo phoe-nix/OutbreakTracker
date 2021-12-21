@@ -1991,7 +1991,7 @@ static int LGetGameInfo (lua_State* L)
 
 static int LTestFunction (lua_State* L)
 {
-	lua_pushstring(L, "luaoutbreaktracker. Made by Fedor Vorobyev, aka \"Fothsid\"");
+	lua_pushstring(L, "luaoutbreaktracker. Made by Fedor Vorobyev");
 	return 1;
 }
 
