@@ -1989,12 +1989,6 @@ static int LGetGameInfo (lua_State* L)
 	return 1;
 }
 
-static int LTestFunction (lua_State* L)
-{
-	lua_pushstring(L, "luaoutbreaktracker. Made by Fedor Vorobyev");
-	return 1;
-}
-
 static const struct luaL_Reg library_functions [] = {
 	{"init", LInit},
 	{"updateLobby", LUpdateLobby},
