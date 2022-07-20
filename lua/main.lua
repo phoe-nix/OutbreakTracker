@@ -152,6 +152,7 @@ function love.draw()
 		elseif(GameInfo.pass4 == 0x4180) then hfmap="12"
 		elseif(GameInfo.pass4 == 0x41A0) then hfmap="2"
 		elseif(GameInfo.pass4 == 0x41C0) then hfmap="1"
+		else hfmap="?"
 		end
 
 		if(puzzleset%2 == 0) then hfpower="1" else hfpower="2" end
