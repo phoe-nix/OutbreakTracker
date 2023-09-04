@@ -1,10 +1,10 @@
 #include <windows.h>
 #include <tlhelp32.h>
-#include <lua.h>
-#include <lualib.h>
-#include <lauxlib.h>
 #include <string.h>
 
+#include <lua.h>
+#include <lauxlib.h>
+#include <lualib.h>
 #include "structs.h"
 #include "F1Addr.h"
 #include "F2Addr.h"
@@ -153,102 +153,102 @@ char GetFile()
 	int f1_7FF8F;
 	int f2_7FF8F;
 
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF600000000+0x2321B3, &f1_7FF60, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF600000000+0x23DFD3, &f2_7FF60, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF610000000+0x2321B3, &f1_7FF61, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF610000000+0x23DFD3, &f2_7FF61, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF620000000+0x2321B3, &f1_7FF62, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF620000000+0x23DFD3, &f2_7FF62, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF630000000+0x2321B3, &f1_7FF63, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF630000000+0x23DFD3, &f2_7FF63, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF640000000+0x2321B3, &f1_7FF64, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF640000000+0x23DFD3, &f2_7FF64, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF650000000+0x2321B3, &f1_7FF65, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF650000000+0x23DFD3, &f2_7FF65, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF660000000+0x2321B3, &f1_7FF66, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF660000000+0x23DFD3, &f2_7FF66, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF670000000+0x2321B3, &f1_7FF67, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF670000000+0x23DFD3, &f2_7FF67, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF680000000+0x2321B3, &f1_7FF68, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF680000000+0x23DFD3, &f2_7FF68, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF690000000+0x2321B3, &f1_7FF69, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF690000000+0x23DFD3, &f2_7FF69, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF6A0000000+0x2321B3, &f1_7FF6A, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF6A0000000+0x23DFD3, &f2_7FF6A, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF6B0000000+0x2321B3, &f1_7FF6B, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF6B0000000+0x23DFD3, &f2_7FF6B, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF6C0000000+0x2321B3, &f1_7FF6C, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF6C0000000+0x23DFD3, &f2_7FF6C, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF6D0000000+0x2321B3, &f1_7FF6D, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF6D0000000+0x23DFD3, &f2_7FF6D, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF6E0000000+0x2321B3, &f1_7FF6E, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF6E0000000+0x23DFD3, &f2_7FF6E, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF6F0000000+0x2321B3, &f1_7FF6F, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF6F0000000+0x23DFD3, &f2_7FF6F, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF700000000+0x2321B3, &f1_7FF70, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF700000000+0x23DFD3, &f2_7FF70, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF710000000+0x2321B3, &f1_7FF71, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF710000000+0x23DFD3, &f2_7FF71, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF720000000+0x2321B3, &f1_7FF72, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF720000000+0x23DFD3, &f2_7FF72, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF730000000+0x2321B3, &f1_7FF73, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF730000000+0x23DFD3, &f2_7FF73, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF740000000+0x2321B3, &f1_7FF74, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF740000000+0x23DFD3, &f2_7FF74, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF750000000+0x2321B3, &f1_7FF75, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF750000000+0x23DFD3, &f2_7FF75, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF760000000+0x2321B3, &f1_7FF76, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF760000000+0x23DFD3, &f2_7FF76, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF770000000+0x2321B3, &f1_7FF77, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF770000000+0x23DFD3, &f2_7FF77, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF780000000+0x2321B3, &f1_7FF78, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF780000000+0x23DFD3, &f2_7FF78, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF790000000+0x2321B3, &f1_7FF79, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF790000000+0x23DFD3, &f2_7FF79, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF7A0000000+0x2321B3, &f1_7FF7A, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF7A0000000+0x23DFD3, &f2_7FF7A, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF7B0000000+0x2321B3, &f1_7FF7B, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF7B0000000+0x23DFD3, &f2_7FF7B, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF7C0000000+0x2321B3, &f1_7FF7C, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF7C0000000+0x23DFD3, &f2_7FF7C, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF7D0000000+0x2321B3, &f1_7FF7D, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF7D0000000+0x23DFD3, &f2_7FF7D, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF7E0000000+0x2321B3, &f1_7FF7E, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF7E0000000+0x23DFD3, &f2_7FF7E, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF7F0000000+0x2321B3, &f1_7FF7F, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF7F0000000+0x23DFD3, &f2_7FF7F, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF800000000+0x2321B3, &f1_7FF80, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF800000000+0x23DFD3, &f2_7FF80, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF810000000+0x2321B3, &f1_7FF81, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF810000000+0x23DFD3, &f2_7FF81, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF820000000+0x2321B3, &f1_7FF82, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF820000000+0x23DFD3, &f2_7FF82, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF830000000+0x2321B3, &f1_7FF83, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF830000000+0x23DFD3, &f2_7FF83, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF840000000+0x2321B3, &f1_7FF84, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF840000000+0x23DFD3, &f2_7FF84, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF850000000+0x2321B3, &f1_7FF85, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF850000000+0x23DFD3, &f2_7FF85, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF860000000+0x2321B3, &f1_7FF86, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF860000000+0x23DFD3, &f2_7FF86, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF870000000+0x2321B3, &f1_7FF87, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF870000000+0x23DFD3, &f2_7FF87, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF880000000+0x2321B3, &f1_7FF88, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF880000000+0x23DFD3, &f2_7FF88, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF890000000+0x2321B3, &f1_7FF89, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF890000000+0x23DFD3, &f2_7FF89, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF8A0000000+0x2321B3, &f1_7FF8A, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF8A0000000+0x23DFD3, &f2_7FF8A, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF8B0000000+0x2321B3, &f1_7FF8B, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF8B0000000+0x23DFD3, &f2_7FF8B, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF8C0000000+0x2321B3, &f1_7FF8C, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF8C0000000+0x23DFD3, &f2_7FF8C, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF8D0000000+0x2321B3, &f1_7FF8D, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF8D0000000+0x23DFD3, &f2_7FF8D, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF8E0000000+0x2321B3, &f1_7FF8E, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF8E0000000+0x23DFD3, &f2_7FF8E, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF8F0000000+0x2321B3, &f1_7FF8F, 4, NULL);
-    ReadProcessMemory(ProcessHandle, (PVOID)0x7FF8F0000000+0x23DFD3, &f2_7FF8F, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF600000000+0x2321B3, &f1_7FF60, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF600000000+0x23DFD3, &f2_7FF60, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF610000000+0x2321B3, &f1_7FF61, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF610000000+0x23DFD3, &f2_7FF61, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF620000000+0x2321B3, &f1_7FF62, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF620000000+0x23DFD3, &f2_7FF62, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF630000000+0x2321B3, &f1_7FF63, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF630000000+0x23DFD3, &f2_7FF63, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF640000000+0x2321B3, &f1_7FF64, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF640000000+0x23DFD3, &f2_7FF64, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF650000000+0x2321B3, &f1_7FF65, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF650000000+0x23DFD3, &f2_7FF65, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF660000000+0x2321B3, &f1_7FF66, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF660000000+0x23DFD3, &f2_7FF66, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF670000000+0x2321B3, &f1_7FF67, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF670000000+0x23DFD3, &f2_7FF67, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF680000000+0x2321B3, &f1_7FF68, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF680000000+0x23DFD3, &f2_7FF68, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF690000000+0x2321B3, &f1_7FF69, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF690000000+0x23DFD3, &f2_7FF69, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF6A0000000+0x2321B3, &f1_7FF6A, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF6A0000000+0x23DFD3, &f2_7FF6A, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF6B0000000+0x2321B3, &f1_7FF6B, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF6B0000000+0x23DFD3, &f2_7FF6B, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF6C0000000+0x2321B3, &f1_7FF6C, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF6C0000000+0x23DFD3, &f2_7FF6C, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF6D0000000+0x2321B3, &f1_7FF6D, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF6D0000000+0x23DFD3, &f2_7FF6D, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF6E0000000+0x2321B3, &f1_7FF6E, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF6E0000000+0x23DFD3, &f2_7FF6E, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF6F0000000+0x2321B3, &f1_7FF6F, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF6F0000000+0x23DFD3, &f2_7FF6F, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF700000000+0x2321B3, &f1_7FF70, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF700000000+0x23DFD3, &f2_7FF70, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF710000000+0x2321B3, &f1_7FF71, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF710000000+0x23DFD3, &f2_7FF71, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF720000000+0x2321B3, &f1_7FF72, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF720000000+0x23DFD3, &f2_7FF72, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF730000000+0x2321B3, &f1_7FF73, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF730000000+0x23DFD3, &f2_7FF73, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF740000000+0x2321B3, &f1_7FF74, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF740000000+0x23DFD3, &f2_7FF74, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF750000000+0x2321B3, &f1_7FF75, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF750000000+0x23DFD3, &f2_7FF75, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF760000000+0x2321B3, &f1_7FF76, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF760000000+0x23DFD3, &f2_7FF76, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF770000000+0x2321B3, &f1_7FF77, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF770000000+0x23DFD3, &f2_7FF77, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF780000000+0x2321B3, &f1_7FF78, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF780000000+0x23DFD3, &f2_7FF78, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF790000000+0x2321B3, &f1_7FF79, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF790000000+0x23DFD3, &f2_7FF79, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF7A0000000+0x2321B3, &f1_7FF7A, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF7A0000000+0x23DFD3, &f2_7FF7A, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF7B0000000+0x2321B3, &f1_7FF7B, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF7B0000000+0x23DFD3, &f2_7FF7B, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF7C0000000+0x2321B3, &f1_7FF7C, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF7C0000000+0x23DFD3, &f2_7FF7C, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF7D0000000+0x2321B3, &f1_7FF7D, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF7D0000000+0x23DFD3, &f2_7FF7D, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF7E0000000+0x2321B3, &f1_7FF7E, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF7E0000000+0x23DFD3, &f2_7FF7E, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF7F0000000+0x2321B3, &f1_7FF7F, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF7F0000000+0x23DFD3, &f2_7FF7F, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF800000000+0x2321B3, &f1_7FF80, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF800000000+0x23DFD3, &f2_7FF80, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF810000000+0x2321B3, &f1_7FF81, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF810000000+0x23DFD3, &f2_7FF81, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF820000000+0x2321B3, &f1_7FF82, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF820000000+0x23DFD3, &f2_7FF82, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF830000000+0x2321B3, &f1_7FF83, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF830000000+0x23DFD3, &f2_7FF83, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF840000000+0x2321B3, &f1_7FF84, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF840000000+0x23DFD3, &f2_7FF84, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF850000000+0x2321B3, &f1_7FF85, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF850000000+0x23DFD3, &f2_7FF85, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF860000000+0x2321B3, &f1_7FF86, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF860000000+0x23DFD3, &f2_7FF86, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF870000000+0x2321B3, &f1_7FF87, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF870000000+0x23DFD3, &f2_7FF87, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF880000000+0x2321B3, &f1_7FF88, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF880000000+0x23DFD3, &f2_7FF88, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF890000000+0x2321B3, &f1_7FF89, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF890000000+0x23DFD3, &f2_7FF89, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF8A0000000+0x2321B3, &f1_7FF8A, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF8A0000000+0x23DFD3, &f2_7FF8A, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF8B0000000+0x2321B3, &f1_7FF8B, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF8B0000000+0x23DFD3, &f2_7FF8B, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF8C0000000+0x2321B3, &f1_7FF8C, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF8C0000000+0x23DFD3, &f2_7FF8C, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF8D0000000+0x2321B3, &f1_7FF8D, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF8D0000000+0x23DFD3, &f2_7FF8D, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF8E0000000+0x2321B3, &f1_7FF8E, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF8E0000000+0x23DFD3, &f2_7FF8E, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF8F0000000+0x2321B3, &f1_7FF8F, 4, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)0x7FF8F0000000+0x23DFD3, &f2_7FF8F, 4, NULL);
 
     if (f1_7FF60 == 0x4D504C53){BasePointer=+0x7FF600000000;return 1;}
     if (f2_7FF60 == 0x4D504C53){BasePointer=+0x7FF600000000;return 2;}
@@ -367,9 +367,9 @@ unsigned short GetSlotNum(int slotNum)
   unsigned short buffer;
   int bytesRead = 0;
   if (info.CurrentFile == 1)
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetLobbyAddress(slotNum), &buffer, 2, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetLobbyAddress(slotNum), &buffer, 2, NULL);
   else
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetLobbyAddress(slotNum), &buffer, 2, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetLobbyAddress(slotNum), &buffer, 2, NULL);
   return buffer;
 }
 
@@ -378,9 +378,9 @@ unsigned short GetSlotPlayer(int slotNum)
   unsigned short buffer;
   int bytesRead = 0;
   if (info.CurrentFile == 1)
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetLobbyAddress(slotNum) + F2_SlotPlayer, &buffer, 2, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetLobbyAddress(slotNum) + F2_SlotPlayer, &buffer, 2, NULL);
   else
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetLobbyAddress(slotNum) + F2_SlotPlayer, &buffer, 2, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetLobbyAddress(slotNum) + F2_SlotPlayer, &buffer, 2, NULL);
   return buffer;
 }
 
@@ -389,9 +389,9 @@ unsigned short GetSlotMaxPlayer(int slotNum)
   unsigned short buffer;
   int bytesRead = 0;
   if (info.CurrentFile == 1)
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetLobbyAddress(slotNum) + F2_SlotMaxPlayer, &buffer, 2, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetLobbyAddress(slotNum) + F2_SlotMaxPlayer, &buffer, 2, NULL);
   else
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetLobbyAddress(slotNum) + F2_SlotMaxPlayer, &buffer, 2, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetLobbyAddress(slotNum) + F2_SlotMaxPlayer, &buffer, 2, NULL);
   return buffer;
 }
 
@@ -400,9 +400,9 @@ unsigned char GetSlotStatus(int slotNum)
   unsigned char buffer;
   int bytesRead = 0;
   if (info.CurrentFile == 1)
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetLobbyAddress(slotNum) + F2_SlotStatus, &buffer, 1, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetLobbyAddress(slotNum) + F2_SlotStatus, &buffer, 1, NULL);
   else
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetLobbyAddress(slotNum) + F2_SlotStatus, &buffer, 1, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetLobbyAddress(slotNum) + F2_SlotStatus, &buffer, 1, NULL);
   return buffer;
 }
 
@@ -411,9 +411,9 @@ unsigned char GetSlotPass(int slotNum)
   unsigned char buffer;
   int bytesRead = 0;
   if (info.CurrentFile == 1)
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetLobbyAddress(slotNum) + F2_SlotPass, &buffer, 1, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetLobbyAddress(slotNum) + F2_SlotPass, &buffer, 1, NULL);
   else
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetLobbyAddress(slotNum) + F2_SlotPass, &buffer, 1, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetLobbyAddress(slotNum) + F2_SlotPass, &buffer, 1, NULL);
   return buffer;
 }
 
@@ -422,9 +422,9 @@ unsigned short GetSlotScenarioID(int slotNum)
 	unsigned short buffer;
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetLobbyAddress(slotNum) + F2_SlotScenarioID, &buffer, 2, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetLobbyAddress(slotNum) + F2_SlotScenarioID, &buffer, 2, NULL);
 	else
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetLobbyAddress(slotNum) + F2_SlotScenarioID, &buffer, 2, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetLobbyAddress(slotNum) + F2_SlotScenarioID, &buffer, 2, NULL);
 	return buffer;
 }
 
@@ -433,9 +433,9 @@ unsigned short GetSlotVersion(int slotNum)
 	unsigned short buffer;
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetLobbyAddress(slotNum) + F2_SlotVersion, &buffer, 2, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetLobbyAddress(slotNum) + F2_SlotVersion, &buffer, 2, NULL);
 	else
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetLobbyAddress(slotNum) + F2_SlotVersion, &buffer, 2, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetLobbyAddress(slotNum) + F2_SlotVersion, &buffer, 2, NULL);
 	return buffer;
 }
 
@@ -444,9 +444,9 @@ unsigned char GetHostStatus()
 	unsigned char buffer;
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_HostStatus, &buffer, 1, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_HostStatus, &buffer, 1, NULL);
 	else
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_HostStatus, &buffer, 1, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_HostStatus, &buffer, 1, NULL);
 	return buffer;
 }
 
@@ -455,9 +455,9 @@ unsigned short GetHostMaxPlayer()
 	unsigned short buffer;
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_HostMaxPlayer, &buffer, 2, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_HostMaxPlayer, &buffer, 2, NULL);
 	else
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_HostMaxPlayer, &buffer, 2, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_HostMaxPlayer, &buffer, 2, NULL);
 	return buffer;
 }
 
@@ -466,9 +466,9 @@ unsigned short GetHostPlayer()
 	unsigned short buffer;
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_HostPlayer, &buffer, 2, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_HostPlayer, &buffer, 2, NULL);
 	else
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_HostPlayer, &buffer, 2, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_HostPlayer, &buffer, 2, NULL);
 	return buffer;
 }
 
@@ -477,9 +477,9 @@ unsigned short GetHostTime()
 	unsigned short buffer;
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_HostTime, &buffer, 2, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_HostTime, &buffer, 2, NULL);
 	else
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_HostTime, &buffer, 2, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_HostTime, &buffer, 2, NULL);
 	return buffer;
 }
 
@@ -488,9 +488,9 @@ unsigned short GetHostScenarioID()
 	unsigned short buffer;
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_HostScenarioID, &buffer, 2, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_HostScenarioID, &buffer, 2, NULL);
 	else
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_HostScenarioID, &buffer, 2, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_HostScenarioID, &buffer, 2, NULL);
 	return buffer;
 }
 
@@ -499,9 +499,9 @@ unsigned short GetHostDifficulty()
 	unsigned short buffer;
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_HostDifficulty, &buffer, 2, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_HostDifficulty, &buffer, 2, NULL);
 	else
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_HostDifficulty, &buffer, 2, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_HostDifficulty, &buffer, 2, NULL);
 	return buffer;
 }
 
@@ -511,9 +511,9 @@ char GetSlotCharacterEnabled(int characterID)
     char buffer;
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetSlotCharAddress(characterID), &buffer, 1, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetSlotCharAddress(characterID), &buffer, 1, NULL);
 	else
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetSlotCharAddress(characterID) + 6, &buffer, 1, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetSlotCharAddress(characterID) + 6, &buffer, 1, NULL);
 	return buffer;
 }
 
@@ -523,9 +523,9 @@ char GetSlotNPCType(int characterID)
 	char buffer;
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetSlotCharAddress(characterID) + 230, &buffer, 1, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetSlotCharAddress(characterID) + 230, &buffer, 1, NULL);
 	else
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetSlotCharAddress(characterID) + 2, &buffer, 1, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetSlotCharAddress(characterID) + 2, &buffer, 1, NULL);
 	return buffer;
 }
 /* slot player name */
@@ -534,9 +534,9 @@ char GetSlotNameID(int characterID)
     char buffer;
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetSlotCharAddress(characterID) + 228, &buffer, 1, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetSlotCharAddress(characterID) + 228, &buffer, 1, NULL);
 	else
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetSlotCharAddress(characterID), &buffer, 1, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetSlotCharAddress(characterID), &buffer, 1, NULL);
 	return buffer;
 }
 
@@ -545,9 +545,9 @@ unsigned short GetScenarioID()
 	unsigned short buffer;
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_ScenarioIDAddr, &buffer, 2, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_ScenarioIDAddr, &buffer, 2, NULL);
 	else
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_ScenarioIDAddr, &buffer, 2, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_ScenarioIDAddr, &buffer, 2, NULL);
 	return buffer;
 }
 
@@ -556,9 +556,9 @@ unsigned int GetFrames()
 	unsigned int buffer;
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_FrameCounter, &buffer, 4, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_FrameCounter, &buffer, 4, NULL);
 	else
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_FrameCounter, &buffer, 4, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_FrameCounter, &buffer, 4, NULL);
 	return buffer;
 }
 
@@ -567,9 +567,9 @@ unsigned char GetCleared()
 	unsigned char buffer;
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_Cleared, &buffer, 1, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_Cleared, &buffer, 1, NULL);
 	else
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_Cleared, &buffer, 1, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_Cleared, &buffer, 1, NULL);
 	return buffer;
 }
 
@@ -577,7 +577,7 @@ unsigned short GetWTTime()
 {
 	unsigned short buffer;
 	int bytesRead = 0;
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_WTTime, &buffer, 2, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_WTTime, &buffer, 2, NULL);
 	return buffer;
 }
 
@@ -585,7 +585,7 @@ unsigned short GetEscapeTime()
 {
 	unsigned short buffer;
 	int bytesRead = 0;
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_EscapeTime, &buffer, 2, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_EscapeTime, &buffer, 2, NULL);
 	return buffer;
 }
 
@@ -593,7 +593,7 @@ unsigned int GetFightTime()
 {
 	unsigned int buffer;
 	int bytesRead = 0;
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_DTFightTime, &buffer, 4, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_DTFightTime, &buffer, 4, NULL);
 	return buffer;
 }
 
@@ -601,7 +601,7 @@ unsigned short GetFightTime2()
 {
 	unsigned short buffer;
 	int bytesRead = 0;
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_DTFightTime2, &buffer, 2, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_DTFightTime2, &buffer, 2, NULL);
 	return buffer;
 }
 
@@ -609,7 +609,7 @@ unsigned int GetGarageTime()
 {
 	unsigned int buffer;
 	int bytesRead = 0;
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_DTGarageTime, &buffer, 4, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_DTGarageTime, &buffer, 4, NULL);
 	return buffer;
 }
 
@@ -617,7 +617,7 @@ unsigned int GetGasTime()
 {
 	unsigned int buffer;
 	int bytesRead = 0;
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_DTGasTime, &buffer, 4, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_DTGasTime, &buffer, 4, NULL);
 	return buffer;
 }
 
@@ -625,7 +625,7 @@ unsigned int GetGasFlag()
 {
 	unsigned int buffer;
 	int bytesRead = 0;
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_DTGasFlag, &buffer, 4, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_DTGasFlag, &buffer, 4, NULL);
 	return buffer;
 }
 
@@ -633,7 +633,7 @@ unsigned char GetGasRandom()
 {
 	unsigned char buffer;
 	int bytesRead = 0;
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_DTGasRandom, &buffer, 1, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_DTGasRandom, &buffer, 1, NULL);
 	return buffer;
 }
 
@@ -642,9 +642,9 @@ unsigned char GetItemRandom()
 	unsigned char buffer;
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_ItemRandom, &buffer, 1, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_ItemRandom, &buffer, 1, NULL);
 	else
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_ItemRandom, &buffer, 1, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_ItemRandom, &buffer, 1, NULL);
 	return buffer;
 }
 
@@ -653,9 +653,9 @@ unsigned char GetItemRandom2()
 	unsigned char buffer;
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_ItemRandom2, &buffer, 1, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_ItemRandom2, &buffer, 1, NULL);
 	else
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_ItemRandom2, &buffer, 1, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_ItemRandom2, &buffer, 1, NULL);
 	return buffer;
 }
 
@@ -664,9 +664,9 @@ unsigned char GetPuzzleRandom()
 	unsigned char buffer;
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_PuzzleRandom, &buffer, 1, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_PuzzleRandom, &buffer, 1, NULL);
 	else
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_PuzzleRandom, &buffer, 1, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_PuzzleRandom, &buffer, 1, NULL);
 	return buffer;
 }
 
@@ -677,10 +677,10 @@ unsigned char GetCoin()
 	unsigned char buffer3;
 	unsigned char buffer4;
 	int bytesRead = 0;
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_Coin, &buffer1, 1, NULL);
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_Coin+2, &buffer2, 1, NULL);
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_Coin+4, &buffer3, 1, NULL);
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_Coin+6, &buffer4, 1, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_Coin, &buffer1, 1, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_Coin+2, &buffer2, 1, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_Coin+4, &buffer3, 1, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_Coin+6, &buffer4, 1, NULL);
 	return buffer1+buffer2+buffer3+buffer4;
 }
 
@@ -688,7 +688,7 @@ unsigned char GetKilledZombies()
 {
 	unsigned char buffer;
 	int bytesRead = 0;
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_KilledZombie, &buffer, 1, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_KilledZombie, &buffer, 1, NULL);
 	return buffer;
 }
 
@@ -696,7 +696,7 @@ unsigned char GetPassWT()
 {
 	unsigned char buffer;
 	int bytesRead = 0;
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_PassWT, &buffer, 1, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_PassWT, &buffer, 1, NULL);
 	return buffer;
 }
 
@@ -704,7 +704,7 @@ unsigned short GetPassDT1()
 {
 	unsigned short buffer;
 	int bytesRead = 0;
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_PassDT1, &buffer, 2, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_PassDT1, &buffer, 2, NULL);
 	return buffer;
 }
 
@@ -712,7 +712,7 @@ unsigned char GetPassDT2()
 {
 	unsigned char buffer;
 	int bytesRead = 0;
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_PassDT2, &buffer, 1, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_PassDT2, &buffer, 1, NULL);
 	return buffer;
 }
 
@@ -720,7 +720,7 @@ unsigned char GetPassDT3()
 {
 	unsigned char buffer;
 	int bytesRead = 0;
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_PassDT3, &buffer, 1, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_PassDT3, &buffer, 1, NULL);
 	return buffer;
 }
 
@@ -728,7 +728,7 @@ unsigned char GetPass1()
 {
 	unsigned char buffer;
 	int bytesRead = 0;
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_Pass1, &buffer, 1, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_Pass1, &buffer, 1, NULL);
 	return buffer;
 }
 
@@ -736,7 +736,7 @@ unsigned char GetPass2()
 {
 	unsigned char buffer;
 	int bytesRead = 0;
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_Pass2, &buffer, 1, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_Pass2, &buffer, 1, NULL);
 	return buffer;
 }
 
@@ -744,7 +744,7 @@ unsigned char GetPass3()
 {
 	unsigned char buffer;
 	int bytesRead = 0;
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_Pass3, &buffer, 1, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_Pass3, &buffer, 1, NULL);
 	return buffer;
 }
 
@@ -752,7 +752,7 @@ unsigned short GetPassUB1()
 {
 	unsigned short buffer;
 	int bytesRead = 0;
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_PassUB1, &buffer, 2, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_PassUB1, &buffer, 2, NULL);
 	return buffer;
 }
 
@@ -760,7 +760,7 @@ unsigned char GetPassUB2()
 {
 	unsigned char buffer;
 	int bytesRead = 0;
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_PassUB2, &buffer, 1, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_PassUB2, &buffer, 1, NULL);
 	return buffer;
 }
 
@@ -768,7 +768,7 @@ unsigned char GetPassUB3()
 {
 	unsigned char buffer;
 	int bytesRead = 0;
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_PassUB3, &buffer, 1, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_PassUB3, &buffer, 1, NULL);
 	return buffer;
 }
 
@@ -777,9 +777,9 @@ unsigned short GetPass4()
 	unsigned short buffer;
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_Pass4, &buffer, 2, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_Pass4, &buffer, 2, NULL);
 	else
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_Pass4, &buffer, 2, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_Pass4, &buffer, 2, NULL);
 	return buffer;
 }
 
@@ -787,7 +787,7 @@ unsigned char GetPass5()
 {
 	unsigned char buffer;
 	int bytesRead = 0;
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_Pass5, &buffer, 1, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_Pass5, &buffer, 1, NULL);
 	return buffer;
 }
 
@@ -795,7 +795,7 @@ unsigned char GetPass6()
 {
 	unsigned char buffer;
 	int bytesRead = 0;
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_Pass6, &buffer, 1, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_Pass6, &buffer, 1, NULL);
 	return buffer;
 }
 
@@ -804,9 +804,9 @@ unsigned char GetDifficulty()
 	unsigned char buffer;
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-	    ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_Difficulty, &buffer, 1, NULL);
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_Difficulty, &buffer, 1, NULL);
 	else
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_Difficulty, &buffer, 1, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_Difficulty, &buffer, 1, NULL);
 	return buffer;
 }
 /*
@@ -817,13 +817,13 @@ unsigned int GetE1HP()//enemy HP
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
 	{
-		ReadProcessMemory(ProcessHandle, (PVOID)F1_Pointer, &Pointer,4,0);
-	    ReadProcessMemory(ProcessHandle, (PVOID)Pointer+0x20000000 + F1_EHPOffset, &buffer, 2, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)F1_Pointer, &Pointer,4,0);
+	    ReadProcessMemory(ProcessHandle, (char *)Pointer+0x20000000 + F1_EHPOffset, &buffer, 2, NULL);
 	}
 	else
 	{
-		ReadProcessMemory(ProcessHandle, (PVOID)F2_Pointer, &Pointer,4,0);
-		ReadProcessMemory(ProcessHandle, (PVOID)Pointer+0x20000000 + F2_EHPOffset, &buffer, 2, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)F2_Pointer, &Pointer,4,0);
+		ReadProcessMemory(ProcessHandle, (char *)Pointer+0x20000000 + F2_EHPOffset, &buffer, 2, NULL);
 	}
 	return buffer;
 }
@@ -842,23 +842,23 @@ void UpdatePickups()
         int bytesRead = 0;
         if (info.CurrentFile == 1)
         {
-            ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_PickupSpaceStart + (F1_PickupStructSize * i) + F1_NumberOffset, &numberBuffer, 1, NULL);
-            ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_PickupSpaceStart + (F1_PickupStructSize * i) + F1_IDOffset, &typeBuffer, 2, NULL);
-            ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_PickupSpaceStart + (F1_PickupStructSize * i) + F1_PickupCountOffset, &countBuffer, 2, NULL);
-            ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_PickupSpaceStart + (F1_PickupStructSize * i) + F1_PickupOffset, &pickBuffer, 2, NULL);
-            ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_PickupSpaceStart + (F1_PickupStructSize * i) + F1_PresentOffset, &presentBuffer, 4, NULL);
-            ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_PickupSpaceStart + (F1_PickupStructSize * i) + F1_MixOffset, &mixBuffer, 1, NULL);
-            ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_PickupSpaceStart + (F1_PickupStructSize * i) + F1_ItemRoomIDOffset, &roomidBuffer, 1, NULL);
+            ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_PickupSpaceStart + (F1_PickupStructSize * i) + F1_NumberOffset, &numberBuffer, 1, NULL);
+            ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_PickupSpaceStart + (F1_PickupStructSize * i) + F1_IDOffset, &typeBuffer, 2, NULL);
+            ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_PickupSpaceStart + (F1_PickupStructSize * i) + F1_PickupCountOffset, &countBuffer, 2, NULL);
+            ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_PickupSpaceStart + (F1_PickupStructSize * i) + F1_PickupOffset, &pickBuffer, 2, NULL);
+            ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_PickupSpaceStart + (F1_PickupStructSize * i) + F1_PresentOffset, &presentBuffer, 4, NULL);
+            ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_PickupSpaceStart + (F1_PickupStructSize * i) + F1_MixOffset, &mixBuffer, 1, NULL);
+            ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_PickupSpaceStart + (F1_PickupStructSize * i) + F1_ItemRoomIDOffset, &roomidBuffer, 1, NULL);
         }
         else if (info.CurrentFile == 2)
         {
-            ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_PickupSpaceStart + (F2_PickupStructSize * i) + F2_NumberOffset, &numberBuffer, 1, NULL);
-            ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_PickupSpaceStart + (F2_PickupStructSize * i) + F2_IDOffset, &typeBuffer, 2, NULL);
-            ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_PickupSpaceStart + (F2_PickupStructSize * i) + F2_PickupCountOffset, &countBuffer, 2, NULL);
-            ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_PickupSpaceStart + (F2_PickupStructSize * i) + F2_PickupOffset, &pickBuffer, 2, NULL);
-            ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_PickupSpaceStart + (F2_PickupStructSize * i) + F2_PresentOffset, &presentBuffer, 4, NULL);
-            ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_PickupSpaceStart + (F2_PickupStructSize * i) + F2_MixOffset, &mixBuffer, 1, NULL);
-            ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_PickupSpaceStart + (F2_PickupStructSize * i) + F2_ItemRoomIDOffset, &roomidBuffer, 1, NULL);
+            ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_PickupSpaceStart + (F2_PickupStructSize * i) + F2_NumberOffset, &numberBuffer, 1, NULL);
+            ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_PickupSpaceStart + (F2_PickupStructSize * i) + F2_IDOffset, &typeBuffer, 2, NULL);
+            ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_PickupSpaceStart + (F2_PickupStructSize * i) + F2_PickupCountOffset, &countBuffer, 2, NULL);
+            ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_PickupSpaceStart + (F2_PickupStructSize * i) + F2_PickupOffset, &pickBuffer, 2, NULL);
+            ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_PickupSpaceStart + (F2_PickupStructSize * i) + F2_PresentOffset, &presentBuffer, 4, NULL);
+            ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_PickupSpaceStart + (F2_PickupStructSize * i) + F2_MixOffset, &mixBuffer, 1, NULL);
+            ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_PickupSpaceStart + (F2_PickupStructSize * i) + F2_ItemRoomIDOffset, &roomidBuffer, 1, NULL);
         }
         Items[i].Number = numberBuffer;
         Items[i].ID = i+1;
@@ -876,9 +876,9 @@ unsigned short GetDoorHP(int doorID)
   unsigned short buffer;
   int bytesRead = 0;
   if (info.CurrentFile == 1)
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetDoorHP(doorID), &buffer, 2, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetDoorHP(doorID), &buffer, 2, NULL);
   else
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetDoorHP(doorID), &buffer, 2, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetDoorHP(doorID), &buffer, 2, NULL);
   return buffer;
 }
 
@@ -887,9 +887,9 @@ unsigned short GetDoorFlag(int doorID)
   unsigned short buffer;
   int bytesRead = 0;
   if (info.CurrentFile == 1)
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetDoorFlag(doorID), &buffer, 2, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetDoorFlag(doorID), &buffer, 2, NULL);
   else
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetDoorFlag(doorID), &buffer, 2, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetDoorFlag(doorID), &buffer, 2, NULL);
   return buffer;
 }
 
@@ -898,9 +898,9 @@ unsigned short GetRoomID(int characterID)
   unsigned short buffer;
   int bytesRead = 0;
   if (info.CurrentFile == 1)
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetCharAddress(characterID) + F1_RoomIDOffset, &buffer, 2, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetCharAddress(characterID) + F1_RoomIDOffset, &buffer, 2, NULL);
   else
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetCharAddress(characterID) + F2_RoomIDOffset, &buffer, 2, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetCharAddress(characterID) + F2_RoomIDOffset, &buffer, 2, NULL);
   return buffer;
 }
 
@@ -909,9 +909,9 @@ unsigned short GetHealth(int characterID)
   unsigned short buffer;
   int bytesRead = 0;
   if (info.CurrentFile == 1)
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetCharAddress(characterID) + F1_HPOffset, &buffer, 2, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetCharAddress(characterID) + F1_HPOffset, &buffer, 2, NULL);
   else
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetCharAddress(characterID) + F2_HPOffset, &buffer, 2, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetCharAddress(characterID) + F2_HPOffset, &buffer, 2, NULL);
   return buffer;
 }
 
@@ -920,9 +920,9 @@ unsigned short GetMaxHealth(int characterID)
   unsigned short buffer;
   int bytesRead = 0;
   if (info.CurrentFile == 1)
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetCharAddress(characterID) + F1_MaxHPOffset, &buffer, 2, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetCharAddress(characterID) + F1_MaxHPOffset, &buffer, 2, NULL);
   else
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetCharAddress(characterID) + F2_MaxHPOffset, &buffer, 2, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetCharAddress(characterID) + F2_MaxHPOffset, &buffer, 2, NULL);
   return buffer;
 }
 
@@ -931,9 +931,9 @@ char GetCharacterType(int characterID)
 	char buffer;
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetCharAddress(characterID) + F1_CharacterTypeOffset, &buffer, 1, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetCharAddress(characterID) + F1_CharacterTypeOffset, &buffer, 1, NULL);
 	else
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetCharAddress(characterID) + F2_CharacterTypeOffset, &buffer, 1, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetCharAddress(characterID) + F2_CharacterTypeOffset, &buffer, 1, NULL);
 	return buffer;
 }
 
@@ -942,9 +942,9 @@ char* GetInventory(int characterID)
 	char* buffer = malloc(4);
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetCharAddress(characterID) + F1_InventoryOffset, buffer, 4, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetCharAddress(characterID) + F1_InventoryOffset, buffer, 4, NULL);
 	else
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetCharAddress(characterID) + F2_InventoryOffset, buffer, 4, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetCharAddress(characterID) + F2_InventoryOffset, buffer, 4, NULL);
 	return buffer;
 }
 
@@ -953,9 +953,9 @@ char GetSpecialItem(int characterID)
 	char buffer;
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetCharAddress(characterID) + F1_InventoryOffset + 4, &buffer, 1, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetCharAddress(characterID) + F1_InventoryOffset + 4, &buffer, 1, NULL);
 	else
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetCharAddress(characterID) + F2_InventoryOffset + 4, &buffer, 1, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetCharAddress(characterID) + F2_InventoryOffset + 4, &buffer, 1, NULL);
 	return buffer;
 }
 
@@ -964,9 +964,9 @@ char* GetSpecialInventory(int characterID)
 	char* buffer = malloc(4);
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetCharAddress(characterID) + F1_InventoryOffset + 5, buffer, 4, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetCharAddress(characterID) + F1_InventoryOffset + 5, buffer, 4, NULL);
 	else
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetCharAddress(characterID) + F2_InventoryOffset + 5, buffer, 4, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetCharAddress(characterID) + F2_InventoryOffset + 5, buffer, 4, NULL);
 	return buffer;
 }
 
@@ -975,9 +975,9 @@ char* GetDeadInventory(int characterID)
 	char* buffer = malloc(4);
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_DeadInventoryStart + 8*characterID, buffer, 4, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_DeadInventoryStart + 8*characterID, buffer, 4, NULL);
 	else
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_DeadInventoryStart + 8*characterID, buffer, 4, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_DeadInventoryStart + 8*characterID, buffer, 4, NULL);
 	return buffer;
 }
 
@@ -986,9 +986,9 @@ char* GetDeadSpecialInventory(int characterID)
 	char* buffer = malloc(4);
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_DeadInventoryStart + 8*characterID + 4, buffer, 4, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_DeadInventoryStart + 8*characterID + 4, buffer, 4, NULL);
 	else
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_DeadInventoryStart + 8*characterID + 4, buffer, 4, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_DeadInventoryStart + 8*characterID + 4, buffer, 4, NULL);
 	return buffer;
 }
 
@@ -999,9 +999,9 @@ void GetCindyBag(int cid)
 		unsigned char* buffer = malloc(36);
 		int bytesRead = 0;
 		if (info.CurrentFile == 1)
-			ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetCharAddress(cid) + F1_InventoryOffset + 5, buffer, 36, NULL);
+			ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetCharAddress(cid) + F1_InventoryOffset + 5, buffer, 36, NULL);
 		else
-			ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetCharAddress(cid) + F2_InventoryOffset + 5, buffer, 36, NULL);
+			ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetCharAddress(cid) + F2_InventoryOffset + 5, buffer, 36, NULL);
 		
 		/* Warning! Unexplainable magic below! */
 		for (int i=0; i < 4; i++)
@@ -1040,9 +1040,9 @@ unsigned short GetBleedTime(int characterID)
   unsigned short buffer;
   int bytesRead = 0;
   if (info.CurrentFile == 1)
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetCharAddress(characterID) + F1_BleedTimeOffset, &buffer, 2, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetCharAddress(characterID) + F1_BleedTimeOffset, &buffer, 2, NULL);
   else
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetCharAddress(characterID) + F2_BleedTimeOffset, &buffer, 2, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetCharAddress(characterID) + F2_BleedTimeOffset, &buffer, 2, NULL);
   return buffer;
 }
 
@@ -1051,7 +1051,7 @@ unsigned short GetAntiVirusGTime(int characterID)
   unsigned short buffer;
   int bytesRead = 0;
   if (info.CurrentFile == 1)
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetCharAddress(characterID) + F1_AntiVirusGTimeOffset, &buffer, 2, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetCharAddress(characterID) + F1_AntiVirusGTimeOffset, &buffer, 2, NULL);
   return buffer;
 }
 
@@ -1060,9 +1060,9 @@ unsigned short GetHerbTime(int characterID)
   unsigned short buffer;
   int bytesRead = 0;
   if (info.CurrentFile == 1)
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetCharAddress(characterID) + F1_HerbTimeOffset, &buffer, 2, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetCharAddress(characterID) + F1_HerbTimeOffset, &buffer, 2, NULL);
   else
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetCharAddress(characterID) + F2_HerbTimeOffset, &buffer, 2, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetCharAddress(characterID) + F2_HerbTimeOffset, &buffer, 2, NULL);
   return buffer;
 }
 
@@ -1071,9 +1071,9 @@ unsigned short GetAntiVirusTime(int characterID)
   unsigned short buffer;
   int bytesRead = 0;
   if (info.CurrentFile == 1)
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetCharAddress(characterID) + F1_AntiVirusTimeOffset, &buffer, 2, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetCharAddress(characterID) + F1_AntiVirusTimeOffset, &buffer, 2, NULL);
   else
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetCharAddress(characterID) + F2_AntiVirusTimeOffset, &buffer, 2, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetCharAddress(characterID) + F2_AntiVirusTimeOffset, &buffer, 2, NULL);
   return buffer;
 }
 
@@ -1082,9 +1082,9 @@ double GetPower(int characterID)
   float buffer;
   int bytesRead = 0;
   if (info.CurrentFile == 1)
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetCharAddress(characterID) + F1_PowerOffset, &buffer, 4, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetCharAddress(characterID) + F1_PowerOffset, &buffer, 4, NULL);
   else
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetCharAddress(characterID) + F2_PowerOffset, &buffer, 4, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetCharAddress(characterID) + F2_PowerOffset, &buffer, 4, NULL);
   return (double)buffer;
 }
 
@@ -1093,9 +1093,9 @@ double GetSize(int characterID)
   float buffer;
   int bytesRead = 0;
   if (info.CurrentFile == 1)
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetCharAddress(characterID) + F1_SizeOffset, &buffer, 4, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetCharAddress(characterID) + F1_SizeOffset, &buffer, 4, NULL);
   else
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetCharAddress(characterID) + F2_SizeOffset, &buffer, 4, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetCharAddress(characterID) + F2_SizeOffset, &buffer, 4, NULL);
   return (double)buffer;
 }
 
@@ -1104,9 +1104,9 @@ double GetSpeed(int characterID)
   float buffer;
   int bytesRead = 0;
   if (info.CurrentFile == 1)
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetCharAddress(characterID) + F1_SpeedOffset, &buffer, 4, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetCharAddress(characterID) + F1_SpeedOffset, &buffer, 4, NULL);
   else
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetCharAddress(characterID) + F2_SpeedOffset, &buffer, 4, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetCharAddress(characterID) + F2_SpeedOffset, &buffer, 4, NULL);
   return (double)buffer;
 }
 double GetPositionX(int characterID)
@@ -1114,9 +1114,9 @@ double GetPositionX(int characterID)
   float buffer;
   int bytesRead = 0;
   if (info.CurrentFile == 1)
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetCharAddress(characterID) + F1_PositionX, &buffer, 4, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetCharAddress(characterID) + F1_PositionX, &buffer, 4, NULL);
   else
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetCharAddress(characterID) + F2_PositionX, &buffer, 4, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetCharAddress(characterID) + F2_PositionX, &buffer, 4, NULL);
   return (double)buffer;
 }
 
@@ -1125,9 +1125,9 @@ double GetPositionY(int characterID)
   float buffer;
   int bytesRead = 0;
   if (info.CurrentFile == 1)
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetCharAddress(characterID) + F1_PositionY, &buffer, 4, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetCharAddress(characterID) + F1_PositionY, &buffer, 4, NULL);
   else
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetCharAddress(characterID) + F2_PositionY, &buffer, 4, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetCharAddress(characterID) + F2_PositionY, &buffer, 4, NULL);
   return (double)buffer;
 }
 
@@ -1138,13 +1138,13 @@ double GetPercentage(int characterID)
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
 	{
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetCharAddress(characterID) + F1_VirusOffset, &currentBuffer, 4, NULL);
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_VirusMaxStart + 4 * Players[characterID].CharacterType, &maxBuffer, 4, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetCharAddress(characterID) + F1_VirusOffset, &currentBuffer, 4, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_VirusMaxStart + 4 * Players[characterID].CharacterType, &maxBuffer, 4, NULL);
 	}
 	else
 	{
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetCharAddress(characterID) + F2_VirusOffset, &currentBuffer, 4, NULL);
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_VirusMaxStart + 4 * Players[characterID].CharacterType, &maxBuffer, 4, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetCharAddress(characterID) + F2_VirusOffset, &currentBuffer, 4, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_VirusMaxStart + 4 * Players[characterID].CharacterType, &maxBuffer, 4, NULL);
 	}
 
 	return (double)currentBuffer/(double)maxBuffer*100.0;
@@ -1155,9 +1155,9 @@ double GetCritBonus(int characterID)
 	float buffer;
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetCharAddress(characterID) + F1_CritBonusOffset, &buffer, 4, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetCharAddress(characterID) + F1_CritBonusOffset, &buffer, 4, NULL);
 	else
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetCharAddress(characterID) + F2_CritBonusOffset, &buffer, 4, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetCharAddress(characterID) + F2_CritBonusOffset, &buffer, 4, NULL);
 	return (double)buffer;
 }
 
@@ -1166,9 +1166,9 @@ char GetNameID(int characterID)
     char buffer;
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetCharAddress(characterID) + F1_NameTypeOffset, &buffer, 1, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetCharAddress(characterID) + F1_NameTypeOffset, &buffer, 1, NULL);
 	else
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetCharAddress(characterID) + F2_NameTypeOffset, &buffer, 1, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetCharAddress(characterID) + F2_NameTypeOffset, &buffer, 1, NULL);
 	return buffer;
 }
 
@@ -1177,9 +1177,9 @@ char GetEquippedItem(int characterID)
     char buffer;
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetCharAddress(characterID) + F1_EquippedItemOffset, &buffer, 1, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetCharAddress(characterID) + F1_EquippedItemOffset, &buffer, 1, NULL);
 	else
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetCharAddress(characterID) + F2_EquippedItemOffset, &buffer, 1, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetCharAddress(characterID) + F2_EquippedItemOffset, &buffer, 1, NULL);
 	return buffer;
 }
 
@@ -1188,9 +1188,9 @@ char GetCharacterStatus(int characterID)
     char buffer;
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetCharAddress(characterID) + F1_CharacterStatusOffset, &buffer, 1, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetCharAddress(characterID) + F1_CharacterStatusOffset, &buffer, 1, NULL);
 	else
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetCharAddress(characterID) + F2_CharacterStatusOffset, &buffer, 1, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetCharAddress(characterID) + F2_CharacterStatusOffset, &buffer, 1, NULL);
 	return buffer;
 }
 
@@ -1199,9 +1199,9 @@ char GetCharacterEnabled(int characterID)
     char buffer;
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetCharAddress(characterID) + F1_CharacterEnabled, &buffer, 1, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetCharAddress(characterID) + F1_CharacterEnabled, &buffer, 1, NULL);
 	else
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetCharAddress(characterID) + F2_CharacterEnabled, &buffer, 1, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetCharAddress(characterID) + F2_CharacterEnabled, &buffer, 1, NULL);
 	return buffer;
 }
 
@@ -1210,9 +1210,9 @@ char GetCharacterInGame(int characterID)
     char buffer;
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetCharAddress(characterID) + F1_CharacterInGame, &buffer, 1, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetCharAddress(characterID) + F1_CharacterInGame, &buffer, 1, NULL);
 	else
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetCharAddress(characterID) + F2_CharacterInGame, &buffer, 1, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetCharAddress(characterID) + F2_CharacterInGame, &buffer, 1, NULL);
 	return buffer;
 }
 
@@ -1222,8 +1222,8 @@ void GetRoomItemF1()
 		unsigned char* buffer = malloc(196*MAX_ITEM);
 		int bytesRead = 0;
 
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_RoomItem, &Pointer,4,0);
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+Pointer+0x40-(196*MAX_ITEM/2), buffer, 196*MAX_ITEM, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_RoomItem, &Pointer,4,0);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+Pointer+0x40-(196*MAX_ITEM/2), buffer, 196*MAX_ITEM, NULL);
 
 		/* Warning! Unexplainable magic below! */
 		for (int i=0; i < MAX_ITEM; i++)
@@ -1262,8 +1262,8 @@ void GetRoomItemF2()
 		unsigned char* buffer = malloc(192*MAX_ITEM);
 		int bytesRead = 0;
 
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_RoomItem, &Pointer,4,NULL);//24AF48
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+Pointer+0x40-(192*MAX_ITEM/2), buffer, 192*MAX_ITEM, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_RoomItem, &Pointer,4,NULL);//24AF48
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+Pointer+0x40-(192*MAX_ITEM/2), buffer, 192*MAX_ITEM, NULL);
 
 		/* Warning! Unexplainable magic below! */
 		for (int i=0; i < MAX_ITEM; i++)
@@ -1301,9 +1301,9 @@ char GetEnemyNameID(int enemyID)
     char buffer;
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetEnemyAddress(enemyID) + F1_EnemyNameIDOffset, &buffer, 1, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetEnemyAddress(enemyID) + F1_EnemyNameIDOffset, &buffer, 1, NULL);
 	else
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetEnemyAddress(enemyID) + F2_EnemyNameIDOffset, &buffer, 1, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetEnemyAddress(enemyID) + F2_EnemyNameIDOffset, &buffer, 1, NULL);
 	return buffer;
 }
 
@@ -1312,9 +1312,9 @@ char GetEnemyType(int enemyID)
 	char buffer;
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetEnemyAddress(enemyID) + F1_EnemyTypeOffset, &buffer, 1, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetEnemyAddress(enemyID) + F1_EnemyTypeOffset, &buffer, 1, NULL);
 	else
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetEnemyAddress(enemyID) + F2_EnemyTypeOffset, &buffer, 1, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetEnemyAddress(enemyID) + F2_EnemyTypeOffset, &buffer, 1, NULL);
 	return buffer;
 }
 
@@ -1323,9 +1323,9 @@ unsigned short GetEnemyHealth(int enemyID)
   unsigned short buffer;
   int bytesRead = 0;
   if (info.CurrentFile == 1)
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetEnemyAddress(enemyID) + F1_EHPOffset, &buffer, 2, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetEnemyAddress(enemyID) + F1_EHPOffset, &buffer, 2, NULL);
   else
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetEnemyAddress(enemyID) + F2_EHPOffset, &buffer, 2, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetEnemyAddress(enemyID) + F2_EHPOffset, &buffer, 2, NULL);
   return buffer;
 }
 
@@ -1334,9 +1334,9 @@ unsigned short GetEnemyMaxHealth(int enemyID)
   unsigned short buffer;
   int bytesRead = 0;
   if (info.CurrentFile == 1)
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetEnemyAddress(enemyID) + F1_EMaxHPOffset, &buffer, 2, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetEnemyAddress(enemyID) + F1_EMaxHPOffset, &buffer, 2, NULL);
   else
-      ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetEnemyAddress(enemyID) + F2_EMaxHPOffset, &buffer, 2, NULL);
+      ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetEnemyAddress(enemyID) + F2_EMaxHPOffset, &buffer, 2, NULL);
   return buffer;
 }
 
@@ -1345,9 +1345,9 @@ char GetEnemyEnabled(int enemyID)
     char buffer;
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetEnemyAddress(enemyID) + F1_EnemyEnabled, &buffer, 1, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetEnemyAddress(enemyID) + F1_EnemyEnabled, &buffer, 1, NULL);
 	else
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetEnemyAddress(enemyID) + F2_EnemyEnabled, &buffer, 1, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetEnemyAddress(enemyID) + F2_EnemyEnabled, &buffer, 1, NULL);
 	return buffer;
 }
 
@@ -1356,9 +1356,9 @@ char GetEnemyInGame(int enemyID)
     char buffer;
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_GetEnemyAddress(enemyID) + F1_EnemyInGame, &buffer, 1, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_GetEnemyAddress(enemyID) + F1_EnemyInGame, &buffer, 1, NULL);
 	else
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_GetEnemyAddress(enemyID) + F2_EnemyInGame, &buffer, 1, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_GetEnemyAddress(enemyID) + F2_EnemyInGame, &buffer, 1, NULL);
 	return buffer;
 }
 
@@ -1377,25 +1377,25 @@ void UpdateEnemyList()
         int bytesRead = 0;
         if (info.CurrentFile == 1)
         {
-            ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_EnemyListOffset + (0x60 * i), &number, 1, NULL);
-            ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_EnemyListOffset + (0x60 * i) + 1, &flag, 1, NULL);
-            ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_EnemyListOffset + (0x60 * i) + 2, &name, 1, NULL);
-            ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_EnemyListOffset + (0x60 * i) + 3, &type, 1, NULL);
-            ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_EnemyListOffset + (0x60 * i) + 0x22, &room, 1, NULL);
-            ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_EnemyListOffset + (0x60 * i) + 0x1C, &hp, 2, NULL);
-            ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_EnemyListOffset + (0x60 * i) + 0x1E, &maxhp, 2, NULL);
-            ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_EnemyListOffset + (0x60 * i) + 0x45, &status, 1, NULL);
+            ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_EnemyListOffset + (0x60 * i), &number, 1, NULL);
+            ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_EnemyListOffset + (0x60 * i) + 1, &flag, 1, NULL);
+            ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_EnemyListOffset + (0x60 * i) + 2, &name, 1, NULL);
+            ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_EnemyListOffset + (0x60 * i) + 3, &type, 1, NULL);
+            ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_EnemyListOffset + (0x60 * i) + 0x22, &room, 1, NULL);
+            ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_EnemyListOffset + (0x60 * i) + 0x1C, &hp, 2, NULL);
+            ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_EnemyListOffset + (0x60 * i) + 0x1E, &maxhp, 2, NULL);
+            ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_EnemyListOffset + (0x60 * i) + 0x45, &status, 1, NULL);
 		}
 		else if (info.CurrentFile == 2)
 		{
-            ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_EnemyListOffset + (0x60 * i), &number, 1, NULL);
-            ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_EnemyListOffset + (0x60 * i) + 1, &flag, 1, NULL);
-            ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_EnemyListOffset + (0x60 * i) + 2, &name, 1, NULL);
-            ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_EnemyListOffset + (0x60 * i) + 3, &type, 1, NULL);
-            ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_EnemyListOffset + (0x60 * i) + 0x22, &room, 1, NULL);
-            ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_EnemyListOffset + (0x60 * i) + 0x1C, &hp, 2, NULL);
-            ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_EnemyListOffset + (0x60 * i) + 0x1E, &maxhp, 2, NULL);
-            ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_EnemyListOffset + (0x60 * i) + 0x45, &status, 1, NULL);
+            ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_EnemyListOffset + (0x60 * i), &number, 1, NULL);
+            ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_EnemyListOffset + (0x60 * i) + 1, &flag, 1, NULL);
+            ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_EnemyListOffset + (0x60 * i) + 2, &name, 1, NULL);
+            ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_EnemyListOffset + (0x60 * i) + 3, &type, 1, NULL);
+            ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_EnemyListOffset + (0x60 * i) + 0x22, &room, 1, NULL);
+            ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_EnemyListOffset + (0x60 * i) + 0x1C, &hp, 2, NULL);
+            ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_EnemyListOffset + (0x60 * i) + 0x1E, &maxhp, 2, NULL);
+            ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_EnemyListOffset + (0x60 * i) + 0x45, &status, 1, NULL);
 		}
 		Enemies2[i].Number = number;
 		Enemies2[i].Flag = flag;
@@ -1413,9 +1413,9 @@ char GetPlayerNum()
     unsigned char buffer;
 	int bytesRead = 0;
 	if (info.CurrentFile == 1)
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F1_PlayerNum, &buffer, 1, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F1_PlayerNum, &buffer, 1, NULL);
 	else
-		ReadProcessMemory(ProcessHandle, (PVOID)BasePointer+F2_PlayerNum, &buffer, 1, NULL);
+		ReadProcessMemory(ProcessHandle, (char *)BasePointer+F2_PlayerNum, &buffer, 1, NULL);
 	return buffer;
 }
 
