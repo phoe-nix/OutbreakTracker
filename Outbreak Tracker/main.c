@@ -1217,8 +1217,7 @@ char* GetStatusText(unsigned char stat)
 static int LInit (lua_State* L) {
 	ProcessID = GetProcessID("pcsx2-qt.exe");
 	if (ProcessID != 0)
-	{
-
+	
 		ProcessHandle = OpenProcess(PROCESS_VM_READ, FALSE, ProcessID);
 		BindBasePointer();
 		lua_pushboolean(L, 1);
