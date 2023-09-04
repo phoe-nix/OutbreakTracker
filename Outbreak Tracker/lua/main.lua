@@ -17,6 +17,7 @@ local RetryTimer = 0
 local scalex,scaley = 300, 740
 local errorX, errorY = 0, 400
 local TimeSwtich=1
+local PuzzleSwitch=1
 local EnemyHPSwtich=1
 local ItemSwtich=1
 local Style=0
@@ -813,13 +814,15 @@ function love.draw()
 				end
 				
 				if not (d == "easy") then
-					love.graphics.setFont(DefaultFont)
-					if (GameInfo.passwt%8 >= 4 and GameInfo.passwt%8 <8) then-- >=4 and <8, >=C and <F
-						love.graphics.setColor( 0, 200/255, 0, 1 )
-					else
-						love.graphics.setColor( 127/255, 127/255, 127/255, 1 )
+					if(PuzzleSwitch == 1) then
+						love.graphics.setFont(DefaultFont)
+						if (GameInfo.passwt%8 >= 4 and GameInfo.passwt%8 <8) then-- >=4 and <8, >=C and <F
+							love.graphics.setColor( 0, 200/255, 0, 1 )
+						else
+							love.graphics.setColor( 127/255, 127/255, 127/255, 1 )
+						end
+						love.graphics.printf(passwt, passwt_x, passwt_y, 300, "left")
 					end
-					love.graphics.printf(passwt, passwt_x, passwt_y, 300, "left")
 				end
 
 			love.graphics.setColor( 1, 1, 1, 1 )
@@ -845,12 +848,14 @@ function love.draw()
 
 				love.graphics.setFont(DefaultFont)
 				if(GameInfo.fighttime == 0) and (GameInfo.fighttime2 == 0xffff) then
-					if (GameInfo.passdt3%8 >= 4 and GameInfo.passdt3%8 <8) then-- >=4 and <8, >=C and <F						love.graphics.setColor( 0, 200/255, 0, 1 )
-						love.graphics.setColor( 0, 200/255, 0, 1 )
-					else
-						love.graphics.setColor( 127/255, 127/255, 127/255, 1 )
+					if(PuzzleSwitch == 1) then
+						if (GameInfo.passdt3%8 >= 4 and GameInfo.passdt3%8 <8) then-- >=4 and <8, >=C and <F						love.graphics.setColor( 0, 200/255, 0, 1 )
+							love.graphics.setColor( 0, 200/255, 0, 1 )
+						else
+							love.graphics.setColor( 127/255, 127/255, 127/255, 1 )
+						end
+						love.graphics.printf(passdt, timeleft_x, timeleft_y, 300, "left")
 					end
-					love.graphics.printf(passdt, timeleft_x, timeleft_y, 300, "left")
 				end
 
 			love.graphics.setColor( 1, 1, 1, 1 )
@@ -985,39 +990,49 @@ function love.draw()
 				end
 
 			elseif (s == "below freezing point") then
-				love.graphics.setFont(DefaultFont)
-				love.graphics.printf(passbfp.."-"..pass2bfp, timeleft_x, timeleft_y, 300, "left")
+				if(PuzzleSwitch == 1) then
+					love.graphics.setFont(DefaultFont)
+					love.graphics.printf(passbfp.."-"..pass2bfp, timeleft_x, timeleft_y, 300, "left")
+				end
 
 			elseif (s == "the hive") then
-				love.graphics.setFont(DefaultFont)
-				love.graphics.printf(passhive, timeleft_x, timeleft_y, 300, "left")
+				if(PuzzleSwitch == 1) then
+					love.graphics.setFont(DefaultFont)
+					love.graphics.printf(passhive, timeleft_x, timeleft_y, 300, "left")
+				end
 
 			elseif (s == "hellfire") then
-				love.graphics.setFont(DefaultFont)
-				love.graphics.printf(hfpass.."-"..hfmap.."-"..hfpower, timeleft_x, timeleft_y, 300, "left")
+				if(PuzzleSwitch == 1) then
+					love.graphics.setFont(DefaultFont)
+					love.graphics.printf(hfpass.."-"..hfmap.."-"..hfpower, timeleft_x, timeleft_y, 300, "left")
+				end
 
 			elseif (s == "decisions,decisions") then
-				love.graphics.setFont(DefaultFont)
-				love.graphics.printf(ddpass.."-"..clocktime, timeleft_x, timeleft_y, 300, "left")
+				if(PuzzleSwitch == 1) then
+					love.graphics.setFont(DefaultFont)
+					love.graphics.printf(ddpass.."-"..clocktime, timeleft_x, timeleft_y, 300, "left")
+				end
 
 			elseif (s == "underbelly") then
 				if(GameInfo.escapetime == 0 or GameInfo.escapetime == 0xffff)then
-					love.graphics.setFont(DefaultFont)
-					if(GameInfo.passub3%64 >=32) then
-						love.graphics.setColor( 0, 200/255, 0, 1 )
-					else
-						love.graphics.setColor( 127/255, 127/255, 127/255, 1 )
-					end
-					love.graphics.printf(passub1, timeleft_x, timeleft_y, 300, "left")
+					if(PuzzleSwitch == 1) then
+						love.graphics.setFont(DefaultFont)
+						if(GameInfo.passub3%64 >=32) then
+							love.graphics.setColor( 0, 200/255, 0, 1 )
+						else
+							love.graphics.setColor( 127/255, 127/255, 127/255, 1 )
+						end
+						love.graphics.printf(passub1, timeleft_x, timeleft_y, 300, "left")
 
-					if(GameInfo.passub3%32 >=16) then
-						love.graphics.setColor( 0, 200/255, 0, 1 )
-					else
-						love.graphics.setColor( 127/255, 127/255, 127/255, 1 )
+						if(GameInfo.passub3%32 >=16) then
+							love.graphics.setColor( 0, 200/255, 0, 1 )
+						else
+							love.graphics.setColor( 127/255, 127/255, 127/255, 1 )
+						end
+						love.graphics.printf(passub2, timeleft_x+60, timeleft_y, 300, "left")
 					end
-					love.graphics.printf(passub2, timeleft_x+60, timeleft_y, 300, "left")
 
-				love.graphics.setColor( 1, 1, 1, 1 )
+					love.graphics.setColor( 1, 1, 1, 1 )
 				else
 					love.graphics.setFont(TimeFont)
 					love.graphics.printf(Time2string3(GameInfo.escapetime), timeleft_x, timeleft_y, 60, "center")
@@ -1035,9 +1050,9 @@ function love.draw()
 			end
 		end	
 		if HelpMenu==1 then
-			love.graphics.rectangle('line',2,2,296,201,3,3,1)
+			love.graphics.rectangle('line',2,2,296,216,3,3,1)
 			love.graphics.setColor( 0, 0, 0, 0.85 )
-			love.graphics.rectangle('fill',2,2,296,201,3,3,1)
+			love.graphics.rectangle('fill',2,2,296,216,3,3,1)
 			love.graphics.setFont(VerySmallFont)
 			love.graphics.setColor( 1, 1, 1, 1 )
 			love.graphics.printf(_l("Help Menu"), 4, 4, 300, "left")
@@ -1215,6 +1230,11 @@ function love.keypressed(key)
 			if key =="i" then
 				if ItemSwtich == 0 then ItemSwtich=1
 				elseif ItemSwtich==1 then ItemSwtich=0
+				end
+			end
+			if key =="q" then
+				if PuzzleSwitch == 0 then PuzzleSwitch=1
+				elseif PuzzleSwitch==1 then PuzzleSwitch=0
 				end
 			end
 			if key =="e" then
