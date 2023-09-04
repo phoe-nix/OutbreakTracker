@@ -1,7 +1,7 @@
 local language = {
     ["Unable to find PCSX2 process.\n Will try again in "] = "Unable to find PCSX2 process.\n Will try again in ", -- UI
     ["This is not Biohazard Outbreak game.\n Will try again in "] = "This is not Biohazard Outbreak game.\n Will try again in ",
-    ["Hotkeys list"] = "Hotkeys list:\n F1: Show/hide help menu.\n F2: Show/hide item list/ F3: Switch room list.\n F4: Show/hide enemy list. F5: No border.\n 1/2/3/4: Change window size.\n I: Show/hide item list in current room.\n T: Show/hide Timers.\n E: Switch/hide enemy HP in current room.\n S: Simple window.\n A: Auto size.\n D: Default.\n H/V: Change layout style.\n ESC: Exit.\n\nCredits\n    Program: Fothsid, killme\n    Thanks: morshi, alyssaprimp\nCode: github.com/phoe-nix/OutbreakTracker",
+    ["Hotkeys list"] = "Hotkeys list:\n F1: Show/hide help menu.\n F2: Show/hide item list/ F3: Switch room list.\n F4: Show/hide enemy list. F5: No border.\n 1/2/3/4: Change window size.\n I: Show/hide item list in current room.\n T: Show/hide Timers.\n E: Switch/hide enemy HP in current room.\n S: Simple window.\n A: Auto size.\n D: Default.\n H/V: Change layout style.\n ESC: Exit.\n\nCredits\n    Program: Fothsid, killme, phoe-nix, madgamer98\n    Thanks: morshi, alyssaprimp\nCode: github.com/madgamer98/OutbreakTracker",
     ["Help Menu"] = "Hotkeys list:\n F1: Show/hide help menu.\n F2: Show/hide item list/ F3: Switch room list.\n F4: Show/hide enemy list. F5: No border.\n 1/2/3/4: Change window size.\n I: Show/hide item list in current room.\n T: Show/hide Timers.\n E: Switch/hide enemy HP in current room.\n S: Simple window.\n A: Auto size.\n D: Default.\n H/V: Change layout style.\n ESC: Exit.",
     ["No"] = "No.",
     ["Title & Scenario"] = "Title & Scenario",
