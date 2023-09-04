@@ -15,7 +15,7 @@ require "language"
 local InitResult = false
 local RetryTimer = 0
 local scalex,scaley = 300, 740
-local errorX, errorY = 0, 400
+local errorX, errorY = 0, 500
 local TimeSwitch=1
 local PuzzleSwitch=1
 local EnemyHPSwitch=1
@@ -27,6 +27,7 @@ local EnemyList=0
 local ItemList=0
 local doorList=1
 local RoomName=1
+LanguageSwitch=0;
 
 Slots = {}
 SPlayers = {}
@@ -1050,24 +1051,27 @@ function love.draw()
 			end
 		end	
 		if HelpMenu==1 then
-			love.graphics.rectangle('line',2,2,296,216,3,3,1)
+			love.graphics.rectangle('line',2,2,296,360,3,3,1)
 			love.graphics.setColor( 0, 0, 0, 0.85 )
-			love.graphics.rectangle('fill',2,2,296,216,3,3,1)
+			love.graphics.rectangle('fill',2,2,296,360,3,3,1)
 			love.graphics.setFont(VerySmallFont)
 			love.graphics.setColor( 1, 1, 1, 1 )
-			love.graphics.printf(_l("Help Menu"), 4, 4, 300, "left")
+			love.graphics.printf(_l("Language list"), 4, 4, 300, "left")
+			love.graphics.printf(_l("Help Menu"), 4, 60, 300, "left")
 		end
 
 	elseif InitResult == false then
 		love.graphics.setFont(DefaultFont)
 		love.graphics.printf(_l("Unable to find PCSX2 process.\n Will try again in ") .. tostring(math.floor(5-RetryTimer + 0.5)) .. ".", errorX, errorY, 300, "center")
 		love.graphics.setFont(VerySmallFont)
-		love.graphics.printf(_l("Hotkeys list"), 4, 4, 300, "left")
+		love.graphics.printf(_l("Language list"), 4, 4, 300, "left")
+		love.graphics.printf(_l("Hotkeys list"), 4, 60, 300, "left")
 	elseif InitResult == true and GameInfo.currentFile == 255 then
 		love.graphics.setFont(DefaultFont)
 		love.graphics.printf(_l("This is not Biohazard Outbreak game.\n Will try again in ") .. tostring(math.floor(5-RetryTimer + 0.5)) .. ".", errorX, errorY, 300, "center")
 		love.graphics.setFont(VerySmallFont)
-		love.graphics.printf(_l("Hotkeys list"), 4, 4, 300, "left")
+		love.graphics.printf(_l("Language list"), 4, 4, 300, "left")
+		love.graphics.printf(_l("Hotkeys list"), 4, 60, 300, "left")
 	end
 end
 
@@ -1205,6 +1209,11 @@ function love.keypressed(key)
 	if key == "d" then love.window.setMode(300, 160+(145*4),{resizable=true,vsync = 3}) love.window.setPosition(x, y)scalex,scaley = 300, 160+(145*4) Style = 0 end
 	if key == "h" then love.window.setMode(300*4+150, 145+60,{resizable=true,vsync = 3}) love.window.setPosition(x, y)scalex,scaley = 300*4+150, 145+60 Style = 1 end
 	if key == "v" then love.window.setMode(300, 160+(145*4),{resizable=true,vsync = 3}) love.window.setPosition(x, y)scalex,scaley = 300, 160+(145*4) Style = 0 end
+	if key =="l" then
+		if LanguageSwitch == 0 then LanguageSwitch=1
+		elseif LanguageSwitch==1 then LanguageSwitch=0
+		end
+	end
 	if InitResult then
 		if not(s == "") then
 			if key =="kp0" then

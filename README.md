@@ -30,3 +30,6 @@ if can't see anything in the program, you need update video card driver.
 Program: Fothsid, killme, phoe-nix, madgamer98
 
 Thanks: morshi, alyssaprimp
+
+### Translations
+Russian: FAILING FORWARD, Damin72
