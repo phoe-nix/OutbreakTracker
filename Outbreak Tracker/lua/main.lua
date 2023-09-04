@@ -16,10 +16,10 @@ local InitResult = false
 local RetryTimer = 0
 local scalex,scaley = 300, 740
 local errorX, errorY = 0, 400
-local TimeSwtich=1
+local TimeSwitch=1
 local PuzzleSwitch=1
-local EnemyHPSwtich=1
-local ItemSwtich=1
+local EnemyHPSwitch=1
+local ItemSwitch=1
 local Style=0
 local HelpMenu=0
 local PlayerList=1
@@ -398,9 +398,9 @@ function love.draw()
 
 		if not(GameInfo.scenario == "") then
 			if(f>0) then
-				if TimeSwtich==1 then
+				if TimeSwitch==1 then
 					love.graphics.printf(Time2string(GameInfo.frames / 0.03), time_x, time_y, 300, "right")
-				--elseif TimeSwtich==2 then
+				--elseif TimeSwitch==2 then
 				--	love.graphics.printf(RealTime(timer), time_x, time_y, 300, "right")
 				end
 				if(f > 0 and doorList ==1 )then
@@ -432,7 +432,7 @@ function love.draw()
 						end
 					end
 				end
-				if not(s == "") and (f > 0) and ItemSwtich ==1 then
+				if not(s == "") and (f > 0) and ItemSwitch ==1 then
 					love.graphics.printf(itemset+1 .."\n"..math.floor(r/10)+1, 0, itemr_y, 24, "center")
 					for i=1, 1 do
 						ItemCards[i]:draw(itemcard_x, itemcard_y)
@@ -690,7 +690,7 @@ function love.draw()
 					end
 				end	
 
-				if EnemyHPSwtich==1 then
+				if EnemyHPSwitch==1 then
 					if Style==0 then
 						--for i=8, 8 do
 						--	--if Boss[i].nameID==32 then
@@ -730,7 +730,7 @@ function love.draw()
 						end
 					end
 				end
-				if EnemyHPSwtich==2 then
+				if EnemyHPSwitch==2 then
 					if Style==0 then
 						--for i=8, 8 do
 						--	--if Boss[i].nameID==32 then
@@ -803,7 +803,7 @@ function love.draw()
 			end
 		end
 		love.graphics.setFont(TimeFont)
-		if EnemyHPSwtich<3 and f > 0 and EnemyList == 0 and ItemList ==0 then
+		if EnemyHPSwitch<3 and f > 0 and EnemyList == 0 and ItemList ==0 then
 			if (s == "wild things") then
 				if(GameInfo.wttime > 0) and not (GameInfo.wttime == 0xffff) then
 					love.graphics.printf(Time2string3(GameInfo.wttime), timeleft_x, timeleft_y, 300, "left")
@@ -1120,7 +1120,7 @@ function love.update(dt)
 					SPlayers[i] = tracker.getSlotPlayer(i)
 				end
 			--end
-			if not(s == "") and (f > 0) and ItemSwtich ==1 then
+			if not(s == "") and (f > 0) and ItemSwitch ==1 then
 				for i=1, 1 do
 					Items[i] = tracker.getItem(i)
 				end
@@ -1130,7 +1130,7 @@ function love.update(dt)
 					Players[i] = tracker.getPlayer(i)
 				end
 			end
-			if not(s == "") and (f > 0) and EnemyHPSwtich ==1 then
+			if not(s == "") and (f > 0) and EnemyHPSwitch ==1 then
 				for i=1, 12 do
 					Enemies[i] = tracker.getEnemy(i)
 				end
@@ -1163,15 +1163,15 @@ function love.keypressed(key)
 		love.event.quit()
 	end
 	--if key == "f5" then
-	--	if doorList==0 then doorList=1 ItemList=0 ItemSwtich=0 PlayerList =0 EnemyHPSwtich=0 TimeSwtich=0
+	--	if doorList==0 then doorList=1 ItemList=0 ItemSwitch=0 PlayerList =0 EnemyHPSwitch=0 TimeSwitch=0
 		--elseif EnemyList==1 then EnemyList=2
-	--	else doorList=0 PlayerList =1 EnemyHPSwtich=1 ItemSwtich=1 TimeSwtich=1
+	--	else doorList=0 PlayerList =1 EnemyHPSwitch=1 ItemSwitch=1 TimeSwitch=1
 	--	end
 	--end
 	if key == "f4" then
-		if EnemyList==0 then EnemyList=1 ItemList=0 ItemSwtich=0 PlayerList =0 EnemyHPSwtich=0 TimeSwtich=0 doorList=0
+		if EnemyList==0 then EnemyList=1 ItemList=0 ItemSwitch=0 PlayerList =0 EnemyHPSwitch=0 TimeSwitch=0 doorList=0
 		--elseif EnemyList==1 then EnemyList=2
-		else EnemyList=0 PlayerList =1 EnemyHPSwtich=1 ItemSwtich=1 TimeSwtich=1 doorList=1
+		else EnemyList=0 PlayerList =1 EnemyHPSwitch=1 ItemSwitch=1 TimeSwitch=1 doorList=1
 		end
 	end
 	if key == "f8" then love.window.setMode(wx, wy,{borderless=true,resizable=true,vsync = 3}) love.window.setPosition(x, y)end
@@ -1181,9 +1181,9 @@ function love.keypressed(key)
 		end
 	end	
 	if key == "f2" then --vsync
-		if ItemList==0 then ItemList=1 ItemSwtich=0 PlayerList =0 EnemyHPSwtich=0 EnemyList=0 TimeSwtich=0  doorList=0
-		elseif ItemList==1 then ItemList=2 ItemSwtich=0 PlayerList =0 EnemyHPSwtich=0 EnemyList=0 TimeSwtich=0 doorList=0
-		else ItemList=0 ItemSwtich=1 PlayerList =1 EnemyHPSwtich=1 TimeSwtich=1 doorList=1
+		if ItemList==0 then ItemList=1 ItemSwitch=0 PlayerList =0 EnemyHPSwitch=0 EnemyList=0 TimeSwitch=0  doorList=0
+		elseif ItemList==1 then ItemList=2 ItemSwitch=0 PlayerList =0 EnemyHPSwitch=0 EnemyList=0 TimeSwitch=0 doorList=0
+		else ItemList=0 ItemSwitch=1 PlayerList =1 EnemyHPSwitch=1 TimeSwitch=1 doorList=1
 		end
 	end
 	if key == "f3" then
@@ -1208,28 +1208,28 @@ function love.keypressed(key)
 	if InitResult then
 		if not(s == "") then
 			if key =="kp0" then
-				PlayerSwtich=0 EnemyHPSwtich=1
+				PlayerSwitch=0 EnemyHPSwitch=1
 			end
 			if key =="kp1" then
-				PlayerSwtich=1 EnemyHPSwtich=2
+				PlayerSwitch=1 EnemyHPSwitch=2
 			end
 			if key =="kp2" then
-				PlayerSwtich=2 EnemyHPSwtich=2
+				PlayerSwitch=2 EnemyHPSwitch=2
 			end
 			if key =="kp3" then
-				PlayerSwtich=3 EnemyHPSwtich=2
+				PlayerSwitch=3 EnemyHPSwitch=2
 			end
 			if key =="kp4" then
-				PlayerSwtich=4 EnemyHPSwtich=2
+				PlayerSwitch=4 EnemyHPSwitch=2
 			end
 			if key =="t" then
-				if TimeSwtich == 0 then TimeSwtich=1
-				elseif TimeSwtich==1 then TimeSwtich=0
+				if TimeSwitch == 0 then TimeSwitch=1
+				elseif TimeSwitch==1 then TimeSwitch=0
 				end
 			end
 			if key =="i" then
-				if ItemSwtich == 0 then ItemSwtich=1
-				elseif ItemSwtich==1 then ItemSwtich=0
+				if ItemSwitch == 0 then ItemSwitch=1
+				elseif ItemSwitch==1 then ItemSwitch=0
 				end
 			end
 			if key =="q" then
@@ -1238,9 +1238,9 @@ function love.keypressed(key)
 				end
 			end
 			if key =="e" then
-				if EnemyHPSwtich == 0 then EnemyHPSwtich=1
-				elseif EnemyHPSwtich==1 then EnemyHPSwtich=2
-				elseif EnemyHPSwtich==2 then EnemyHPSwtich=0
+				if EnemyHPSwitch == 0 then EnemyHPSwitch=1
+				elseif EnemyHPSwitch==1 then EnemyHPSwitch=2
+				elseif EnemyHPSwitch==2 then EnemyHPSwitch=0
 				end
 			end
 			if key == "1" then love.window.setMode(300, (145*1),{resizable=true,vsync = 3}) love.window.setPosition(x, y)scalex,scaley = 300, (145*1) end
