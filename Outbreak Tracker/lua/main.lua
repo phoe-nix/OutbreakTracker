@@ -14,7 +14,7 @@ require "SPlayerCard"
 local InitResult = false
 local RetryTimer = 0
 local scalex,scaley = 300, 740
-local errorX, errorY = 0, 300
+local errorX, errorY = 0, 320
 local TimeSwtich=1
 local EnemyHPSwtich=1
 local ItemSwtich=1
