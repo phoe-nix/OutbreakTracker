@@ -10,6 +10,7 @@ require "ItemCard"
 require "DoorCard"
 require "LobbyCard"
 require "SPlayerCard"
+require "language"
 
 local InitResult = false
 local RetryTimer = 0
@@ -350,9 +351,9 @@ function love.draw()
 		if (hs == 3 and s == "") then
 			UIAtlas:draw("title bar", 0, 2, 0, 1)
 			love.graphics.setFont(VerySmallFont)
-			love.graphics.printf("No.",10, 8,20, "right")
-			love.graphics.printf("Title & Scenario",40, 8,130, "left")
-			love.graphics.printf("HEADS",240, 8,50, "left")
+			love.graphics.printf(_l("No"),10, 8,20, "right")
+			love.graphics.printf(_l("Title & Scenario"),40, 8,130, "left")
+			love.graphics.printf(_l("HEADS"),240, 8,50, "left")
 			for i=1, lobby_n do
 				LobbyCards[i]:draw(lobby_x, (i-1)*lobby_y)		
 			end
@@ -1039,19 +1040,19 @@ function love.draw()
 			love.graphics.rectangle('fill',2,2,296,201,3,3,1)
 			love.graphics.setFont(VerySmallFont)
 			love.graphics.setColor( 1, 1, 1, 1 )
-			love.graphics.printf("Hotkeys list:\n F1: Show/hide help menu.\n F2: Show/hide item list/ F3: Switch room list.\n F4: Show/hide enemy list. F5: No border.\n 1/2/3/4: Change window size.\n I: Show/hide item list in current room.\n T: Show/hide Timers.\n E: Switch/hide enemy HP in current room.\n S: Simple window.\n A: Auto size.\n D: Default.\n H/V: Change layout style.\n ESC: Exit.", 4, 4, 300, "left")
+			love.graphics.printf(_l("Help Menu"), 4, 4, 300, "left")
 		end
 
 	elseif InitResult == false then
 		love.graphics.setFont(DefaultFont)
-		love.graphics.printf("Unable to find PCSX2 process.\n Will try again in " .. tostring(math.floor(5-RetryTimer + 0.5)) .. ".", errorX, errorY, 300, "center")
+		love.graphics.printf(_l("Unable to find PCSX2 process.\n Will try again in ") .. tostring(math.floor(5-RetryTimer + 0.5)) .. ".", errorX, errorY, 300, "center")
 		love.graphics.setFont(VerySmallFont)
-		love.graphics.printf("Hotkeys list:\n F1: Show/hide help menu.\n F2: Show/hide item list/ F3: Switch room list.\n F4: Show/hide enemy list. F5: No border.\n 1/2/3/4: Change window size.\n I: Show/hide item list in current room.\n T: Show/hide Timers.\n E: Switch/hide enemy HP in current room.\n S: Simple window.\n A: Auto size.\n D: Default.\n H/V: Change layout style.\n ESC: Exit.\n\nCredits\n    Program: Fothsid, killme\n    Thanks: morshi, alyssaprimp\nCode: github.com/phoe-nix/OutbreakTracker", 4, 4, 300, "left")
+		love.graphics.printf(_l("Hotkeys list"), 4, 4, 300, "left")
 	elseif InitResult == true and GameInfo.currentFile == 255 then
 		love.graphics.setFont(DefaultFont)
-		love.graphics.printf("This is not Biohazard Outbreak game.\n Will try again in " .. tostring(math.floor(5-RetryTimer + 0.5)) .. ".", errorX, errorY, 300, "center")
+		love.graphics.printf(_l("This is not Biohazard Outbreak game.\n Will try again in ") .. tostring(math.floor(5-RetryTimer + 0.5)) .. ".", errorX, errorY, 300, "center")
 		love.graphics.setFont(VerySmallFont)
-		love.graphics.printf("Hotkeys list:\n F1: Show/hide help menu.\n F2: Show/hide item list/ F3: Switch room list.\n F4: Show/hide enemy list. F5: No border.\n 1/2/3/4: Change window size.\n I: Show/hide item list in current room.\n T: Show/hide Timers.\n E: Switch/hide enemy HP in current room.\n S: Simple window.\n A: Auto size.\n D: Default.\n H/V: Change layout style.\n ESC: Exit.\n\nCredits\n    Program: Fothsid, killme\n    Thanks: morshi, alyssaprimp\nCode: github.com/phoe-nix/OutbreakTracker", 4, 4, 300, "left")
+		love.graphics.printf(_l("Hotkeys list"), 4, 4, 300, "left")
 	end
 end
 
