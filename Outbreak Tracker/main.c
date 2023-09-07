@@ -17,6 +17,7 @@ HANDLE ProcessHandle = NULL;
 GameInfo info;
 Slot Slots[20];
 SPlayer SPlayers[4];
+RoomPriority Rooms[128];
 RItem RItems[MAX_ITEM];
 Player Players[4];
 Enemy Enemies[MAX_ENEMY];
@@ -974,6 +975,37 @@ char GetCharacterInGame(int characterID)
 	return buffer;
 }
 
+void UpdateRoomMasters()
+{
+	unsigned int* buffer = malloc(128 * MAX_PLAYER_SLOTS);
+
+	if (info.CurrentFile == 1)
+	{
+		ReadProcessMemory(ProcessHandle, (char*)BasePointer + F1_RoomPriorty, buffer, 128 * MAX_PLAYER_SLOTS, NULL);
+	}
+	else
+	{
+		ReadProcessMemory(ProcessHandle, (char*)BasePointer + F2_RoomPriorty, buffer, 128 * MAX_PLAYER_SLOTS, NULL);
+	}
+
+
+	/* Iterate through the rooms and there slots to grab the room master index */
+	for (int i = 0; i < 128; i++)
+	{
+		for (int k = 0; k < 4; k++)
+		{
+			char roomData = *((char*)buffer + i * 4 + k);
+			Rooms[i].RoomMaster = 4; // Default Value to check against in LUA
+			if (roomData == 0x00)
+			{
+				Rooms[i].RoomMaster = k + 1; // Lua Index's start at 1
+				break;
+			}
+		}
+	}
+	free(buffer);
+}
+
 void GetRoomItemF1()
 {
 		int Pointer;
@@ -1309,6 +1341,7 @@ static int LUpdate (lua_State* L)
 	info.Difficulty = GetDifficulty();
 	UpdatePickups();
 	UpdateEnemyList();
+	UpdateRoomMasters();
 
 	for (int i=0; i < 4; i++)
 	{
@@ -2028,6 +2061,20 @@ static int LGetGameInfo (lua_State* L)
 	return 1;
 }
 
+static int LGetRoomMaster(lua_State* L)
+{
+	double roomID = lua_tonumber(L, 1);
+	int i = (int)(roomID);
+
+	lua_newtable(L);
+
+	lua_pushstring(L, "roommaster");
+	lua_pushnumber(L, Rooms[i].RoomMaster);
+	lua_rawset(L, -3);
+
+	return 1;
+}
+
 static const struct luaL_Reg library_functions [] = {
 	{"init", LInit},
 	{"updateLobby", LUpdateLobby},
@@ -2041,6 +2088,7 @@ static const struct luaL_Reg library_functions [] = {
 	{"getItem", LGetItem},
 	{"getItem2", LGetItem2},
 	{"getDoor", LGetDoor},
+	{"getRoomMaster", LGetRoomMaster},
 	{"getGameInfo", LGetGameInfo},
 	{NULL, NULL}
 };

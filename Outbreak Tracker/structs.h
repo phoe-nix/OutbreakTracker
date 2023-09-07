@@ -1,3 +1,4 @@
+#define MAX_PLAYER_SLOTS 4
 #define MAX_ITEM 32
 #define MAX_ENEMY 12
 #define MAX_DOOR 19
@@ -122,6 +123,11 @@ typedef struct
 {
     Item RItem [MAX_ITEM];
 } RItem;
+
+typedef struct
+{
+    char RoomMaster;
+} RoomPriority;
 
 typedef struct
 {

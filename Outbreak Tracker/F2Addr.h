@@ -9,6 +9,7 @@ const int F2_DeadInventoryStart = 0x491146;
 const int F2_VirusMaxStart = 0x728500;
 const int F2_ScenarioIDAddr = 0x3137BA;
 const int F2_FrameCounter = 0x4912B8;
+const int F2_RoomPriorty = 0x007d7a90;
 
 const int F2_PositionX = 0x38;
 const int F2_PositionY = 0x40;
