@@ -33,6 +33,7 @@ Slots = {}
 SPlayers = {}
 Items = {}
 Items2 = {}
+RoomMasters = {}
 Doors = {}
 Players = {}
 Enemies = {}
@@ -612,10 +613,10 @@ function love.draw()
 							love.graphics.setFont(MiniFont)
 						if RoomName == 1 then
 							for i=1,13 do
-							love.graphics.printf("1"*(i-1)*2+1,2, 605+10*(i-1),12, "right")
-							love.graphics.printf(GetRoomName(s,(i-1)*2+1),16, 605+10*(i-1),160, "left")
-							love.graphics.printf("1"*(i-1)*2+2,150, 605+10*(i-1),12, "right")
-							love.graphics.printf(GetRoomName(s,(i-1)*2+2),166, 605+10*(i-1),160, "left")
+								love.graphics.printf("1"*(i-1)*2+1,2, 605+10*(i-1),12, "right")
+								love.graphics.printf(GetRoomName(s,(i-1)*2+1),16, 605+10*(i-1),160, "left")
+								love.graphics.printf("1"*(i-1)*2+2,150, 605+10*(i-1),12, "right")
+								love.graphics.printf(GetRoomName(s,(i-1)*2+2),166, 605+10*(i-1),160, "left")
 							end
 						elseif RoomName == 2 then
 							for i=1,13 do
@@ -1152,6 +1153,11 @@ function love.update(dt)
 			if not(s == "") and (f > 0) and doorList ==1 then
 				for i=1, 19 do
 					Doors[i] = tracker.getDoor(i)
+				end
+			end
+			if not(s == "") and (f > 0) then
+				for i=1, 128 do
+					RoomMasters[i] = tracker.getRoomMaster(i)
 				end
 			end
 		end
