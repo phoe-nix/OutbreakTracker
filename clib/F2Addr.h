@@ -167,24 +167,24 @@ const int F2_HostDifficulty = 0x6020CA;
 const int F2_DoorHP = 0x477722;//4776E0
 const int F2_DoorFlag = 0x49021C;//lock flag
 
-const int F2_Door1HP = 0x477762;//4777A2 ºóÏïÃÅ
-const int F2_Door2HP = 0x477720;//477760 ²ÍÌüºóÃÅ
-const int F2_Door3HP = 0x477724;//²ÍÌü³ø·¿S
-const int F2_Door4HP = 0x477726;//²ÍÌü³ø·¿W
-const int F2_Door5HP = 0x4777E4;//477820 Ô°ÄÚÄÏ>¶«ÃÅ
-const int F2_Door6HP = 0x4777E0;//477864 Ô°ÄÚÄÏ>±±ÃÅ
-const int F2_Door7HP = 0x477824;//477860 Ô°ÄÚ¶«>±±ÃÅ
-const int F2_Door8HP = 0x4779E2;//477A66 ´óÏóÎèÌ¨
-const int F2_Door9HP = 0x4778AE;//477B64 Òì½ç ¶«²à
-const int F2_Door10HP = 0x4777A4;//4778A0 Òì½ç Î÷²à
-const int F2_Door11HP = 0x4778AC;//4779A0 ĞİÏ¢ÊÒÓÒ
-const int F2_Door12HP = 0x4778AA;//4779A2 ĞİÏ¢ÊÒ×ó
-const int F2_Door13HP = 0x477B26;//477BE0 ¼ÇÒä203·¿
-const int F2_Door14HP = 0x477724;//4777E0 ´óÌü>1Â¥´óÌÃ
-const int F2_Door15HP = 0x477824;//477920 °ì¹«ÊÒ>1Â¥¶«²à
-const int F2_Door16HP = 0x4777E4;//477BE0 1Â¥´óÌÃ>U×ßÀÈ
-const int F2_Door17HP = 0x4779A0;//4779E0 Í£Ê¬·¿
-const int F2_Door18HP = 0x477A62;//477AA0 ¹·Îİ
+const int F2_Door1HP = 0x477762;//4777A2 åå··é—¨
+const int F2_Door2HP = 0x477720;//477760 é¤å…åé—¨
+const int F2_Door3HP = 0x477724;//é¤å…å¨æˆ¿S
+const int F2_Door4HP = 0x477726;//é¤å…å¨æˆ¿W
+const int F2_Door5HP = 0x4777E4;//477820 å›­å†…å—>ä¸œé—¨
+const int F2_Door6HP = 0x4777E0;//477864 å›­å†…å—>åŒ—é—¨
+const int F2_Door7HP = 0x477824;//477860 å›­å†…ä¸œ>åŒ—é—¨
+const int F2_Door8HP = 0x4779E2;//477A66 å¤§è±¡èˆå°
+const int F2_Door9HP = 0x4778AE;//477B64 å¼‚ç•Œ ä¸œä¾§
+const int F2_Door10HP = 0x4777A4;//4778A0 å¼‚ç•Œ è¥¿ä¾§
+const int F2_Door11HP = 0x4778AC;//4779A0 ä¼‘æ¯å®¤å³
+const int F2_Door12HP = 0x4778AA;//4779A2 ä¼‘æ¯å®¤å·¦
+const int F2_Door13HP = 0x477B26;//477BE0 è®°å¿†203æˆ¿
+const int F2_Door14HP = 0x477724;//4777E0 å¤§å…>1æ¥¼å¤§å ‚
+const int F2_Door15HP = 0x477824;//477920 åŠå…¬å®¤>1æ¥¼ä¸œä¾§
+const int F2_Door16HP = 0x4777E4;//477BE0 1æ¥¼å¤§å ‚>Uèµ°å»Š
+const int F2_Door17HP = 0x4779A0;//4779E0 åœå°¸æˆ¿
+const int F2_Door18HP = 0x477A62;//477AA0 ç‹—å±‹
 const int F2_Door19HP = 0x477B00;//eotr hole hp
 
 int F2_GetDoorHP(int doorID)
@@ -213,25 +213,25 @@ int F2_GetDoorHP(int doorID)
         default:return -1;
     }
 }
-const int F2_Door1Flag = 0x490234;//490228/490234 ºóÏïÃÅ
-const int F2_Door2Flag = 0x490228;//49021C/490228 ²ÍÌüºóÃÅ
-const int F2_Door3Flag = 0x49021C;//²ÍÌü³ø·¿S
-const int F2_Door4Flag = 0x49021C;//²ÍÌü³ø·¿W
-const int F2_Door5Flag = 0x490240;//490240/49024C Ô°ÄÚÄÏ>¶«ÃÅ
-const int F2_Door6Flag = 0x490240;//490240/490258 Ô°ÄÚÄÏ>±±ÃÅ
-const int F2_Door7Flag = 0x490258;//49024C/490258 Ô°ÄÚ¶«>±±ÃÅ
-const int F2_Door8Flag = 0x4902B8;//4902A0/4902B8 ´óÏóÎèÌ¨
-const int F2_Door9Flag = 0x4902E8;//490264/4902E8 Òì½ç ¶«²à
-const int F2_Door10Flag = 0x490234;//490234/490264 Òì½ç Î÷²à
-const int F2_Door11Flag = 0x490294;//490264/490294 ĞİÏ¢ÊÒÓÒ
-const int F2_Door12Flag = 0x490294;//490264/490294 ĞİÏ¢ÊÒ×ó
-const int F2_Door13Flag = 0x490300;//490300 4902DC ¼ÇÒä203·¿
-const int F2_Door14Flag = 0x49021C;//49021C/490240 ´óÌü>1Â¥´óÌÃ
-const int F2_Door15Flag = 0x49027C;//49024C/49027C °ì¹«ÊÒ>1Â¥¶«²à
-const int F2_Door16Flag = 0x490300;//490240/490300 1Â¥´óÌÃ>U×ßÀÈ
-const int F2_Door17Flag = 0x490294;//490294/4902A0 Í£Ê¬·¿
-const int F2_Door18Flag = 0x4902C4;//4902B8/4902C4 ¹·Îİ
-const int F2_Door19Flag = 0x48FFF4;//eotr hole hp
+const int F2_Door1Flag = 0x490234;//490228/490234 åå··é—¨
+const int F2_Door2Flag = 0x490228;//49021C/490228 é¤å…åé—¨
+const int F2_Door3Flag = 0x49021C;//é¤å…å¨æˆ¿S
+const int F2_Door4Flag = 0x49021C;//é¤å…å¨æˆ¿W
+const int F2_Door5Flag = 0x490240;//490240/49024C å›­å†…å—>ä¸œé—¨
+const int F2_Door6Flag = 0x490240;//490240/490258 å›­å†…å—>åŒ—é—¨
+const int F2_Door7Flag = 0x490258;//49024C/490258 å›­å†…ä¸œ>åŒ—é—¨
+const int F2_Door8Flag = 0x4902B8;//4902A0/4902B8 å¤§è±¡èˆå°
+const int F2_Door9Flag = 0x4902E8;//490264/4902E8 å¼‚ç•Œ ä¸œä¾§
+const int F2_Door10Flag = 0x490234;//490234/490264 å¼‚ç•Œ è¥¿ä¾§
+const int F2_Door11Flag = 0x490294;//490264/490294 ä¼‘æ¯å®¤å³
+const int F2_Door12Flag = 0x490294;//490264/490294 ä¼‘æ¯å®¤å·¦
+const int F2_Door13Flag = 0x490300;//490300 4902DC è®°å¿†203æˆ¿
+const int F2_Door14Flag = 0x49021C;//49021C/490240 å¤§å…>1æ¥¼å¤§å ‚
+const int F2_Door15Flag = 0x49027C;//49024C/49027C åŠå…¬å®¤>1æ¥¼ä¸œä¾§
+const int F2_Door16Flag = 0x490300;//490240/490300 1æ¥¼å¤§å ‚>Uèµ°å»Š
+const int F2_Door17Flag = 0x490294;//490294/4902A0 åœå°¸æˆ¿
+const int F2_Door18Flag = 0x4902C4;//4902B8/4902C4 ç‹—å±‹
+const int F2_Door19Flag = 0x477B00;//48FFF4/490034/490F70 eotr hole need more test
 
 int F2_GetDoorFlag(int doorID)
 {
@@ -261,22 +261,22 @@ int F2_GetDoorFlag(int doorID)
 }
 
 /*
-ÅØÏø 8¸öÃÅ
-Òì½ç 4¸öÃÅ
-¼ÇÒä 1¸öÃÅ
-ËÀÊØ 5¸öÃÅ
-Í»ÆÆ 1¸ö¶´
+å’†å“® 8ä¸ªé—¨
+å¼‚ç•Œ 4ä¸ªé—¨
+è®°å¿† 1ä¸ªé—¨
+æ­»å®ˆ 5ä¸ªé—¨
+çªç ´ 1ä¸ªæ´
 wt door 0x477762 0x4777A2 flag 490234 first locked door 3BC2C0
-49021C ²ÍÌüS FLAG>=4 and flag<8 lock;unlock: >=8 and <= 0x0C 
-49021C ²ÍÌüW FLAG>=8 lock unlock: <8 and
-490234 ºóÏïÃÅFLAG 02=lock 00=unlock
-490228 ²ÍÌüºóÃÅFLAG 03=lock 02=unlock
-490240 Ô°Çø¶«ÃÅI lock:>=04 and <8 unlock:<4
-490240 Ô°ÇøÄÏÃÅP lock:%2=0 unlock:%2=1
-49024C Ô°Çø±±ÃÅI 07=lock 03=unlock
-4902A0 ´óÏóÎèÌ¨P 03=lock 01=unlock
+49021C é¤å…S FLAG>=4 and flag<8 lock;unlock: >=8 and <= 0x0C 
+49021C é¤å…W FLAG>=8 lock unlock: <8 and
+490234 åå··é—¨FLAG 02=lock 00=unlock
+490228 é¤å…åé—¨FLAG 03=lock 02=unlock
+490240 å›­åŒºä¸œé—¨I lock:>=04 and <8 unlock:<4
+490240 å›­åŒºå—é—¨P lock:%2=0 unlock:%2=1
+49024C å›­åŒºåŒ—é—¨I 07=lock 03=unlock
+4902A0 å¤§è±¡èˆå°P 03=lock 01=unlock
 
-Í»ÆÆ
+çªç ´
 477B00 hole hp
 48FFF5 (490035) flag 20=broke, 00= block
 //dt unlock door 3BC0E4 door flag 49021C
@@ -287,7 +287,7 @@ wt door 0x477762 0x4777A2 flag 490234 first locked door 3BC2C0
 //slot Scenario 62DDF6 62E324
 //slot num 63C56A 63C56C
 //slot1 628da0 +2players +4maxplayers slot2+15C
-//slot1 628DAE 00=Busy 01=Vacant 02=Busy(Éè¶¨ÖĞ) 03=Join in 04=Full 05=playing 06=opening
+//slot1 628DAE 00=Busy 01=Vacant 02=Busy(è®¾å®šä¸­) 03=Join in 04=Full 05=playing 06=opening
 //slot2 628EFC
 //62B672 num of players in door
 //63C56A num of players in chat room
@@ -391,17 +391,17 @@ int F2_GetLobbyAddress(int slotNum)
     }
 }
 
-const int F2_WTTime = 0x491248;//ÅØÏø
-const int F2_PassWT = 0x48FE7B;//ÅØÏø
-const int F2_PassDT1 = 0x490070;//ËÀÊØ
-const int F2_PassDT2 = 0x490072;//ËÀÊØ
-const int F2_PassDT3 = 0x48FE70;//ËÀÊØ adlib 48FE70
-const int F2_PassUB1 = 0x490073;//Òì½ç
-const int F2_PassUB2 = 0x490075;//Òì½ç
-const int F2_PassUB3 = 0x48FE76;//Òì½ç adlib 48FE76
-const int F2_EscapeTime = 0x491256;//Òì½ç
-const int F2_FBTime = 0x491254;//¼ÇÒä
-const int F2_Pass4 = 0x491268;//Í»ÆÆ
+const int F2_WTTime = 0x491248;//å’†å“®
+const int F2_PassWT = 0x48FE7B;//å’†å“®
+const int F2_PassDT1 = 0x490070;//æ­»å®ˆ
+const int F2_PassDT2 = 0x490072;//æ­»å®ˆ
+const int F2_PassDT3 = 0x48FE70;//æ­»å®ˆ adlib 48FE70
+const int F2_PassUB1 = 0x490073;//å¼‚ç•Œ
+const int F2_PassUB2 = 0x490075;//å¼‚ç•Œ
+const int F2_PassUB3 = 0x48FE76;//å¼‚ç•Œ adlib 48FE76
+const int F2_EscapeTime = 0x491256;//å¼‚ç•Œ
+const int F2_FBTime = 0x491254;//è®°å¿†
+const int F2_Pass4 = 0x491268;//çªç ´
 const int F2_Difficulty = 0x49135A;
 const int F2_DTGasRandom = 0x24ADB0;//24ADB0(offline) 491338(online)
 const int F2_DTGasFlag = 0x48FFFC;
