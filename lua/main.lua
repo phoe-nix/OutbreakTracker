@@ -403,29 +403,32 @@ function love.draw()
 				end
 				if(f > 0 and doorList ==1 )then
 					if (s == "outbreak") then
-						for i=1, 4 do DoorCards[i]:draw(door_x+30, (i-1)*15+door_y)end
+						for i=1, 4 do DoorCards[i]:draw(door_x+30-4, (i-1)*15+door_y)end
+					elseif (s == "below freezing point") then
+						for i=5, 6 do DoorCards[i]:draw(door_x+30, (i-5)*15+door_y)end
 					elseif (s == "hellfire") then
-						for i=5, 8 do DoorCards[i]:draw(door_x+30, (i-5)*15+door_y)end
+						for i=7, 10 do DoorCards[i]:draw(door_x+30, (i-7)*15+door_y)end
 					elseif (s == "decisions,decisions") then
-						for i=9, 10 do DoorCards[i]:draw(door_x+30, (i-9)*15+door_y)end
+						for i=11, 14 do DoorCards[i]:draw(door_x+30, (i-11)*15+door_y)end
+						for i=15, 15 do DoorCards[i]:draw(door_x, (i-15)*15+door_y)end
 					elseif (s == "wild things") then
 						for i=1, 4 do DoorCards[i]:draw(door_x+30, (i-1)*15+door_y)end
-						if d == "very hard" then
+						if d == "极难" then
 							for i=5, 8 do DoorCards[i]:draw(door_x, (i-5)*15+door_y)end
-						elseif d == "hard" then
+						elseif d == "困难" then
 							for i=7, 8 do DoorCards[i]:draw(door_x, (i-7)*15+door_y)end
 						else
 							for i=8, 8 do DoorCards[i]:draw(door_x, (i-8)*15+door_y)end
 						end
-					elseif (s == "underbelly" and (d == "very hard" or d == "hard")) then
+					elseif (s == "underbelly" and (d == "极难" or d == "困难")) then
 						for i=9, 12 do DoorCards[i]:draw(door_x+30, (i-9)*15+door_y)end
-					elseif (s == "flashback" and (d == "very hard" or d == "hard")) then
+					elseif (s == "flashback" and (d == "极难" or d == "困难")) then
 						for i=13, 13 do DoorCards[i]:draw(door_x+30, (i-13)*15+door_y)end
 					elseif (s == "desperate times") then
 						for i=18, 18 do DoorCards[i]:draw(door_x, (i-18)*15+door_y)end
 						for i=14, 17 do DoorCards[i]:draw(door_x+30, (i-14)*15+door_y)end
 					elseif (s == "end of the road") then
-						if Doors[19].flag == 0 then
+						if Doors[19].flag == 1 then
 							for i=19, 19 do DoorCards[i]:draw(door_x+30, (i-19)*15+door_y)end
 						end
 					end
@@ -1146,26 +1149,20 @@ function love.keypressed(key)
 	if key == "escape" then
 		love.event.quit()
 	end
-	--if key == "f5" then
-	--	if doorList==0 then doorList=1 ItemList=0 ItemSwtich=0 PlayerList =0 EnemyHPSwtich=0 TimeSwtich=0
-		--elseif EnemyList==1 then EnemyList=2
-	--	else doorList=0 PlayerList =1 EnemyHPSwtich=1 ItemSwtich=1 TimeSwtich=1
-	--	end
-	--end
 	if key == "f4" then
 		if EnemyList==0 then EnemyList=1 ItemList=0 ItemSwtich=0 PlayerList =0 EnemyHPSwtich=0 TimeSwtich=0 doorList=0
 		--elseif EnemyList==1 then EnemyList=2
 		else EnemyList=0 PlayerList =1 EnemyHPSwtich=1 ItemSwtich=1 TimeSwtich=1 doorList=1
 		end
 	end
-	if key == "f8" then love.window.setMode(wx, wy,{borderless=true,resizable=true,vsync = 3}) love.window.setPosition(x, y)end
+	if key == "f5" then love.window.setMode(wx, wy,{borderless=true,resizable=true,vsync = 3}) love.window.setPosition(x, y)end
 	if key == "f1" then
 		if HelpMenu==0 then HelpMenu=1
 		else HelpMenu=0
 		end
 	end	
 	if key == "f2" then --vsync
-		if ItemList==0 then ItemList=1 ItemSwtich=0 PlayerList =0 EnemyHPSwtich=0 EnemyList=0 TimeSwtich=0  doorList=0
+		if ItemList==0 then ItemList=1 ItemSwtich=0 PlayerList =0 EnemyHPSwtich=0 EnemyList=0 TimeSwtich=0 doorList=0
 		elseif ItemList==1 then ItemList=2 ItemSwtich=0 PlayerList =0 EnemyHPSwtich=0 EnemyList=0 TimeSwtich=0 doorList=0
 		else ItemList=0 ItemSwtich=1 PlayerList =1 EnemyHPSwtich=1 TimeSwtich=1 doorList=1
 		end
