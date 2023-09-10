@@ -140,13 +140,18 @@ int F1_GetEnemy2Address(int enemyID)
 const int F1_Door1HP = 0x472FC0;//472FC0/472FF0
 const int F1_Door2HP = 0x473086;//473086
 const int F1_Door3HP = 0x4731C0;//4731C0/473220
-const int F1_Door4HP = 0x473232;//473232/473260
-const int F1_Door5HP = 0x473504;//473504/4735F0
-const int F1_Door6HP = 0x473652;//room 102
-const int F1_Door7HP = 0x473712;//room 201
-const int F1_Door8HP = 0x4737D2;//room 202
-const int F1_Door9HP = 0x4739B6;//4739B6/473A70 dd t-shaped
-const int F1_Door10HP = 0x473A40;//473A40/473A72 store room
+const int F1_Door4HP = 0x473340;//473232/473260/473340
+const int F1_Door5HP = 0x473162;//零下左墙箱子
+const int F1_Door6HP = 0x473160;//零下右墙箱子
+const int F1_Door7HP = 0x473504;//1楼楼梯反锁的门473504/4735F0
+const int F1_Door8HP = 0x473652;//room 102
+const int F1_Door9HP = 0x473712;//room 201
+const int F1_Door10HP = 0x4737D2;//room 202
+const int F1_Door11HP = 0x473E9A;//473E9A/473F86 entrance hall
+const int F1_Door12HP = 0x4739B6;//4739B6/473A70 dd t-shaped
+const int F1_Door13HP = 0x473A40;//473A40/473A72 store room
+const int F1_Door14HP = 0x473F84;//473F84/473FB0 1楼走廊暴君隐藏房间
+const int F1_Door15HP = 0x473D32;//决议柜子
 
 int F1_GetDoorHP(int doorID)
 {
@@ -162,6 +167,11 @@ int F1_GetDoorHP(int doorID)
         case 7:return F1_Door8HP;
         case 8:return F1_Door9HP;
         case 9:return F1_Door10HP;
+        case 10:return F1_Door11HP;
+        case 11:return F1_Door12HP;
+        case 12:return F1_Door13HP;
+        case 13:return F1_Door14HP;
+        case 14:return F1_Door15HP;
         default:return -1;
     }
 }
@@ -170,12 +180,18 @@ const int F1_Door1Flag = 0x48AFBC;//48AFBC
 const int F1_Door2Flag = 0x48AFEC;//48AFEC
 const int F1_Door3Flag = 0x48AD90;//
 const int F1_Door4Flag = 0x48B058;//48B058
-const int F1_Door5Flag = 0x48B10C;//48B10C/48B148
-const int F1_Door6Flag = 0x48B160;//room 102
-const int F1_Door7Flag = 0x48B190;//room 201
-const int F1_Door8Flag = 0x48B1C0;//room 202
-const int F1_Door9Flag = 0x48B238;//48B238/48B268 dd t-shaped
-const int F1_Door10Flag = 0x48B25C;//48B25C/48B268 store room
+const int F1_Door5Flag = 0x473162;
+const int F1_Door6Flag = 0x473160;
+const int F1_Door7Flag = 0x48B10C;//48B10C/48B148
+const int F1_Door8Flag = 0x48B160;//room 102
+const int F1_Door9Flag = 0x48B190;//room 201
+const int F1_Door10Flag = 0x48B1C0;//room 202
+const int F1_Door11Flag = 0x473E9A;//473E9A/473F86 entrance hall
+const int F1_Door12Flag = 0x48B238;//48B238/48B268 dd t-shaped
+const int F1_Door13Flag = 0x48B25C;//48B25C/48B268 store room
+const int F1_Door14Flag = 0x48B3B8;//48B3B8/48B3AC 1楼走廊暴君隐藏房间
+const int F1_Door15Flag = 0x473D32;
+
 
 int F1_GetDoorFlag(int doorID)
 {
@@ -191,6 +207,11 @@ int F1_GetDoorFlag(int doorID)
         case 7:return F1_Door8Flag;
         case 8:return F1_Door9Flag;
         case 9:return F1_Door10Flag;
+        case 10:return F1_Door11Flag;
+        case 11:return F1_Door12Flag;
+        case 12:return F1_Door13Flag;
+        case 13:return F1_Door14Flag;
+        case 14:return F1_Door15Flag;
         default:return -1;
     }
 }
@@ -299,13 +320,13 @@ const int F1_ItemRandom2 = 0x23BBA1;
 const int F1_PuzzleRandom = 0x23BBA0;// puzzle set
 const int F1_Cleared = 0x48BF60;//
 /*pass 6D6570
-�¼�����48BF60
+ÊÂ¼þÁãÏÂ48BF60
 b7f 48AD93:0x00=off 0x01=on
 b5f 48AD91:0x40=off 0x50=on
 b4f 48AD92:0x00=off 0x40=on
-����pass 48AC17 A375=0x20 J126=0x40 C582=0x80
+ÁãÏÂpass 48AC17 A375=0x20 J126=0x40 C582=0x80
 48AC13 0634 0-1f 80-9f 4509 20-3f a0 bf 9741 40-7f c0-ff
-�������� 1=0x20 2=0x40 3=0x80 4=0x100
+ÓüÑ×ÃÕÌâ 1=0x20 2=0x40 3=0x80 4=0x100
 48AC1B 02
 48ADCE
     :0 44 110
