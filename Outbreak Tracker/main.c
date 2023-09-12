@@ -1252,6 +1252,10 @@ static int LInit (lua_State* L) {
 	{
 		ProcessID = GetProcessID("pcsx2-qtx64.exe");
 	}
+	if (ProcessID == 0)
+	{
+		ProcessID = GetProcessID("pcsx2-qtx64-avx2.exe");
+	}
 	if (ProcessID != 0)
 	{
 		ProcessHandle = OpenProcess(PROCESS_VM_READ, FALSE, ProcessID);
