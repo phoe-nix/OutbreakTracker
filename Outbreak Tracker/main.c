@@ -17,7 +17,7 @@ HANDLE ProcessHandle = NULL;
 GameInfo info;
 Slot Slots[20];
 SPlayer SPlayers[4];
-RoomPriority Rooms[128];
+RoomsType Rooms;
 RItem RItems[MAX_ITEM];
 Player Players[4];
 Enemy Enemies[MAX_ENEMY];
@@ -988,20 +988,21 @@ void UpdateRoomMasters()
 		ReadProcessMemory(ProcessHandle, (char*)BasePointer + F2_RoomPriorty, buffer, 128 * MAX_PLAYER_SLOTS, NULL);
 	}
 
+	//ReadProcessMemory(ProcessHandle, (char*)0x1000000000, buffer, 128 * MAX_PLAYER_SLOTS, NULL);
+
+	Rooms.Enabled = true;
 
 	/* Iterate through the rooms and there slots to grab the room master index */
 	for (int i = 0; i < 128; i++)
 	{
-		for (int k = 0; k < 4; k++)
+		Rooms.Room[i].RoomMaster = 5; // Default Value to check against in LUA
+		char roomData = *((char*)buffer + i * 4);
+		if (roomData != (char) 0x00 && roomData != (char) 0x01 && roomData != (char) 0x02 && roomData != (char) 0x03 && roomData != (char) 0xff)
 		{
-			char roomData = *((char*)buffer + i * 4 + k);
-			Rooms[i].RoomMaster = 4; // Default Value to check against in LUA
-			if (roomData == 0x00)
-			{
-				Rooms[i].RoomMaster = k + 1; // Lua Index's start at 1
-				break;
-			}
+			Rooms.Enabled = false;
+			break;
 		}
+		Rooms.Room[i].RoomMaster = roomData + 1; // Lua Index's start at 1
 	}
 	free(buffer);
 }
@@ -2076,8 +2077,12 @@ static int LGetRoomMaster(lua_State* L)
 
 	lua_newtable(L);
 
+	lua_pushstring(L, "enabled");
+	lua_pushboolean(L, Rooms.Enabled);
+	lua_rawset(L, -3);
+
 	lua_pushstring(L, "roommaster");
-	lua_pushnumber(L, Rooms[i].RoomMaster);
+	lua_pushnumber(L, Rooms.Room[i].RoomMaster);
 	lua_rawset(L, -3);
 
 	return 1;

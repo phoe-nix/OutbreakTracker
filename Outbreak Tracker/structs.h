@@ -131,6 +131,12 @@ typedef struct
 
 typedef struct
 {
+    bool Enabled;
+    RoomPriority Room [128];
+} RoomsType;
+
+typedef struct
+{
 	bool Enabled;
 	bool InGame;
     unsigned short HP;
