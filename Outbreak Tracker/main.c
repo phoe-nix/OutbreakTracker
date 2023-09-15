@@ -63,7 +63,7 @@ void BindBasePointer()
 	hModuleSnap = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, ProcessID);
 	if (hModuleSnap == INVALID_HANDLE_VALUE)
 	{
-		return(FALSE);
+		return;
 	}
 
 	//  Set the size of the structure before using it. 
@@ -73,7 +73,7 @@ void BindBasePointer()
 	if (!Module32First(hModuleSnap, &me32))
 	{
 		CloseHandle(hModuleSnap);     // Must clean up the snapshot object! 
-		return 0;
+		return;
 	}
 
 	//  Do not forget to clean up the snapshot object. 
@@ -84,7 +84,7 @@ void BindBasePointer()
 	// Initialize debug symbol loading
 	if (!SymInitialize(hHandle, NULL, FALSE)) {
 		CloseHandle(hHandle);
-		return 0;
+		return;
 	}
 
 	SymLoadModuleEx(
@@ -96,10 +96,10 @@ void BindBasePointer()
 	if (!SymFromName(hHandle, "EEmem", &symbol) || symbol.Address == 0)
 	{
 		CloseHandle(hHandle);
-		return 0;
+		return;
 	}
 	ULONG64 EEmemPointer = symbol.Address;
-	ReadProcessMemory(hHandle, EEmemPointer, &BasePointer, 8, NULL);
+	ReadProcessMemory(hHandle, (char *)EEmemPointer, &BasePointer, 8, NULL);
 }
 
 char GetFile()
@@ -108,8 +108,8 @@ char GetFile()
     int bytesRead = 0;
     char f1;
     char f2;
-    ReadProcessMemory(ProcessHandle, BasePointer+0x002321B3, &f1, 1, NULL);
-    ReadProcessMemory(ProcessHandle, BasePointer+0x0023DFD3, &f2, 1, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)BasePointer+0x002321B3, &f1, 1, NULL);
+    ReadProcessMemory(ProcessHandle, (char *)BasePointer+0x0023DFD3, &f2, 1, NULL);
     if (f1 == 0x53)
 	{
         return 1;
