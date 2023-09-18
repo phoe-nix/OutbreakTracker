@@ -1674,7 +1674,7 @@ char* GetNPCPower(int charType)
         case 5:
             return "130%";//130%
         case 6:
-            return "130%";//130%
+            return "105%";//105%
         case 7:
             return "Unknown";
         case 8:
