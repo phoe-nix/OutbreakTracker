@@ -429,9 +429,9 @@ function love.draw()
 						for i=18, 18 do DoorCards[i]:draw(door_x, (i-18)*15+door_y)end
 						for i=14, 17 do DoorCards[i]:draw(door_x+30, (i-14)*15+door_y)end
 					elseif (s == "end of the road") then
-						if Doors[19].flag == 0 then
+						--if Doors[19].flag == 0 then
 							for i=19, 19 do DoorCards[i]:draw(door_x+30, (i-19)*15+door_y)end
-						end
+						--end
 					end
 				end
 				if not(s == "") and (f > 0) and ItemSwitch ==1 then
