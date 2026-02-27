@@ -1,3 +1,4 @@
+#define MAX_PLAYER_SLOTS 4
 #define MAX_ITEM 32
 #define MAX_ENEMY 12
 #define MAX_DOOR 19
@@ -57,6 +58,8 @@ typedef struct
 	unsigned int FrameCounter;
 	unsigned char Cleared;
 	unsigned short WTTime;
+	unsigned short WTGateMHp;
+	unsigned short WTGateHp;
 	unsigned short EscapeTime;
 	unsigned int FightTime;
 	unsigned short FightTime2;
@@ -95,6 +98,8 @@ typedef struct
 	unsigned char Number;
     unsigned short ID;
     unsigned short EN;
+    unsigned short EN1;
+    unsigned short EN2;
 	unsigned short Type;
 	unsigned short Count;
 	unsigned short Pick;
@@ -125,6 +130,17 @@ typedef struct
 
 typedef struct
 {
+    char RoomMaster;
+} RoomPriority;
+
+typedef struct
+{
+    bool Enabled;
+    RoomPriority Room [128];
+} RoomsType;
+
+typedef struct
+{
 	bool Enabled;
 	bool InGame;
     unsigned short HP;
@@ -143,6 +159,7 @@ typedef struct
     double PositionY;
     unsigned short RoomID;
     unsigned char Status;
+    unsigned char LoadingStatus;
     unsigned char NameID;
     unsigned char Inventory [4];
     unsigned char SpecialItem;
@@ -1662,7 +1679,7 @@ char* GetNPCPower(int charType)
         case 5:
             return "130%";//130%
         case 6:
-            return "130%";//130%
+            return "105%";//105%
         case 7:
             return "Unknown";
         case 8:
