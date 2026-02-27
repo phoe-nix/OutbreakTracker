@@ -6,15 +6,15 @@ function SPlayerCard:new(id)
 	o.id = id or 1
 
 	o.nameLabel 	  = Label:new(10, 4, "placeholder", SmallFont)
-	o.nameLabelShadow = Label:new(12, 5, "placeholder", SmallFont, nil, nil, nil, nil, {0, 0, 0, 1})
+	o.nameLabelShadow = Label:new(12, 5, "placeholder", SmallFont, nil, nil, nil, nil, {10/255, 10/255, 10/255, 1})
 	--o.roomLabel		  = Label:new(110, 0, "placeholder", SmallFont, "center", "center", 190, 40)
 	--o.roomLabelShadow = Label:new(111, 1, "placeholder", SmallFont, "center", "center", 190, 40, {0, 0, 0, 1})
 	--o.roomLabel_j		= Label:new(280, 2, "placeholder", SmallFont, "center", "up", 15, 145)
 	--o.roomLabelShadow_j = Label:new(281, 3, "placeholder", SmallFont, "center", "up", 15, 145, {0, 0, 0, 1})
-	o.healthLabel	  = Label:new(8, 21, "placeholder", VerySmallFont, "center", "up", 70, 10)
+	o.healthLabel	  = Label:new(8, 21, "placeholder", HPFont, "center", "up", 70, 10)
 	o.powerLabel	  = Label:new(172, 126, "placeholder", VirusFont, "right", "up", 48, 15,{25/255, 255/255, 255/255, 1})
 	o.powertextLabel  = Label:new(136, 125, "placeholder", SmallFont, "right", "up", 48, 15,{255/255, 255/255, 255/255, 1})
-	o.powertextShadow = Label:new(138, 127, "placeholder", SmallFont, "right", "up", 48, 15,{0, 0, 0, 1})
+	o.powertextShadow = Label:new(138, 127, "placeholder", SmallFont, "right", "up", 48, 15,{10/255, 10/255, 10/255, 1})
 
 
 	return setmetatable(o, self)
@@ -82,8 +82,8 @@ function SPlayerCard:draw(x, y)
 	self.powerLabel.text = power
 	self.powerLabel:draw()
 
-	self.powertextLabel.text = "Power"
-	self.powertextShadow.text = "Power"
+	self.powertextLabel.text = _l("Power")
+	self.powertextShadow.text = _l("Power")
 	self.powertextShadow:draw()
 	self.powertextLabel:draw()
 

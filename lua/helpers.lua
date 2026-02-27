@@ -186,11 +186,11 @@ function GetRoomName_j(scenario, roomID)
 end
 
 function GetScenarioIDString(id)
-	local scenariostring = "\n"..tostring(Slots[id].slotscenario)
+	local scenariostring = "\n"..tostring(_l(Slots[id].slotscenario))
 	if Slots[id].status ==3 or Slots[id].status ==4 then
 		return scenariostring
 	elseif Slots[id].status ==1 or Slots[id].status ==2 then
-		return "(free)\n"
+		return _l("(free)\n")
 	else
 		return ""
 	end
@@ -199,9 +199,9 @@ end
 function GetVersionString(id)
 	local vesionstring = tostring(Slots[id].version)
 	if Slots[id].version ==0x11 then
-		return "DVD-ROM"
+		return _l("DVD-ROM")
 	elseif Slots[id].version ==0x12 then
-		return "HDD-ROM"
+		return _l("HDD-ROM")
 	else
 		return ""
 	end
@@ -215,15 +215,15 @@ end
 function GetPlayerString(id)
 	local playerstring = tostring(Slots[id].player) .. "/" .. tostring(Slots[id].maxplayer)
 	if Slots[id].status ==0 then
-		return "-/-P\nBusy"--red color
+		return _l("-/-P\nBusy1")--red color
 	elseif Slots[id].status ==1 then
-		return "-/-P\nVacant"
+		return _l("-/-P\nVacant")
 	elseif Slots[id].status ==2 then
-		return "-/-P\nBusy"--yellow color
+		return _l("-/-P\nBusy2")--yellow color
 	elseif Slots[id].status ==3 then
-		return tostring(Slots[id].player) .. "/" .. tostring(Slots[id].maxplayer).."\nJoin in"--white color
+		return tostring(Slots[id].player) .. "/" .. tostring(Slots[id].maxplayer).._l("\nJoin in")--white color
 	elseif Slots[id].status ==4 then
-		return tostring(Slots[id].player) .. "/" .. tostring(Slots[id].maxplayer).."\nFull"--pink color
+		return tostring(Slots[id].player) .. "/" .. tostring(Slots[id].maxplayer).._l("\nFull")--pink color
 	else
 		return playerstring
 	end
@@ -232,17 +232,31 @@ end
 function GetPlayerHealthString(id)
 	local healthstring = tostring(Players[id].HP) .. "/" .. tostring(Players[id].maxHP)
 	if Players[id].status == "Dead" or Players[id].status == "Down" or Players[id].status == "Zombie" then
-		return Players[id].status
+		return " "
 	elseif Players[id].status == "Gas" then
 		return Players[id].HP .. "  " .. Time2string3(GameInfo.gastime)
 	elseif Players[id].status == "Down+Gas" then
-		return "Down"
+		return "         " ..Time2string3(GameInfo.gastime)
 	elseif Players[id].status == "Cleared" then
-		return "Cleared"
-	--elseif Players[id].vgstoptime >0 then
-	--	return Players[id].HP .. "  " .. Time2string3(Players[id].vgstoptime)
+		return "      "
 	else
 		return healthstring
+	end
+end
+
+function GetPlayerStatus(id)
+	if Players[id].status == "Dead" then
+		return _l("Dead")
+	elseif Players[id].status == "Down" then
+		return _l("Down")
+	elseif Players[id].status == "Zombie" then
+		return _l("S:Zombie")
+	elseif Players[id].status == "Down+Gas" then
+		return _l("Down")..("　　　　")
+	elseif Players[id].status == "Cleared" then
+		return _l("Cleared")
+	else
+		return " "
 	end
 end
 
@@ -255,20 +269,20 @@ function GetEnemiesHealthString2(id)
 	or Enemies2[id].nameID == 26
 	or Enemies2[id].nameID == 34
 	or Enemies2[id].nameID == 56 then
-		return "Inv."
+		return _l("Inv.")
 	elseif (Enemies2[id].HP == 0x0
 	or Enemies2[id].HP == 0xffff
 	or Enemies2[id].HP >= 0x8000)
 	and not (Enemies2[id].nameID == 54
 	or Enemies2[id].nameID == 58) then
-		return "Dead"
+		return _l("Dead")
 	elseif (Enemies2[id].HP == 0xffff
 	and Enemies2[id].maxHP == 0x1
 	and Enemies2[id].nameID == 54) then
-		return "Destroyed"
+		return _l("Destroyed")
 	elseif (Enemies2[id].HP == 0x0
 	and Enemies2[id].nameID == 58) then
-		return "Exploded"
+		return _l("Exploded")
 	else
 		return healthstring 
 	end

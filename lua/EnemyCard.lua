@@ -5,9 +5,9 @@ function EnemyCard:new(id)
 	local o = {}
 	o.id = id or 1
 	o.nameLabel 	   = Label:new(80, 0, "placeholder", VerySmallFont, "left", "up", 150, 10, {1, 1, 1, 1})
-	o.nameLabelShadow  = Label:new(81, 1, "placeholder", VerySmallFont, "left", "up", 150, 10, {0, 0, 0, 1})
+	o.nameLabelShadow  = Label:new(81, 1, "placeholder", VerySmallFont, "left", "up", 150, 10, {10/255, 10/255, 10/255, 1})
 	o.healthLabel	   = Label:new(2, 0, "placeholder", VerySmallFont, "center", "up", 75, 10, {1, 1, 1, 1})
-	o.healthLabelShadow= Label:new(3, 1, "placeholder", VerySmallFont, "center", "up", 75, 10, {0, 0, 0, 1})
+	o.healthLabelShadow= Label:new(3, 1, "placeholder", VerySmallFont, "center", "up", 75, 10, {10/255, 10/255, 10/255, 1})
 
 	return setmetatable(o, self)
 end
@@ -58,8 +58,8 @@ EnemyCard2.__index = EnemyCard2
 function EnemyCard2:new(id)
 	local o = {}
 	o.id = id or 1
-	o.nameLabel 	   = Label:new(80, 5, "placeholder", VerySmallFont, "left", "down", 110, 10, {0, 0, 0, 1})
-	o.nameLabelShadow  = Label:new(81, 6, "placeholder", VerySmallFont, "left", "down", 110, 10, {0, 0, 0, 1})
+	o.nameLabel 	   = Label:new(80, 5, "placeholder", VerySmallFont, "left", "down", 110, 10, {10/255, 10/255, 10/255, 1})
+	o.nameLabelShadow  = Label:new(81, 6, "placeholder", VerySmallFont, "left", "down", 110, 10, {10/255, 10/255, 10/255, 1})
 
 	return setmetatable(o, self)
 end
@@ -157,12 +157,12 @@ EnemyCard4.__index = EnemyCard4
 function EnemyCard4:new(id)
 	local o = {}
 	o.id = id or 1
-	o.nameLabel 	   = Label:new(4, 0, "placeholder", MiniFont, "left", "up", 300, 10, {1, 1, 1, 1})
-	o.nameLabelShadow  = Label:new(5, 1, "placeholder", MiniFont, "left", "up", 300, 10, {0, 0, 0, 1})
+	o.nameLabel 	   = Label:new(4, 1, "placeholder", MiniFont, "left", "up", 300, 10, {1, 1, 1, 1})
+	o.nameLabelShadow  = Label:new(5, 2, "placeholder", MiniFont, "left", "up", 300, 10, {10/255, 10/255, 10/255, 1})
 	o.roomLabel		  = Label:new(14, 0, "placeholder", MiniFont, "center", "up", 300, 10, {1, 1, 1, 1})
-	o.roomLabelShadow = Label:new(15, 1, "placeholder", MiniFont, "center", "up", 300, 10, {0, 0, 0, 1})
+	o.roomLabelShadow = Label:new(15, 1, "placeholder", MiniFont, "center", "up", 300, 10, {10/255, 10/255, 10/255, 1})
 	o.healthLabel	   = Label:new(0, 1, "placeholder", MiniFont, "right", "up", 296, 10, {1, 1, 1, 1})
-	o.healthLabelShadow= Label:new(1, 2, "placeholder", MiniFont, "right", "up", 296, 10, {0, 0, 0, 1})
+	o.healthLabelShadow= Label:new(1, 2, "placeholder", MiniFont, "right", "up", 296, 10, {10/255, 10/255, 10/255, 1})
 
 	return setmetatable(o, self)
 end

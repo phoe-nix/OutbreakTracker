@@ -22,13 +22,16 @@ function PlayerCard:new(id)
 		o.icons[i] = ItemIcon:new(unpack(IconPositions[i]))
 	end
 
-	o.nameLabel 	  = Label:new(10 , 4, "placeholder", SmallFont)
-	o.nameLabelShadow = Label:new(12 , 5, "placeholder", SmallFont, nil, nil, nil, nil, {0, 0, 0, 1})
-	o.roomLabel		  = Label:new(110, 0, "placeholder", SmallFont, "center", "center", 190, 40)
-	o.roomLabelShadow = Label:new(111, 1, "placeholder", SmallFont, "center", "center", 190, 40, {0, 0, 0, 1})
+	o.nameLabel			= Label:new(10 , 4, "placeholder", SmallFont)
+	o.nameLabelShadow	= Label:new(12 , 5, "placeholder", SmallFont, nil, nil, nil, nil, {10/255, 10/255, 10/255, 1})
+	o.roomLabel			= Label:new(110, 0, "placeholder", SmallFont, "center", "center", 190, 40)
+	o.roomLabelShadow	= Label:new(111, 1, "placeholder", SmallFont, "center", "center", 190, 40, {10/255, 10/255, 10/255, 1})
 	--o.roomLabel_j		= Label:new(280, 2, "placeholder", SmallFont, "center", "up", 15, 145)
 	--o.roomLabelShadow_j = Label:new(281, 3, "placeholder", SmallFont, "center", "up", 15, 145, {0, 0, 0, 1})
-	o.healthLabel	  = Label:new(8  ,20, "placeholder", VerySmallFont, "center", "up", 70, 10)
+	o.healthLabel		= Label:new(8  ,20, "placeholder", HPFont, "center", "up", 70, 10)
+	o.healthLabelShadow	= Label:new(9  ,21, "placeholder", HPFont, "center", "up", 70, 10, {10/255, 10/255, 10/255, 1})
+	o.statusLabel		= Label:new(8  ,20, "placeholder", VerySmallFont, "center", "up", 70, 10)
+	o.statusLabelShadow	= Label:new(9  ,21, "placeholder", VerySmallFont, "center", "up", 70, 10, {10/255, 10/255, 10/255, 1})
 
 
 	return setmetatable(o, self)
@@ -44,6 +47,7 @@ function PlayerCard:draw(x, y)
 	local bx, by, bw, bh = UIAtlas.quads[bustname]:getViewport()
 	local scale = 140 / bh;
 
+	
 	if Players[self.id].inGame == false then
 		sb:setColor(1, 1, 1, 0.5)
 	else
@@ -630,7 +634,15 @@ function PlayerCard:draw(x, y)
 
 	self.healthLabel.color = GetStatusColor(self.id)
 	self.healthLabel.text = GetPlayerHealthString(self.id)
+	self.healthLabelShadow.text = GetPlayerHealthString(self.id)
+	self.healthLabelShadow:draw()
 	self.healthLabel:draw()
+
+	self.statusLabel.color = GetStatusColor(self.id)
+	self.statusLabel.text = GetPlayerStatus(self.id)
+	self.statusLabelShadow.text = GetPlayerStatus(self.id)
+	self.statusLabelShadow:draw()
+	self.statusLabel:draw()
 
 	self.roomLabel.text = GetRoomName(GameInfo.scenario, Players[self.id].roomID)
 	self.roomLabelShadow.text = GetRoomName(GameInfo.scenario, Players[self.id].roomID)
@@ -681,17 +693,12 @@ function PlayerCard:draw(x, y)
 		end
 	end
 
-	--self.roomLabel_j.text = GetRoomName_j(GameInfo.scenario, Players[self.id].roomID)
-	--self.roomLabelShadow_j.text = GetRoomName_j(GameInfo.scenario, Players[self.id].roomID)
-	--self.roomLabelShadow_j:draw()
-	--self.roomLabel_j:draw()
-
 	love.graphics.setFont(VirusFont)
 	if Players[self.id].specialItem.type == 403 then
 		love.graphics.printf({{25/255, 255/255, 25/255, 1},tostring(Players[self.id].critBonus) .. "%"}, 118, 125, 46, "right")
 	end
 	-- Here goes some weird magic 150, 120
-	local tx, ty = 192, 125
+	local tx, ty = 190, 125
 	local val1 = math.floor(Players[self.id].virus)
 	local val2 = math.floor(math.floor(Players[self.id].virus*100+0.5) - val1 * 100)
 	love.graphics.printf(tostring(val1), tx, ty, 60, "right", 0, 1.25, 1.25)
@@ -703,6 +710,36 @@ function PlayerCard:draw(x, y)
 
 	local pow = math.floor(math.floor(Players[self.id].power*100+0.5))
 	love.graphics.printf({{25/255, 255/255, 255/255, 1},string.format("%d", pow) .. "%"}, tx+46, ty+3.5-20, 60, "right", 0, 1.0, 1.0)
+
+	if Players[self.id].inGame == true then
+		if (RoomMasters[1].enabled) then
+			if not(Players[self.id].roomID == 0) then
+				if (RoomMasters[Players[self.id].roomID].roommaster == self.id) then
+					self.roomLabel.color = {0, 1, 0, 1}
+				else
+					self.roomLabel.color = {1, 1, 1, 1}
+				end
+			end
+		end
+	else
+			self.roomLabel.color = {1, 1, 1, 1}
+	end
+
+	--if (RoomMasters[1].enabled) then
+	--	if Players[self.id].loadingstatus == 5 or Players[self.id].loadingstatus == 21 then
+	--		if Players[self.id].inGame == false then
+	--			self.roomLabel.color = {0.5, 0.5, 1, 1}
+	--		end
+	--	end
+	--end
+
+	--if (RoomMasters[1].enabled) then
+	--	if not(Players[self.id].roomID == 0) then
+	--		if (RoomMasters[Players[self.id].roomID].roommaster == self.id)  then
+	--				UIAtlas:draw("room master crown", tx+75, ty+3.5-40);
+	--		end
+	--	end
+	--end
 
 	--local spd = math.floor(math.floor(Players[self.id].speed*100+0.5))
 	--love.graphics.printf(string.format("%d", spd) .. "%", tx+46, ty+3.5-40, 60, "right", 0, 1.0, 1.0)

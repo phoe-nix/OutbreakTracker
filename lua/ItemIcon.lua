@@ -33,11 +33,40 @@ function ItemIcon:draw(drawCount)
 		elseif self.type==18 then
 		love.graphics.setColor( 255/255, 255/255, 255/255, 1 )
 		love.graphics.printf(tostring(self.count), self.x, self.y+30, 46, "right")
+		elseif self.type==23 then
+		love.graphics.setColor( 200/255, 200/255, 255/255, 1 )
+		love.graphics.printf(tostring(self.count), self.x, self.y+30, 46, "right")
+		elseif self.type==24 then
+		love.graphics.setColor( 255/255, 120/255, 120/255, 1 )
+		love.graphics.printf(tostring(self.count), self.x, self.y+30, 46, "right")
+		elseif self.type==25 then
+		love.graphics.setColor( 255/255, 170/255, 120/255, 1 )
+		love.graphics.printf(tostring(self.count), self.x, self.y+30, 46, "right")
+		elseif self.type==0x1c5 or self.type==0x1c6 then--1c5 1c6 broken weapons
+		love.graphics.setColor( 125/255, 125/255, 125/255, 1 )
+		love.graphics.printf(tostring(self.count), self.x, self.y+30, 46, "right")
+		elseif self.type==0x2cf6 then
+		love.graphics.setFont(DefaultFont)
+		love.graphics.setColor( 255/255,255/255, 255/255, 1 )
+		love.graphics.printf(tostring"A", self.x, self.y+30, 46, "right")
+		elseif self.type==0x2cf9 then
+		love.graphics.setFont(DefaultFont)
+		love.graphics.setColor( 255/255,255/255, 255/255, 1 )
+		love.graphics.printf(tostring"B", self.x, self.y+30, 46, "right")
+		elseif self.type==0x2cfa then
+		love.graphics.setFont(DefaultFont)
+		love.graphics.setColor( 255/255,255/255, 255/255, 1 )
+		love.graphics.printf(tostring"C", self.x, self.y+30, 46, "right")
+		elseif self.type==0x2cfb then
+		love.graphics.setFont(DefaultFont)
+		love.graphics.setColor( 255/255,255/255, 255/255, 1 )
+		love.graphics.printf(tostring"D", self.x, self.y+30, 46, "right")
 		else
-		love.graphics.setColor( 253/255, 253/255, 168/255, 1 )
+		love.graphics.setColor( 253/255, 253/255, 253/255, 1 )
 		love.graphics.printf(tostring(self.count), self.x, self.y+30, 46, "right")
 		end
-		if self.pick>0 then
+		local p = GameInfo.playernum
+		if self.pick>0 and p > 1 then
 		love.graphics.setFont(DefaultFont)
 		love.graphics.setColor( 1, 1, 0, 1 )
 		love.graphics.printf(tostring"P"..(self.pick), self.x, self.y+0, 46, "right")
@@ -45,7 +74,7 @@ function ItemIcon:draw(drawCount)
 	end
 	if self.equipped then
 		love.graphics.setColor( 1, 1, 1, 1 )
-		UIAtlas:draw("equip", self.x + 5, self.y + 2)
+		UIAtlas:draw("equip", self.x + 35, self.y)
 	end
 	love.graphics.setColor( 1, 1, 1, 1 )
 	love.graphics.setFont(oldfont)

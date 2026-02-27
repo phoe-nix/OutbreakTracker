@@ -1,6 +1,6 @@
 ItemCard = {}
 ItemCard.__index = ItemCard
-local x, y = 46, 48
+local x, y = 50, 40
 local IconPositions = {
 --[[ x  | y  ]]--
 	{0*x, 1*y-y},--1
@@ -50,6 +50,102 @@ end
 
 function ItemCard:draw(x, y)
 	love.graphics.push()
+	love.graphics.scale(0.5, 0.5)
+	love.graphics.translate(x, y)
+
+	local item = Items[self.id]
+	local p = GameInfo.playernum
+
+	if p == 1 then
+		for i=1, 32 do
+			--if(Items[self.id].roomitem[i].pick < 5) and (Items[self.id].roomitem[i].type > 0) and(Items[self.id].roomitem[i].count > 0) then
+			if not(Items[self.id].roomitem[i].id == -1) then
+				if not(Items[self.id].roomitem[i].mix == 0x20
+				or (Items[self.id].roomitem[i].pick > 0) and (Items[self.id].roomitem[i].present == 0)) then
+				self.icons[i].type = Items[self.id].roomitem[i].type
+				self.icons[i].count = Items[self.id].roomitem[i].count
+				love.graphics.setColor( 1, 1, 1, 1 )
+				self.icons[i]:draw()
+				end
+			end
+		end
+	else
+		for i=1, 32 do
+			--if(Items[self.id].roomitem[i].pick < 5) and (Items[self.id].roomitem[i].type > 0) and(Items[self.id].roomitem[i].count > 0) then
+			if not(Items[self.id].roomitem[i].id == -1) then
+				if (Items[self.id].roomitem[i].mix == 0x20
+				or (Items[self.id].roomitem[i].pick > 0) and (Items[self.id].roomitem[i].present == 0)) then
+				self.icons[i].type = Items[self.id].roomitem[i].type
+				self.icons[i].count = Items[self.id].roomitem[i].count
+				self.icons[i].pick = Items[self.id].roomitem[i].pick
+				love.graphics.setColor( 1, 1, 1, 0.25 )
+				self.icons[i]:draw()
+				else
+				self.icons[i].type = Items[self.id].roomitem[i].type
+				self.icons[i].count = Items[self.id].roomitem[i].count
+				self.icons[i].pick = Items[self.id].roomitem[i].pick
+				love.graphics.setColor( 1, 1, 1, 1 )
+				self.icons[i]:draw()
+				end
+			end
+		end
+	end
+
+	love.graphics.pop()
+end
+
+ItemCard1 = {}
+ItemCard1.__index = ItemCard1
+local x, y = 45, 45
+local IconPositions = {
+--[[ x  | y  ]]--
+	{0*x, 1*y-y},--1
+	{1*x, 1*y-y},--2
+	{2*x, 1*y-y},--3
+	{3*x, 1*y-y},--4
+	{4*x, 1*y-y},--5
+	{5*x, 1*y-y},--6
+	{6*x, 1*y-y},--7
+	{7*x, 1*y-y},--8
+	{8*x, 1*y-y},--9
+	{9*x, 1*y-y},--10
+	{10*x, 1*y-y},--11
+	{11*x, 1*y-y},--12
+	{12*x, 1*y-y},--13
+	{13*x, 1*y-y},--14
+	{14*x, 1*y-y},--15
+	{15*x, 1*y-y},--16
+	{0*x, 1*y-y},--17
+	{1*x, 1*y-y},--18
+	{2*x, 1*y-y},--19
+	{3*x, 1*y-y},--20
+	{4*x, 1*y-y},--21
+	{5*x, 1*y-y},--22
+	{6*x, 1*y-y},--23
+	{7*x, 1*y-y},--24
+	{8*x, 1*y-y},--25
+	{9*x, 1*y-y},--26
+	{10*x, 1*y-y},--27
+	{11*x, 1*y-y},--28
+	{12*x, 1*y-y},--29
+	{13*x, 1*y-y},--30
+	{14*x, 1*y-y},--31
+	{15*x, 1*y-y},--32
+}
+
+function ItemCard1:new(id)
+	local o = {}
+	o.id = id or 1
+	o.icons = {}
+	for i=1, 32 do
+		o.icons[i] = ItemIcon:new(unpack(IconPositions[i]))
+	end
+
+	return setmetatable(o, self)
+end
+
+function ItemCard1:draw(x, y)
+	love.graphics.push()
 	love.graphics.scale(0.6, 0.6)
 	love.graphics.translate(x, y)
 
@@ -93,6 +189,7 @@ function ItemCard:draw(x, y)
 
 	love.graphics.pop()
 end
+
 ItemCard2 = {}
 ItemCard2.__index = ItemCard2
 local x, y = 60, 48

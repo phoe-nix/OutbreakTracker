@@ -2,6 +2,7 @@ local IconLinks = require "icondata"
 local IconLinks2 = require "icondata2"
 local UIAtlasInfo = require "uidata"
 RoomNames = require "roomnames"
+RoomNames_j = require "roomnames_j"
 
 function LoadAssets()
 	ItemCountFont = love.graphics.newImageFont("assets/ItemCountFont.png", "0123456789")
@@ -11,10 +12,14 @@ function LoadAssets()
 	UIAtlas = LoadTextureAtlas("assets/ui.png", UIAtlasInfo)
 	ItemIcons = LoadTextureAtlas("assets/icons.png", IconLinks)
 	ItemIcons2 = LoadTextureAtlas("assets/StartingItem.png", IconLinks2)
-	DefaultFont = love.graphics.newFont("assets/arialbd.ttf",18)
-	SmallFont = love.graphics.newFont("assets/arialbd.ttf",15)
-	VerySmallFont = love.graphics.newFont("assets/arialbd.ttf",13)
-	MiniFont = love.graphics.newFont("assets/arialnb.ttf",11)
+	DefaultFont = love.graphics.newFont("assets/DFPKingGothicGB-Semibold-2.ttf",18)
+	SmallFont = love.graphics.newFont("assets/DroidSansFallback.ttf",15)
+	VerySmallFont = love.graphics.newFont("assets/DroidSansFallback.ttf",13)
+	HPFont = love.graphics.newFont("assets/arialbd.ttf",13)
+	MiniFont = love.graphics.newFont("assets/DFPKingGothicGB-Semibold-2.ttf",11)
+	--DefaultFont_chs = love.graphics.newFont("assets/DroidSansFallback.ttf",18)
+	--SmallFont_chs = love.graphics.newFont("assets/DroidSansFallback.ttf",15)
+	--VerySmallFont_chs = love.graphics.newFont("assets/DroidSansFallback.ttf",13)
 	--MiniFont = love.graphics.newFont(9)
 end
 

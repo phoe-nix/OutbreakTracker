@@ -33,9 +33,9 @@ function Label:draw()
 		elseif self.vAlign == "center" then
 			y = (self.y + (self.height / 2)) - (lineHeight * #wrapText)/2
 		end 
-		love.graphics.printf(self.text, math.floor(x), math.floor(y), self.width, self.hAlign)
+		love.graphics.printf(_l(self.text), math.floor(x), math.floor(y), self.width, self.hAlign)
 	else
-		love.graphics.print(self.text, self.x, self.y)
+		love.graphics.print(_l(self.text), self.x, self.y)
 	end
 	love.graphics.setFont(oldFont)
 	love.graphics.setColor(oldR, oldG, oldB, oldA)

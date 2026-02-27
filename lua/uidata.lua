@@ -143,10 +143,10 @@ SheetInfo.sheet =
 
         },
         {
-            -- equip
+            -- equip width=39
             x=946,
             y=452,
-            width=39,
+            width=9,
             height=15,
 
         },
@@ -414,6 +414,14 @@ SheetInfo.sheet =
             height=30,
 
         },
+        {
+            -- room master crown
+            x=985,
+            y=469,
+            width=30,
+            height=20,
+
+        },
     },
 
     sheetContentWidth = 1280,
@@ -576,6 +584,7 @@ SheetInfo.frameIndex =
     ["key"] = 48,
     ["title bar"] = 49,
     ["slot bar"] = 50,
+    ["room master crown"] = 51,
 }
 
 function SheetInfo:getSheet()
