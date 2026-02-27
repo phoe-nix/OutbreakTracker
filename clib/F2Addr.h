@@ -9,6 +9,7 @@ const int F2_DeadInventoryStart = 0x491146;
 const int F2_VirusMaxStart = 0x728500;
 const int F2_ScenarioIDAddr = 0x3137BA;
 const int F2_FrameCounter = 0x4912B8;
+const int F2_RoomPriorty = 0x007d7a90;
 
 const int F2_PositionX = 0x38;
 const int F2_PositionY = 0x40;
@@ -19,6 +20,7 @@ const int F2_HPOffset = 0x540;
 const int F2_MaxHPOffset = 0x542;
 const int F2_CharacterTypeOffset = 0xBB0;
 const int F2_CharacterStatusOffset = 0xBB8;
+const int F2_CharacterLoadingStatusOffset = 0x546;//546,BBB,BBE
 const int F2_VirusOffset = 0xBC4;
 const int F2_NameTypeOffset = 0xBC8;
 const int F2_CritBonusOffset = 0xBD4;
@@ -41,6 +43,10 @@ const int F2_PresentOffset = 32;//28 38
 const int F2_MixOffset = 27;
 const int F2_IDOffset = 6;
 const int F2_NumberOffset = 4;
+
+const int F2_ItemCursor = 0x38AE30;
+const int F2_PlayerControl = 0x4912BD;
+const int F2_MenuOpen = 0x4912BE;
 
 int F2_GetCharAddress(int characterID)
 {
@@ -231,7 +237,7 @@ const int F2_Door15Flag = 0x49027C;//49024C/49027C 办公室>1楼东侧
 const int F2_Door16Flag = 0x490300;//490240/490300 1楼大堂>U走廊
 const int F2_Door17Flag = 0x490294;//490294/4902A0 停尸房
 const int F2_Door18Flag = 0x4902C4;//4902B8/4902C4 狗屋
-const int F2_Door19Flag = 0x477B00;//48FFF4/490034/490F70 eotr hole need more test
+const int F2_Door19Flag = 0x490034;//48FFF4/490034/490F70 eotr hole hp
 
 int F2_GetDoorFlag(int doorID)
 {
@@ -391,6 +397,8 @@ int F2_GetLobbyAddress(int slotNum)
     }
 }
 
+const int F2_WTGateMHp = 0x389096;//咆哮大象大门MAXHP
+const int F2_WTGateHp = 0x389098;//咆哮大象大门HP
 const int F2_WTTime = 0x491248;//咆哮
 const int F2_PassWT = 0x48FE7B;//咆哮
 const int F2_PassDT1 = 0x490070;//死守
