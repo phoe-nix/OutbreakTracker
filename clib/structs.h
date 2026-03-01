@@ -48,6 +48,7 @@ typedef int bool;
 typedef struct
 {
 	unsigned char CurrentFile;
+	unsigned int Language;
 	unsigned char HostStatus;
 	unsigned short HostTime;
 	unsigned short HostMaxPlayer;
