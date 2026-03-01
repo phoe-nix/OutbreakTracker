@@ -121,6 +121,17 @@ char GetFile()
 	return -1;
 }
 
+unsigned int GetFileLanguage()
+{
+	unsigned int buffer;
+	int bytesRead = 0;
+	if (info.CurrentFile == 1)
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+0x00232240, &buffer, 4, NULL);
+	else
+	    ReadProcessMemory(ProcessHandle, (char *)BasePointer+0x0023E060, &buffer, 4, NULL);
+	return buffer;
+}
+
 unsigned short GetSlotNum(int slotNum)
 {
   unsigned short buffer;
@@ -1342,6 +1353,7 @@ static int LUpdate (lua_State* L)
 	info.CurrentFile = GetFile();
 	if (info.CurrentFile == -1)
 		return 0;
+	info.Language = GetFileLanguage();
 	info.HostStatus = GetHostStatus();
 	info.HostTime = GetHostTime();
 	info.HostMaxPlayer = GetHostMaxPlayer();
@@ -1981,6 +1993,9 @@ static int LGetGameInfo (lua_State* L)
 	lua_newtable(L);
 		lua_pushstring(L, "currentFile");
 			lua_pushnumber(L, (double)info.CurrentFile);
+		lua_rawset(L, -3);
+		lua_pushstring(L, "language");
+			lua_pushnumber(L, (double)info.Language);
 		lua_rawset(L, -3);
 		lua_pushstring(L, "hoststatus");
 			lua_pushnumber(L, (double)info.HostStatus);
