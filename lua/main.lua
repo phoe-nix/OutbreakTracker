@@ -98,6 +98,7 @@ function love.draw()
 	wx, wy, display = love.window.getMode()-- get window size
 	love.graphics.scale(wx/scalex, wy/scaley)
 
+	if GameInfo.language == 0xBB89B690 then LanguageSwitch = 1 end
 	local p = GameInfo.playernum
 	local itemset = GameInfo.itemrandom
 	local subset = GameInfo.itemrandom2
